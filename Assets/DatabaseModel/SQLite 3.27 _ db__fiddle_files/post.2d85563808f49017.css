@@ -1,0 +1,47 @@
+.post { background: rgb(var(--rgb-white)); border-radius: 3px; margin: 10px; overflow: hidden; border: 1px solid rgba(var(--rgb-dark),0.6); }
+.post:not(.processed) { opacity: 0; }
+.post:not(:hover) .hover { display: none; }
+.post.deleted, .post.deleted>.markdown, .post .answers .bar.deleted { background: linear-gradient(rgba(var(--rgb-warning),0.13),rgba(var(--rgb-warning),0.13)), rgb(var(--rgb-white)); }
+.post .corner { font-size: 12px; margin: 2px; color: rgb(var(--rgb-dark)); white-space: nowrap; }
+.post .corner>:first-child { margin-right: 2px; }
+.post .corner>i { margin: 0; }
+.post span.corner+span.corner { margin-left: 4px; }
+.post .title { display: flex; font-size: 18px; }
+.post .title>a { flex: 1 1 auto; overflow: hidden; text-overflow: ellipsis; padding: 6px 26px 0 6px; text-decoration: none; color: rgb(var(--rgb-black)); white-space: nowrap; }
+.post .title i.highlight { color: rgb(var(--rgb-highlight)); }
+.post .title+.bar { margin: 4px 6px; }
+.post .title+.bar>.element { margin-left: 0; }
+.post .title+.bar>div:last-child { margin-right: -6px; margin-bottom: -8px; }
+.post .bar { height: 22px; font-size: 12px; }
+.post .bar .fa { text-decoration: none; }
+.post .bar .fa:not(.highlight) { color: rgb(var(--rgb-dark)); }
+.post .bar .icon+.icon { margin-left: 0; }
+.post .bar, .post .bar>div { display: flex; min-width: 0; align-items: center; white-space: nowrap; justify-content: space-between }
+.post .bar>div:not(.shrink) { flex: 0 0 auto; }
+.post .bar.shrink { flex: 0 1 auto; }
+.post .kind { display: inline-block; height: 18px; padding: 1px 4px; background: rgb(var(--rgb-dark)); color: rgb(var(--rgb-light)); margin-left: 0; margin-right: 6px; line-height: 16px; }
+.post .label { display: inline-block; height: 18px; padding: 1px 4px; border: 2px solid rgb(var(--rgb-mid)); background: rgb(var(--rgb-light)); color: rgb(var(--rgb-dark)); line-height: 12px; border-radius: 6px; margin-right: 0px; }
+.post .community { margin-left: 0; margin-right: 6px; }
+.post .community>img { display: block; height: 18px; border: 1px solid rgb(var(--rgb-dark)); background: rgb(var(--rgb-light)); border-radius: 2px; }
+
+.post .tags { display: flex; margin-left: -2px; }
+.post .tag { position: relative; height: 18px; background: rgb(var(--rgb-light)); background-clip: padding-box; border: 1px solid rgba(var(--rgb-dark),0.6); border-radius: 0 9px 9px 0; line-height: 14px; 
+             margin-left: 0; font-size: 12px; margin: 0 2px; padding-left: 3px; padding-right: 15px; vertical-align: middle; cursor: pointer; text-decoration: none; color: rgb(var(--rgb-dark)); }
+.post .tag::after { position: absolute; display: block; border-radius: 50%; background: rgb(var(--rgb-white)); border: 1px solid rgb(var(--rgb-dark)); height: 8px; width: 8px; content: ''; top: 4px; right: 4px; box-sizing: border-box; }
+.post .tag:visited { color: rgb(var(--rgb-dark)); }
+.post .newtag:not(:hover) { opacity: 0.5; }
+.post .tag.hide { display: none; }
+.post #taginput { background: white; outline: none; padding-right: 0; }
+.post #taginput { width: 140px; }
+.post .newtag { width: 70px; }
+
+.post .answers { border-top: 1px solid rgba(var(--rgb-dark),0.6); }
+.post .answers .bar { background: rgb(var(--rgb-white)); height: 23px; }
+.post .answers .bar:not(:last-child) { border-bottom: 1px solid rgb(var(--rgb-white)); }
+.post .answers .bar:not(:last-child).premore { border-bottom: 1px solid rgb(var(--rgb-mid)); }
+.post:hover .answers .bar:not(:last-child) { border-bottom: 1px solid rgb(var(--rgb-mid)); }
+.post .answers .bar .summary>a:not(.label) { display: block; padding: 2px; text-decoration: none; color: rgb(var(--rgb-black)); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.post .markdown .post { border: 3px solid rgb(var(--rgb-dark)); margin: 0; }
+.post .markdown .post .tag:hover i { visibility: hidden; }
+.post .answers .bar.more:not(:hover) a { text-decoration: none; }
+.post .answers .bar.more a { color: rgb(var(--rgb-dark)); }
