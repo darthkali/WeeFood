@@ -7,47 +7,48 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		125E723AAB37A84A93B0CAE7 /* Pods_iosWeeFood.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18190209AFA023A7D3B84EAB /* Pods_iosWeeFood.framework */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
-		5BDB47D334868C22A88CE278 /* Pods_iosWeeFood.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 219AB49DE46487BC9CE2CA74 /* Pods_iosWeeFood.framework */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18190209AFA023A7D3B84EAB /* Pods_iosWeeFood.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosWeeFood.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
-		219AB49DE46487BC9CE2CA74 /* Pods_iosWeeFood.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosWeeFood.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2F38F42FDC0C4F50C0B7F91B /* Pods-iosWeeFood.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosWeeFood.debug.xcconfig"; path = "Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood.debug.xcconfig"; sourceTree = "<group>"; };
+		26B73C976FC9F40F36DC22C4 /* Pods-iosWeeFood.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosWeeFood.release.xcconfig"; path = "Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood.release.xcconfig"; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosWeeFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosWeeFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F3F27C5FD6200D6CD8710C75 /* Pods-iosWeeFood.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosWeeFood.release.xcconfig"; path = "Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood.release.xcconfig"; sourceTree = "<group>"; };
+		861E9EAA781E523F3B9E6B12 /* Pods-iosWeeFood.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosWeeFood.debug.xcconfig"; path = "Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		7D031E8D7819433762B70594 /* Frameworks */ = {
+		37FBD735D328303F9D8FD98A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BDB47D334868C22A88CE278 /* Pods_iosWeeFood.framework in Frameworks */,
+				125E723AAB37A84A93B0CAE7 /* Pods_iosWeeFood.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0D8EE7E3A62892567AFD3D6B /* Frameworks */ = {
+		01EAA4C33E9838DFCD76A06A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				219AB49DE46487BC9CE2CA74 /* Pods_iosWeeFood.framework */,
+				18190209AFA023A7D3B84EAB /* Pods_iosWeeFood.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		52E6BA7785F9EEF5775D20DE /* Pods */ = {
+		39A38FEB493004AB073AFFF7 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2F38F42FDC0C4F50C0B7F91B /* Pods-iosWeeFood.debug.xcconfig */,
-				F3F27C5FD6200D6CD8710C75 /* Pods-iosWeeFood.release.xcconfig */,
+				861E9EAA781E523F3B9E6B12 /* Pods-iosWeeFood.debug.xcconfig */,
+				26B73C976FC9F40F36DC22C4 /* Pods-iosWeeFood.release.xcconfig */,
 			);
+			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -56,8 +57,8 @@
 			children = (
 				7555FF7D242A565900829871 /* iosWeeFood */,
 				7555FF7C242A565900829871 /* Products */,
-				52E6BA7785F9EEF5775D20DE /* Pods */,
-				0D8EE7E3A62892567AFD3D6B /* Frameworks */,
+				39A38FEB493004AB073AFFF7 /* Pods */,
+				01EAA4C33E9838DFCD76A06A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,10 +87,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7555FFA5242A565B00829871 /* Build configuration list for PBXNativeTarget "iosWeeFood" */;
 			buildPhases = (
-				34C36D732D26FC8F996AC20C /* [CP] Check Pods Manifest.lock */,
+				B4F36A8F8720E7B3F1C6B00E /* [CP] Check Pods Manifest.lock */,
 				7555FF77242A565900829871 /* Sources */,
 				7555FF79242A565900829871 /* Resources */,
-				7D031E8D7819433762B70594 /* Frameworks */,
+				37FBD735D328303F9D8FD98A /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -144,7 +145,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		34C36D732D26FC8F996AC20C /* [CP] Check Pods Manifest.lock */ = {
+		B4F36A8F8720E7B3F1C6B00E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -299,11 +300,10 @@
 		};
 		7555FFA6242A565B00829871 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2F38F42FDC0C4F50C0B7F91B /* Pods-iosWeeFood.debug.xcconfig */;
+			baseConfigurationReference = 861E9EAA781E523F3B9E6B12 /* Pods-iosWeeFood.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8ZVFT372F9;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iosWeeFood/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -319,11 +319,10 @@
 		};
 		7555FFA7242A565B00829871 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F3F27C5FD6200D6CD8710C75 /* Pods-iosWeeFood.release.xcconfig */;
+			baseConfigurationReference = 26B73C976FC9F40F36DC22C4 /* Pods-iosWeeFood.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8ZVFT372F9;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iosWeeFood/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -347,7 +346,7 @@
 				7555FFA4242A565B00829871 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		7555FFA5242A565B00829871 /* Build configuration list for PBXNativeTarget "iosWeeFood" */ = {
 			isa = XCConfigurationList;
@@ -356,7 +355,7 @@
 				7555FFA7242A565B00829871 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
