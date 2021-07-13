@@ -36,14 +36,11 @@ struct RecipeListScreen: View {
     
     
     var body: some View {
-        VStack{
-            Text("\(viewModel.state.page)")
-            Button {
-                viewModel.updateState(page: Int(viewModel.state.page) + 1)
-            } label: {
-                Text("Increment Page")
+        List{
+            ForEach(viewModel.state.recipes, id: \.self.id){recipe in
+                Text(recipe.title)
+                
             }
-
         }
     }
 }

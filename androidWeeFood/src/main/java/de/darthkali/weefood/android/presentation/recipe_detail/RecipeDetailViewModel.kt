@@ -41,7 +41,7 @@ constructor(
     }
 
     private fun getRecipe(recipeId: Int){
-        getRecipe.execute(recipeId = recipeId).onEach { dataState ->
+        getRecipe.execute(recipeId = recipeId).collectCommon (viewModelScope){ dataState ->
 
             state.value = state.value.copy(isLoading = dataState.isLoading)
 
@@ -52,7 +52,7 @@ constructor(
             dataState.message?.let { message ->
                 handleError(message)
             }
-        }.launchIn(viewModelScope)
+        }
     }
 
 

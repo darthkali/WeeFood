@@ -3,7 +3,9 @@ package de.darthkali.weefood.interactors.recipe_list
 import de.darthkali.weefood.datasource.cache.RecipeCache
 import de.darthkali.weefood.datasource.network.RecipeService
 import de.darthkali.weefood.domain.model.Recipe
+import de.darthkali.weefood.domain.util.CommonFlow
 import de.darthkali.weefood.domain.util.DataState
+import de.darthkali.weefood.domain.util.asCommonFlow
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -16,7 +18,7 @@ class SearchRecipes(
     fun execute(
         page: Int,
         query: String,
-    ): Flow<DataState<List<Recipe>>> = flow  {
+    ): CommonFlow<DataState<List<Recipe>>> = flow  {
         emit(DataState.loading())
         try{
             val recipes = recipeService.search(
@@ -44,5 +46,5 @@ class SearchRecipes(
         }catch (e: Exception){
             emit(DataState.error<List<Recipe>>(message = e.message?: "Unknown Error"))
         }
-    }
+    }.asCommonFlow()
 }

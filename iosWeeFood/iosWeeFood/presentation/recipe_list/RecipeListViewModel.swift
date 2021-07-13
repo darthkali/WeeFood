@@ -25,9 +25,29 @@ class RecipeListViewModel : ObservableObject{
     ){
         self.searchRecipes = searchRecipes
         self.foodCatergorieUtil = foodCategorieUtil
-        
+        onTriggerEvent(stateEvent: RecipeListEvents.LoadRecipes())
         
     }
+    
+    func onTriggerEvent(stateEvent: RecipeListEvents){
+        switch stateEvent{
+        case is RecipeListEvents.LoadRecipes:
+            loadRecipies()
+        case is RecipeListEvents.NewSearch:
+            doNothing()
+        case is RecipeListEvents.NextPage:
+            doNothing()
+        case is RecipeListEvents.OnUpdateQuery:
+            doNothing()
+        case is RecipeListEvents.OnSelectCategory:
+            doNothing()
+        //case is RecipeListEvents.OnRemoveHeadMessageFromQueue:
+        //    doNothing()
+        default:
+            doNothing()
+        }
+    }
+    
     
     func updateState(
         isLoading: Bool? = nil,
@@ -45,26 +65,58 @@ class RecipeListViewModel : ObservableObject{
             recipes: currentState.recipes)
     }
     
-    func onTriggerEvent(stateEvent: RecipeListEvents){
-        switch stateEvent{
-        case is RecipeListEvents.LoadRecipes:
-            doNothing()
-        case is RecipeListEvents.NewSearch:
-            doNothing()
-        case is RecipeListEvents.NextPage:
-            doNothing()
-        case is RecipeListEvents.OnUpdateQuery:
-            doNothing()
-        case is RecipeListEvents.OnSelectCategory:
-            doNothing()
-        //case is RecipeListEvents.OnRemoveHeadMessageFromQueue:
-        //    doNothing()
-        
-        default
-
-
+    private func loadRecipies(){
+        let currentState = (self.state.copy() as! RecipeListState)
+        do{
+            try searchRecipes.execute(
+                page: Int32(currentState.page),
+                query: currentState.query
+            ).collectCommon(
+                coroutineScope: nil,
+                callback: {dataState in
+                    if dataState != nil{
+                        let data = dataState?.data
+                        let message = dataState?.message
+                        let loading = dataState?.isLoading ?? false
+                        
+                        self.updateState(isLoading: loading)
+                        
+                        if data != nil{
+                            self.appendRecipes(recipes: data as! [Recipe])
+                        }
+                        
+                        if message != nil{
+                            //TODO: ErrorHandling: self.handleMessageByUIComponentType(message!.build())
+                        }
+                    }
+                    
+                }
+            )
+        }catch{
+            print("\(error)")
+        }
     }
     
+    
+    private func appendRecipes(recipes: [Recipe]){
+        var currentState = (self.state.copy() as! RecipeListState)
+        var currentRecipes = currentState.recipes
+        currentRecipes.append(contentsOf: recipes)
+        self.state = self.state.doCopy(
+            isLoading: currentState.isLoading,
+            page: currentState.page,
+            query: currentState.query,
+            selectedCategory: currentState.selectedCategory,
+            recipes: currentRecipes
+            //queuw: currentState.queue
+            )
+        
+    }
+    
+    //private func handleMessageByUIComponentType(_ message: GenericMessageInfo){
+      //TODO ErrorHandling
+    //}
+        
     func doNothing(){
         
     }
