@@ -40,7 +40,7 @@ constructor(
             is RecipeListEvents.OnUpdateQuery -> {
                 state.value = state.value.copy(query = event.query, selectedCategory = null)
             }
-            is RecipeListEvents.OnSelectedCategory -> {
+            is RecipeListEvents.OnSelectCategory -> {
                 onSelectCategory(event.category)
             }
             RecipeListEvents.NextPage -> {

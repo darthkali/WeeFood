@@ -30,7 +30,7 @@ fun RecipeListScreen(
                     query = state.query,
                     categories = foodCategories,
                     onSelectedCategoryChanged = {
-                        onTriggerEvent(RecipeListEvents.OnSelectedCategory(it))
+                        onTriggerEvent(RecipeListEvents.OnSelectCategory(it))
                     },
                     selectedCategory = state.selectedCategory,
                     onQueryChange = {
