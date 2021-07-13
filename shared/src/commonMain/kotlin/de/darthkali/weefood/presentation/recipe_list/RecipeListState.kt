@@ -8,4 +8,12 @@ data class RecipeListState(
     val query: String = "",
     val selectedCategory: FoodCategory? = null,
     val recipes: List<Recipe> = listOf(),
-)
+) {
+    constructor(): this (
+        isLoading = false,
+        page = 1,
+        query = "",
+        recipes = listOf(),
+        selectedCategory = null,
+    )
+}
