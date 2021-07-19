@@ -36,7 +36,7 @@ class RecipeListViewModel : ObservableObject{
         case is RecipeListEvents.NewSearch:
             doNothing()
         case is RecipeListEvents.NextPage:
-            doNothing()
+            nextPage()
         case is RecipeListEvents.OnUpdateQuery:
             doNothing()
         case is RecipeListEvents.OnSelectCategory:
@@ -52,7 +52,8 @@ class RecipeListViewModel : ObservableObject{
     func updateState(
         isLoading: Bool? = nil,
         page: Int? = nil,
-        query: String? = nil
+        query: String? = nil,
+        bottomRecipe: Recipe? = nil
         //queue: Queue<GenericMessageInfo>? = nil //TODO Errorhandling
     ){
         
@@ -62,7 +63,16 @@ class RecipeListViewModel : ObservableObject{
             page: Int32(page ?? Int(currentState.page)),
             query: query ?? currentState.query,
             selectedCategory: currentState.selectedCategory,
-            recipes: currentState.recipes)
+            recipes: currentState.recipes,
+            bottomRecipe: bottomRecipe ?? currentState.bottomRecipe
+        )
+    
+    }
+    
+    private func nextPage(){
+        let currentState = self.state.copy() as! RecipeListState
+        updateState(page: Int(currentState.page) +  1)
+        loadRecipies()
     }
     
     private func loadRecipies(){
@@ -97,6 +107,9 @@ class RecipeListViewModel : ObservableObject{
         }
     }
     
+    private func onUpdateBottomRecipe(recipe: Recipe){
+        updateState(bottomRecipe: recipe)
+    }
     
     private func appendRecipes(recipes: [Recipe]){
         var currentState = (self.state.copy() as! RecipeListState)
@@ -107,10 +120,26 @@ class RecipeListViewModel : ObservableObject{
             page: currentState.page,
             query: currentState.query,
             selectedCategory: currentState.selectedCategory,
-            recipes: currentRecipes
-            //queuw: currentState.queue
+            recipes: currentRecipes,
+            bottomRecipe: currentState.bottomRecipe
+            //queue: currentState.queue
             )
+        currentState = self.state.copy() as! RecipeListState
+        self.onUpdateBottomRecipe(recipe: currentState.recipes[currentState.recipes.count - 1])
         
+    }
+    
+    func shouldQueryNextPage(recipe: Recipe) -> Bool{
+        let currentState = self.state.copy() as! RecipeListState
+        if(recipe.id == currentState.bottomRecipe?.id){
+            if(RecipeListState.Companion().RECIPE_PAGINATION_PAGE_SIZE *
+                currentState.page <= currentState.recipes.count){
+                if(!currentState.isLoading){
+                    return true
+                }
+            }
+        }
+        return false
     }
     
     //private func handleMessageByUIComponentType(_ message: GenericMessageInfo){
