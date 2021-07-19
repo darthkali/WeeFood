@@ -3,13 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		125E723AAB37A84A93B0CAE7 /* Pods_iosWeeFood.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18190209AFA023A7D3B84EAB /* Pods_iosWeeFood.framework */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		C247688C26A5CD8300BD7FFD /* SearchAppBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C247688B26A5CD8300BD7FFD /* SearchAppBar.swift */; };
+		C247688E26A5F5F600BD7FFD /* FoodCategorieChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = C247688D26A5F5F600BD7FFD /* FoodCategorieChip.swift */; };
+		C247689026A5FD0B00BD7FFD /* RecipeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C247688F26A5FD0B00BD7FFD /* RecipeCard.swift */; };
 		C2738DAD269B6EF10030B47D /* RecipeListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2738DAC269B6EF10030B47D /* RecipeListScreen.swift */; };
 		C2D0017A269E0463005E92FC /* RecipeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D00179269E0463005E92FC /* RecipeListViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -22,6 +24,8 @@
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		861E9EAA781E523F3B9E6B12 /* Pods-iosWeeFood.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosWeeFood.debug.xcconfig"; path = "Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood.debug.xcconfig"; sourceTree = "<group>"; };
 		C247688B26A5CD8300BD7FFD /* SearchAppBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAppBar.swift; sourceTree = "<group>"; };
+		C247688D26A5F5F600BD7FFD /* FoodCategorieChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCategorieChip.swift; sourceTree = "<group>"; };
+		C247688F26A5FD0B00BD7FFD /* RecipeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCard.swift; sourceTree = "<group>"; };
 		C2738DAC269B6EF10030B47D /* RecipeListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListScreen.swift; sourceTree = "<group>"; };
 		C2D00179269E0463005E92FC /* RecipeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -87,6 +91,8 @@
 			isa = PBXGroup;
 			children = (
 				C247688B26A5CD8300BD7FFD /* SearchAppBar.swift */,
+				C247688D26A5F5F600BD7FFD /* FoodCategorieChip.swift */,
+				C247688F26A5FD0B00BD7FFD /* RecipeCard.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -120,6 +126,7 @@
 				7555FF77242A565900829871 /* Sources */,
 				7555FF79242A565900829871 /* Resources */,
 				37FBD735D328303F9D8FD98A /* Frameworks */,
+				21DF599A458B37CE221B0240 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -174,6 +181,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		21DF599A458B37CE221B0240 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		B4F36A8F8720E7B3F1C6B00E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -207,6 +231,8 @@
 				C247688C26A5CD8300BD7FFD /* SearchAppBar.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				C2D0017A269E0463005E92FC /* RecipeListViewModel.swift in Sources */,
+				C247688E26A5F5F600BD7FFD /* FoodCategorieChip.swift in Sources */,
+				C247689026A5FD0B00BD7FFD /* RecipeCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

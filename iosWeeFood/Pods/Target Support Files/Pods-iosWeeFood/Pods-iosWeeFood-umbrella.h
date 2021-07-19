@@ -14,4 +14,3 @@
 FOUNDATION_EXPORT double Pods_iosWeeFoodVersionNumber;
 FOUNDATION_EXPORT const unsigned char Pods_iosWeeFoodVersionString[];
 
-

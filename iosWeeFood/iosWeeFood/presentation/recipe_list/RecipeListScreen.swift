@@ -15,6 +15,7 @@ struct RecipeListScreen: View {
     private let networkModule: NetworkModule
     private let cacheModule: CacheModule
     private let searchRecipesModule: SearchRecipesModule
+    private let foodCategories: [FoodCategory]
     
     @ObservedObject var viewModel: RecipeListViewModel
     
@@ -29,22 +30,22 @@ struct RecipeListScreen: View {
             networkModule: self.networkModule,
             cacheModule: self.cacheModule
         )
+        let foodCategoryUtil = FoodCategoryUtil()
         self.viewModel = RecipeListViewModel(
             searchRecipes: searchRecipesModule.searchRecipes,
-            foodCategorieUtil: FoodCategoryUtil())
+            foodCategorieUtil: foodCategoryUtil
+        )
+        self.foodCategories = foodCategoryUtil.getAllFoodCategories()
     }
     
     
     var body: some View {
         
         VStack{
-            HStack{
-                Text("Page: \(viewModel.state.page), Size: \(viewModel.state.recipes.count)")
-                    .padding()
-            }
-        }
         SearchAppBar(
             query: viewModel.state.query,
+            selectedCategory: viewModel.state.selectedCategory,
+            foodCategories: foodCategories,
             onTriggerEvent:viewModel.onTriggerEvent
             
             //onTriggerEvent: {event in
@@ -53,16 +54,18 @@ struct RecipeListScreen: View {
         )
         List{
             ForEach(viewModel.state.recipes, id: \.self.id){recipe in
-                Text(recipe.title)
+               RecipeCard(recipe: recipe)
                     .onAppear(perform: {
                         if( viewModel.shouldQueryNextPage(recipe: recipe)){
                             viewModel.onTriggerEvent(stateEvent: RecipeListEvents.NextPage())
                             
                         }
                 })
-                
+                .listRowInsets(EdgeInsets())
+                .padding(.top,10)
             }
         }
+    }
     }
 }
 
