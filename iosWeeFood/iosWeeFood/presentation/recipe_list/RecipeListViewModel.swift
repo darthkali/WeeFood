@@ -34,11 +34,13 @@ class RecipeListViewModel : ObservableObject{
         case is RecipeListEvents.LoadRecipes:
             loadRecipies()
         case is RecipeListEvents.NewSearch:
-            doNothing()
+            newSearch()
         case is RecipeListEvents.NextPage:
             nextPage()
         case is RecipeListEvents.OnUpdateQuery:
-            doNothing()
+            onUpdateQuery(
+                query: (stateEvent as! RecipeListEvents.OnUpdateQuery).query
+            )
         case is RecipeListEvents.OnSelectCategory:
             doNothing()
         //case is RecipeListEvents.OnRemoveHeadMessageFromQueue:
@@ -47,6 +49,8 @@ class RecipeListViewModel : ObservableObject{
             doNothing()
         }
     }
+    
+    
     
     
     func updateState(
@@ -67,6 +71,11 @@ class RecipeListViewModel : ObservableObject{
             bottomRecipe: bottomRecipe ?? currentState.bottomRecipe
         )
     
+    }
+    
+    private func newSearch(){
+        resetSearchState()
+        loadRecipies()
     }
     
     private func nextPage(){
@@ -106,6 +115,29 @@ class RecipeListViewModel : ObservableObject{
             print("\(error)")
         }
     }
+    
+    
+    private func resetSearchState(){
+        let currentState = (self.state.copy() as! RecipeListState)
+        var foodCatergory = currentState.selectedCategory
+        if(foodCatergory?.value != currentState.query){
+            foodCatergory = nil
+        }
+        self.state = self.state.doCopy(
+            isLoading: currentState.isLoading,
+            page: 1,
+            query: currentState.query,
+            selectedCategory: foodCatergory,
+            recipes: [],
+            bottomRecipe: currentState.bottomRecipe
+            //queue: currentState.queue
+            )
+    }
+    
+    private func onUpdateQuery(query:String){
+        updateState(query: query)
+    }
+    
     
     private func onUpdateBottomRecipe(recipe: Recipe){
         updateState(bottomRecipe: recipe)

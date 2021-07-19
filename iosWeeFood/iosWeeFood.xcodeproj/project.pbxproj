@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		125E723AAB37A84A93B0CAE7 /* Pods_iosWeeFood.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18190209AFA023A7D3B84EAB /* Pods_iosWeeFood.framework */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
+		C247688C26A5CD8300BD7FFD /* SearchAppBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C247688B26A5CD8300BD7FFD /* SearchAppBar.swift */; };
 		C2738DAD269B6EF10030B47D /* RecipeListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2738DAC269B6EF10030B47D /* RecipeListScreen.swift */; };
 		C2D0017A269E0463005E92FC /* RecipeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D00179269E0463005E92FC /* RecipeListViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -20,6 +21,7 @@
 		7555FF7B242A565900829871 /* iosWeeFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosWeeFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		861E9EAA781E523F3B9E6B12 /* Pods-iosWeeFood.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosWeeFood.debug.xcconfig"; path = "Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood.debug.xcconfig"; sourceTree = "<group>"; };
+		C247688B26A5CD8300BD7FFD /* SearchAppBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAppBar.swift; sourceTree = "<group>"; };
 		C2738DAC269B6EF10030B47D /* RecipeListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListScreen.swift; sourceTree = "<group>"; };
 		C2D00179269E0463005E92FC /* RecipeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,9 +83,18 @@
 			path = iosWeeFood;
 			sourceTree = "<group>";
 		};
+		C247688A26A5CD6900BD7FFD /* components */ = {
+			isa = PBXGroup;
+			children = (
+				C247688B26A5CD8300BD7FFD /* SearchAppBar.swift */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
 		C2738DAA269B6ECB0030B47D /* presentation */ = {
 			isa = PBXGroup;
 			children = (
+				C247688A26A5CD6900BD7FFD /* components */,
 				C2738DAB269B6ED60030B47D /* recipe_list */,
 			);
 			path = presentation;
@@ -193,6 +204,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C2738DAD269B6EF10030B47D /* RecipeListScreen.swift in Sources */,
+				C247688C26A5CD8300BD7FFD /* SearchAppBar.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				C2D0017A269E0463005E92FC /* RecipeListViewModel.swift in Sources */,
 			);
