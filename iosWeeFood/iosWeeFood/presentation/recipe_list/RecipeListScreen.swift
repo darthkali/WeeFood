@@ -42,36 +42,48 @@ struct RecipeListScreen: View {
     var body: some View {
         
         NavigationView{
-            VStack{
-            SearchAppBar(
-                query: viewModel.state.query,
-                selectedCategory: viewModel.state.selectedCategory,
-                foodCategories: foodCategories,
-                onTriggerEvent:viewModel.onTriggerEvent
-                
-                //onTriggerEvent: {event in
-                //    viewModel.onTriggerEvent(stateEvent: event)
-                //}
-            )
-            List{
-                ForEach(viewModel.state.recipes, id: \.self.id){recipe in
-                    NavigationLink(
-                        destination: Text("\(recipe.title)")
-                    ){
-                        RecipeCard(recipe: recipe)
-                             .onAppear(perform: {
-                                 if( viewModel.shouldQueryNextPage(recipe: recipe)){
-                                     viewModel.onTriggerEvent(stateEvent: RecipeListEvents.NextPage())
-                                     
-                                 }
-                         })
-                       
-                     }
-                    .listRowInsets(EdgeInsets())
-                    .padding(.top,10)
+            ZStack{
+                VStack{
+                SearchAppBar(
+                    query: viewModel.state.query,
+                    selectedCategory: viewModel.state.selectedCategory,
+                    foodCategories: foodCategories,
+                    onTriggerEvent:viewModel.onTriggerEvent
+                    
+                    //onTriggerEvent: {event in
+                    //    viewModel.onTriggerEvent(stateEvent: event)
+                    //}
+                )
+                List{
+                    ForEach(viewModel.state.recipes, id: \.self.id){recipe in
+                        ZStack{
+                            RecipeCard(recipe: recipe)
+                                 .onAppear(perform: {
+                                     if( viewModel.shouldQueryNextPage(recipe: recipe)){
+                                         viewModel.onTriggerEvent(stateEvent: RecipeListEvents.NextPage())
+                                         
+                                     }
+                             })
+                            NavigationLink(
+                                destination: Text("\(recipe.title)")
+                            ){
+                                //workarounf for hiding the arrows
+                               EmptyView()
+                             }
+                         
+                        }
+                        .listRowInsets(EdgeInsets())
+                        .padding(.top,10)
+         
+                        }
                     }
+                .listStyle(PlainListStyle())
+                .background(Color.gray)
                 }
-            .listStyle(PlainListStyle())
+                if viewModel.state.isLoading{
+                    ProgressView("Searching recipies...")
+                }
+                
             }
             .navigationBarHidden(true)
         }
