@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class RecipeDTO(
+data class RecipeDto(
 
     @SerialName("pk")
     val pk: Int,
@@ -20,19 +20,17 @@ data class RecipeDTO(
     val featuredImage: String,
 
     @SerialName("rating")
-    val rating: Int,
+    val rating: Int = 0,
 
     @SerialName("source_url")
     val sourceUrl: String,
 
     @SerialName("ingredients")
-    val ingredients: List<String> = listOf(),
+    val ingredients: List<String> = emptyList(),
 
     @SerialName("long_date_added")
-    val dateAdded: Long,
+    val longDateAdded: Long,
 
     @SerialName("long_date_updated")
-    val dateUpdated: Long,
-
-
+    val longDateUpdated: Long,
 )

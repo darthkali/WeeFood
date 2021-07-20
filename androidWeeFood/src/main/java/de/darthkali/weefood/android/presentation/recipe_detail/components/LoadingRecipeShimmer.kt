@@ -119,6 +119,4 @@ fun LoadingRecipeShimmer(
             }
         }
     }
-
-
 }

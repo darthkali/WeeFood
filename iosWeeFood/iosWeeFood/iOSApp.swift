@@ -10,7 +10,10 @@ struct iOSApp: App {
     
     var body: some Scene {
         WindowGroup {
-            RecipeListScreen(networkModule: networkModule, cacheModule: cacheModule)
+            RecipeListScreen(
+                networkModule: networkModule,
+                cacheModule: cacheModule
+            )
         }
     }
 }

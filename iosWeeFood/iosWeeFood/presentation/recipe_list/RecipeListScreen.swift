@@ -9,91 +9,101 @@
 import SwiftUI
 import shared
 
+@available(iOS 14.0, *)
 struct RecipeListScreen: View {
-    
-    // depencies
+
     private let networkModule: NetworkModule
     private let cacheModule: CacheModule
     private let searchRecipesModule: SearchRecipesModule
-    private let foodCategories: [FoodCategory]
-    
+
     @ObservedObject var viewModel: RecipeListViewModel
-    
-    
+
     init(
         networkModule: NetworkModule,
         cacheModule: CacheModule
-    ){
+    ) {
         self.networkModule = networkModule
         self.cacheModule = cacheModule
         self.searchRecipesModule = SearchRecipesModule(
             networkModule: self.networkModule,
             cacheModule: self.cacheModule
         )
-        let foodCategoryUtil = FoodCategoryUtil()
         self.viewModel = RecipeListViewModel(
             searchRecipes: searchRecipesModule.searchRecipes,
-            foodCategorieUtil: foodCategoryUtil
+            foodCategoryUtil: FoodCategoryUtil()
         )
-        self.foodCategories = foodCategoryUtil.getAllFoodCategories()
+        // dismiss keyboard when drag starts
+        UIScrollView.appearance().keyboardDismissMode = .onDrag
     }
-    
-    
+
     var body: some View {
-        
         NavigationView{
             ZStack{
                 VStack{
-                SearchAppBar(
-                    query: viewModel.state.query,
-                    selectedCategory: viewModel.state.selectedCategory,
-                    foodCategories: foodCategories,
-                    onTriggerEvent:viewModel.onTriggerEvent
-                    
-                    //onTriggerEvent: {event in
-                    //    viewModel.onTriggerEvent(stateEvent: event)
-                    //}
-                )
-                List{
-                    ForEach(viewModel.state.recipes, id: \.self.id){recipe in
-                        ZStack{
-                            RecipeCard(recipe: recipe)
-                                 .onAppear(perform: {
-                                     if( viewModel.shouldQueryNextPage(recipe: recipe)){
-                                         viewModel.onTriggerEvent(stateEvent: RecipeListEvents.NextPage())
-                                         
-                                     }
-                             })
-                            NavigationLink(
-                                destination: RecipeDetailScreen(
-                                    recipeId: Int(recipe.id),
-                                    cacheModule: self.cacheModule)
-                            ){
-                                //workarounf for hiding the arrows
-                               EmptyView()
-                             }
-                         
+                    SearchAppBar(
+                        query: viewModel.state.query,
+                        onUpdateQuery: { query in
+                            viewModel.onUpdateQuery(query: query)
+                        },
+                        selectedCategory: viewModel.state.selectedCategory,
+                        onUpdateSelectedCategory: { foodCategory in
+                            viewModel.onUpdateSelectedCategory(foodCategory: foodCategory)
+                        },
+                        foodCategories: viewModel.state.foodCategories,
+                        onTriggerEvent: { event in
+                            viewModel.onTriggerEvent(stateEvent: event)
                         }
-                        .listRowInsets(EdgeInsets())
-                        .padding(.top,10)
-         
+                    )
+                    List{
+                        ForEach(viewModel.state.recipes, id: \.self.id){ recipe in
+                            ZStack{
+                                VStack{
+                                    RecipeCard(recipe: recipe)
+                                        .onAppear(perform: {
+                                            if viewModel.shouldQueryNextPage(recipe: recipe){
+                                                viewModel.onTriggerEvent(stateEvent: RecipeListEvents.NextPage())
+                                            }
+                                        })
+                                }
+                                NavigationLink(
+                                    destination: RecipeScreen(
+                                        recipeId: Int(recipe.id),
+                                        cacheModule: self.cacheModule
+                                    )
+                                ){
+                                    // workaround for hiding arrows
+                                    EmptyView()
+                                }.hidden().frame(width: 0)
+                            }
+                            .listRowInsets(EdgeInsets())
+                            .padding(.top, 10)
                         }
                     }
-                .listStyle(PlainListStyle())
-                .background(Color.gray)
+                    .listStyle(PlainListStyle())
+                    .background(Color.init(hex: 0xf2f2f2))
                 }
-                if viewModel.state.isLoading{
-                    ProgressView("Searching recipies...")
+                if viewModel.state.isLoading {
+                    ProgressView("Searching recipes...")
                 }
-                
             }
             .navigationBarHidden(true)
+            .alert(isPresented: $viewModel.showDialog, content: {
+                let first = viewModel.state.queue.peek()!
+                return GenericMessageInfoAlert().build(
+                    message: first,
+                    onRemoveHeadMessage: viewModel.removeHeadFromQueue
+                )
+            })
         }
     }
 }
 
-/*struct RecipeListScreen_Previews: PreviewProvider {
+@available(iOS 14.0, *)
+struct RecipeListScreen_Previews: PreviewProvider {
     static var previews: some View {
-        RecipeListScreen()
+        RecipeListScreen(
+            networkModule: NetworkModule(),
+            cacheModule: CacheModule()
+        )
     }
-}*/
+}

@@ -4,22 +4,21 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import de.darthkali.weefood.android.BASE_URL
 import de.darthkali.weefood.datasource.network.KtorClientFactory
 import de.darthkali.weefood.datasource.network.RecipeService
-import de.darthkali.weefood.datasource.network.model.RecipeServiceImpl
+import de.darthkali.weefood.datasource.network.RecipeServiceImpl
 import io.ktor.client.*
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object NetworkModule {
+object NetworkModule{
+
     @Singleton
     @Provides
-    fun provideHttpClient(): HttpClient {
+    fun provideHttpClient(): HttpClient{
         return KtorClientFactory().build()
     }
-
 
     @Singleton
     @Provides
@@ -28,8 +27,7 @@ object NetworkModule {
     ): RecipeService {
         return RecipeServiceImpl(
             httpClient = httpClient,
-            baseUrl = BASE_URL
+            baseUrl = RecipeServiceImpl.BASE_URL,
         )
     }
-
 }

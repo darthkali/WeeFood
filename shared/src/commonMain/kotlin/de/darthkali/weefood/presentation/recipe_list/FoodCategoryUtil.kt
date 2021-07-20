@@ -1,7 +1,7 @@
 package de.darthkali.weefood.presentation.recipe_list
 
 class FoodCategoryUtil {
-    fun getAllFoodCategories(): List<FoodCategory> {
+    fun getAllFoodCategories(): List<FoodCategory>{
         return listOf(
             FoodCategory.ERROR,
             FoodCategory.CHICKEN,

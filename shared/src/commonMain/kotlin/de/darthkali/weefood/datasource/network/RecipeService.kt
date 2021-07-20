@@ -9,8 +9,7 @@ interface RecipeService {
         query: String,
     ): List<Recipe>
 
-
     suspend fun get(
-        id: Int,
+        id: Int
     ): Recipe
 }

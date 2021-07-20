@@ -1,8 +1,8 @@
 plugins {
     id(Plugins.androidApplication)
-    id(Plugins.hilt)
     kotlin(KotlinPlugins.android)
     kotlin(KotlinPlugins.kapt)
+    id(Plugins.hilt)
     kotlin(KotlinPlugins.serialization) version Kotlin.version
 }
 
@@ -40,6 +40,7 @@ dependencies {
     implementation(project(":shared"))
 
     implementation(Accompanist.coil)
+
     implementation(AndroidX.appCompat)
 
     implementation(Compose.runtime)

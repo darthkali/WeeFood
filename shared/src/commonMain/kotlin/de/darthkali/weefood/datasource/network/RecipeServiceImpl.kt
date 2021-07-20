@@ -1,8 +1,7 @@
-package de.darthkali.weefood.datasource.network.model
+package de.darthkali.weefood.datasource.network
 
-import de.darthkali.weefood.datasource.network.RecipeService
-import de.darthkali.weefood.datasource.network.toRecipe
-import de.darthkali.weefood.datasource.network.toRecipeList
+import de.darthkali.weefood.datasource.network.model.RecipeDto
+import de.darthkali.weefood.datasource.network.model.RecipeSearchResponse
 import de.darthkali.weefood.domain.model.Recipe
 import io.ktor.client.*
 import io.ktor.client.request.*
@@ -21,7 +20,7 @@ class RecipeServiceImpl(
     }
 
     override suspend fun get(id: Int): Recipe {
-        return httpClient.get<RecipeDTO> {
+        return httpClient.get<RecipeDto> {
             url("$BASE_URL/get?id=$id")
             header("Authorization", TOKEN)
         }.toRecipe()

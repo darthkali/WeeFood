@@ -1,4 +1,3 @@
-
 object Ktor {
     private const val ktorVersion = "1.5.2"
     const val core = "io.ktor:ktor-client-core:${ktorVersion}"

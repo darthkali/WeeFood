@@ -17,8 +17,8 @@ const val RECIPE_IMAGE_HEIGHT = 260
 fun RecipeImage(
     url: String,
     contentDescription: String,
-) {
-    val painter = rememberCoilPainter(request = url)
+){
+    val painter = rememberCoilPainter(url)
     Box {
         Image(
             modifier = Modifier
@@ -26,31 +26,19 @@ fun RecipeImage(
                 .height(RECIPE_IMAGE_HEIGHT.dp),
             painter = painter,
             contentDescription = contentDescription,
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Crop,
         )
-    }
-
-    when (painter.loadState) {
-        is ImageLoadState.Error -> {
-            Box(
-                modifier = Modifier
+        when (painter.loadState) {
+            ImageLoadState.Loading -> {
+                Box(modifier = Modifier
                     .fillMaxWidth()
                     .height(RECIPE_IMAGE_HEIGHT.dp)
-            ) {
-                // Show Error
+                ) {
+                    // empty for white background
+                }
             }
-        }
-        is ImageLoadState.Success -> {
-
-        }
-
-        is ImageLoadState.Loading -> {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(RECIPE_IMAGE_HEIGHT.dp)
-            ) {
-                // Show Loading
+            is ImageLoadState.Error -> {
+                // If you wish to display some content if the request fails
             }
         }
     }

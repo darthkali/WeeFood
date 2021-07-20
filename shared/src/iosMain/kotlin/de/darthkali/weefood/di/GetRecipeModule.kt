@@ -6,7 +6,7 @@ class GetRecipeModule(
     private val cacheModule: CacheModule,
 ) {
 
-    val getRecipe: GetRecipe by lazy {
+    val getRecipe: GetRecipe by lazy{
         GetRecipe(
             recipeCache = cacheModule.recipeCache
         )

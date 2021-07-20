@@ -2,7 +2,7 @@ package de.darthkali.weefood.di
 
 import de.darthkali.weefood.datasource.network.KtorClientFactory
 import de.darthkali.weefood.datasource.network.RecipeService
-import de.darthkali.weefood.datasource.network.model.RecipeServiceImpl
+import de.darthkali.weefood.datasource.network.RecipeServiceImpl
 
 class NetworkModule {
 
@@ -12,4 +12,5 @@ class NetworkModule {
             baseUrl = RecipeServiceImpl.BASE_URL
         )
     }
+
 }

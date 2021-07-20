@@ -13,8 +13,10 @@ import androidx.compose.ui.unit.dp
 import de.darthkali.weefood.android.presentation.components.RecipeImage
 import de.darthkali.weefood.domain.model.Recipe
 import de.darthkali.weefood.domain.util.DatetimeUtil
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalStdlibApi
+@ExperimentalCoroutinesApi
 @Composable
 fun RecipeView(
     recipe: Recipe,

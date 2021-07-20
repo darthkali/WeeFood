@@ -28,68 +28,63 @@ import de.darthkali.weefood.presentation.recipe_list.FoodCategoryUtil
 @Composable
 fun SearchAppBar(
     query: String,
-    categories: List<FoodCategory>,
-    onSelectedCategoryChanged: (FoodCategory) -> Unit,
-    selectedCategory: FoodCategory? = null,
-    onQueryChange: (String) -> Unit,
+    onQueryChanged: (String) -> Unit,
     onExecuteSearch: () -> Unit,
+    categories: List<FoodCategory>,
+    selectedCategory: FoodCategory?,
+    onSelectedCategoryChanged: (FoodCategory) -> Unit,
 ) {
+    val keyboardController = LocalSoftwareKeyboardController.current
     Surface(
         modifier = Modifier
             .fillMaxWidth(),
         color = MaterialTheme.colors.secondary,
         elevation = 8.dp,
     ) {
-        val keyboardController = LocalSoftwareKeyboardController.current
         Column {
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
             ) {
                 TextField(
+                    modifier = Modifier
+                        .fillMaxWidth(.9f)
+                        .padding(8.dp)
+                    ,
                     value = query,
-                    onValueChange = onQueryChange,
-                    label = {
-                        Text(text = "Search...")
-                    },
+                    onValueChange = { onQueryChanged(it) },
+                    label = { Text(text = "Search") },
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Text,
-                        imeAction = ImeAction.Done
+                        imeAction = ImeAction.Done,
                     ),
                     keyboardActions = KeyboardActions(
                         onDone = {
                             onExecuteSearch()
                             keyboardController?.hide()
-                        }
+                        },
                     ),
-                    leadingIcon = {
-                        Icon(
-                            Icons.Filled.Search,
-                            contentDescription = "Search for a Recipe Icon"
-                        )
-                    },
+                    leadingIcon = { Icon(Icons.Filled.Search, contentDescription = "Search Icon") },
                     textStyle = TextStyle(color = MaterialTheme.colors.onSurface),
-                    colors = TextFieldDefaults.textFieldColors(
-                        backgroundColor = MaterialTheme.colors.surface,
-                    )
+                    colors = TextFieldDefaults.textFieldColors(backgroundColor = MaterialTheme.colors.surface),
                 )
             }
             LazyRow(
-                modifier = Modifier.padding(start = 8.dp, bottom = 8.dp),
+                modifier = Modifier
+                    .padding(start = 8.dp, bottom = 8.dp),
             ) {
                 items(categories) {
                     FoodCategoryChip(
                         category = it.value,
                         isSelected = selectedCategory == it,
                         onSelectedCategoryChanged = {
-                          FoodCategoryUtil().getFoodCategory(it)?.let { newCategory ->
-                              onSelectedCategoryChanged(newCategory)
-                          }
-                        })
-
+                            FoodCategoryUtil().getFoodCategory(it)?.let{ newCategory ->
+                                onSelectedCategoryChanged(newCategory)
+                            }
+                        },
+                    )
                 }
             }
-
         }
-
     }
 }

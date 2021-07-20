@@ -9,28 +9,32 @@
 import SwiftUI
 import shared
 
+@available(iOS 14.0, *)
 struct SearchAppBar: View {
-    
+
     @State var query: String
-    private let selectedCategory: FoodCategory?
-    private let foodCategories: [FoodCategory]
-    private let onTriggerEvent: (RecipeListEvents) -> Void
-    
+    let onUpdateQuery: (String) -> Void
+    let selectedCategory: FoodCategory?
+    let onUpdateSelectedCategory: (FoodCategory) -> Void
+    let foodCategories: [FoodCategory]
+    let onTriggerEvent: (RecipeListEvents) -> Void
+
     init(
         query: String,
+        onUpdateQuery: @escaping (String) -> Void,
         selectedCategory: FoodCategory?,
+        onUpdateSelectedCategory: @escaping (FoodCategory) -> Void,
         foodCategories: [FoodCategory],
-        onTriggerEvent: @escaping(RecipeListEvents) -> Void
-    ){
-        self.onTriggerEvent = onTriggerEvent
+        onTriggerEvent: @escaping (RecipeListEvents) -> Void
+    ) {
+        self.onUpdateQuery = onUpdateQuery
         self.selectedCategory = selectedCategory
+        self.onUpdateSelectedCategory = onUpdateSelectedCategory
         self.foodCategories = foodCategories
-        self._query = State(initialValue: query)
+        self.onTriggerEvent = onTriggerEvent
+        self._query = State(initialValue: query) // set initial value for query
     }
-    
-    
 
-    
     var body: some View {
         VStack{
             HStack{
@@ -38,25 +42,26 @@ struct SearchAppBar: View {
                 TextField(
                     "Search...",
                     text: $query,
-                    onCommit: {
+                    onCommit:{
                         onTriggerEvent(RecipeListEvents.NewSearch())
                     }
                 )
                 .onChange(of: query, perform: { value in
-                    onTriggerEvent(RecipeListEvents.OnUpdateQuery(query: value))
+                    onUpdateQuery(value)
                 })
+
             }
             .padding(.bottom, 8)
             ScrollView(.horizontal){
-                HStack(spacing:10){
-                    ForEach(foodCategories, id: \.self){category in
-                        FoodCategorieChip(
-                            category:category.value,
-                            isSelected: selectedCategory ==  category
+                HStack(spacing: 10){
+                    ForEach(foodCategories, id: \.self){ category in
+                        FoodCategoryChip(
+                            category: category.value,
+                            isSelected: selectedCategory == category
                         )
                         .onTapGesture {
                             query = category.value
-                            onTriggerEvent(RecipeListEvents.OnSelectCategory(category: category))
+                            onUpdateSelectedCategory(category)
                         }
                     }
                 }
@@ -68,4 +73,32 @@ struct SearchAppBar: View {
         .background(Color.white.opacity(0))
     }
 }
+
+//@available(iOS 14.0, *)
+//struct SearchAppBar_Previews: PreviewProvider {
+//    static let dtoMapper = RecipeDtoMapper()
+//    static let driverFactory = DriverFactory()
+//    static let recipeEntityMapper = RecipeEntityMapper()
+//    static let dateUtil = DatetimeUtil()
+//    static let recipeService = RecipeServiceImpl(
+//        recipeDtoMapper: dtoMapper,
+//        httpClient: KtorClientFactory().build(),
+//        baseUrl: RecipeServiceImpl.Companion().BASE_URL
+//    )
+//    static let recipeDatabase = RecipeDatabaseFactory(driverFactory: driverFactory).createDatabase()
+//    static let searchRecipes = SearchRecipes(
+//        recipeService: recipeService,
+//        recipeDatabase: recipeDatabase,
+//        recipeEntityMapper: recipeEntityMapper,
+//        dateUtil: dateUtil
+//    )
+//    static let foodCategoryUtil = FoodCategoryUtil()
+//    static let viewModel = RecipeListViewModel(
+//        searchRecipes: searchRecipes,
+//        foodCategoryUtil: foodCategoryUtil
+//    )
+//    static var previews: some View {
+//        SearchAppBar(viewModel: viewModel)
+//    }
+//}
 

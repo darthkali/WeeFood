@@ -1,6 +1,6 @@
 package de.darthkali.weefood.presentation.recipe_list
 
-enum class FoodCategory (val value: String){
+enum class FoodCategory(val value: String){
     ERROR("error"),
     CHICKEN("Chicken"),
     BEEF("Beef"),

@@ -1,4 +1,4 @@
-package de.darthkali.weefood.android
+package de.darthkali.weefood
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

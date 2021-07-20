@@ -1,5 +1,6 @@
 package de.darthkali.weefood.android.presentation.navigation
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -13,22 +14,24 @@ import de.darthkali.weefood.android.presentation.recipe_detail.RecipeDetailScree
 import de.darthkali.weefood.android.presentation.recipe_detail.RecipeDetailViewModel
 import de.darthkali.weefood.android.presentation.recipe_list.RecipeListScreen
 import de.darthkali.weefood.android.presentation.recipe_list.RecipeListViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalStdlibApi
+@ExperimentalCoroutinesApi
+@ExperimentalFoundationApi
 @ExperimentalComposeUiApi
 @ExperimentalMaterialApi
-@ExperimentalStdlibApi
 @Composable
-fun Navigation() {
+fun Navigation(){
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Screen.RecipeList.route) {
         composable(route = Screen.RecipeList.route) { navBackStackEntry ->
-            // in the future, the hilt-navigation-compose artifact will simplify this
             val factory = HiltViewModelFactory(LocalContext.current, navBackStackEntry)
             val viewModel: RecipeListViewModel = viewModel("RecipeListViewModel", factory)
             RecipeListScreen(
                 state = viewModel.state.value,
                 onTriggerEvent = viewModel::onTriggerEvent,
-                onSelectRecipe = { recipeId ->
+                onClickRecipeListItem = { recipeId ->
                     navController.navigate("${Screen.RecipeDetail.route}/$recipeId")
                 }
             )
@@ -47,5 +50,4 @@ fun Navigation() {
             )
         }
     }
-
 }

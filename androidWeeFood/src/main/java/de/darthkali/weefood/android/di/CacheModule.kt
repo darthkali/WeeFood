@@ -4,7 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import de.darthkali.weefood.android.BaseApplication
+import de.darthkali.weefood.BaseApplication
 import de.darthkali.weefood.datasource.cache.*
 import de.darthkali.weefood.domain.util.DatetimeUtil
 import javax.inject.Singleton
@@ -15,9 +15,7 @@ object CacheModule {
 
     @Singleton
     @Provides
-    fun provideRecipeDatabase(
-        context: BaseApplication
-    ): RecipeDatabase {
+    fun provideRecipeDatabase(context: BaseApplication): RecipeDatabase {
         return RecipeDatabaseFactory(driverFactory = DriverFactory(context)).createDatabase()
     }
 
@@ -25,10 +23,11 @@ object CacheModule {
     @Provides
     fun provideRecipeCache(
         recipeDatabase: RecipeDatabase,
+        datetimeUtil: DatetimeUtil,
     ): RecipeCache {
         return RecipeCacheImpl(
             recipeDatabase = recipeDatabase,
-            datetimeUtil = DatetimeUtil()
+            datetimeUtil = datetimeUtil,
         )
     }
 }

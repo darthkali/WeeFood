@@ -1,15 +1,16 @@
 package de.darthkali.weefood.datasource.cache
 
-import de.darthkali.weefood.datasource.network.model.RecipeServiceImpl.Companion.RECIPE_PAGINATION_PAGE_SIZE
+import de.darthkali.weefood.datasource.network.RecipeServiceImpl.Companion.RECIPE_PAGINATION_PAGE_SIZE
 import de.darthkali.weefood.domain.model.Recipe
 import de.darthkali.weefood.domain.util.DatetimeUtil
 
 class RecipeCacheImpl(
-    private val recipeDatabase: RecipeDatabase,
-    private val datetimeUtil: DatetimeUtil
-) : RecipeCache {
+    val recipeDatabase: RecipeDatabase,
+    private val datetimeUtil: DatetimeUtil,
+): RecipeCache {
 
-    private val queries: RecipeDbQueries = recipeDatabase.recipeDbQueries
+    private var queries: RecipeDbQueries = recipeDatabase.recipeDbQueries
+
     override fun insert(recipe: Recipe) {
         queries.insertRecipe(
             id = recipe.id.toLong(),
@@ -25,7 +26,7 @@ class RecipeCacheImpl(
     }
 
     override fun insert(recipes: List<Recipe>) {
-        for (recipe in recipes) {
+        for(recipe in recipes){
             insert(recipe)
         }
     }
@@ -34,7 +35,7 @@ class RecipeCacheImpl(
         return queries.searchRecipes(
             query = query,
             pageSize = RECIPE_PAGINATION_PAGE_SIZE.toLong(),
-            offset = ((page - 1) * RECIPE_PAGINATION_PAGE_SIZE).toLong(),
+            offset = ((page - 1)* RECIPE_PAGINATION_PAGE_SIZE).toLong()
         ).executeAsList().toRecipeList()
     }
 
@@ -48,9 +49,8 @@ class RecipeCacheImpl(
     override fun get(recipeId: Int): Recipe? {
         return try {
             queries.getRecipeById(id = recipeId.toLong()).executeAsOne().toRecipe()
-        } catch (e: Exception) {
+        }catch (e: NullPointerException){
             null
         }
     }
-
 }

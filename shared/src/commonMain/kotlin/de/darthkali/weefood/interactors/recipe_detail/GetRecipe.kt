@@ -1,30 +1,55 @@
 package de.darthkali.weefood.interactors.recipe_detail
 
 import de.darthkali.weefood.datasource.cache.RecipeCache
+import de.darthkali.weefood.domain.model.GenericMessageInfo
 import de.darthkali.weefood.domain.model.Recipe
 import de.darthkali.weefood.domain.util.CommonFlow
 import de.darthkali.weefood.domain.util.DataState
 import de.darthkali.weefood.domain.util.asCommonFlow
+import de.darthkali.weefood.shared.domain.util.UIComponentType
+import de.darthkali.weefood.util.BuildConfig
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class GetRecipe(
+/**
+ * Retrieve a recipe from the cache given it's unique id.
+ */
+class GetRecipe (
     private val recipeCache: RecipeCache,
-) {
+){
+
     fun execute(
         recipeId: Int,
     ): CommonFlow<DataState<Recipe>> = flow {
         try {
             emit(DataState.loading())
 
+            // just to show loading, cache is fast
+            // Note: iOS loads the DetailView ahead of time so delaying here for iOS is pointless
+            if(BuildConfig().isDebug() && BuildConfig().isAndroid()){
+                delay(500)
+            }
+
+            // Force error for testing
+            if(recipeId == 1){
+                throw Exception("Invalid Recipe Id")
+            }
+
             val recipe =  recipeCache.get(recipeId)
 
-            delay(500)  //TODO: Delete, its jut for testing
             emit(DataState.data(message = null, data = recipe))
 
         }catch (e: Exception){
-            emit(DataState.error<Recipe>(message = e.message ?: "Unknown Error"))
+            emit(DataState.error<Recipe>(
+                message = GenericMessageInfo.Builder()
+                    .id("GetRecipe.Error")
+                    .title("Error")
+                    .uiComponentType(UIComponentType.Dialog)
+                    .description(e.message?: "Unknown Error")
+            ))
         }
     }.asCommonFlow()
+
+
 }

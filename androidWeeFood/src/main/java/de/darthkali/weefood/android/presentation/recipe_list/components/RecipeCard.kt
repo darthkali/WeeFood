@@ -12,12 +12,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import de.darthkali.weefood.android.presentation.components.RecipeImage
 import de.darthkali.weefood.domain.model.Recipe
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 
+const val RECIPE_IMAGE_HEIGHT = 260
+
+@ExperimentalCoroutinesApi
 @Composable
 fun RecipeCard(
     recipe: Recipe,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     Card(
         shape = MaterialTheme.shapes.small,
@@ -30,18 +34,15 @@ fun RecipeCard(
             .clickable(onClick = onClick),
         elevation = 8.dp,
     ) {
-        Column {
-            RecipeImage(url = recipe.featuredImage, contentDescription = recipe.title)
+        Column() {
+            RecipeImage(
+                url = recipe.featuredImage,
+                contentDescription = recipe.title
+            )
             Row(
-
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(
-                        top = 12.dp,
-                        bottom = 12.dp,
-                        start = 8.dp,
-                        end = 8.dp
-                    )
+                    .padding(top = 12.dp, bottom = 12.dp, start = 8.dp, end = 8.dp)
             ) {
                 Text(
                     text = recipe.title,
@@ -50,17 +51,16 @@ fun RecipeCard(
                         .wrapContentWidth(Alignment.Start),
                     style = MaterialTheme.typography.h3
                 )
+                val rank = recipe.rating.toString()
                 Text(
-                    text = recipe.rating.toString(),
+                    text = rank,
                     modifier = Modifier
                         .fillMaxWidth()
                         .wrapContentWidth(Alignment.End)
                         .align(Alignment.CenterVertically),
                     style = MaterialTheme.typography.h5
-
-                )}
-
-
+                )
+            }
         }
     }
 }
