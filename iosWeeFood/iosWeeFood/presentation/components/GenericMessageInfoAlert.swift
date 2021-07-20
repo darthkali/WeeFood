@@ -2,7 +2,7 @@
 //  GenericMessageInfoAlert.swift
 //  iosWeeFood
 //
-//  Created by Danny Steinbrecher on 19.07.21.
+//  Created by Danny Steinbrecher on 20.07.21.
 //  Copyright © 2021 orgName. All rights reserved.
 //
 
@@ -39,4 +39,3 @@ struct GenericMessageInfoAlert  {
         )
     }
 }
-

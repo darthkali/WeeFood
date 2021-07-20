@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		125E723AAB37A84A93B0CAE7 /* Pods_iosWeeFood.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18190209AFA023A7D3B84EAB /* Pods_iosWeeFood.framework */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		C247688C26A5CD8300BD7FFD /* SearchAppBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C247688B26A5CD8300BD7FFD /* SearchAppBar.swift */; };
 		C247688E26A5F5F600BD7FFD /* FoodCategorieChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = C247688D26A5F5F600BD7FFD /* FoodCategorieChip.swift */; };
@@ -16,16 +15,20 @@
 		C247689526A6BFD600BD7FFD /* RecipeDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C247689426A6BFD600BD7FFD /* RecipeDetailScreen.swift */; };
 		C247689926A6C38600BD7FFD /* RecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C247689826A6C38600BD7FFD /* RecipeView.swift */; };
 		C2738DAD269B6EF10030B47D /* RecipeListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2738DAC269B6EF10030B47D /* RecipeListScreen.swift */; };
+		C27A6BD826A74C8400A18B14 /* DefaultText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A6BD726A74C8400A18B14 /* DefaultText.swift */; };
+		C27A6BDA26A74CEC00A18B14 /* GenericMessageInfoAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A6BD926A74CEC00A18B14 /* GenericMessageInfoAlert.swift */; };
+		C27A6BDC26A74F1000A18B14 /* Avenir.ttc in Resources */ = {isa = PBXBuildFile; fileRef = C27A6BDB26A74F1000A18B14 /* Avenir.ttc */; };
+		C27A6BDE26A74F4000A18B14 /* Color_a.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A6BDD26A74F4000A18B14 /* Color_a.swift */; };
 		C2D0017A269E0463005E92FC /* RecipeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D00179269E0463005E92FC /* RecipeListViewModel.swift */; };
+		C902392785B856D9CC73D3AE /* Pods_iosWeeFood.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D3197EEF22A31645DCE6D8 /* Pods_iosWeeFood.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		18190209AFA023A7D3B84EAB /* Pods_iosWeeFood.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosWeeFood.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0067F64FB8DEE80B75C72C92 /* Pods-iosWeeFood.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosWeeFood.release.xcconfig"; path = "Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood.release.xcconfig"; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
-		26B73C976FC9F40F36DC22C4 /* Pods-iosWeeFood.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosWeeFood.release.xcconfig"; path = "Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood.release.xcconfig"; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosWeeFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosWeeFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		861E9EAA781E523F3B9E6B12 /* Pods-iosWeeFood.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosWeeFood.debug.xcconfig"; path = "Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood.debug.xcconfig"; sourceTree = "<group>"; };
+		B7D3197EEF22A31645DCE6D8 /* Pods_iosWeeFood.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosWeeFood.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C247688B26A5CD8300BD7FFD /* SearchAppBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAppBar.swift; sourceTree = "<group>"; };
 		C247688D26A5F5F600BD7FFD /* FoodCategorieChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCategorieChip.swift; sourceTree = "<group>"; };
 		C247688F26A5FD0B00BD7FFD /* RecipeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCard.swift; sourceTree = "<group>"; };
@@ -33,7 +36,12 @@
 		C247689426A6BFD600BD7FFD /* RecipeDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailScreen.swift; sourceTree = "<group>"; };
 		C247689826A6C38600BD7FFD /* RecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeView.swift; sourceTree = "<group>"; };
 		C2738DAC269B6EF10030B47D /* RecipeListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListScreen.swift; sourceTree = "<group>"; };
+		C27A6BD726A74C8400A18B14 /* DefaultText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultText.swift; sourceTree = "<group>"; };
+		C27A6BD926A74CEC00A18B14 /* GenericMessageInfoAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericMessageInfoAlert.swift; sourceTree = "<group>"; };
+		C27A6BDB26A74F1000A18B14 /* Avenir.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Avenir.ttc; sourceTree = "<group>"; };
+		C27A6BDD26A74F4000A18B14 /* Color_a.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color_a.swift; sourceTree = "<group>"; };
 		C2D00179269E0463005E92FC /* RecipeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewModel.swift; sourceTree = "<group>"; };
+		D831AD8E708C7820BF9B3096 /* Pods-iosWeeFood.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosWeeFood.debug.xcconfig"; path = "Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,26 +49,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				125E723AAB37A84A93B0CAE7 /* Pods_iosWeeFood.framework in Frameworks */,
+				C902392785B856D9CC73D3AE /* Pods_iosWeeFood.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		01EAA4C33E9838DFCD76A06A /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				18190209AFA023A7D3B84EAB /* Pods_iosWeeFood.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		39A38FEB493004AB073AFFF7 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				861E9EAA781E523F3B9E6B12 /* Pods-iosWeeFood.debug.xcconfig */,
-				26B73C976FC9F40F36DC22C4 /* Pods-iosWeeFood.release.xcconfig */,
+				D831AD8E708C7820BF9B3096 /* Pods-iosWeeFood.debug.xcconfig */,
+				0067F64FB8DEE80B75C72C92 /* Pods-iosWeeFood.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -71,7 +71,7 @@
 				7555FF7D242A565900829871 /* iosWeeFood */,
 				7555FF7C242A565900829871 /* Products */,
 				39A38FEB493004AB073AFFF7 /* Pods */,
-				01EAA4C33E9838DFCD76A06A /* Frameworks */,
+				C8D7DBA7A6E65D9CCE435E26 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,6 +86,8 @@
 		7555FF7D242A565900829871 /* iosWeeFood */ = {
 			isa = PBXGroup;
 			children = (
+				C27A6BD626A74BDE00A18B14 /* modifier */,
+				C27A6BD526A74B9600A18B14 /* fonts */,
 				C2738DAA269B6ECB0030B47D /* presentation */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
@@ -99,6 +101,8 @@
 				C247688B26A5CD8300BD7FFD /* SearchAppBar.swift */,
 				C247688D26A5F5F600BD7FFD /* FoodCategorieChip.swift */,
 				C247688F26A5FD0B00BD7FFD /* RecipeCard.swift */,
+				C27A6BD726A74C8400A18B14 /* DefaultText.swift */,
+				C27A6BD926A74CEC00A18B14 /* GenericMessageInfoAlert.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -140,6 +144,30 @@
 			path = recipe_list;
 			sourceTree = "<group>";
 		};
+		C27A6BD526A74B9600A18B14 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C27A6BDB26A74F1000A18B14 /* Avenir.ttc */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
+		C27A6BD626A74BDE00A18B14 /* modifier */ = {
+			isa = PBXGroup;
+			children = (
+				C27A6BDD26A74F4000A18B14 /* Color_a.swift */,
+			);
+			path = modifier;
+			sourceTree = "<group>";
+		};
+		C8D7DBA7A6E65D9CCE435E26 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B7D3197EEF22A31645DCE6D8 /* Pods_iosWeeFood.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -147,11 +175,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7555FFA5242A565B00829871 /* Build configuration list for PBXNativeTarget "iosWeeFood" */;
 			buildPhases = (
-				B4F36A8F8720E7B3F1C6B00E /* [CP] Check Pods Manifest.lock */,
+				84E67C26D2AAAA2A1404777D /* [CP] Check Pods Manifest.lock */,
 				7555FF77242A565900829871 /* Sources */,
 				7555FF79242A565900829871 /* Resources */,
 				37FBD735D328303F9D8FD98A /* Frameworks */,
-				21DF599A458B37CE221B0240 /* [CP] Embed Pods Frameworks */,
+				8A15DB729A156DA55CDC41AB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -200,30 +228,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C27A6BDC26A74F1000A18B14 /* Avenir.ttc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		21DF599A458B37CE221B0240 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B4F36A8F8720E7B3F1C6B00E /* [CP] Check Pods Manifest.lock */ = {
+		84E67C26D2AAAA2A1404777D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -245,6 +257,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		8A15DB729A156DA55CDC41AB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -256,8 +285,11 @@
 				C2738DAD269B6EF10030B47D /* RecipeListScreen.swift in Sources */,
 				C247689326A6BE4E00BD7FFD /* RecipeDetailViewModel.swift in Sources */,
 				C247688C26A5CD8300BD7FFD /* SearchAppBar.swift in Sources */,
+				C27A6BDA26A74CEC00A18B14 /* GenericMessageInfoAlert.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				C2D0017A269E0463005E92FC /* RecipeListViewModel.swift in Sources */,
+				C27A6BDE26A74F4000A18B14 /* Color_a.swift in Sources */,
+				C27A6BD826A74C8400A18B14 /* DefaultText.swift in Sources */,
 				C247688E26A5F5F600BD7FFD /* FoodCategorieChip.swift in Sources */,
 				C247689526A6BFD600BD7FFD /* RecipeDetailScreen.swift in Sources */,
 				C247689026A5FD0B00BD7FFD /* RecipeCard.swift in Sources */,
@@ -385,7 +417,7 @@
 		};
 		7555FFA6242A565B00829871 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 861E9EAA781E523F3B9E6B12 /* Pods-iosWeeFood.debug.xcconfig */;
+			baseConfigurationReference = D831AD8E708C7820BF9B3096 /* Pods-iosWeeFood.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -413,7 +445,7 @@
 		};
 		7555FFA7242A565B00829871 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 26B73C976FC9F40F36DC22C4 /* Pods-iosWeeFood.release.xcconfig */;
+			baseConfigurationReference = 0067F64FB8DEE80B75C72C92 /* Pods-iosWeeFood.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
