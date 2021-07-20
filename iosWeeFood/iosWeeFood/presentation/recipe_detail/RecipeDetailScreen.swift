@@ -21,7 +21,7 @@ struct RecipeDetailScreen: View {
     init(
         recipeId: Int,
         cacheModule: CacheModule
-         ) {
+     ) {
         self.recipeId = recipeId
         self.cacheModule = cacheModule
         self.getRecipeModule = GetRecipeModule(
@@ -34,36 +34,11 @@ struct RecipeDetailScreen: View {
     }
 
     var body: some View {
-            if viewModel.state.recipe != nil {
-                RecipeView(
-                    recipe: viewModel.state.recipe!,
-                    dateUtil: datetimeUtil
-                )
-            }
-            else{
-                NavigationView { // NavigationView is needed for alert to work?
-                    Text("Error")
-                        .alert(isPresented: $viewModel.showDialog, content: {
-                            let first = viewModel.state.queue.peek()!
-                            return GenericMessageInfoAlert().build(
-                                message: first,
-                                onRemoveHeadMessage: viewModel.removeHeadFromQueue
-                            )
-                        })
-                }
-            }
-            if viewModel.state.isLoading { // this is actually pointless b/c SwiftUI preloads this view
-                VStack{
-                    Spacer()
-                    ProgressView("Loading Recipe Details...")
-                    Spacer()
-                }
-            }
+        RecipeView(
+            recipe: viewModel.state.recipe,
+            dateUtil: datetimeUtil,
+            message: viewModel.state.queue.peek(),
+            onTriggerEvent: viewModel.onTriggerEvent
+        )
     }
 }
-
-//struct RecipeDetailScreen_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RecipeDetailScreen()
-//    }
-//}

@@ -28,13 +28,23 @@ class RecipeListViewModel: ObservableObject {
     ){
         self.searchRecipes = searchRecipes
         self.foodCategoryUtil = foodCategoryUtil
-        onTriggerEvent(stateEvent: RecipeListEvents.NewSearch())
+        onTriggerEvent(stateEvent: RecipeListEvents.LoadRecipes())
     }
 
     func onTriggerEvent(stateEvent: RecipeListEvents){
-        switch stateEvent{
-        case RecipeListEvents.NewSearch(): newSearch()
-        case RecipeListEvents.NextPage(): nextPage()
+        switch stateEvent {
+        case is RecipeListEvents.LoadRecipes:
+            loadRecipes()
+        case is RecipeListEvents.NewSearch:
+            newSearch()
+        case is RecipeListEvents.NextPage:
+            nextPage()
+        case is RecipeListEvents.OnUpdateQuery:
+            onUpdateQuery(query: (stateEvent as! RecipeListEvents.OnUpdateQuery).query)
+        case is RecipeListEvents.OnSelectCategory:
+            onUpdateSelectedCategory(foodCategory: (stateEvent as! RecipeListEvents.OnSelectCategory).category)
+        case RecipeListEvents.OnRemoveHeadMessageFromQueue():
+            removeHeadFromQueue()
         default:
             doNothing()
         }
@@ -42,8 +52,7 @@ class RecipeListViewModel: ObservableObject {
 
     func doNothing(){}
 
-    private func newSearch() {
-        resetSearchState()
+    private func loadRecipes(){
         let currentState = (self.state.copy() as! RecipeListState)
         do{
             try searchRecipes.execute(
@@ -74,38 +83,14 @@ class RecipeListViewModel: ObservableObject {
         }
     }
 
+    private func newSearch() {
+        resetSearchState()
+        loadRecipes()
+    }
+
     private func nextPage(){
         incrementPage()
-        let currentState = (self.state.copy() as! RecipeListState)
-        logger.log(msg: "NEXT PAGE \(currentState.page)")
-        if(currentState.page > 1){
-            do{
-                try searchRecipes.execute(
-                    page: Int32(currentState.page),
-                    query: currentState.query
-                ).collectCommon(
-                    coroutineScope: nil,
-                    callback: { dataState in
-                    if dataState != nil {
-                        let data = dataState?.data
-                        let message = dataState?.message
-                        let loading = dataState?.isLoading ?? false
-
-                        self.updateState(isLoading: loading)
-                        if(data != nil){
-                            self.appendRecipes(recipes: data as! [Recipe])
-                        }
-                        if(message != nil){
-                            self.handleMessageByUIComponentType(message!.build())
-                        }
-                    }else{
-                        self.logger.log(msg: "NextPage: DataState is nil")
-                    }
-                })
-            }catch{
-                self.logger.log(msg: "\(error)")
-            }
-        }
+        loadRecipes()
     }
 
     private func resetSearchState(){
@@ -120,14 +105,12 @@ class RecipeListViewModel: ObservableObject {
             query: currentState.query,
             recipes: [], // reset
             selectedCategory: foodCategory, // Maybe reset (see logic above)
-            foodCategories: currentState.foodCategories,
             bottomRecipe:  currentState.bottomRecipe,
-            isQueryInProgress: currentState.isQueryInProgress,
             queue: currentState.queue
         )
     }
 
-    func onUpdateSelectedCategory(foodCategory: FoodCategory?){
+    private func onUpdateSelectedCategory(foodCategory: FoodCategory?){
         let currentState = (self.state.copy() as! RecipeListState)
         self.state = self.state.doCopy(
             isLoading: currentState.isLoading,
@@ -135,16 +118,14 @@ class RecipeListViewModel: ObservableObject {
             query: currentState.query,
             recipes: currentState.recipes,
             selectedCategory: foodCategory, // update selected FoodCategory
-            foodCategories: currentState.foodCategories,
             bottomRecipe:  currentState.bottomRecipe,
-            isQueryInProgress: currentState.isQueryInProgress,
             queue: currentState.queue
         )
         onUpdateQuery(query: foodCategory?.value ?? "")
         onTriggerEvent(stateEvent: RecipeListEvents.NewSearch())
     }
 
-    func onUpdateQuery(query: String){
+    private func onUpdateQuery(query: String){
         updateState(query: query)
     }
 
@@ -167,9 +148,7 @@ class RecipeListViewModel: ObservableObject {
             query: currentState.query,
             recipes: currentRecipes, // update recipes
             selectedCategory: currentState.selectedCategory,
-            foodCategories: currentState.foodCategories,
             bottomRecipe:  currentState.bottomRecipe,
-            isQueryInProgress: currentState.isQueryInProgress,
             queue: currentState.queue
         )
         currentState = (self.state.copy() as! RecipeListState)
@@ -196,7 +175,7 @@ class RecipeListViewModel: ObservableObject {
         let currentState = (self.state.copy() as! RecipeListState)
         if(recipe.id == currentState.bottomRecipe?.id){
             if(RecipeListState.Companion().RECIPE_PAGINATION_PAGE_SIZE * currentState.page <= currentState.recipes.count){
-                if(!currentState.isQueryInProgress){
+                if(!currentState.isLoading){
                     return true
                 }
             }
@@ -237,7 +216,6 @@ class RecipeListViewModel: ObservableObject {
         page: Int? = nil,
         query: String? = nil,
         bottomRecipe: Recipe? = nil,
-        isQueryInProgress: Bool? = nil,
         queue: Queue<GenericMessageInfo>? = nil
     ){
         let currentState = (self.state.copy() as! RecipeListState)
@@ -247,9 +225,7 @@ class RecipeListViewModel: ObservableObject {
             query: query ?? currentState.query,
             recipes: currentState.recipes ,
             selectedCategory: currentState.selectedCategory,
-            foodCategories: currentState.foodCategories,
             bottomRecipe:  bottomRecipe ?? currentState.bottomRecipe,
-            isQueryInProgress: isQueryInProgress ?? currentState.isQueryInProgress,
             queue: queue ?? currentState.queue
         )
         shouldShowDialog()
@@ -260,3 +236,5 @@ class RecipeListViewModel: ObservableObject {
         showDialog = currentState.queue.items.count > 0
     }
 }
+
+

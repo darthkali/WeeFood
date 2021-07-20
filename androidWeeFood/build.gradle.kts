@@ -42,6 +42,7 @@ dependencies {
     implementation(Accompanist.coil)
 
     implementation(AndroidX.appCompat)
+    implementation(AndroidX.fragmentKtx)
 
     implementation(Compose.runtime)
     implementation(Compose.runtimeLiveData)

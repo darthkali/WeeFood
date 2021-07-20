@@ -15,6 +15,7 @@ struct RecipeListScreen: View {
     private let networkModule: NetworkModule
     private let cacheModule: CacheModule
     private let searchRecipesModule: SearchRecipesModule
+    private let foodCategories: [FoodCategory]
 
     @ObservedObject var viewModel: RecipeListViewModel
 
@@ -28,10 +29,12 @@ struct RecipeListScreen: View {
             networkModule: self.networkModule,
             cacheModule: self.cacheModule
         )
+        let foodCategoryUtil = FoodCategoryUtil()
         self.viewModel = RecipeListViewModel(
             searchRecipes: searchRecipesModule.searchRecipes,
-            foodCategoryUtil: FoodCategoryUtil()
+            foodCategoryUtil: foodCategoryUtil
         )
+        self.foodCategories = foodCategoryUtil.getAllFoodCategories()
         // dismiss keyboard when drag starts
         UIScrollView.appearance().keyboardDismissMode = .onDrag
     }
@@ -42,14 +45,8 @@ struct RecipeListScreen: View {
                 VStack{
                     SearchAppBar(
                         query: viewModel.state.query,
-                        onUpdateQuery: { query in
-                            viewModel.onUpdateQuery(query: query)
-                        },
                         selectedCategory: viewModel.state.selectedCategory,
-                        onUpdateSelectedCategory: { foodCategory in
-                            viewModel.onUpdateSelectedCategory(foodCategory: foodCategory)
-                        },
-                        foodCategories: viewModel.state.foodCategories,
+                        foodCategories: foodCategories,
                         onTriggerEvent: { event in
                             viewModel.onTriggerEvent(stateEvent: event)
                         }
@@ -66,7 +63,7 @@ struct RecipeListScreen: View {
                                         })
                                 }
                                 NavigationLink(
-                                    destination: RecipeScreen(
+                                    destination: RecipeDetailScreen(
                                         recipeId: Int(recipe.id),
                                         cacheModule: self.cacheModule
                                     )
@@ -91,7 +88,9 @@ struct RecipeListScreen: View {
                 let first = viewModel.state.queue.peek()!
                 return GenericMessageInfoAlert().build(
                     message: first,
-                    onRemoveHeadMessage: viewModel.removeHeadFromQueue
+                    onRemoveHeadMessage: {
+                        viewModel.onTriggerEvent(stateEvent: RecipeListEvents.OnRemoveHeadMessageFromQueue())
+                    }
                 )
             })
         }
