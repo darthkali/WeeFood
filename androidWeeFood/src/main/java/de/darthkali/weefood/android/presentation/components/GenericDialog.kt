@@ -44,7 +44,7 @@ fun GenericDialog(
                 if(negativeAction != null){
                     Button(
                         modifier = Modifier.padding(end = 8.dp),
-                        colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.onError),
+                        colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary),
                         onClick = {
                             negativeAction.onNegativeAction()
                             onRemoveHeadFromQueue()

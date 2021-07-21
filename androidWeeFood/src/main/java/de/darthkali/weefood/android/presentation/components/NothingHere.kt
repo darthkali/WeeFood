@@ -24,7 +24,7 @@ fun NothingHere(){
             Text(
                 modifier = Modifier.padding(8.dp).align(Alignment.CenterHorizontally),
                 text = "There's nothing here",
-                style = MaterialTheme.typography.h4
+                style = MaterialTheme.typography.h1
             )
         }
 

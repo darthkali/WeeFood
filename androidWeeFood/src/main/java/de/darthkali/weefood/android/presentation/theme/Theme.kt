@@ -1,10 +1,12 @@
 package de.darthkali.weefood.android.presentation.theme
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
+import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -15,20 +17,6 @@ import de.darthkali.weefood.domain.model.GenericMessageInfo
 import de.darthkali.weefood.domain.util.Queue
 
 
-private val LightThemeColors = lightColors(
-    primary = Blue600,
-    primaryVariant = Blue400,
-    onPrimary = Black2,
-    secondary = Color.White,
-    secondaryVariant = Teal300,
-    onSecondary = Color.Black,
-    error = RedErrorDark,
-    onError = RedErrorLight,
-    background = Grey1,
-    onBackground = Color.Black,
-    surface = Color.White,
-    onSurface = Black2,
-)
 
 @ExperimentalComposeUiApi
 @ExperimentalMaterialApi
@@ -36,18 +24,20 @@ private val LightThemeColors = lightColors(
 fun AppTheme(
     displayProgressBar: Boolean,
     dialogQueue: Queue<GenericMessageInfo> = Queue(mutableListOf()),
+    darkTheme: Boolean = isSystemInDarkTheme(),
     onRemoveHeadMessageFromQueue: () -> Unit,
     content: @Composable () -> Unit,
 ) {
+
     MaterialTheme(
-        colors = LightThemeColors,
-        typography = QuickSandTypography,
+        colors = if (darkTheme) DarkColors else LightColors,
+        typography = MontserratTypography,
         shapes = AppShapes
     ){
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(color =Grey1)
+                .background(lightColors().background)
         ){
             // For android we can process the DialogQueue at the Application level
             // on iOS you cannot do this because SwiftUI preloads the views in a List
