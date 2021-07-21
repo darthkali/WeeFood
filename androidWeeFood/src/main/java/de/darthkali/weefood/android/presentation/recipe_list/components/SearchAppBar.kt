@@ -38,7 +38,7 @@ fun SearchAppBar(
     Surface(
         modifier = Modifier
             .fillMaxWidth(),
-        color = MaterialTheme.colors.secondary,
+        color = MaterialTheme.colors.background,
         elevation = 8.dp,
     ) {
         Column {
@@ -65,13 +65,14 @@ fun SearchAppBar(
                         },
                     ),
                     leadingIcon = { Icon(Icons.Filled.Search, contentDescription = "Search Icon") },
-                    textStyle = TextStyle(color = MaterialTheme.colors.onSurface),
+                    textStyle = TextStyle(color = MaterialTheme.colors.primary),
                     colors = TextFieldDefaults.textFieldColors(backgroundColor = MaterialTheme.colors.surface),
                 )
             }
             LazyRow(
                 modifier = Modifier
                     .padding(start = 8.dp, bottom = 8.dp),
+
             ) {
                 items(categories) {
                     FoodCategoryChip(
