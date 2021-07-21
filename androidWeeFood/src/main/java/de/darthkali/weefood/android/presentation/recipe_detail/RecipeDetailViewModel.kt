@@ -25,7 +25,7 @@ constructor(
     private val getRecipe: GetRecipe,
 ): ViewModel() {
 
-    private val logger = Logger("RecipeDetilViewModel")
+    private val logger = Logger("RecipeDetailViewModel")
 
     val state: MutableState<RecipeDetailState> = mutableStateOf(RecipeDetailState())
 
