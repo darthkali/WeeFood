@@ -58,7 +58,7 @@ fun RecipeCard(
                         .fillMaxWidth()
                         .wrapContentWidth(Alignment.End)
                         .align(Alignment.CenterVertically),
-                    style = MaterialTheme.typography.h5
+                    style = MaterialTheme.typography.h1
                 )
             }
         }
