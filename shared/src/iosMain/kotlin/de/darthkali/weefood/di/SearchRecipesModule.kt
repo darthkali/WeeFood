@@ -10,7 +10,7 @@ class SearchRecipesModule(
 
     val searchRecipes: SearchRecipes by lazy{
         SearchRecipes(
-            recipeService = networkModule.ingredientService,
+            ingredientService = networkModule.ingredientService,
             recipeCache = cacheModule.recipeCache
         )
     }

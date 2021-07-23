@@ -44,7 +44,7 @@ struct RecipeView: View {
                     Text("Error")
                 }else{
                     VStack(alignment: .leading){
-                        WebImage(url: URL(string: recipe!.featuredImage))
+                        WebImage(url: URL(string: recipe!.image))
                                     .resizable()
                                     .placeholder(Image(systemName: "photo")) // Placeholder Image
                                     .placeholder {
@@ -58,21 +58,21 @@ struct RecipeView: View {
 
                         VStack(alignment: .leading){
                             HStack(alignment: .lastTextBaseline){
-                                DefaultText(
-                                    "Updated \(dateUtil.humanizeDatetime(date: recipe!.dateUpdated)) by \(recipe!.publisher)"
-                                )
-                                .foregroundColor(Color.gray)
+                                //DefaultText(
+                               //     "Updated \(dateUtil.humanizeDatetime(date: recipe!.dateUpdated)) by \(recipe!.publisher)"
+                               // )
+                               // .foregroundColor(Color.gray)
 
                                 Spacer()
 
-                                DefaultText(String(recipe!.rating))
-                                    .frame(alignment: .trailing)
+                                //DefaultText(String(recipe!.rating))
+                                  //  .frame(alignment: .trailing)
                             }
 
-                            ForEach(recipe!.ingredients as Array<String>, id: \.self){ ingredient in
-                                DefaultText(ingredient)
-                                    .padding(.top, 4)
-                            }
+                           // ForEach(recipe!.ingredients as Array<String>, id: \.self){ ingredient in
+                               // DefaultText(ingredient)
+                             //       .padding(.top, 4)
+                           // }
                         }
                         .background(Color.white)
                         .padding(12)
@@ -89,7 +89,7 @@ struct RecipeView: View {
                 )
             })
         }
-        .navigationBarTitle(Text(recipe?.title ?? "Error"), displayMode: .inline)
+        .navigationBarTitle(Text(recipe?.name ?? "Error"), displayMode: .inline)
     }
 }
 

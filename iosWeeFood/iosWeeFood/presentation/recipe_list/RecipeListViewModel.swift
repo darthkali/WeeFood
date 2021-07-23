@@ -56,8 +56,8 @@ class RecipeListViewModel: ObservableObject {
         let currentState = (self.state.copy() as! RecipeListState)
         do{
             try searchRecipes.execute(
-                page: Int32(currentState.page),
-                query: currentState.query
+                query: currentState.query,
+                page: Int32(currentState.page)
             ).collectCommon(
                 coroutineScope: nil,
                 callback: { dataState in
@@ -152,7 +152,11 @@ class RecipeListViewModel: ObservableObject {
             queue: currentState.queue
         )
         currentState = (self.state.copy() as! RecipeListState)
-        self.onUpdateBottomRecipe(recipe: currentState.recipes[currentState.recipes.count - 1])
+        
+        if(currentState.recipes.count != 0){
+            self.onUpdateBottomRecipe(recipe: currentState.recipes[currentState.recipes.count - 1 ])
+        }
+        
     }
 
     private func handleMessageByUIComponentType(_ message: GenericMessageInfo){
