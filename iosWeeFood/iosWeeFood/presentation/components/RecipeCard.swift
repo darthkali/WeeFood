@@ -20,7 +20,7 @@ struct RecipeCard: View {
 
     var body: some View {
         VStack(alignment: .leading){
-            WebImage(url: URL(string: recipe.featuredImage))
+            WebImage(url: URL(string: "https://spoonacular.com/cdn/ingredients_500x500/" +  recipe.image))
                         .resizable()
                         .placeholder(Image(systemName: "photo")) // Placeholder Image
                         .placeholder {
@@ -82,9 +82,9 @@ struct RecipeCard_Previews: PreviewProvider {
             "1 medium zucchini, sliced and chopped",
             "1/2 teaspoon freshly ground black pepper",
             "2-3 tablespoons fresh chopped thyme leaves"
-        ],
-        dateAdded: DatetimeUtil().now(),
-        dateUpdated: DatetimeUtil().now()
+        ]
+        //dateAdded: DatetimeUtil().now(),
+        //dateUpdated: DatetimeUtil().now()
     )
     static var previews: some View {
         RecipeCard(recipe: recipe)

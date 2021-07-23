@@ -16,7 +16,7 @@ struct GenericMessageInfoAlert  {
         onRemoveHeadMessage: @escaping () -> Void
     ) -> Alert {
        return Alert(
-            title: Text(message.title),
+            title: Text(message.name),
             message: Text(message.description_ ?? "Something went wrong"),
             primaryButton: .default(
                 Text(message.positiveAction?.positiveBtnTxt ?? "Ok"),
