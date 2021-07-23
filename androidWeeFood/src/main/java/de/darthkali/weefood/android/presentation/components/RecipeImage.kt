@@ -18,7 +18,7 @@ fun RecipeImage(
     url: String,
     contentDescription: String,
 ){
-    val painter = rememberCoilPainter(url)
+    val painter = rememberCoilPainter("https://spoonacular.com/cdn/ingredients_500x500/$url")
     Box {
         Image(
             modifier = Modifier

@@ -2,14 +2,14 @@ package de.darthkali.weefood.datasource.network
 
 import de.darthkali.weefood.domain.model.Recipe
 
-interface RecipeService {
+interface IngredientService {
 
     suspend fun search(
-        page: Int,
         query: String,
+        page: Int,
     ): List<Recipe>
 
-    suspend fun get(
-        id: Int
-    ): Recipe
+//    suspend fun get(
+//        id: Int
+//    ): Recipe
 }

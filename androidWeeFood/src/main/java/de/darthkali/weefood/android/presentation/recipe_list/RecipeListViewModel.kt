@@ -105,8 +105,8 @@ constructor(
 
     private fun loadRecipes(){
         searchRecipes.execute(
+            query = state.value.query,
             page = state.value.page,
-            query = state.value.query
         ).collectCommon(viewModelScope) { dataState ->
             state.value = state.value.copy(isLoading = dataState.isLoading)
 

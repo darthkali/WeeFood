@@ -1,15 +1,13 @@
 package de.darthkali.weefood.domain.model
 
-import kotlinx.datetime.LocalDateTime
+import kotlinx.serialization.SerialName
 
 data class Recipe (
     val id: Int,
-    val title: String,
-    val publisher: String,
-    val featuredImage: String,
-    val rating: Int,
-    val sourceUrl: String,
-    val ingredients: List<String> = listOf(),
-    val dateAdded: LocalDateTime,
-    val dateUpdated: LocalDateTime,
+    val name: String,
+    val image: String,
+    val aisle: String,
+    val possibleUnits: List<String> = listOf(),
 )
+
+

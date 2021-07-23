@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import de.darthkali.weefood.android.presentation.components.NothingHere
-import de.darthkali.weefood.datasource.network.RecipeServiceImpl.Companion.RECIPE_PAGINATION_PAGE_SIZE
+import de.darthkali.weefood.datasource.network.IngredientServiceImpl.Companion.RECIPE_PAGINATION_PAGE_SIZE
 import de.darthkali.weefood.domain.model.Recipe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 

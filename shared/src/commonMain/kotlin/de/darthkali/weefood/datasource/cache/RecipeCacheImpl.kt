@@ -1,6 +1,6 @@
 package de.darthkali.weefood.datasource.cache
 
-import de.darthkali.weefood.datasource.network.RecipeServiceImpl.Companion.RECIPE_PAGINATION_PAGE_SIZE
+import de.darthkali.weefood.datasource.network.IngredientServiceImpl.Companion.RECIPE_PAGINATION_PAGE_SIZE
 import de.darthkali.weefood.domain.model.Recipe
 import de.darthkali.weefood.domain.util.DatetimeUtil
 
@@ -12,17 +12,14 @@ class RecipeCacheImpl(
     private var queries: RecipeDbQueries = recipeDatabase.recipeDbQueries
 
     override fun insert(recipe: Recipe) {
-        queries.insertRecipe(
-            id = recipe.id.toLong(),
-            title = recipe.title,
-            publisher = recipe.publisher,
-            featured_image = recipe.featuredImage,
-            rating = recipe.rating.toLong(),
-            source_url = recipe.sourceUrl,
-            ingredients = recipe.ingredients.convertIngredientListToString(),
-            date_updated = datetimeUtil.toEpochMilliseconds(recipe.dateUpdated),
-            date_added = datetimeUtil.toEpochMilliseconds(recipe.dateAdded),
-        )
+       // queries.insertRecipe(
+         //   id = recipe.id.toLong()
+            //TODO add cache
+//            name = recipe.name,
+//            image = recipe.image,
+//            aisle = recipe.aisle,
+//            possibleUnits = recipe.possibleUnits.convertIngredientListToString(),
+        //)
     }
 
     override fun insert(recipes: List<Recipe>) {

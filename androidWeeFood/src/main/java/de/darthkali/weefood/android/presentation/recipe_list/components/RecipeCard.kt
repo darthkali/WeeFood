@@ -36,8 +36,8 @@ fun RecipeCard(
     ) {
         Column() {
             RecipeImage(
-                url = recipe.featuredImage,
-                contentDescription = recipe.title
+                url = recipe.image,
+                contentDescription = recipe.name
             )
             Row(
                 modifier = Modifier
@@ -45,21 +45,21 @@ fun RecipeCard(
                     .padding(top = 12.dp, bottom = 12.dp, start = 8.dp, end = 8.dp)
             ) {
                 Text(
-                    text = recipe.title,
+                    text = recipe.name,
                     modifier = Modifier
                         .fillMaxWidth(0.85f)
                         .wrapContentWidth(Alignment.Start),
                     style = MaterialTheme.typography.h2
                 )
-                val rank = recipe.rating.toString()
-                Text(
-                    text = rank,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .wrapContentWidth(Alignment.End)
-                        .align(Alignment.CenterVertically),
-                    style = MaterialTheme.typography.h1
-                )
+//                val rank = recipe.rating.toString()
+//                Text(
+//                    text = rank,
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .wrapContentWidth(Alignment.End)
+//                        .align(Alignment.CenterVertically),
+//                    style = MaterialTheme.typography.h1
+//                )
             }
         }
     }

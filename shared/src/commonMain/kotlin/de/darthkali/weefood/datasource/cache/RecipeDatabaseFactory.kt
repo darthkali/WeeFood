@@ -17,17 +17,12 @@ expect class DriverFactory {
 }
 
 fun Recipe_Entity.toRecipe(): Recipe {
-    val datetimeUtil = DatetimeUtil()
     return Recipe(
         id = id.toInt(),
-        title = title,
-        publisher = publisher,
-        featuredImage = featured_image,
-        rating = rating.toInt(),
-        sourceUrl = source_url,
-        ingredients = ingredients.convertIngredientsToList(),
-        dateAdded = datetimeUtil.toLocalDate(date_added),
-        dateUpdated = datetimeUtil.toLocalDate(date_updated),
+        name = title,
+        image = publisher,
+        aisle = featured_image,
+        possibleUnits = ingredients.convertIngredientsToList(),
     )
 }
 

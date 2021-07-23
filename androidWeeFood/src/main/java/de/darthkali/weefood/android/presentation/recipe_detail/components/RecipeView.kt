@@ -27,8 +27,8 @@ fun RecipeView(
     ) {
         item {
             RecipeImage(
-                url = recipe.featuredImage,
-                contentDescription = recipe.title
+                url = recipe.image,
+                contentDescription = recipe.name
             )
             Column(
                 modifier = Modifier
@@ -41,44 +41,44 @@ fun RecipeView(
                         .padding(bottom = 4.dp)
                 ){
                     Text(
-                        text = recipe.title,
+                        text = recipe.name,
                         modifier = Modifier
                             .fillMaxWidth(0.85f)
                             .wrapContentWidth(Alignment.Start)
                         ,
                         style = MaterialTheme.typography.h3
                     )
-                    val rank = recipe.rating.toString()
-                    Text(
-                        text = rank,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .wrapContentWidth(Alignment.End)
-                            .align(Alignment.CenterVertically)
-                        ,
-                        style = MaterialTheme.typography.h5
-                    )
+                    //val rank = recipe.rating.toString()
+//                    Text(
+//                        text = rank,
+//                        modifier = Modifier
+//                            .fillMaxWidth()
+//                            .wrapContentWidth(Alignment.End)
+//                            .align(Alignment.CenterVertically)
+//                        ,
+//                        style = MaterialTheme.typography.h5
+//                    )
                 }
-                val datetimeUtil = remember{DatetimeUtil()}
-                Text(
-                    text = "Updated ${datetimeUtil.humanizeDatetime(recipe.dateUpdated)} by ${recipe.publisher}"
-                    ,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 8.dp)
-                    ,
-                    style = MaterialTheme.typography.caption
-                )
-                for(ingredient in recipe.ingredients){
-                    Text(
-                        text = ingredient,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(bottom = 4.dp)
-                        ,
-                        style = MaterialTheme.typography.body1
-                    )
-                }
+//                val datetimeUtil = remember{DatetimeUtil()}
+//                Text(
+//                    text = "Updated ${datetimeUtil.humanizeDatetime(recipe.dateUpdated)} by ${recipe.publisher}"
+//                    ,
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .padding(bottom = 8.dp)
+//                    ,
+//                    style = MaterialTheme.typography.caption
+//                )
+//                for(ingredient in recipe.ingredients){
+//                    Text(
+//                        text = ingredient,
+//                        modifier = Modifier
+//                            .fillMaxWidth()
+//                            .padding(bottom = 4.dp)
+//                        ,
+//                        style = MaterialTheme.typography.body1
+//                    )
+//                }
             }
         }
     }
