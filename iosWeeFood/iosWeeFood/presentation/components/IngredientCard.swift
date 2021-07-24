@@ -10,17 +10,17 @@ import SwiftUI
 import shared
 import SDWebImageSwiftUI
 
-struct RecipeCard: View {
+struct IngredientCard: View {
 
-    let recipe: Recipe
+    let ingredient: Ingredient
 
-    init(recipe: Recipe) {
-        self.recipe = recipe
+    init(ingredient: Ingredient) {
+        self.ingredient = ingredient
     }
 
     var body: some View {
         VStack(alignment: .leading){
-            WebImage(url: URL(string: "https://spoonacular.com/cdn/ingredients_500x500/" +  recipe.image))
+            WebImage(url: URL(string: "https://spoonacular.com/cdn/ingredients_500x500/" +  ingredient.image))
                         .resizable()
                         .placeholder(Image(systemName: "photo")) // Placeholder Image
                         .placeholder {
@@ -33,7 +33,7 @@ struct RecipeCard: View {
                         .clipped() // 3
 
             HStack(alignment: .lastTextBaseline){
-                DefaultText(recipe.name, size: 19)
+                DefaultText(ingredient.name, size: 19)
                     .font(.body)
                     .frame(alignment: .center)
 
@@ -54,8 +54,8 @@ struct RecipeCard: View {
     }
 }
 
-struct RecipeCard_Previews: PreviewProvider {
-    static let recipe = Recipe(
+struct IngredientCard_Previews: PreviewProvider {
+    static let ingredient = Ingredient(
         id: 1,
         name: "Apfel",
         image: "apple.png",
@@ -69,7 +69,7 @@ struct RecipeCard_Previews: PreviewProvider {
         //dateUpdated: DatetimeUtil().now()
     )
     static var previews: some View {
-        RecipeCard(recipe: recipe)
+        IngredientCard(ingredient: ingredient)
     }
 }
 

@@ -10,14 +10,14 @@ import SwiftUI
 import shared
 
 @available(iOS 14.0, *)
-struct RecipeListScreen: View {
+struct IngredientListScreen: View {
 
     private let networkModule: NetworkModule
     private let cacheModule: CacheModule
-    private let searchRecipesModule: SearchRecipesModule
-    private let foodCategories: [FoodCategory]
+    private let searchIngredientsModule: SearchIngredientModule
+    //private let foodCategories: [FoodCategory]
 
-    @ObservedObject var viewModel: RecipeListViewModel
+    @ObservedObject var viewModel: IngredientListViewModel
 
     init(
         networkModule: NetworkModule,
@@ -25,16 +25,16 @@ struct RecipeListScreen: View {
     ) {
         self.networkModule = networkModule
         self.cacheModule = cacheModule
-        self.searchRecipesModule = SearchRecipesModule(
+        self.searchIngredientsModule = SearchIngredientModule(
             networkModule: self.networkModule,
             cacheModule: self.cacheModule
         )
-        let foodCategoryUtil = FoodCategoryUtil()
-        self.viewModel = RecipeListViewModel(
-            searchRecipes: searchRecipesModule.searchRecipes,
-            foodCategoryUtil: foodCategoryUtil
+        //let foodCategoryUtil = FoodCategoryUtil()
+        self.viewModel = IngredientListViewModel(
+            searchIngredients: searchIngredientsModule.searchIngredient
+            //foodCategoryUtil: foodCategoryUtil
         )
-        self.foodCategories = foodCategoryUtil.getAllFoodCategories()
+       // self.foodCategories = foodCategoryUtil.getAllFoodCategories()
         // dismiss keyboard when drag starts
         UIScrollView.appearance().keyboardDismissMode = .onDrag
     }
@@ -45,32 +45,32 @@ struct RecipeListScreen: View {
                 VStack{
                     SearchAppBar(
                         query: viewModel.state.query,
-                        selectedCategory: viewModel.state.selectedCategory,
-                        foodCategories: foodCategories,
+                        //selectedCategory: viewModel.state.selectedCategory,
+                        //foodCategories: foodCategories,
                         onTriggerEvent: { event in
                             viewModel.onTriggerEvent(stateEvent: event)
                         }
                     )
                     List{
-                        ForEach(viewModel.state.recipes, id: \.self.id){ recipe in
+                        ForEach(viewModel.state.ingredients, id: \.self.id){ ingredients in
                             ZStack{
                                 VStack{
-                                    RecipeCard(recipe: recipe)
+                                    IngredientCard(ingredient: ingredients)
                                         .onAppear(perform: {
-                                            if viewModel.shouldQueryNextPage(recipe: recipe){
-                                                viewModel.onTriggerEvent(stateEvent: RecipeListEvents.NextPage())
+                                            if viewModel.shouldQueryNextPage(ingredient: ingredients){
+                                                viewModel.onTriggerEvent(stateEvent: IngredientListEvents.NextPage())
                                             }
                                         })
                                 }
-                                NavigationLink(
-                                    destination: RecipeDetailScreen(
-                                        recipeId: Int(recipe.id),
+                                /*NavigationLink(
+                                    destination: IngredientDetailScreen(
+                                        ingredientId: Int(ingredient.id),
                                         cacheModule: self.cacheModule
                                     )
                                 ){
                                     // workaround for hiding arrows
                                     EmptyView()
-                                }.hidden().frame(width: 0)
+                                }.hidden().frame(width: 0)*/
                             }
                             .listRowInsets(EdgeInsets())
                             .padding(.top, 10)
@@ -80,10 +80,12 @@ struct RecipeListScreen: View {
                     .background(Color.init(hex: 0xf2f2f2))
                 }
                 if viewModel.state.isLoading {
-                    ProgressView("Searching recipes...")
+                    ProgressView("Searching ingredients...")
                 }
             }
             .navigationBarHidden(true)
+            
+            /*
             .alert(isPresented: $viewModel.showDialog, content: {
                 let first = viewModel.state.queue.peek()!
                 return GenericMessageInfoAlert().build(
@@ -93,6 +95,8 @@ struct RecipeListScreen: View {
                     }
                 )
             })
+            */
+            
         }
     }
 }
@@ -100,7 +104,7 @@ struct RecipeListScreen: View {
 @available(iOS 14.0, *)
 struct RecipeListScreen_Previews: PreviewProvider {
     static var previews: some View {
-        RecipeListScreen(
+        IngredientListScreen(
             networkModule: NetworkModule(),
             cacheModule: CacheModule()
         )

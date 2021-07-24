@@ -9,8 +9,10 @@
 import SwiftUI
 import shared
 import SDWebImageSwiftUI
-
+/*
 struct RecipeView: View {
+    
+    
 
     private let recipe: Recipe?
     private let dateUtil: DatetimeUtil
@@ -90,6 +92,6 @@ struct RecipeView: View {
             })
         }
         .navigationBarTitle(Text(recipe?.name ?? "Error"), displayMode: .inline)
-    }
-}
+    }*/
+//}
 

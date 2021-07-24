@@ -3,7 +3,7 @@ package de.darthkali.weefood.di
 import de.darthkali.weefood.interactors.recipe_list.SearchIngredient
 
 
-class SearchRecipesModule(
+class SearchIngredientModule(
     val networkModule: NetworkModule,
     val cacheModule: CacheModule,
 ) {

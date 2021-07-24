@@ -9,9 +9,9 @@
 import SwiftUI
 import shared
 
-class RecipeDetailViewModel: ObservableObject {
+//class RecipeDetailViewModel: ObservableObject {
     
-    private let logger = Logger(className: "RecipeDetailViewModel")
+    /*private let logger = Logger(className: "RecipeDetailViewModel")
 
     // Dependencies
     private let getRecipe: GetRecipe
@@ -114,5 +114,5 @@ class RecipeDetailViewModel: ObservableObject {
             queue: queue ?? currentState.queue
         )
     }
-
-}
+*/
+//}

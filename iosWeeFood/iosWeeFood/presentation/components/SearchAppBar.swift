@@ -13,18 +13,18 @@ import shared
 struct SearchAppBar: View {
 
     @State var query: String
-    let selectedCategory: FoodCategory?
-    let foodCategories: [FoodCategory]
-    let onTriggerEvent: (RecipeListEvents) -> Void
+    //let selectedCategory: FoodCategory?
+    //let foodCategories: [FoodCategory]
+    let onTriggerEvent: (IngredientListEvents) -> Void
 
     init(
         query: String,
-        selectedCategory: FoodCategory?,
-        foodCategories: [FoodCategory],
-        onTriggerEvent: @escaping (RecipeListEvents) -> Void
+        //selectedCategory: FoodCategory?,
+        //foodCategories: [FoodCategory],
+        onTriggerEvent: @escaping (IngredientListEvents) -> Void
     ) {
-        self.selectedCategory = selectedCategory
-        self.foodCategories = foodCategories
+        //self.selectedCategory = selectedCategory
+        //self.foodCategories = foodCategories
         self.onTriggerEvent = onTriggerEvent
         self._query = State(initialValue: query) // set initial value for query
     }
@@ -37,15 +37,15 @@ struct SearchAppBar: View {
                     "Search...",
                     text: $query,
                     onCommit:{
-                        onTriggerEvent(RecipeListEvents.NewSearch())
+                        onTriggerEvent(IngredientListEvents.NewSearch())
                     }
                 )
                 .onChange(of: query, perform: { value in
-                    onTriggerEvent(RecipeListEvents.OnUpdateQuery(query: value))
+                    onTriggerEvent(IngredientListEvents.OnUpdateQuery(query: value))
                 })
             }
             .padding(.bottom, 8)
-            ScrollView(.horizontal){
+            /*ScrollView(.horizontal){
                 HStack(spacing: 10){
                     ForEach(foodCategories, id: \.self){ category in
                         FoodCategoryChip(
@@ -58,7 +58,7 @@ struct SearchAppBar: View {
                         }
                     }
                 }
-            }
+            }*/
         }
         .padding(.top, 8)
         .padding(.leading, 8)

@@ -9,9 +9,11 @@
 import SwiftUI
 import shared
 
-struct RecipeDetailScreen: View {
+//struct RecipeDetailScreen: View {
+ 
+    
 
-    private let cacheModule: CacheModule
+    /*private let cacheModule: CacheModule
     private let getRecipeModule: GetRecipeModule
     private let recipeId: Int
     private let datetimeUtil = DatetimeUtil()
@@ -40,5 +42,5 @@ struct RecipeDetailScreen: View {
             message: viewModel.state.queue.peek(),
             onTriggerEvent: viewModel.onTriggerEvent
         )
-    }
-}
+    }*/
+//}
