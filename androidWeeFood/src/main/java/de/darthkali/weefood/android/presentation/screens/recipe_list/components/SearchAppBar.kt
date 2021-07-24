@@ -30,9 +30,9 @@ fun SearchAppBar(
     query: String,
     onQueryChanged: (String) -> Unit,
     onExecuteSearch: () -> Unit,
-    categories: List<FoodCategory>,
-    selectedCategory: FoodCategory?,
-    onSelectedCategoryChanged: (FoodCategory) -> Unit,
+//    categories: List<FoodCategory>,
+//    selectedCategory: FoodCategory?,
+//    onSelectedCategoryChanged: (FoodCategory) -> Unit,
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     Surface(
@@ -69,23 +69,23 @@ fun SearchAppBar(
                     colors = TextFieldDefaults.textFieldColors(backgroundColor = MaterialTheme.colors.surface),
                 )
             }
-            LazyRow(
-                modifier = Modifier
-                    .padding(start = 8.dp, bottom = 8.dp),
-
-            ) {
-                items(categories) {
-                    FoodCategoryChip(
-                        category = it.value,
-                        isSelected = selectedCategory == it,
-                        onSelectedCategoryChanged = {
-                            FoodCategoryUtil().getFoodCategory(it)?.let{ newCategory ->
-                                onSelectedCategoryChanged(newCategory)
-                            }
-                        },
-                    )
-                }
-            }
+//            LazyRow(
+//                modifier = Modifier
+//                    .padding(start = 8.dp, bottom = 8.dp),
+//
+//            ) {
+//                items(categories) {
+//                    FoodCategoryChip(
+//                        category = it.value,
+//                        isSelected = selectedCategory == it,
+//                        onSelectedCategoryChanged = {
+//                            FoodCategoryUtil().getFoodCategory(it)?.let{ newCategory ->
+//                                onSelectedCategoryChanged(newCategory)
+//                            }
+//                        },
+//                    )
+//                }
+//            }
         }
     }
 }

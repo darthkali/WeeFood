@@ -19,20 +19,21 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import de.darthkali.weefood.android.presentation.theme.AppTheme
+import de.darthkali.weefood.domain.model.Ingredient
 import de.darthkali.weefood.presentation.recipe_list.FoodCategory
 import de.darthkali.weefood.presentation.recipe_list.FoodCategoryUtil
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 
 @ExperimentalComposeUiApi
 @Composable
 fun SearchAppBar(
-    query: String,
+    query: String = "",
     onQueryChanged: (String) -> Unit,
     onExecuteSearch: () -> Unit,
-    categories: List<FoodCategory>,
-    selectedCategory: FoodCategory?,
-    onSelectedCategoryChanged: (FoodCategory) -> Unit,
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     Surface(
@@ -48,7 +49,7 @@ fun SearchAppBar(
             ) {
                 TextField(
                     modifier = Modifier
-                        .fillMaxWidth(.9f)
+                        .fillMaxWidth()
                         .padding(8.dp)
                     ,
                     value = query,
@@ -69,23 +70,25 @@ fun SearchAppBar(
                     colors = TextFieldDefaults.textFieldColors(backgroundColor = MaterialTheme.colors.surface),
                 )
             }
-            LazyRow(
-                modifier = Modifier
-                    .padding(start = 8.dp, bottom = 8.dp),
-
-            ) {
-                items(categories) {
-                    FoodCategoryChip(
-                        category = it.value,
-                        isSelected = selectedCategory == it,
-                        onSelectedCategoryChanged = {
-                            FoodCategoryUtil().getFoodCategory(it)?.let{ newCategory ->
-                                onSelectedCategoryChanged(newCategory)
-                            }
-                        },
-                    )
-                }
-            }
         }
     }
+}
+
+
+@OptIn(
+    ExperimentalCoroutinesApi::class,
+    androidx.compose.ui.ExperimentalComposeUiApi::class,
+    androidx.compose.material.ExperimentalMaterialApi::class
+)
+@Preview(showBackground = true)
+@Composable
+fun SearchAppBarPreview() {
+    AppTheme() {
+        SearchAppBar(
+            query = "",
+            onQueryChanged = { /*TODO*/ },
+            onExecuteSearch = { /*TODO*/ },
+        )
+    }
+
 }

@@ -122,9 +122,6 @@ fun Navigation(){
                 state = viewModel.state.value,
                 navController = navController,
                 onTriggerEvent = viewModel::onTriggerEvent,
-                onClickRecipeListItem = { recipeId ->
-                    navController.navigate("${NavigationItem.RecipeDetail.route}/$recipeId")
-                }
             )
         }
 
@@ -161,9 +158,6 @@ fun Navigation(){
                 state = viewModel.state.value,
                 navController = navController,
                 onTriggerEvent = viewModel::onTriggerEvent,
-                onClickRecipeListItem = { recipeId ->
-                    navController.navigate("${NavigationItem.RecipeDetail.route}/$recipeId")
-                }
             )
         }
     }

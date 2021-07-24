@@ -9,10 +9,7 @@ expect class KtorClientFactory() {
     fun build(): HttpClient
 }
 
-
-
-fun IngredientDto.toRecipe(): Ingredient{
-    val datetimeUtil = DatetimeUtil()
+fun IngredientDto.toIngredient(): Ingredient{
     return Ingredient(
         id = id,
         name = name,
@@ -22,6 +19,6 @@ fun IngredientDto.toRecipe(): Ingredient{
     )
 }
 
-fun List<IngredientDto>.toRecipeList(): List<Ingredient>{
-    return map{it.toRecipe()}
+fun List<IngredientDto>.totoIngredientList(): List<Ingredient>{
+    return map{it.toIngredient()}
 }

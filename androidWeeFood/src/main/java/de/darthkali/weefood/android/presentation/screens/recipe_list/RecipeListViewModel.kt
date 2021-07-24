@@ -10,7 +10,7 @@ import de.darthkali.weefood.domain.model.Ingredient
 import de.darthkali.weefood.domain.util.GenericMessageInfoQueueUtil
 import de.darthkali.weefood.domain.util.Queue
 import de.darthkali.weefood.presentation.recipe_list.IngredientListEvents
-import de.darthkali.weefood.interactors.recipe_list.SearchRecipes
+import de.darthkali.weefood.interactors.recipe_list.SearchIngredient
 import de.darthkali.weefood.presentation.recipe_list.FoodCategory
 import de.darthkali.weefood.presentation.recipe_list.IngredientListState
 import de.darthkali.weefood.shared.domain.util.UIComponentType
@@ -23,7 +23,7 @@ import kotlin.collections.ArrayList
 class RecipeListViewModel
 @Inject
 constructor(
-    private val searchRecipes: SearchRecipes,
+    private val searchIngredient: SearchIngredient,
 ): ViewModel() {
 
     private val logger = Logger("RecipeListVM")
@@ -45,44 +45,46 @@ constructor(
             IngredientListEvents.NextPage -> {
                 nextPage()
             }
-            is IngredientListEvents.OnSelectCategory -> {
-                onSelectCategory(event.category)
-            }
-            is IngredientListEvents.OnUpdateQuery -> {
-                state.value = state.value.copy(query =  event.query, selectedCategory = null)
-            }
-            is IngredientListEvents.OnRemoveHeadMessageFromQueue -> {
-                removeHeadMessage()
-            }
+//            is IngredientListEvents.OnSelectCategory -> {
+//                onSelectCategory(event.category)
+//            }
+//            is IngredientListEvents.OnUpdateQuery -> {
+//                state.value = state.value.copy(query =  event.query, selectedCategory = null)
+//            }
+//            is IngredientListEvents.OnRemoveHeadMessageFromQueue -> {
+//                removeHeadMessage()
+//            }
             else -> {
-                val messageInfoBuilder = GenericMessageInfo.Builder()
-                    .id(UUID.randomUUID().toString())
-                    .title("Invalid Event")
-                    .uiComponentType(UIComponentType.Dialog)
-                    .description("Something went wrong.")
-                appendToMessageQueue(messageInfo = messageInfoBuilder)
+
+                //TODO: ErrorMessage
+//                val messageInfoBuilder = GenericMessageInfo.Builder()
+//                    .id(UUID.randomUUID().toString())
+//                    .title("Invalid Event")
+//                    .uiComponentType(UIComponentType.Dialog)
+//                    .description("Something went wrong.")
+//                appendToMessageQueue(messageInfo = messageInfoBuilder)
             }
         }
     }
 
-    private fun removeHeadMessage() {
-        try {
-            val queue = state.value.queue
-            queue.remove() // can throw exception if empty
-            state.value = state.value.copy(queue = Queue(mutableListOf())) // force recompose
-            state.value = state.value.copy(queue = queue)
-        }catch (e: Exception){
-            logger.log("Nothing to remove from DialogQueue")
-        }
-    }
+//    private fun removeHeadMessage() {
+//        try {
+//            val queue = state.value.queue
+//            queue.remove() // can throw exception if empty
+//            state.value = state.value.copy(queue = Queue(mutableListOf())) // force recompose
+//            state.value = state.value.copy(queue = queue)
+//        }catch (e: Exception){
+//            logger.log("Nothing to remove from DialogQueue")
+//        }
+//    }
 
     /**
      *  Called when a new FoodCategory chip is selected
      */
-    private fun onSelectCategory(category: FoodCategory){
-        state.value = state.value.copy(selectedCategory = category, query =  category.value)
-        newSearch()
-    }
+//    private fun onSelectCategory(category: FoodCategory){
+//        state.value = state.value.copy(selectedCategory = category, query =  category.value)
+//        newSearch()
+//    }
 
     /**
      * Get the next page of recipes
@@ -103,7 +105,7 @@ constructor(
     }
 
     private fun loadRecipes(){
-        searchRecipes.execute(
+        searchIngredient.execute(
             query = state.value.query,
             page = state.value.page,
         ).collectCommon(viewModelScope) { dataState ->
@@ -113,9 +115,9 @@ constructor(
                 appendRecipes(recipes)
             }
 
-            dataState.message?.let { message ->
-                appendToMessageQueue(message)
-            }
+//            dataState.message?.let { message ->
+//                appendToMessageQueue(message)
+//            }
         }
     }
 
@@ -125,13 +127,13 @@ constructor(
         state.value = state.value.copy(ingredients = curr)
     }
 
-    private fun appendToMessageQueue(messageInfo: GenericMessageInfo.Builder){
-        if(!GenericMessageInfoQueueUtil()
-                .doesMessageAlreadyExistInQueue(queue = state.value.queue,messageInfo = messageInfo.build())){
-            val queue = state.value.queue
-            queue.add(messageInfo.build())
-            state.value = state.value.copy(queue = queue)
-        }
-    }
+//    private fun appendToMessageQueue(messageInfo: GenericMessageInfo.Builder){
+//        if(!GenericMessageInfoQueueUtil()
+//                .doesMessageAlreadyExistInQueue(queue = state.value.queue,messageInfo = messageInfo.build())){
+//            val queue = state.value.queue
+//            queue.add(messageInfo.build())
+//            state.value = state.value.copy(queue = queue)
+//        }
+//    }
 
 }

@@ -27,12 +27,10 @@ fun IngredientListScreen(
     state: IngredientListState,
     navController: NavController,
     onTriggerEvent: (IngredientListEvents) -> Unit,
-    onClickRecipeListItem: (Int) -> Unit,
 ) {
     AppTheme(
         displayProgressBar = state.isLoading,
     ) {
-        val foodCategories = remember { FoodCategoryUtil().getAllFoodCategories() }
         Scaffold(
             topBar = {
                 TopBar(title = "Zutaten Suche")
@@ -48,11 +46,6 @@ fun IngredientListScreen(
                     onExecuteSearch = {
                         onTriggerEvent(IngredientListEvents.NewSearch)
                     },
-                    categories = foodCategories,
-                    selectedCategory = state.selectedCategory,
-                    onSelectedCategoryChanged = {
-                        onTriggerEvent(IngredientListEvents.OnSelectCategory(it))
-                    },
                 )
 
                 IngredientList(
@@ -62,7 +55,6 @@ fun IngredientListScreen(
                     onTriggerNextPage = {
                         onTriggerEvent(IngredientListEvents.NextPage)
                     },
-                    onClickRecipeListItem = onClickRecipeListItem
                 )
             }
         }

@@ -13,7 +13,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 
 
-class   SearchRecipes(
+class   SearchIngredient(
     private val ingredientService: IngredientService,
     private val recipeCache: RecipeCache,
 ){
@@ -34,7 +34,7 @@ class   SearchRecipes(
                 throw Exception("Forcing an error... Search FAILED!")
             }
 
-            val recipes = ingredientService.search(
+            val ingredient = ingredientService.search(
                 query = query,
                 page = page,
             )
@@ -54,7 +54,7 @@ class   SearchRecipes(
 //                )
 //            }
             // emit List<Recipe> from cache
-            emit(DataState.data(message = null, data = recipes)) //TODO: changed from cacheResult to recipe -> change after added cache
+            emit(DataState.data(message = null, data = ingredient)) //TODO: changed from cacheResult to ingredient -> change after added cache
         } catch (e: Exception) {
             emit(DataState.error<List<Ingredient>>(
                 message = GenericMessageInfo.Builder()

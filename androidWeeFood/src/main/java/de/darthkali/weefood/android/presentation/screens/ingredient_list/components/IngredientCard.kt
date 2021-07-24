@@ -5,19 +5,22 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import de.darthkali.weefood.android.presentation.components.CircleImage
+import de.darthkali.weefood.android.presentation.components.CommonButton
+import de.darthkali.weefood.android.presentation.components.button.ButtonStyle
 import de.darthkali.weefood.android.presentation.theme.AppTheme
 import de.darthkali.weefood.domain.model.Ingredient
+import java.util.Locale
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-
-const val RECIPE_IMAGE_HEIGHT = 260
 
 @ExperimentalCoroutinesApi
 @Composable
@@ -30,9 +33,12 @@ fun IngredientCard(
             .padding(
                 bottom = 6.dp,
                 top = 6.dp,
+                start = 16.dp,
+                end = 16.dp
             )
             .fillMaxWidth(),
         elevation = 8.dp,
+        backgroundColor = MaterialTheme.colors.surface
     ) {
         Column() {
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -45,19 +51,20 @@ fun IngredientCard(
                     modifier = Modifier
                         .fillMaxWidth(0.85f)
                         .wrapContentWidth(Alignment.Start),
-                    style = MaterialTheme.typography.h2
+                    style = typography.h2
                 )
             }
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Button(onClick = {}){
-                    Text("Schliessen")
-                }
-                Button(onClick = {}){
-                    Text("Hinzufügen")
-                }
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(end= 8.dp, bottom = 8.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.End
+
+            ) {
+                CommonButton( text = "Schliessen",  buttonStyle = ButtonStyle.CLOSE_BUTTON, onClick = {})
+                CommonButton( text = "Hinzufügen",  buttonStyle = ButtonStyle.ADD_BUTTON, onClick = {})
             }
-
-
         }
     }
 }

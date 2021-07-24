@@ -1,6 +1,6 @@
 package de.darthkali.weefood.datasource.cache
 
-import de.darthkali.weefood.datasource.network.IngredientServiceImpl.Companion.RECIPE_PAGINATION_PAGE_SIZE
+import de.darthkali.weefood.datasource.network.IngredientServiceImpl.Companion.PAGINATION_PAGE_SIZE
 import de.darthkali.weefood.domain.model.Ingredient
 import de.darthkali.weefood.domain.util.DatetimeUtil
 
@@ -31,15 +31,15 @@ class RecipeCacheImpl(
     override fun search(query: String, page: Int): List<Ingredient> {
         return queries.searchRecipes(
             query = query,
-            pageSize = RECIPE_PAGINATION_PAGE_SIZE.toLong(),
-            offset = ((page - 1)* RECIPE_PAGINATION_PAGE_SIZE).toLong()
+            pageSize = PAGINATION_PAGE_SIZE.toLong(),
+            offset = ((page - 1)* PAGINATION_PAGE_SIZE).toLong()
         ).executeAsList().toRecipeList()
     }
 
     override fun getAll(page: Int): List<Ingredient> {
         return queries.getAllRecipes(
-            pageSize = RECIPE_PAGINATION_PAGE_SIZE.toLong(),
-            offset = ((page - 1) * RECIPE_PAGINATION_PAGE_SIZE).toLong()
+            pageSize = PAGINATION_PAGE_SIZE.toLong(),
+            offset = ((page - 1) * PAGINATION_PAGE_SIZE).toLong()
         ).executeAsList().toRecipeList()
     }
 

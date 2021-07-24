@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import de.darthkali.weefood.android.presentation.components.NothingHere
-import de.darthkali.weefood.datasource.network.IngredientServiceImpl.Companion.RECIPE_PAGINATION_PAGE_SIZE
+import de.darthkali.weefood.datasource.network.IngredientServiceImpl.Companion.PAGINATION_PAGE_SIZE
 import de.darthkali.weefood.domain.model.Ingredient
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -40,7 +40,7 @@ fun RecipeList(
                 itemsIndexed(
                     items = ingredients
                 ) { index, recipe ->
-                    if ((index + 1) >= (page * RECIPE_PAGINATION_PAGE_SIZE) && !loading) {
+                    if ((index + 1) >= (page * PAGINATION_PAGE_SIZE) && !loading) {
                         onTriggerNextPage()
                     }
                     RecipeCard(

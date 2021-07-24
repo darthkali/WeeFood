@@ -10,9 +10,9 @@ actual data class IngredientListState(
     val page: Int = 1,
     val query: String = "",
     val ingredients: List<Ingredient> = listOf(),
-    val selectedCategory: FoodCategory? = null,
     val bottomIngredient: Ingredient? = null, // track the recipe at the bottom of the list so we know when to trigger pagination
-    val queue: Queue<GenericMessageInfo> = Queue(mutableListOf()), // messages to be displayed in ui
+    //val selectedCategory: FoodCategory? = null,
+//    val queue: Queue<GenericMessageInfo> = Queue(mutableListOf()), // messages to be displayed in ui
 )  {
     // Need secondary constructor to initialize with no args in SwiftUI
 
@@ -21,9 +21,9 @@ actual data class IngredientListState(
         page = 1,
         query = "",
         ingredients = listOf(),
-        selectedCategory = null,
         bottomIngredient = null,
-        queue = Queue(mutableListOf()),
+//        selectedCategory = null,
+//        queue = Queue(mutableListOf()),
     )
 
     companion object{
