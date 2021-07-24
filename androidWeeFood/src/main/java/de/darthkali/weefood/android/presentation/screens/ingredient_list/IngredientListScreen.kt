@@ -10,8 +10,8 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.navigation.NavController
 import de.darthkali.weefood.android.presentation.navigation.BottomBar
 import de.darthkali.weefood.android.presentation.navigation.TopBar
-import de.darthkali.weefood.android.presentation.screens.recipe_list.components.RecipeList
-import de.darthkali.weefood.android.presentation.screens.recipe_list.components.SearchAppBar
+import de.darthkali.weefood.android.presentation.screens.ingredient_list.components.IngredientList
+import de.darthkali.weefood.android.presentation.screens.ingredient_list.components.SearchAppBar
 import de.darthkali.weefood.android.presentation.theme.AppTheme
 import de.darthkali.weefood.presentation.recipe_list.FoodCategoryUtil
 import de.darthkali.weefood.presentation.recipe_list.IngredientListEvents
@@ -55,7 +55,7 @@ fun IngredientListScreen(
                     },
                 )
 
-                RecipeList(
+                IngredientList(
                     loading = state.isLoading,
                     ingredients = state.ingredients,
                     page = state.page,

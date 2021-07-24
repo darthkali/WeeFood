@@ -1,16 +1,18 @@
 package de.darthkali.weefood.android.presentation.screens.ingredient_list.components
 
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import de.darthkali.weefood.android.presentation.components.RecipeImage
+import de.darthkali.weefood.android.presentation.components.CircleImage
+import de.darthkali.weefood.android.presentation.theme.AppTheme
 import de.darthkali.weefood.domain.model.Ingredient
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -19,9 +21,8 @@ const val RECIPE_IMAGE_HEIGHT = 260
 
 @ExperimentalCoroutinesApi
 @Composable
-fun RecipeCard(
+fun IngredientCard(
     ingredient: Ingredient,
-    onClick: () -> Unit,
 ) {
     Card(
         shape = MaterialTheme.shapes.small,
@@ -30,20 +31,15 @@ fun RecipeCard(
                 bottom = 6.dp,
                 top = 6.dp,
             )
-            .fillMaxWidth()
-            .clickable(onClick = onClick),
+            .fillMaxWidth(),
         elevation = 8.dp,
     ) {
         Column() {
-            RecipeImage(
-                url = ingredient.image,
-                contentDescription = ingredient.name
-            )
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 12.dp, bottom = 12.dp, start = 8.dp, end = 8.dp)
-            ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                CircleImage(
+                    url = ingredient.image,
+                    contentDescription = ingredient.name
+                )
                 Text(
                     text = ingredient.name,
                     modifier = Modifier
@@ -51,16 +47,39 @@ fun RecipeCard(
                         .wrapContentWidth(Alignment.Start),
                     style = MaterialTheme.typography.h2
                 )
-//                val rank = recipe.rating.toString()
-//                Text(
-//                    text = rank,
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .wrapContentWidth(Alignment.End)
-//                        .align(Alignment.CenterVertically),
-//                    style = MaterialTheme.typography.h1
-//                )
             }
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Button(onClick = {}){
+                    Text("Schliessen")
+                }
+                Button(onClick = {}){
+                    Text("Hinzufügen")
+                }
+            }
+
+
         }
     }
+}
+
+
+@OptIn(
+    ExperimentalCoroutinesApi::class,
+    androidx.compose.ui.ExperimentalComposeUiApi::class,
+    androidx.compose.material.ExperimentalMaterialApi::class
+)
+@Preview(showBackground = true)
+@Composable
+fun UserProfileDetailsPreview() {
+    val apple = Ingredient(
+        id = 1,
+        name = "Apfel",
+        image = "apple.img",
+        aisle = "meat",
+        possibleUnits = listOf(),
+    )
+    AppTheme() {
+        IngredientCard(ingredient = apple)
+    }
+
 }

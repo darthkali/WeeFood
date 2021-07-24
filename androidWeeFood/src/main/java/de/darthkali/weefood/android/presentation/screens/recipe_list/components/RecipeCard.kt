@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import de.darthkali.weefood.android.presentation.components.RecipeImage
+import de.darthkali.weefood.android.presentation.components.CircleImage
 import de.darthkali.weefood.domain.model.Ingredient
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -35,7 +35,7 @@ fun RecipeCard(
         elevation = 8.dp,
     ) {
         Column() {
-            RecipeImage(
+            CircleImage(
                 url = ingredient.image,
                 contentDescription = ingredient.name
             )

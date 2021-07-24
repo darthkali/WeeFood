@@ -9,6 +9,7 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import de.darthkali.weefood.android.presentation.components.NothingHere
 import de.darthkali.weefood.datasource.network.IngredientServiceImpl.Companion.RECIPE_PAGINATION_PAGE_SIZE
@@ -19,10 +20,10 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalMaterialApi
 @ExperimentalCoroutinesApi
 @Composable
-fun RecipeList(
-    loading: Boolean,
-    ingredients: List<Ingredient>,
-    page: Int,
+fun IngredientList(
+    loading: Boolean = false,
+    ingredients: List<Ingredient> = listOf(),
+    page: Int = 1,
     onTriggerNextPage: () -> Unit,
     onClickRecipeListItem: (Int) -> Unit,
 ){
@@ -30,7 +31,7 @@ fun RecipeList(
         .background(color = MaterialTheme.colors.surface)
     ) {
         if (loading && ingredients.isEmpty()) {
-            LoadingRecipeListShimmer(imageHeight = 250.dp,)
+            LoadingIngredientListShimmer(imageHeight = 250.dp,)
         }
         else if(ingredients.isEmpty()){
             NothingHere()
@@ -43,14 +44,11 @@ fun RecipeList(
                     if ((index + 1) >= (page * RECIPE_PAGINATION_PAGE_SIZE) && !loading) {
                         onTriggerNextPage()
                     }
-                    RecipeCard(
-                        ingredient = recipe,
-                        onClick = {
-                            onClickRecipeListItem(recipe.id)
-                        }
-                    )
+                    IngredientCard(ingredient = recipe)
                 }
             }
         }
     }
 }
+
+

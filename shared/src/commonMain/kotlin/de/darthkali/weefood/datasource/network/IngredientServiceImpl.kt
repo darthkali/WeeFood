@@ -19,24 +19,13 @@ class IngredientServiceImpl(
         }.results.toRecipeList()
     }
 
-//    override suspend fun get(id: Int): Recipe {
-//        return httpClient.get<RecipeDto> {
-//            url("$BASE_URL/get?id=$id")
-//            header("Authorization", API_KEY)
-//        }.toRecipe()
-//    }
-
-
-//    companion object {
-//        const val TOKEN = "Token 9c8b06d329136da358c2d00e76946b0111ce2c48"
-//        const val BASE_URL = "https://food2fork.ca/api/recipe"
-//        const val RECIPE_PAGINATION_PAGE_SIZE = 30
-//    }
-
     companion object {
         const val API_KEY = "a18522db266047e4b92632a17b82bd6f"
         const val BASE_URL = "https://api.spoonacular.com"
         const val RECIPE_PAGINATION_PAGE_SIZE = 30
+        const val IMAGE_URL_SMALL = "https://spoonacular.com/cdn/ingredients_100x100"
+        const val IMAGE_URL_MEDIUM = "https://spoonacular.com/cdn/ingredients_250x250"
+        const val IMAGE_URL_LARGE = "https://spoonacular.com/cdn/ingredients_500x500"
     }
 }
 

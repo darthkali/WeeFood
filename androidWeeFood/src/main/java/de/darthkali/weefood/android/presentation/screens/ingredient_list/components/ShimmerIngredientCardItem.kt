@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 
 
 @Composable
-fun ShimmerRecipeCardItem(
+fun ShimmerIngredientCardItem(
     colors: List<Color>,
     xShimmer: Float,
     yShimmer: Float,

@@ -2,18 +2,20 @@ package de.darthkali.weefood.android.presentation.navigation
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.HiltViewModelFactory
 import androidx.lifecycle.viewmodel.compose.viewModel
-
 import androidx.navigation.NavType
-import androidx.navigation.compose.*
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.navArgument
+import androidx.navigation.compose.rememberNavController
 import de.darthkali.weefood.android.presentation.screens.day_list.DayListScreen
 import de.darthkali.weefood.android.presentation.screens.day_list.WeekListScreen
 import de.darthkali.weefood.android.presentation.screens.ingredient_list.IngredientListScreen
+import de.darthkali.weefood.android.presentation.screens.ingredient_list.IngredientListViewModel
 import de.darthkali.weefood.android.presentation.screens.new_recipe.NewRecipeScreen
 import de.darthkali.weefood.android.presentation.screens.recipe_detail.RecipeDetailScreen
 import de.darthkali.weefood.android.presentation.screens.recipe_detail.RecipeDetailViewModel
@@ -24,11 +26,10 @@ import de.darthkali.weefood.android.presentation.screens.shopping_list.ShoppingL
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 /**
- * Ein Hello-World-Programm in Java.
- * Dies ist ein Javadoc-Kommentar.
+ * Navigation Class
+ * Here we set the Routes for the App
  *
- * @author John Doe
- * @version 1.0
+ * @author Danny Steinbrecher
  */
 @ExperimentalStdlibApi
 @ExperimentalCoroutinesApi
@@ -116,7 +117,7 @@ fun Navigation(){
             route = NavigationItem.IngredientList.route
         ) { navBackStackEntry ->
             val factory = HiltViewModelFactory(LocalContext.current, navBackStackEntry)
-            val viewModel: RecipeListViewModel = viewModel("RecipeListViewModel", factory)
+            val viewModel: IngredientListViewModel = viewModel("RecipeListViewModel", factory)
             IngredientListScreen(
                 state = viewModel.state.value,
                 navController = navController,
@@ -155,7 +156,7 @@ fun Navigation(){
             route = NavigationItem.Playground.route
         ) { navBackStackEntry ->
             val factory = HiltViewModelFactory(LocalContext.current, navBackStackEntry)
-            val viewModel: RecipeListViewModel = viewModel("RecipeListViewModel", factory)
+            val viewModel: IngredientListViewModel = viewModel("RecipeListViewModel", factory)
             IngredientListScreen(
                 state = viewModel.state.value,
                 navController = navController,
