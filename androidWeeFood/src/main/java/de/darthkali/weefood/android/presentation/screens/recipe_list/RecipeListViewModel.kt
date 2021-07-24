@@ -1,8 +1,7 @@
-package de.darthkali.weefood.android.presentation.recipe_list
+package de.darthkali.weefood.android.presentation.screens.recipe_list
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel

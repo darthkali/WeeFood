@@ -1,4 +1,4 @@
-package de.darthkali.weefood.android.presentation.recipe_detail
+package de.darthkali.weefood.android.presentation.screens.recipe_detail
 
 
 import androidx.compose.foundation.layout.padding
@@ -10,8 +10,8 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import de.darthkali.weefood.android.presentation.components.RECIPE_IMAGE_HEIGHT
-import de.darthkali.weefood.android.presentation.recipe_detail.components.LoadingRecipeShimmer
-import de.darthkali.weefood.android.presentation.recipe_detail.components.RecipeView
+import de.darthkali.weefood.android.presentation.screens.recipe_detail.components.LoadingRecipeShimmer
+import de.darthkali.weefood.android.presentation.screens.recipe_detail.components.RecipeView
 import de.darthkali.weefood.android.presentation.theme.AppTheme
 import de.darthkali.weefood.presentation.recipe_detail.RecipeDetailEvents
 import de.darthkali.weefood.presentation.recipe_detail.RecipeDetailState
@@ -28,10 +28,10 @@ fun RecipeDetailScreen(
 ){
     AppTheme(
         displayProgressBar = state.isLoading,
-        dialogQueue = state.queue,
-        onRemoveHeadMessageFromQueue = {
-            onTriggerEvent(RecipeDetailEvents.OnRemoveHeadMessageFromQueue)
-        }
+        //dialogQueue = state.queue,
+//        onRemoveHeadMessageFromQueue = {
+//            onTriggerEvent(RecipeDetailEvents.OnRemoveHeadMessageFromQueue)
+//        }
     ){
         if(state.recipe == null && state.isLoading){
             LoadingRecipeShimmer(imageHeight = RECIPE_IMAGE_HEIGHT.dp)

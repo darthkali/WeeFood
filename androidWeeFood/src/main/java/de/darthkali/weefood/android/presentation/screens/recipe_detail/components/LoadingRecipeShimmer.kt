@@ -1,4 +1,4 @@
-package de.darthkali.weefood.android.presentation.recipe_detail.components
+package de.darthkali.weefood.android.presentation.screens.recipe_detail.components
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background

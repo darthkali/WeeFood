@@ -1,4 +1,4 @@
-package de.darthkali.weefood.android.presentation.recipe_list
+package de.darthkali.weefood.android.presentation.screens.recipe_list
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.ExperimentalMaterialApi
@@ -6,8 +6,8 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
-import de.darthkali.weefood.android.presentation.recipe_list.components.RecipeList
-import de.darthkali.weefood.android.presentation.recipe_list.components.SearchAppBar
+import de.darthkali.weefood.android.presentation.screens.recipe_list.components.RecipeList
+import de.darthkali.weefood.android.presentation.screens.recipe_list.components.SearchAppBar
 import de.darthkali.weefood.android.presentation.theme.AppTheme
 import de.darthkali.weefood.presentation.recipe_list.RecipeListEvents
 import de.darthkali.weefood.presentation.recipe_list.FoodCategoryUtil
@@ -27,10 +27,10 @@ fun RecipeListScreen(
 ) {
     AppTheme(
         displayProgressBar = state.isLoading,
-        dialogQueue = state.queue,
-        onRemoveHeadMessageFromQueue = {
-            onTriggerEvent(RecipeListEvents.OnRemoveHeadMessageFromQueue)
-        }
+//        dialogQueue = state.queue,
+//        onRemoveHeadMessageFromQueue = {
+//            onTriggerEvent(RecipeListEvents.OnRemoveHeadMessageFromQueue)
+//        }
     ) {
         val foodCategories = remember{FoodCategoryUtil().getAllFoodCategories()}
         Scaffold(

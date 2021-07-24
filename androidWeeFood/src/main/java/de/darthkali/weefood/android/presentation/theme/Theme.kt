@@ -22,10 +22,10 @@ import de.darthkali.weefood.domain.util.Queue
 @ExperimentalMaterialApi
 @Composable
 fun AppTheme(
-    displayProgressBar: Boolean,
-    dialogQueue: Queue<GenericMessageInfo> = Queue(mutableListOf()),
+    displayProgressBar: Boolean = false,
+   // dialogQueue: Queue<GenericMessageInfo> = Queue(mutableListOf()),
     darkTheme: Boolean = isSystemInDarkTheme(),
-    onRemoveHeadMessageFromQueue: () -> Unit,
+    //onRemoveHeadMessageFromQueue: () -> Unit,
     content: @Composable () -> Unit,
 ) {
 
@@ -37,14 +37,14 @@ fun AppTheme(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(lightColors().background)
+                .background(MaterialTheme.colors.background)
         ){
             // For android we can process the DialogQueue at the Application level
             // on iOS you cannot do this because SwiftUI preloads the views in a List
-            ProcessDialogQueue(
-                dialogQueue = dialogQueue,
-                onRemoveHeadMessageFromQueue = onRemoveHeadMessageFromQueue,
-            )
+//            ProcessDialogQueue(
+//                dialogQueue = dialogQueue,
+//                onRemoveHeadMessageFromQueue = onRemoveHeadMessageFromQueue,
+//            )
             Column{
                 content()
             }
