@@ -3,7 +3,7 @@ package de.darthkali.weefood.interactors.recipe_list
 import de.darthkali.weefood.datasource.cache.RecipeCache
 import de.darthkali.weefood.datasource.network.IngredientService
 import de.darthkali.weefood.domain.model.GenericMessageInfo
-import de.darthkali.weefood.domain.model.Recipe
+import de.darthkali.weefood.domain.model.Ingredient
 import de.darthkali.weefood.domain.util.CommonFlow
 import de.darthkali.weefood.domain.util.DataState
 import de.darthkali.weefood.domain.util.asCommonFlow
@@ -22,7 +22,7 @@ class   SearchRecipes(
     fun execute(
         query: String,
         page: Int
-    ): CommonFlow<DataState<List<Recipe>>> = flow  {
+    ): CommonFlow<DataState<List<Ingredient>>> = flow  {
         try{
             emit(DataState.loading())
 
@@ -56,7 +56,7 @@ class   SearchRecipes(
             // emit List<Recipe> from cache
             emit(DataState.data(message = null, data = recipes)) //TODO: changed from cacheResult to recipe -> change after added cache
         } catch (e: Exception) {
-            emit(DataState.error<List<Recipe>>(
+            emit(DataState.error<List<Ingredient>>(
                 message = GenericMessageInfo.Builder()
                     .id("SearchRecipes.Error")
                     .title("Error")

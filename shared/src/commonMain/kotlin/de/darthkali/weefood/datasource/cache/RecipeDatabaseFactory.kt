@@ -1,8 +1,7 @@
 package de.darthkali.weefood.datasource.cache
 
 import com.squareup.sqldelight.db.SqlDriver
-import de.darthkali.weefood.domain.model.Recipe
-import de.darthkali.weefood.domain.util.DatetimeUtil
+import de.darthkali.weefood.domain.model.Ingredient
 
 class RecipeDatabaseFactory(
     private val driverFactory: DriverFactory
@@ -16,8 +15,8 @@ expect class DriverFactory {
     fun createDriver(): SqlDriver
 }
 
-fun Recipe_Entity.toRecipe(): Recipe {
-    return Recipe(
+fun Recipe_Entity.toRecipe(): Ingredient {
+    return Ingredient(
         id = id.toInt(),
         name = title,
         image = publisher,
@@ -26,7 +25,7 @@ fun Recipe_Entity.toRecipe(): Recipe {
     )
 }
 
-fun List<Recipe_Entity>.toRecipeList(): List<Recipe>{
+fun List<Recipe_Entity>.toRecipeList(): List<Ingredient>{
     return map{it.toRecipe()}
 }
 

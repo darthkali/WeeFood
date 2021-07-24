@@ -19,5 +19,7 @@ sealed class NavigationItem(
     object NewRecipe : NavigationItem("newRecipe")
     object IngredientList : NavigationItem("ingredientList")
 
+    object Playground : NavigationItem("playground", R.drawable.ic_playground, "Spielwiese")
+
 }
 

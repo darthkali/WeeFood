@@ -23,6 +23,13 @@ import de.darthkali.weefood.android.presentation.screens.settings.SettingsScreen
 import de.darthkali.weefood.android.presentation.screens.shopping_list.ShoppingListScreen
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+/**
+ * Ein Hello-World-Programm in Java.
+ * Dies ist ein Javadoc-Kommentar.
+ *
+ * @author John Doe
+ * @version 1.0
+ */
 @ExperimentalStdlibApi
 @ExperimentalCoroutinesApi
 @ExperimentalFoundationApi
@@ -34,6 +41,9 @@ fun Navigation(){
     NavHost(navController = navController, startDestination = NavigationItem.WeekList.route) {
 
 
+        /**
+         * Navigation -> WeekList
+         */
         composable(
             route = NavigationItem.WeekList.route
         ) { navBackStackEntry ->
@@ -41,6 +51,9 @@ fun Navigation(){
         }
 
 
+        /**
+         * Navigation -> DayList
+         */
         composable(
             route = NavigationItem.DayList.route
         ) { navBackStackEntry ->
@@ -49,6 +62,9 @@ fun Navigation(){
 
 
 
+        /**
+         * Navigation -> RecipeList
+         */
         composable(
             route = NavigationItem.RecipeList.route
         ) { navBackStackEntry ->
@@ -56,6 +72,7 @@ fun Navigation(){
             val viewModel: RecipeListViewModel = viewModel("RecipeListViewModel", factory)
             RecipeListScreen(
                 state = viewModel.state.value,
+                navController = navController,
                 onTriggerEvent = viewModel::onTriggerEvent,
                 onClickRecipeListItem = { recipeId ->
                     navController.navigate("${NavigationItem.RecipeDetail.route}/$recipeId")
@@ -64,6 +81,9 @@ fun Navigation(){
         }
 
 
+        /**
+         * Navigation -> RecipeDetail
+         */
         composable(
             route = NavigationItem.RecipeDetail.route + "/{recipeId}",
             arguments = listOf(navArgument("recipeId") {
@@ -79,28 +99,71 @@ fun Navigation(){
         }
 
 
+        /**
+         * Navigation -> NewRecipe
+         */
         composable(
             route = NavigationItem.NewRecipe.route
         ) { navBackStackEntry ->
             NewRecipeScreen(navController)
         }
 
+
+        /**
+         * Navigation -> IngredientList
+         */
         composable(
             route = NavigationItem.IngredientList.route
         ) { navBackStackEntry ->
-            IngredientListScreen(navController)
+            val factory = HiltViewModelFactory(LocalContext.current, navBackStackEntry)
+            val viewModel: RecipeListViewModel = viewModel("RecipeListViewModel", factory)
+            IngredientListScreen(
+                state = viewModel.state.value,
+                navController = navController,
+                onTriggerEvent = viewModel::onTriggerEvent,
+                onClickRecipeListItem = { recipeId ->
+                    navController.navigate("${NavigationItem.RecipeDetail.route}/$recipeId")
+                }
+            )
         }
 
+
+        /**
+         * Navigation -> ShoppingList
+         */
         composable(
             route = NavigationItem.ShoppingList.route
         ) { navBackStackEntry ->
             ShoppingListScreen(navController)
         }
 
+
+        /**
+         * Navigation -> Settings
+         */
         composable(
             route = NavigationItem.Settings.route
         ) { navBackStackEntry ->
             SettingsScreen(navController)
+        }
+
+
+        /**
+         * Navigation -> Playground
+         */
+        composable(
+            route = NavigationItem.Playground.route
+        ) { navBackStackEntry ->
+            val factory = HiltViewModelFactory(LocalContext.current, navBackStackEntry)
+            val viewModel: RecipeListViewModel = viewModel("RecipeListViewModel", factory)
+            IngredientListScreen(
+                state = viewModel.state.value,
+                navController = navController,
+                onTriggerEvent = viewModel::onTriggerEvent,
+                onClickRecipeListItem = { recipeId ->
+                    navController.navigate("${NavigationItem.RecipeDetail.route}/$recipeId")
+                }
+            )
         }
     }
 }

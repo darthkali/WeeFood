@@ -1,4 +1,4 @@
-package de.darthkali.weefood.android.presentation.screens.recipe_list.components
+package de.darthkali.weefood.android.presentation.screens.ingredient_list.components
 
 
 import androidx.compose.foundation.clickable

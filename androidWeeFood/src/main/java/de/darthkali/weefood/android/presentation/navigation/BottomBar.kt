@@ -2,9 +2,7 @@ package de.darthkali.weefood.android.presentation.navigation
 
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 
 
@@ -17,6 +15,7 @@ fun BottomBar(
         NavigationItem.RecipeList,
         NavigationItem.WeekList,
         NavigationItem.ShoppingList,
+        NavigationItem.Playground
     )
     BottomNavigation(
         backgroundColor = MaterialTheme.colors.primary,

@@ -1,7 +1,7 @@
 package de.darthkali.weefood.datasource.network
 
 import de.darthkali.weefood.datasource.network.model.IngredientSearchResponse
-import de.darthkali.weefood.domain.model.Recipe
+import de.darthkali.weefood.domain.model.Ingredient
 import io.ktor.client.*
 import io.ktor.client.request.*
 
@@ -10,7 +10,7 @@ class IngredientServiceImpl(
 ) : IngredientService {
 
 
-    override suspend fun search(query: String, page: Int): List<Recipe> {
+    override suspend fun search(query: String, page: Int): List<Ingredient> {
 
         val offset: Int  = (page - 1)  * RECIPE_PAGINATION_PAGE_SIZE + 1
 

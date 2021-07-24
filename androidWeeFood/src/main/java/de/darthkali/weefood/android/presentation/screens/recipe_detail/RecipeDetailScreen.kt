@@ -33,10 +33,10 @@ fun RecipeDetailScreen(
 //            onTriggerEvent(RecipeDetailEvents.OnRemoveHeadMessageFromQueue)
 //        }
     ){
-        if(state.recipe == null && state.isLoading){
+        if(state.ingredient == null && state.isLoading){
             LoadingRecipeShimmer(imageHeight = RECIPE_IMAGE_HEIGHT.dp)
         }
-        else if(state.recipe == null){
+        else if(state.ingredient == null){
             Text(
                 modifier = Modifier.padding(16.dp),
                 text = "We were unable to retrieve the details for this recipe.\nTry resetting the app.",
@@ -44,7 +44,7 @@ fun RecipeDetailScreen(
             )
         }
         else{
-            RecipeView(recipe = state.recipe!!)
+            RecipeView(ingredient = state.ingredient!!)
         }
     }
 }

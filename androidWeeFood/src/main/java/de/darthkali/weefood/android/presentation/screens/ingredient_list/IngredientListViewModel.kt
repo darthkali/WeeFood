@@ -1,4 +1,4 @@
-package de.darthkali.weefood.android.presentation.screens.recipe_list
+package de.darthkali.weefood.android.presentation.screens.ingredient_list
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -20,13 +20,13 @@ import javax.inject.Inject
 import kotlin.collections.ArrayList
 
 @HiltViewModel
-class RecipeListViewModel
+class IngredientListViewModel
 @Inject
 constructor(
     private val searchRecipes: SearchRecipes,
 ): ViewModel() {
 
-    private val logger = Logger("RecipeListVM")
+    private val logger = Logger("IngredientListViewModel")
 
     val state: MutableState<IngredientListState> = mutableStateOf(IngredientListState())
 

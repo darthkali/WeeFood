@@ -2,16 +2,16 @@ package de.darthkali.weefood.presentation.recipe_list
 
 
 import de.darthkali.weefood.domain.model.GenericMessageInfo
-import de.darthkali.weefood.domain.model.Recipe
+import de.darthkali.weefood.domain.model.Ingredient
 import de.darthkali.weefood.domain.util.Queue
 
-actual data class RecipeListState(
+actual data class IngredientListState(
     val isLoading: Boolean = false,
     val page: Int = 1,
     val query: String = "",
-    val recipes: List<Recipe> = listOf(),
+    val ingredients: List<Ingredient> = listOf(),
     val selectedCategory: FoodCategory? = null,
-    val bottomRecipe: Recipe? = null, // track the recipe at the bottom of the list so we know when to trigger pagination
+    val bottomIngredient: Ingredient? = null, // track the recipe at the bottom of the list so we know when to trigger pagination
     val queue: Queue<GenericMessageInfo> = Queue(mutableListOf()), // messages to be displayed in ui
 )  {
     // Need secondary constructor to initialize with no args in SwiftUI
@@ -20,9 +20,9 @@ actual data class RecipeListState(
         isLoading = false,
         page = 1,
         query = "",
-        recipes = listOf(),
+        ingredients = listOf(),
         selectedCategory = null,
-        bottomRecipe = null,
+        bottomIngredient = null,
         queue = Queue(mutableListOf()),
     )
 

@@ -2,14 +2,13 @@ package de.darthkali.weefood.interactors.recipe_detail
 
 import de.darthkali.weefood.datasource.cache.RecipeCache
 import de.darthkali.weefood.domain.model.GenericMessageInfo
-import de.darthkali.weefood.domain.model.Recipe
+import de.darthkali.weefood.domain.model.Ingredient
 import de.darthkali.weefood.domain.util.CommonFlow
 import de.darthkali.weefood.domain.util.DataState
 import de.darthkali.weefood.domain.util.asCommonFlow
 import de.darthkali.weefood.shared.domain.util.UIComponentType
 import de.darthkali.weefood.util.BuildConfig
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 /**
@@ -21,7 +20,7 @@ class GetRecipe (
 
     fun execute(
         recipeId: Int,
-    ): CommonFlow<DataState<Recipe>> = flow {
+    ): CommonFlow<DataState<Ingredient>> = flow {
         try {
             emit(DataState.loading())
 
@@ -41,7 +40,7 @@ class GetRecipe (
             emit(DataState.data(message = null, data = recipe))
 
         }catch (e: Exception){
-            emit(DataState.error<Recipe>(
+            emit(DataState.error<Ingredient>(
                 message = GenericMessageInfo.Builder()
                     .id("GetRecipe.Error")
                     .title("Error")
