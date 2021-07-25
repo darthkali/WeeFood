@@ -70,12 +70,9 @@ fun SearchAppBar(
 }
 
 
-@OptIn(
-    ExperimentalCoroutinesApi::class,
-    androidx.compose.ui.ExperimentalComposeUiApi::class,
-    androidx.compose.material.ExperimentalMaterialApi::class
-)
-@Preview(showBackground = true)
+@ExperimentalCoroutinesApi
+@ExperimentalMaterialApi
+@ExperimentalComposeUiApi
 @Composable
 fun SearchAppBarPreview() {
     AppTheme() {

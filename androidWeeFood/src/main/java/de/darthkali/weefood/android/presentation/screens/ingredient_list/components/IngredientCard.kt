@@ -3,11 +3,13 @@ package de.darthkali.weefood.android.presentation.screens.ingredient_list.compon
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -68,11 +70,9 @@ fun IngredientCard(
 }
 
 
-@OptIn(
-    ExperimentalCoroutinesApi::class,
-    androidx.compose.ui.ExperimentalComposeUiApi::class,
-    androidx.compose.material.ExperimentalMaterialApi::class
-)
+@ExperimentalCoroutinesApi
+@ExperimentalMaterialApi
+@ExperimentalComposeUiApi
 @Preview(showBackground = true)
 @Composable
 fun UserProfileDetailsPreview() {
