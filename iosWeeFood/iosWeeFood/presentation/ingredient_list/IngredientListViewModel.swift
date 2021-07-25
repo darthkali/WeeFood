@@ -110,20 +110,7 @@ class IngredientListViewModel: ObservableObject {
         )
     }
 
-    private func onUpdateSelectedCategory(foodCategory: FoodCategory?){
-        let currentState = (self.state.copy() as! IngredientListState)
-        self.state = self.state.doCopy(
-            isLoading: currentState.isLoading,
-            page: currentState.page,
-            query: currentState.query,
-            ingredients: currentState.ingredients,
-           // selectedCategory: foodCategory, // update selected FoodCategory
-            bottomIngredient:  currentState.bottomIngredient
-            //queue: currentState.queue
-        )
-       // onUpdateQuery(query: foodCategory?.value ?? "")
-        onTriggerEvent(stateEvent: IngredientListEvents.NewSearch())
-    }
+
 
     private func onUpdateQuery(query: String){
         updateState(query: query)
@@ -147,9 +134,7 @@ class IngredientListViewModel: ObservableObject {
             page: currentState.page,
             query: currentState.query,
             ingredients: currentIngredients, // update recipes
-            //selectedCategory: currentState.selectedCategory,
             bottomIngredient:  currentState.bottomIngredient
-            //queue: currentState.queue
         )
         currentState = (self.state.copy() as! IngredientListState)
         
@@ -159,16 +144,6 @@ class IngredientListViewModel: ObservableObject {
         
     }
 
-   /* private func handleMessageByUIComponentType(_ message: GenericMessageInfo){
-        switch message.uiComponentType{
-        case UIComponentType.Dialog():
-            appendToQueue(message: message)
-        case UIComponentType.None():
-            logger.log(msg: "\(message.description)")
-        default:
-            doNothing()
-        }
-    }*/
 
     func shouldQueryNextPage(ingredient: Ingredient) -> Bool {
         // check if looking at the bottom recipe
@@ -187,30 +162,6 @@ class IngredientListViewModel: ObservableObject {
         return false
     }
 
-    /*private func appendToQueue(message: GenericMessageInfo){
-        let currentState = (self.state.copy() as! RecipeListState)
-        let queue = currentState.queue
-        let queueUtil = GenericMessageInfoQueueUtil() // prevent duplicates
-        if !queueUtil.doesMessageAlreadyExistInQueue(queue: queue, messageInfo: message) {
-            queue.add(element: message)
-            updateState(queue: queue)
-        }
-    }*/
-
-    /**
-     *  Remove the head message from queue
-     */
-    /*func removeHeadFromQueue(){
-        let currentState = (self.state.copy() as! RecipeListState)
-        let queue = currentState.queue
-        do {
-            try queue.remove()
-            updateState(queue: queue)
-        }catch{
-            self.logger.log(msg: "\(error)")
-        }
-    }*/
-
     /**
      *  Not everything can be conveniently updated with this function.
      *  Things like recipes, selectedCategory must have their own functions.
@@ -220,7 +171,6 @@ class IngredientListViewModel: ObservableObject {
         page: Int? = nil,
         query: String? = nil,
         bottomIngredient: Ingredient? = nil
-        //queue: Queue<GenericMessageInfo>? = nil
     ){
         let currentState = (self.state.copy() as! IngredientListState)
         self.state = self.state.doCopy(
@@ -228,17 +178,9 @@ class IngredientListViewModel: ObservableObject {
             page: Int32(page ?? Int(currentState.page)),
             query: query ?? currentState.query,
             ingredients: currentState.ingredients ,
-            //selectedCategory: currentState.selectedCategory,
             bottomIngredient:  bottomIngredient ?? currentState.bottomIngredient
-            //queue: queue ?? currentState.queue
         )
-        //shouldShowDialog()
     }
-
-    /*func shouldShowDialog(){
-        let currentState = (self.state.copy() as! IngredientListState)
-        showDialog = currentState.queue.items.count > 0
-    }*/
 }
 
 

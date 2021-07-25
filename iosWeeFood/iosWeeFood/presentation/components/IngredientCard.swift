@@ -19,33 +19,41 @@ struct IngredientCard: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading){
-            WebImage(url: URL(string: "https://spoonacular.com/cdn/ingredients_500x500/" +  ingredient.image))
-                        .resizable()
-                        .placeholder(Image(systemName: "photo")) // Placeholder Image
-                        .placeholder {
-                            Rectangle().foregroundColor(.white)
-                        }
-                        .indicator(.activity)
-                        .transition(.fade(duration: 0.5))
-                        .scaledToFill() // 1
-                        .frame(height: 250, alignment: .center) // 2
-                        .clipped() // 3
+        VStack(){
+            
+            HStack(){
+                
+                let ingredientImage = ingredient.image ?? "no.jpg"
 
-            HStack(alignment: .lastTextBaseline){
-                DefaultText(ingredient.name, size: 19)
-                    .font(.body)
-                    .frame(alignment: .center)
+                WebImage(url: URL(string: "https://spoonacular.com/cdn/ingredients_500x500/" +  ingredientImage ))
+                            .resizable()
+                            .placeholder(Image(systemName: "photo")) // Placeholder Image
+                            .placeholder {
+                                Rectangle().foregroundColor(.white)
+                            }
+                            .indicator(.activity)
+                            .transition(.fade(duration: 0.5))
+                            .scaledToFit() // 1
+                            .frame(height: 64, alignment: .center) // 2
+                            .clipped() // 3
 
+              
+                    DefaultText(ingredient.name ?? "", size: 19)
+                        .font(.body)
+                        .frame(alignment: .center)
+                    
                 Spacer()
-
-                //DefaultText(String(recipe.rating))
-                   // .frame(alignment: .trailing)
+                
             }
-            .padding(.top, 8)
-            .padding(.leading, 8)
-            .padding(.trailing, 8)
-            .padding(.bottom, 12)
+            Button("Hinzufügen"){
+                print("Ingredient hinzugefügt")
+            }
+            .padding()
+            .foregroundColor(.white)
+            .background(Color.green)
+            .cornerRadius(8)
+            Spacer()
+
         }
         .background(Color.white)
         .cornerRadius(8)
@@ -58,15 +66,7 @@ struct IngredientCard_Previews: PreviewProvider {
     static let ingredient = Ingredient(
         id: 1,
         name: "Apfel",
-        image: "apple.png",
-        aisle: "meat",
-
-        possibleUnits: [
-            "ml",
-            "l",
-        ]
-        //dateAdded: DatetimeUtil().now(),
-        //dateUpdated: DatetimeUtil().now()
+        image: "apple.png"
     )
     static var previews: some View {
         IngredientCard(ingredient: ingredient)
