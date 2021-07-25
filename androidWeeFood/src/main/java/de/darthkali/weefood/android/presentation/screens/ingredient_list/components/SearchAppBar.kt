@@ -5,8 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -22,9 +20,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import de.darthkali.weefood.android.presentation.theme.AppTheme
-import de.darthkali.weefood.domain.model.Ingredient
-import de.darthkali.weefood.presentation.recipe_list.FoodCategory
-import de.darthkali.weefood.presentation.recipe_list.FoodCategoryUtil
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 

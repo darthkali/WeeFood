@@ -1,9 +1,7 @@
-package de.darthkali.weefood.presentation.recipe_list
+package de.darthkali.weefood.presentation.ingredient_list
 
 
-import de.darthkali.weefood.domain.model.GenericMessageInfo
 import de.darthkali.weefood.domain.model.Ingredient
-import de.darthkali.weefood.domain.util.Queue
 
 actual data class IngredientListState(
     val isLoading: Boolean = false,

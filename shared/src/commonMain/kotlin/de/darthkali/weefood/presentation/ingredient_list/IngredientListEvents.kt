@@ -1,4 +1,4 @@
-package de.darthkali.weefood.presentation.recipe_list
+package de.darthkali.weefood.presentation.ingredient_list
 
 sealed class IngredientListEvents{
 
@@ -10,7 +10,4 @@ sealed class IngredientListEvents{
 
     data class OnUpdateQuery(val query: String): IngredientListEvents()
 
-    data class OnSelectCategory(val category: FoodCategory): IngredientListEvents()
-
-    object OnRemoveHeadMessageFromQueue: IngredientListEvents()
 }

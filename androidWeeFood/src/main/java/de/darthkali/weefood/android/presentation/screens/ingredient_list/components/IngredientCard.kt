@@ -2,12 +2,10 @@ package de.darthkali.weefood.android.presentation.screens.ingredient_list.compon
 
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.material.Text
-import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,7 +45,7 @@ fun IngredientCard(
                     contentDescription = ingredient.name
                 )
                 Text(
-                    text = ingredient.name,
+                    text = ingredient.name ?: "",   //if ingredient.name == null, then set "" as text
                     modifier = Modifier
                         .fillMaxWidth(0.85f)
                         .wrapContentWidth(Alignment.Start),
@@ -82,8 +80,8 @@ fun UserProfileDetailsPreview() {
         id = 1,
         name = "Apfel",
         image = "apple.img",
-        aisle = "meat",
-        possibleUnits = listOf(),
+//        aisle = "meat",
+//        possibleUnits = listOf(),
     )
     AppTheme() {
         IngredientCard(ingredient = apple)

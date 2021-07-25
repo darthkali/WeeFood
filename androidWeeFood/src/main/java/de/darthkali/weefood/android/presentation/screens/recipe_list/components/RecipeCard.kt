@@ -1,6 +1,5 @@
 package de.darthkali.weefood.android.presentation.screens.recipe_list.components
 
-
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
@@ -11,11 +10,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import de.darthkali.weefood.android.presentation.components.CircleImage
+import de.darthkali.weefood.datasource.network.IngredientServiceImpl.Companion.NO_IMAGE
 import de.darthkali.weefood.domain.model.Ingredient
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-
-
-const val RECIPE_IMAGE_HEIGHT = 260
 
 @ExperimentalCoroutinesApi
 @Composable
@@ -36,8 +33,8 @@ fun RecipeCard(
     ) {
         Column() {
             CircleImage(
-                url = ingredient.image,
-                contentDescription = ingredient.name
+                url = ingredient.image ?: NO_IMAGE,
+                contentDescription = ingredient.name ?: "not valid"
             )
             Row(
                 modifier = Modifier
@@ -45,21 +42,12 @@ fun RecipeCard(
                     .padding(top = 12.dp, bottom = 12.dp, start = 8.dp, end = 8.dp)
             ) {
                 Text(
-                    text = ingredient.name,
+                    text = ingredient.name ?: "",    //if ingredient.name == null, then set "" as text
                     modifier = Modifier
                         .fillMaxWidth(0.85f)
                         .wrapContentWidth(Alignment.Start),
                     style = MaterialTheme.typography.h2
                 )
-//                val rank = recipe.rating.toString()
-//                Text(
-//                    text = rank,
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .wrapContentWidth(Alignment.End)
-//                        .align(Alignment.CenterVertically),
-//                    style = MaterialTheme.typography.h1
-//                )
             }
         }
     }

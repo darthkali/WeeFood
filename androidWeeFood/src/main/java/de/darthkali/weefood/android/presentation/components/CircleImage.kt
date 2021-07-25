@@ -20,8 +20,8 @@ import de.darthkali.weefood.datasource.network.IngredientServiceImpl.Companion.I
 
 @Composable
 fun CircleImage(
-    url: String,
-    contentDescription: String,
+    url: String?,
+    contentDescription: String?,
 ){
     val painter = rememberCoilPainter("$IMAGE_URL_MEDIUM/$url")
     Card(

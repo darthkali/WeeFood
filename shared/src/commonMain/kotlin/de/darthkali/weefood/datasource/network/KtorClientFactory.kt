@@ -13,12 +13,10 @@ fun IngredientDto.toIngredient(): Ingredient{
     return Ingredient(
         id = id,
         name = name,
-        image = image,
-        aisle = aisle,
-        possibleUnits = possibleUnits,
+        image = image
     )
 }
 
-fun List<IngredientDto>.totoIngredientList(): List<Ingredient>{
+fun List<IngredientDto>.toIngredientList(): List<Ingredient>{
     return map{it.toIngredient()}
 }

@@ -39,7 +39,7 @@ fun RecipeView(
                         .padding(bottom = 4.dp)
                 ){
                     Text(
-                        text = ingredient.name,
+                        text = ingredient.name ?: "",    //if ingredient.name == null, then set "" as text
                         modifier = Modifier
                             .fillMaxWidth(0.85f)
                             .wrapContentWidth(Alignment.Start)

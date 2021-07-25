@@ -1,9 +1,8 @@
 package de.darthkali.weefood.domain.util
 
-import de.darthkali.weefood.domain.model.GenericMessageInfo
 
 data class DataState<T>(
-    val message: GenericMessageInfo.Builder? = null,
+    val error: String = "",
     val data: T? = null,
     val isLoading: Boolean = false,
 ) {
@@ -11,20 +10,17 @@ data class DataState<T>(
     companion object {
 
         fun <T> error(
-            message: GenericMessageInfo.Builder,
+            message: String,
         ): DataState<T> {
             return DataState(
-                message = message,
-                data = null,
+                error = message,
             )
         }
 
         fun <T> data(
-            message: GenericMessageInfo.Builder? = null,
             data: T? = null,
         ): DataState<T> {
             return DataState(
-                message = message,
                 data = data,
             )
         }

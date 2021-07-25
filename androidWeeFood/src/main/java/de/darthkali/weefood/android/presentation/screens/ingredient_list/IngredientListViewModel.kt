@@ -5,14 +5,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import de.darthkali.weefood.domain.model.GenericMessageInfo
 import de.darthkali.weefood.domain.model.Ingredient
-import de.darthkali.weefood.domain.util.GenericMessageInfoQueueUtil
-import de.darthkali.weefood.presentation.recipe_list.IngredientListEvents
+import de.darthkali.weefood.presentation.ingredient_list.IngredientListEvents
 import de.darthkali.weefood.interactors.recipe_list.SearchIngredient
-import de.darthkali.weefood.presentation.recipe_list.IngredientListState
+import de.darthkali.weefood.presentation.ingredient_list.IngredientListState
 import de.darthkali.weefood.util.Logger
-import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 

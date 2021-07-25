@@ -1,4 +1,4 @@
-package de.darthkali.weefood.presentation.recipe_list
+package de.darthkali.weefood.presentation.ingredient_list
 
 /**
  * RecipeListState is a little different on iOS so need expect/actual

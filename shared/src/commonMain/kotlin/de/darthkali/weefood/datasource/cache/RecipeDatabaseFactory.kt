@@ -20,8 +20,8 @@ fun Recipe_Entity.toRecipe(): Ingredient {
         id = id.toInt(),
         name = title,
         image = publisher,
-        aisle = featured_image,
-        possibleUnits = ingredients.convertIngredientsToList(),
+//        aisle = featured_image,
+//        possibleUnits = ingredients.convertIngredientsToList(),
     )
 }
 

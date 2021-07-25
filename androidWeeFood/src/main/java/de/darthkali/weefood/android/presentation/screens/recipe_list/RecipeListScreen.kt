@@ -13,9 +13,8 @@ import de.darthkali.weefood.android.presentation.navigation.TopBar
 import de.darthkali.weefood.android.presentation.screens.recipe_list.components.RecipeList
 import de.darthkali.weefood.android.presentation.screens.recipe_list.components.SearchAppBar
 import de.darthkali.weefood.android.presentation.theme.AppTheme
-import de.darthkali.weefood.presentation.recipe_list.IngredientListEvents
-import de.darthkali.weefood.presentation.recipe_list.FoodCategoryUtil
-import de.darthkali.weefood.presentation.recipe_list.IngredientListState
+import de.darthkali.weefood.presentation.ingredient_list.IngredientListEvents
+import de.darthkali.weefood.presentation.ingredient_list.IngredientListState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 
@@ -33,7 +32,6 @@ fun RecipeListScreen(
     AppTheme(
         displayProgressBar = state.isLoading,
     ) {
-        val foodCategories = remember { FoodCategoryUtil().getAllFoodCategories() }
         Scaffold(
             topBar = {
                 TopBar(title = "Einkaufsliste")
@@ -49,11 +47,6 @@ fun RecipeListScreen(
                     onExecuteSearch = {
                         onTriggerEvent(IngredientListEvents.NewSearch)
                     },
-//                    categories = foodCategories,
-                    //selectedCategory = state.selectedCategory,
-//                    onSelectedCategoryChanged = {
-//                        onTriggerEvent(IngredientListEvents.OnSelectCategory(it))
-//                    },
                 )
 
                 RecipeList(

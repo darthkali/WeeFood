@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.navigation.NavController
 import de.darthkali.weefood.android.presentation.navigation.BottomBar
@@ -13,9 +12,8 @@ import de.darthkali.weefood.android.presentation.navigation.TopBar
 import de.darthkali.weefood.android.presentation.screens.ingredient_list.components.IngredientList
 import de.darthkali.weefood.android.presentation.screens.ingredient_list.components.SearchAppBar
 import de.darthkali.weefood.android.presentation.theme.AppTheme
-import de.darthkali.weefood.presentation.recipe_list.FoodCategoryUtil
-import de.darthkali.weefood.presentation.recipe_list.IngredientListEvents
-import de.darthkali.weefood.presentation.recipe_list.IngredientListState
+import de.darthkali.weefood.presentation.ingredient_list.IngredientListEvents
+import de.darthkali.weefood.presentation.ingredient_list.IngredientListState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi

@@ -11,15 +11,8 @@ data class IngredientDto(
     val id: Int,
 
     @SerialName("name")
-    val name: String,
+    val name: String?,
 
     @SerialName("image")
-    val image: String,
-
-    @SerialName("aisle")
-    val aisle: String,
-
-    @SerialName("possibleUnits")
-    val possibleUnits: List<String> = emptyList(),
-
+    val image: String?,
 )

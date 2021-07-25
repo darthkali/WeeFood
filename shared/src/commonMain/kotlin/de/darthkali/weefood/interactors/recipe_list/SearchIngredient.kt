@@ -2,12 +2,10 @@ package de.darthkali.weefood.interactors.recipe_list
 
 import de.darthkali.weefood.datasource.cache.RecipeCache
 import de.darthkali.weefood.datasource.network.IngredientService
-import de.darthkali.weefood.domain.model.GenericMessageInfo
 import de.darthkali.weefood.domain.model.Ingredient
 import de.darthkali.weefood.domain.util.CommonFlow
 import de.darthkali.weefood.domain.util.DataState
 import de.darthkali.weefood.domain.util.asCommonFlow
-import de.darthkali.weefood.shared.domain.util.UIComponentType
 import de.darthkali.weefood.util.Logger
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
@@ -54,15 +52,9 @@ class   SearchIngredient(
 //                )
 //            }
             // emit List<Recipe> from cache
-            emit(DataState.data(message = null, data = ingredient)) //TODO: changed from cacheResult to ingredient -> change after added cache
+            emit(DataState.data(data = ingredient)) //TODO: changed from cacheResult to ingredient -> change after added cache
         } catch (e: Exception) {
-            emit(DataState.error<List<Ingredient>>(
-                message = GenericMessageInfo.Builder()
-                    .id("SearchRecipes.Error")
-                    .title("Error")
-                    .uiComponentType(UIComponentType.Dialog)
-                    .description(e.message?: "Unknown Error")
-            ))
+            logger.log(e.toString())
         }
     }.asCommonFlow()
 

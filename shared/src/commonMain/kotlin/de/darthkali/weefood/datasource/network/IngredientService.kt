@@ -8,8 +8,4 @@ interface IngredientService {
         query: String,
         page: Int,
     ): List<Ingredient>
-
-//    suspend fun get(
-//        id: Int
-//    ): Recipe
 }
