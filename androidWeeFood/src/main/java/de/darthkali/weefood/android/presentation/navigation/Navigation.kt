@@ -132,7 +132,13 @@ fun Navigation(){
         composable(
             route = NavigationItem.ShoppingList.route
         ) { navBackStackEntry ->
-            ShoppingListScreen(navController)
+            val factory = HiltViewModelFactory(LocalContext.current, navBackStackEntry)
+            val viewModel: IngredientListViewModel = viewModel("RecipeListViewModel", factory)
+            IngredientListScreen(
+                state = viewModel.state.value,
+                navController = navController,
+                onTriggerEvent = viewModel::onTriggerEvent,
+            )
         }
 
 
@@ -145,20 +151,5 @@ fun Navigation(){
             SettingsScreen(navController)
         }
 
-
-        /**
-         * Navigation -> Playground
-         */
-        composable(
-            route = NavigationItem.Playground.route
-        ) { navBackStackEntry ->
-            val factory = HiltViewModelFactory(LocalContext.current, navBackStackEntry)
-            val viewModel: IngredientListViewModel = viewModel("RecipeListViewModel", factory)
-            IngredientListScreen(
-                state = viewModel.state.value,
-                navController = navController,
-                onTriggerEvent = viewModel::onTriggerEvent,
-            )
-        }
     }
 }

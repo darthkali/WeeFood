@@ -11,11 +11,9 @@ fun BottomBar(
     navController: NavController
 ) {
     val items = listOf(
-        NavigationItem.Settings,
         NavigationItem.RecipeList,
         NavigationItem.WeekList,
-        NavigationItem.ShoppingList,
-        NavigationItem.Playground
+        NavigationItem.ShoppingList
     )
     BottomNavigation(
         backgroundColor = MaterialTheme.colors.primary,
