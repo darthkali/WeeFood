@@ -1,5 +1,5 @@
 //
-//  RecipeListScreen.swift
+//  IngredientListScreen.swift
 //  iosWeeFood
 //
 //  Created by Danny Steinbrecher on 11.07.21.
@@ -42,6 +42,7 @@ struct IngredientListScreen: View {
     var body: some View {
         
         NavigationView{
+         
             ZStack{
                 VStack{
                     SearchAppBar(
@@ -103,7 +104,7 @@ struct IngredientListScreen: View {
 }
 
 @available(iOS 14.0, *)
-struct RecipeListScreen_Previews: PreviewProvider {
+struct IngredientListScreen_Previews: PreviewProvider {
     static var previews: some View {
         IngredientListScreen(
             networkModule: NetworkModule(),
