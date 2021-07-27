@@ -1,15 +1,15 @@
 package de.darthkali.weefood.di
 
 import de.darthkali.weefood.datasource.network.KtorClientFactory
-import de.darthkali.weefood.datasource.network.RecipeService
-import de.darthkali.weefood.datasource.network.model.RecipeServiceImpl
+import de.darthkali.weefood.datasource.network.IngredientService
+import de.darthkali.weefood.datasource.network.IngredientServiceImpl
 
 class NetworkModule {
 
-    val recipeService: RecipeService by lazy {
-        RecipeServiceImpl(
+    val ingredientService: IngredientService by lazy {
+        IngredientServiceImpl(
             httpClient = KtorClientFactory().build(),
-            baseUrl = RecipeServiceImpl.BASE_URL
         )
     }
+
 }

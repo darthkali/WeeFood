@@ -9,28 +9,26 @@
 import SwiftUI
 import shared
 
+@available(iOS 14.0, *)
 struct SearchAppBar: View {
-    
+
     @State var query: String
-    private let selectedCategory: FoodCategory?
-    private let foodCategories: [FoodCategory]
-    private let onTriggerEvent: (RecipeListEvents) -> Void
-    
+    //let selectedCategory: FoodCategory?
+    //let foodCategories: [FoodCategory]
+    let onTriggerEvent: (IngredientListEvents) -> Void
+
     init(
         query: String,
-        selectedCategory: FoodCategory?,
-        foodCategories: [FoodCategory],
-        onTriggerEvent: @escaping(RecipeListEvents) -> Void
-    ){
+        //selectedCategory: FoodCategory?,
+        //foodCategories: [FoodCategory],
+        onTriggerEvent: @escaping (IngredientListEvents) -> Void
+    ) {
+        //self.selectedCategory = selectedCategory
+        //self.foodCategories = foodCategories
         self.onTriggerEvent = onTriggerEvent
-        self.selectedCategory = selectedCategory
-        self.foodCategories = foodCategories
-        self._query = State(initialValue: query)
+        self._query = State(initialValue: query) // set initial value for query
     }
-    
-    
 
-    
     var body: some View {
         VStack{
             HStack{
@@ -38,21 +36,21 @@ struct SearchAppBar: View {
                 TextField(
                     "Search...",
                     text: $query,
-                    onCommit: {
-                        onTriggerEvent(RecipeListEvents.NewSearch())
+                    onCommit:{
+                        onTriggerEvent(IngredientListEvents.NewSearch())
                     }
                 )
                 .onChange(of: query, perform: { value in
-                    onTriggerEvent(RecipeListEvents.OnUpdateQuery(query: value))
+                    onTriggerEvent(IngredientListEvents.OnUpdateQuery(query: value))
                 })
             }
             .padding(.bottom, 8)
-            ScrollView(.horizontal){
-                HStack(spacing:10){
-                    ForEach(foodCategories, id: \.self){category in
-                        FoodCategorieChip(
-                            category:category.value,
-                            isSelected: selectedCategory ==  category
+            /*ScrollView(.horizontal){
+                HStack(spacing: 10){
+                    ForEach(foodCategories, id: \.self){ category in
+                        FoodCategoryChip(
+                            category: category.value,
+                            isSelected: selectedCategory == category
                         )
                         .onTapGesture {
                             query = category.value
@@ -60,7 +58,7 @@ struct SearchAppBar: View {
                         }
                     }
                 }
-            }
+            }*/
         }
         .padding(.top, 8)
         .padding(.leading, 8)
@@ -68,4 +66,33 @@ struct SearchAppBar: View {
         .background(Color.white.opacity(0))
     }
 }
+
+//@available(iOS 14.0, *)
+//struct SearchAppBar_Previews: PreviewProvider {
+//    static let dtoMapper = RecipeDtoMapper()
+//    static let driverFactory = DriverFactory()
+//    static let recipeEntityMapper = RecipeEntityMapper()
+//    static let dateUtil = DatetimeUtil()
+//    static let recipeService = RecipeServiceImpl(
+//        recipeDtoMapper: dtoMapper,
+//        httpClient: KtorClientFactory().build(),
+//        baseUrl: RecipeServiceImpl.Companion().BASE_URL
+//    )
+//    static let recipeDatabase = RecipeDatabaseFactory(driverFactory: driverFactory).createDatabase()
+//    static let searchRecipes = SearchRecipes(
+//        recipeService: recipeService,
+//        recipeDatabase: recipeDatabase,
+//        recipeEntityMapper: recipeEntityMapper,
+//        dateUtil: dateUtil
+//    )
+//    static let foodCategoryUtil = FoodCategoryUtil()
+//    static let viewModel = RecipeListViewModel(
+//        searchRecipes: searchRecipes,
+//        foodCategoryUtil: foodCategoryUtil
+//    )
+//    static var previews: some View {
+//        SearchAppBar(viewModel: viewModel)
+//    }
+//}
+
 

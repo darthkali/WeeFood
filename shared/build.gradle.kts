@@ -53,9 +53,9 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies{
-                implementation(Kotlinx.datetime)
                 implementation(Ktor.core)
                 implementation(Ktor.clientSerialization)
+                implementation(Kotlinx.datetime)
                 implementation(SQLDelight.runtime)
             }
         }

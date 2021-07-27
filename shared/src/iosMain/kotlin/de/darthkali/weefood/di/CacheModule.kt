@@ -9,12 +9,12 @@ class CacheModule {
     val recipeDatabase: RecipeDatabase by lazy{
         RecipeDatabaseFactory(driverFactory = driverFactory).createDatabase()
     }
-
-    val recipeCache : RecipeCache by lazy {
+    val recipeCache: RecipeCache by lazy {
         RecipeCacheImpl(
             recipeDatabase = recipeDatabase,
-            datetimeUtil = DatetimeUtil(),
+            datetimeUtil = DatetimeUtil()
         )
     }
+
 
 }

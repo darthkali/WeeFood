@@ -1,14 +1,15 @@
 package de.darthkali.weefood.presentation.recipe_detail
 
-import de.darthkali.weefood.domain.model.Recipe
+import de.darthkali.weefood.domain.model.Ingredient
 
 data class RecipeDetailState(
     val isLoading: Boolean = false,
-    val recipe: Recipe? = null,
+    val ingredient: Ingredient? = null,
 ){
+    // Need secondary constructor to initialize with no args in SwiftUI
     constructor(): this(
         isLoading = false,
-        recipe = null,
-        //queue = Queue(mutableListOf())
+        ingredient = null,
     )
+
 }

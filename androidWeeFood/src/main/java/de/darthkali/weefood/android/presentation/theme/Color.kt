@@ -1,20 +1,40 @@
 package de.darthkali.weefood.android.presentation.theme
 
+import androidx.compose.material.darkColors
+import androidx.compose.material.lightColors
 import androidx.compose.ui.graphics.Color
 
-val Blue300 = Color(0xFF64B5F6)
-val Blue400 = Color(0xFF42A5F5)
-val Blue500 = Color(0xFF2196F3)
-val Blue600 = Color(0xFF1E88E5)
-val Blue700 = Color(0xFF1976D2)
-val Blue800 = Color(0xFF1565C0)
+val DarkGreen = Color(0xFF356859)             // DarkGreen
+val LightGreen = Color(0xFFB9E4C9)     // LightGreen
+val Orange = Color(0xFFFD5523)           // Orange
+val LightYellow = Color(0xFFFFFBE6)          // YellowColoredWhite
+val White = Color(0xFFFFFDF3)             // White
 
-val Teal300 = Color(0xFF1AC6FF)
+val Black = Color(0xFF000000)             // DarkGreen
+val DarkGray = Color(0xFF1B1B1B)             // DarkGreen
+val LightGray = Color(0xFF5C5C5C)     // LightGreen
 
-val Grey1 = Color(0xFFF2F2F2)
 
-val Black1 = Color(0xFF222222)
-val Black2 = Color(0xFF000000)
+val DarkColors = darkColors(
+    primary = Black,
+    primaryVariant = LightGray,
+    secondary = Orange,
+    background = DarkGray,
+    surface = LightGray,
+    onPrimary = White,
+    onSecondary = White,
+    onBackground = White,
+    onSurface = White,
 
-val RedErrorDark = Color(0xFFB00020)
-val RedErrorLight = Color(0xFFEF5350)
+)
+val LightColors = lightColors(
+    primary = DarkGreen,
+    primaryVariant = LightGreen,
+    secondary = Orange,
+    background = LightYellow,
+    surface = White,
+    onPrimary = LightYellow,
+    onSecondary = LightYellow,
+    onBackground = DarkGreen,
+    onSurface = DarkGreen,
+)

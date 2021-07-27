@@ -5,9 +5,12 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:name=".BaseApplication"
+        android:icon="@drawable/wee_food_logo"
+        android:label="WeeFood"
+        android:name="de.darthkali.weefood.BaseApplication"
         android:allowBackup="false"
         android:supportsRtl="true"
+        android:configChanges="orientation"
         android:theme="@style/AppTheme">
         <activity
             android:name="de.darthkali.weefood.android.MainActivity"
@@ -18,4 +21,4 @@
             </intent-filter>
         </activity>
     </application>
-</manifest> 
+</manifest>

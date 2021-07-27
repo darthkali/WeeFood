@@ -8,3 +8,7 @@
 /captures
 .externalNativeBuild
 .cxx
+local.properties
+*/*.xcodeproj
+*/*.xcworkspace
+*/Pods/

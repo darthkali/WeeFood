@@ -1,3 +1,5 @@
+
+
 CREATE TABLE  recipe_Entity(
     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
@@ -30,10 +32,9 @@ INTO recipe_Entity (
 
 searchRecipes:
 SELECT * FROM recipe_Entity
-WHERE title LIKE (:query || '%')
--- OR ingredients LIKE ('%' || :query || '%')
+WHERE title LIKE ('%' || :query || '%')
+OR ingredients LIKE ('%' || :query || '%')
 -- ORDER BY date_updated DESC -- Ordering can cause duplicates in the results because they all have identical timestamps
--- GROUP BY title
 LIMIT :pageSize
 OFFSET :offset;
 
