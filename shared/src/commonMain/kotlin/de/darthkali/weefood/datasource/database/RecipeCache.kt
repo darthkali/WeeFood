@@ -1,4 +1,4 @@
-package de.darthkali.weefood.datasource.cache
+package de.darthkali.weefood.datasource.database
 
 import de.darthkali.weefood.domain.model.Ingredient
 

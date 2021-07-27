@@ -1,6 +1,6 @@
 package de.darthkali.weefood.di
 
-import de.darthkali.weefood.datasource.cache.*
+import de.darthkali.weefood.datasource.database.*
 import de.darthkali.weefood.domain.util.DatetimeUtil
 
 class CacheModule {

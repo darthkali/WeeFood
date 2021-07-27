@@ -4,7 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import de.darthkali.weefood.datasource.cache.RecipeCache
+import de.darthkali.weefood.datasource.database.RecipeCache
 import de.darthkali.weefood.datasource.network.IngredientService
 import de.darthkali.weefood.interactors.recipe_detail.GetRecipe
 import de.darthkali.weefood.interactors.recipe_list.SearchIngredient

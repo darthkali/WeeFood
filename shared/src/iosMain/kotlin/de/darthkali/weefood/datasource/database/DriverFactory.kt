@@ -1,4 +1,4 @@
-package de.darthkali.weefood.datasource.cache
+package de.darthkali.weefood.datasource.database
 
 import com.squareup.sqldelight.db.SqlDriver
 import com.squareup.sqldelight.drivers.native.NativeSqliteDriver

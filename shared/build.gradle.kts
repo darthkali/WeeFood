@@ -75,8 +75,8 @@ kotlin {
 }
 
 sqldelight {
-    database("RecipeDatabase") {
-        packageName = "de.darthkali.weefood.datasource.cache"
+    database("WeeFoodDatabase") {
+        packageName = "de.darthkali.weefood.datasource.database"
         sourceFolders = listOf("sqldelight")
     }
 }

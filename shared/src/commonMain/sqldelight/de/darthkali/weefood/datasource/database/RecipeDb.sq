@@ -1,0 +1,26 @@
+-- -----------------------------------------------------
+-- Table
+-- -----------------------------------------------------
+CREATE TABLE recipe_Entity (
+  id            INTEGER             NOT NULL PRIMARY KEY AUTOINCREMENT,
+  name          TEXT                NOT NULL,
+  image         TEXT,
+  cooking_time  INTEGER AS Integer  NOT NULL,
+  unit          TEXT                NOT NULL,
+  description   TEXT
+);
+
+-- -----------------------------------------------------
+-- CRUD
+-- -----------------------------------------------------
+insertRecipe:
+INSERT INTO recipe_Entity(id,name, image,cooking_time, unit, description)
+VALUES(?, ?, ?, ?, ?, ?);
+
+getAllRecipes:
+SELECT *
+FROM recipe_Entity;
+
+deleteRecipeById:
+DELETE FROM recipe_Entity WHERE id = ?;
+

@@ -1,0 +1,28 @@
+-- -----------------------------------------------------
+-- Table
+-- -----------------------------------------------------
+CREATE TABLE recipeIngredient_Entity(
+  id            INTEGER             NOT NULL PRIMARY KEY AUTOINCREMENT,
+  quantity      REAL AS Float       NOT NULL,
+  unit          TEXT                NOT NULL,
+  recipe_id     INTEGER AS Integer  NOT NULL,
+  ingredient_id INTEGER AS Integer  NOT NULL,
+
+  FOREIGN KEY (ingredient_id)   REFERENCES ingredient_Entity(id),
+  FOREIGN KEY (recipe_id)       REFERENCES recipe_Entity(id)
+);
+
+-- -----------------------------------------------------
+-- CRUD
+-- -----------------------------------------------------
+insertRecipeIngredient:
+INSERT INTO recipeIngredient_Entity(id,quantity, unit ,recipe_id, ingredient_id)
+VALUES(?, ?, ?, ?, ?);
+
+getAllRecipeIngredients:
+SELECT *
+FROM recipeIngredient_Entity;
+
+deleteRecipeIngredientById:
+DELETE FROM recipeIngredient_Entity WHERE id = ?;
+
