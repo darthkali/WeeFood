@@ -25,7 +25,7 @@ class   SearchIngredient(
             emit(DataState.loading())
 
             // just to show pagination, api is fast
-            delay(500)
+            //delay(500)
 
             // force error for testing
             if (query == "error") {
