@@ -28,10 +28,6 @@ fun RecipeDetailScreen(
 ){
     AppTheme(
         displayProgressBar = state.isLoading,
-        //dialogQueue = state.queue,
-//        onRemoveHeadMessageFromQueue = {
-//            onTriggerEvent(RecipeDetailEvents.OnRemoveHeadMessageFromQueue)
-//        }
     ){
         if(state.ingredient == null && state.isLoading){
             LoadingRecipeShimmer(imageHeight = RECIPE_IMAGE_HEIGHT.dp)
