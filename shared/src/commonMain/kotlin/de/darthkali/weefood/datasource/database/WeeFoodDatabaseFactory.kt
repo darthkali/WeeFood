@@ -6,7 +6,7 @@ import de.darthkali.weefood.domain.model.Recipe
 import de.darthkali.weefood.domain.model.RecipeIngredient
 import de.darthkali.weefood.domain.model.WeekRecipe
 
-class RecipeDatabaseFactory(
+class WeeFoodDatabaseFactory(
     private val driverFactory: DriverFactory
 ){
     fun createDatabase(): WeeFoodDatabase {

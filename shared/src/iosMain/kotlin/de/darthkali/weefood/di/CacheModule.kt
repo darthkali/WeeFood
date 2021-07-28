@@ -6,12 +6,12 @@ import de.darthkali.weefood.domain.util.DatetimeUtil
 class CacheModule {
 
     private val driverFactory: DriverFactory by lazy {DriverFactory()}
-    val recipeDatabase: RecipeDatabase by lazy{
-        RecipeDatabaseFactory(driverFactory = driverFactory).createDatabase()
+    val weeFoodDatabase: WeeFoodDatabase by lazy{
+        WeeFoodDatabaseFactory(driverFactory = driverFactory).createDatabase()
     }
     val recipeCache: RecipeCache by lazy {
         RecipeCacheImpl(
-            recipeDatabase = recipeDatabase,
+            weeFoodDatabase = weeFoodDatabase,
             datetimeUtil = DatetimeUtil()
         )
     }

@@ -24,13 +24,13 @@ class GetRecipe (
         try {
             emit(DataState.loading())
 
-            // just to show loading, cache is fast
+            // TODO: just to show loading, cache is fast
             // Note: iOS loads the DetailView ahead of time so delaying here for iOS is pointless
             if(BuildConfig().isDebug() && BuildConfig().isAndroid()){
                 delay(500)
             }
 
-            // Force error for testing
+            // TODO:  Force error for testing
             if(recipeId == 1){
                 throw Exception("Invalid Recipe Id")
             }
