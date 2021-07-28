@@ -10,10 +10,18 @@ CREATE TABLE ingredient_Entity(
 -- -----------------------------------------------------
 -- CRUD
 -- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- INSERT
+-- -----------------------------------------------------
 insertIngredient:
 INSERT INTO ingredient_Entity(id,name, image)
 VALUES(?, ?, ?);
 
+
+-- -----------------------------------------------------
+-- READ
+-- -----------------------------------------------------
 getAllIngredients:
 SELECT * FROM ingredient_Entity
 -- ORDER BY date_updated DESC -- Ordering can cause duplicates in the results because they all have identical timestamps
@@ -24,12 +32,23 @@ getIngredientById:
 SELECT * FROM ingredient_Entity
 WHERE id = :id;
 
-deleteIngredientById:
-DELETE FROM ingredient_Entity WHERE id = ?;
-
 searchIngredients:
 SELECT * FROM ingredient_Entity
 WHERE name LIKE ('%' || :query || '%')
 -- ORDER BY date_updated DESC -- Ordering can cause duplicates in the results because they all have identical timestamps
 LIMIT :pageSize
 OFFSET :offset;
+
+
+-- -----------------------------------------------------
+-- UPDATE
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- DELETE
+-- -----------------------------------------------------
+deleteIngredientById:
+DELETE FROM ingredient_Entity WHERE id = ?;
+
+deleteAllIngredients:
+DELETE FROM ingredient_Entity;

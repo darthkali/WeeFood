@@ -24,7 +24,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @Composable
 fun RecipeDetailScreen(
     state: RecipeDetailState,
-    onTriggerEvent: (RecipeDetailEvents) -> Unit,
+    //onTriggerEvent: (RecipeDetailEvents) -> Unit,
 ){
     AppTheme(
         displayProgressBar = state.isLoading,
