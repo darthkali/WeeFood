@@ -67,6 +67,7 @@ kotlin {
                 implementation(Kotlin.annotations)
                 implementation(Kotlinx.datetime)
                 implementation(Kotlinx.common)
+                implementation(Kotlinx.serialization)
                 implementation(SQLDelight.runtime)
             }
         }

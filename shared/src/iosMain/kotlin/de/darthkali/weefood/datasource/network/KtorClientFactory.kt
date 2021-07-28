@@ -12,6 +12,7 @@ actual class KtorClientFactory {
                 serializer = KotlinxSerializer(
                     kotlinx.serialization.json.Json {
                         ignoreUnknownKeys = true // if the server sends extra fields, ignore them
+                        useAlternativeNames = false // to avoid kotlin.native.concurrent.InvalidMutabilityException: mutation attempt of frozen kotlin.collections.HashMap@81b47788
                     }
                 )
             }
