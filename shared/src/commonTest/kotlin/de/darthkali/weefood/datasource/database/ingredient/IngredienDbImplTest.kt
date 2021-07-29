@@ -28,11 +28,11 @@ class SqlDelightTest : BaseTest() {
 
         ingredientDb.deleteAllIngredients()
 
-
+//        val ingredients =
         val ingredients = listOf<Ingredient>(
-            Ingredient(id = 1, name = "name1", "no.jpg"),
-            Ingredient(id = 2, name = "name2", "no.jpg"),
-            Ingredient(id = 3, name = "name3", "no.jpg")
+            Ingredient(id = null, name = "name1", "no.jpg"),
+            Ingredient(id = null, name = "name2", "no.jpg"),
+            Ingredient(id = null, name = "name3", "no.jpg")
         )
 
 
@@ -41,8 +41,10 @@ class SqlDelightTest : BaseTest() {
         }
     }
 
+
+
     @Test
-    fun `Delete All Success`() = runTest {
+    fun delete_all_ingredients_success() = runTest {
         assertTrue(ingredientDb.getAllIngredients().isNotEmpty())
         ingredientDb.deleteAllIngredients()
 
@@ -52,14 +54,19 @@ class SqlDelightTest : BaseTest() {
         )
     }
 
-//    @Test
-//    fun `Select All Items Success`() = runTest {
-//        val breeds = dbHelper.selectAllItems().first()
+    @Test
+    fun get_all_ingredients_success() = runTest {
+        val ingredients = ingredientDb.getAllIngredients()
 //        assertNotNull(
 //            breeds.find { it.name == "Beagle" },
 //            "Could not retrieve Breed"
 //        )
-//    }
+        for(ingredient in ingredients){
+            println(ingredient.id)
+        }
+
+
+    }
 
 //    @Test
 //    fun `Select Item by Id Success`() = runTest {
