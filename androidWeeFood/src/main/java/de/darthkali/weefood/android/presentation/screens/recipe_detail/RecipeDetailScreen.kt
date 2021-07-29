@@ -13,7 +13,6 @@ import de.darthkali.weefood.android.presentation.components.RECIPE_IMAGE_HEIGHT
 import de.darthkali.weefood.android.presentation.screens.recipe_detail.components.LoadingRecipeShimmer
 import de.darthkali.weefood.android.presentation.screens.recipe_detail.components.RecipeView
 import de.darthkali.weefood.android.presentation.theme.AppTheme
-import de.darthkali.weefood.presentation.recipe_detail.RecipeDetailEvents
 import de.darthkali.weefood.presentation.recipe_detail.RecipeDetailState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 

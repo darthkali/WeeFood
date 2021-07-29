@@ -18,6 +18,7 @@ import de.darthkali.weefood.android.presentation.components.CommonButton
 import de.darthkali.weefood.android.presentation.components.button.ButtonStyle
 import de.darthkali.weefood.android.presentation.theme.AppTheme
 import de.darthkali.weefood.domain.model.Ingredient
+import de.darthkali.weefood.presentation.ingredient_list.IngredientListEvents
 import java.util.Locale
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -26,6 +27,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @Composable
 fun IngredientCard(
     ingredient: Ingredient,
+    onSaveIngredient: (Ingredient) -> Unit
 ) {
     Card(
         shape = MaterialTheme.shapes.small,
@@ -63,28 +65,29 @@ fun IngredientCard(
 
             ) {
                 CommonButton( text = "Schliessen",  buttonStyle = ButtonStyle.CLOSE_BUTTON, onClick = {})
-                CommonButton( text = "Hinzufügen",  buttonStyle = ButtonStyle.ADD_BUTTON, onClick = {})
+                CommonButton( text = "Hinzufügen",  buttonStyle = ButtonStyle.ADD_BUTTON, onClick = { onSaveIngredient(ingredient) })
             }
         }
     }
 }
 
 
-@ExperimentalCoroutinesApi
-@ExperimentalMaterialApi
-@ExperimentalComposeUiApi
-@Preview(showBackground = true)
-@Composable
-fun UserProfileDetailsPreview() {
-    val apple = Ingredient(
-        id = 1,
-        name = "Apfel",
-        image = "apple.img",
-//        aisle = "meat",
-//        possibleUnits = listOf(),
-    )
-    AppTheme() {
-        IngredientCard(ingredient = apple)
-    }
 
-}
+//@ExperimentalCoroutinesApi
+//@ExperimentalMaterialApi
+//@ExperimentalComposeUiApi
+//@Preview(showBackground = true)
+//@Composable
+//fun UserProfileDetailsPreview() {
+//    val apple = Ingredient(
+//        id = 1,
+//        name = "Apfel",
+//        image = "apple.img",
+////        aisle = "meat",
+////        possibleUnits = listOf(),
+//    )
+//    AppTheme() {
+//        IngredientCard(ingredient = apple)
+//    }
+//
+//}

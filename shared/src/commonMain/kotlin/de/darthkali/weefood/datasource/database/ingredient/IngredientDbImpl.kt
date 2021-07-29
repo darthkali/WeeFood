@@ -16,9 +16,9 @@ class IngredientDbImpl(
 
         return try {
             weeFoodDatabase.ingredientDbQueries.insertIngredient(
-                null,
-                ingredient.name ?: "",
-                ingredient.image ?: "no.jpg"
+               null,
+                name = ingredient.name ?: "",
+                image = ingredient.image ?: "no.jpg"
             )
             logger.log("Inserting ${ingredient.name} into database")
             true

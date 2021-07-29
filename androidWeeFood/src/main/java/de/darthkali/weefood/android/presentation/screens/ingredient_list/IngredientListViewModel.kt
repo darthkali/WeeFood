@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import de.darthkali.weefood.domain.model.Ingredient
+import de.darthkali.weefood.interactors.recipe_list.GetAllIngredients
+import de.darthkali.weefood.interactors.recipe_list.SaveIngredient
 import de.darthkali.weefood.presentation.ingredient_list.IngredientListEvents
 import de.darthkali.weefood.interactors.recipe_list.SearchIngredient
 import de.darthkali.weefood.presentation.ingredient_list.IngredientListState
@@ -18,6 +20,8 @@ class IngredientListViewModel
 @Inject
 constructor(
     private val searchIngredient: SearchIngredient,
+    private val saveIngredient: SaveIngredient,
+    private val getAllIngredients: GetAllIngredients
 ): ViewModel() {
 
     private val logger = Logger("IngredientListViewModel")
@@ -39,39 +43,27 @@ constructor(
             IngredientListEvents.NextPage -> {
                 nextPage()
             }
-//            is IngredientListEvents.OnSelectCategory -> {
-//                onSelectCategory(event.category)
-//            }
+            is IngredientListEvents.SaveIngredient -> {
+                saveIngredient(event.ingredient)
+            }
             is IngredientListEvents.OnUpdateQuery -> {
                 state.value = state.value.copy(query =  event.query)
             }
-//            is IngredientListEvents.OnRemoveHeadMessageFromQueue -> {
-//                removeHeadMessage()
-//            }
             else -> {
                 logger.log("Something went wrong.")
             }
         }
     }
 
-//    private fun removeHeadMessage() {
-//        try {
-//            val queue = state.value.queue
-//            queue.remove() // can throw exception if empty
-//            state.value = state.value.copy(queue = Queue(mutableListOf())) // force recompose
-//            state.value = state.value.copy(queue = queue)
-//        }catch (e: Exception){
-//            logger.log("Nothing to remove from DialogQueue")
-//        }
-//    }
+    private fun saveIngredient(ingredient:Ingredient) {
+        saveIngredient.saveIngredient(ingredient)
+        for(ingredientItem in getAllIngredients.GetAllIngredients()){
+            logger.log("Ingredientien wurde gefunden: ${ingredientItem.name}")
+        }
 
-    /**
-     *  Called when a new FoodCategory chip is selected
-     */
-//    private fun onSelectCategory(category: FoodCategory){
-//        state.value = state.value.copy(selectedCategory = category, query =  category.value)
-//        newSearch()
-//    }
+        logger.log("Ingredientien wurde geschpeichert junge${ingredient.name}")
+    }
+
 
     /**
      * Get the next page of recipes
@@ -101,10 +93,6 @@ constructor(
             dataState.data?.let { ingredients ->
                 appendIngredients(ingredients)
             }
-
-//            dataState.message?.let { message ->
-//                appendToMessageQueue(message)
-//            }
         }
     }
 
@@ -113,14 +101,4 @@ constructor(
         curr.addAll(ingredients)
         state.value = state.value.copy(ingredients = curr)
     }
-
-//    private fun appendToMessageQueue(messageInfo: GenericMessageInfo.Builder){
-//        if(!GenericMessageInfoQueueUtil()
-//                .doesMessageAlreadyExistInQueue(queue = state.value.queue,messageInfo = messageInfo.build())){
-//            val queue = state.value.queue
-//            queue.add(messageInfo.build())
-//            state.value = state.value.copy(queue = queue)
-//        }
-//    }
-
 }

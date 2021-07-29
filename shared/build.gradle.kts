@@ -61,7 +61,7 @@ kotlin {
 
 
         val commonMain by getting {
-            dependencies{
+            dependencies {
                 implementation(Ktor.core)
                 implementation(Ktor.clientSerialization)
                 implementation(Kotlin.annotations)
@@ -79,7 +79,7 @@ kotlin {
             }
         }
         val androidMain by getting {
-            dependencies{
+            dependencies {
                 implementation(Ktor.android)
                 implementation(SQLDelight.androidDriver)
                 implementation(Kotlinx.android)
@@ -87,7 +87,7 @@ kotlin {
         }
 
         val androidTest by getting {
-            dependencies{
+            dependencies {
 
 
                 implementation(Kotlin.jvm)
@@ -105,7 +105,7 @@ kotlin {
         }
 
 
-        val iosMain by getting{
+        val iosMain by getting {
             dependencies {
                 implementation(Ktor.ios)
                 implementation(SQLDelight.nativeDriver)
