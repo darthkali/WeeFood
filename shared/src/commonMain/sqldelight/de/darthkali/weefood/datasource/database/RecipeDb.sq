@@ -27,7 +27,22 @@ VALUES(?, ?, ?, ?, ?, ?);
 -- -----------------------------------------------------
 getAllRecipes:
 SELECT *
-FROM recipe_Entity;
+FROM recipe_Entity
+LIMIT :pageSize
+OFFSET :offset;
+
+getRecipeById:
+SELECT * FROM recipe_Entity
+WHERE id = :id;
+
+
+searchRecipes:
+SELECT * FROM recipe_Entity
+WHERE name LIKE ('%' || :query || '%')
+-- OR ingredients LIKE ('%' || :query || '%')
+-- ORDER BY date_updated DESC -- Ordering can cause duplicates in the results because they all have identical timestamps
+LIMIT :pageSize
+OFFSET :offset;
 
 -- -----------------------------------------------------
 -- UPDATE
@@ -38,8 +53,20 @@ FROM recipe_Entity;
 -- DELETE
 -- -----------------------------------------------------
 
-
-
 deleteRecipeById:
 DELETE FROM recipe_Entity WHERE id = ?;
+
+deleteAllRecipes:
+DELETE FROM recipe_Entity;
+
+
+
+
+
+
+
+
+
+
+
 

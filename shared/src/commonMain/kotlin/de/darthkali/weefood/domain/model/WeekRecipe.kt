@@ -1,7 +1,7 @@
 package de.darthkali.weefood.domain.model
 
 data class WeekRecipe(
-    val id          : Int,
+    val id          : Int = 0,
     val weekday     : Int,
     val portion     : Int,
     val recipe_id   : Int,

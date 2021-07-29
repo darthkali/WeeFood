@@ -58,10 +58,8 @@ constructor(
     private fun saveIngredient(ingredient:Ingredient) {
         saveIngredient.saveIngredient(ingredient)
         for(ingredientItem in getAllIngredients.GetAllIngredients()){
-            logger.log("Ingredientien wurde gefunden: ${ingredientItem.name}")
+            logger.log(ingredientItem.toString())
         }
-
-        logger.log("Ingredientien wurde geschpeichert junge${ingredient.name}")
     }
 
 

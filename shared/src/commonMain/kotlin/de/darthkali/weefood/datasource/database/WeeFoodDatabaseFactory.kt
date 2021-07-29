@@ -101,8 +101,8 @@ fun List<Recipe_Entity>.toRecipeList(): List<Recipe>{
 fun RecipeIngredient_Entity.toRecipeIngredient(): RecipeIngredient {
     return RecipeIngredient(
         id = id.toInt(),
-        quantity = quantity.toInt(),
-        unit = unit.toInt(),
+        quantity = quantity,
+        unit = unit,
         recipe_id = recipe_id,
         ingredient_id = ingredient_id,
     )

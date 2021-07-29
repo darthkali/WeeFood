@@ -1,9 +1,9 @@
 package de.darthkali.weefood.domain.model
 
 data class Ingredient (
-    val id: Int = 0,
-    val name: String? = "",
-    val image: String? = "",
+    val id      : Int = 0,
+    val name    : String? = "",
+    val image   : String? = "",
     // TODO:  APi ID
 ){
     override fun toString(): String {

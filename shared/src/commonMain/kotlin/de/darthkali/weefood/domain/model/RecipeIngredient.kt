@@ -1,9 +1,9 @@
 package de.darthkali.weefood.domain.model
 
 data class RecipeIngredient(
-    val id              : Int,
-    val quantity        : Int,
-    val unit            : Int,
+    val id              : Int = 0,
+    val quantity        : Float,
+    val unit            : String,
     val recipe_id       : Int,
     val ingredient_id   : Int,
 ){

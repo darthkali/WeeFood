@@ -2,73 +2,128 @@ package de.darthkali.weefood.datasource.database.recipeIngredient
 
 import de.darthkali.weefood.BaseTest
 import de.darthkali.weefood.datasource.database.DatabaseHelper
+import de.darthkali.weefood.datasource.database.WeeFoodDatabase
+import de.darthkali.weefood.datasource.database.ingredient.IngredientDb
+import de.darthkali.weefood.datasource.database.ingredient.IngredientDbImpl
 import de.darthkali.weefood.domain.model.Ingredient
+import de.darthkali.weefood.mockFactory.IngredientMock
 import de.darthkali.weefood.testDbConnection
+import de.darthkali.weefood.writeHead
 import kotlin.test.BeforeTest
 import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
-class SqlDelightTest : BaseTest() {
 
-    private lateinit var dbHelper: DatabaseHelper
+class RecipeIngredientDbImplTest : BaseTest() {
 
-    private suspend fun DatabaseHelper.insertIngredient(name: String) {
-        insertIngredients(listOf(Ingredient(id = 1, name = name, "no.jpg")))
-    }
-
-    @BeforeTest
-    fun setup() = runTest {
-        dbHelper = DatabaseHelper(testDbConnection())
-        dbHelper.deleteAll()
-        dbHelper.insertIngredient("Beagle")
-    }
-
-//    @Test
-//    fun `Select All Items Success`() = runTest {
-//        val breeds = dbHelper.selectAllItems().first()
-//        assertNotNull(
-//            breeds.find { it.name == "Beagle" },
-//            "Could not retrieve Breed"
-//        )
-//    }
-
-//    @Test
-//    fun `Select Item by Id Success`() = runTest {
-//        val breeds = dbHelper.selectAllItems().first()
-//        val firstBreed = breeds.first()
-//        assertNotNull(
-//            dbHelper.selectById(firstBreed.id),
-//            "Could not retrieve Breed by Id"
-//        )
-//    }
-
-//    @Test
-//    fun `Update Favorite Success`() = runTest {
-//        val breeds = dbHelper.selectAllItems().first()
-//        val firstBreed = breeds.first()
-//        dbHelper.updateFavorite(firstBreed.id, true)
-//        val newBreed = dbHelper.selectById(firstBreed.id).first().first()
-//        assertNotNull(
-//            newBreed,
-//            "Could not retrieve Breed by Id"
-//        )
-//        assertTrue(
-//            newBreed.isFavorited(),
-//            "Favorite Did Not Save"
-//        )
-//    }
-
-
-    @Test
-    fun `Delete All Success`() = runTest {
-        dbHelper.insertIngredient("Poodle")
-        dbHelper.insertIngredient("Schnauzer")
-        assertTrue(dbHelper.selectAllItems().isNotEmpty())
-        dbHelper.deleteAll()
-
-        assertTrue(
-            dbHelper.selectAllItems().isEmpty(),
-            "Delete All did not work"
+    private val weeFoodDatabase: WeeFoodDatabase = WeeFoodDatabase(testDbConnection())
+    private val recipeIngredientDb: RecipeIngredientDb by lazy {
+        RecipeIngredientDbImpl(
+            weeFoodDatabase = weeFoodDatabase
         )
     }
+//
+//
+//    @BeforeTest
+//    fun setup() = runTest {
+//        writeHead("setup")
+//        ingredientDb.deleteAllIngredients()
+//        val ingredients = IngredientMock.ingredientList
+//
+//        for (ingredient in ingredients) {
+//            ingredientDb.insertIngredient(ingredient)
+//        }
+//    }
+//
+//
+//    @Test
+//    fun get_all_ingredients_success() = runTest {
+//        writeHead("get_all_ingredients_success")
+//        val ingredients = ingredientDb.getAllIngredients()
+//        ingredients.forEachIndexed { index, ingredient ->
+//            println(ingredient.toString())
+//            assertEquals(
+//                IngredientMock.ingredientList[index].name,
+//                ingredient.name
+//            )
+//        }
+//    }
+//
+//    @Test
+//    fun get_ingredient_by_id_success() = runTest {
+//        writeHead("get_ingredient_by_id_success")
+//        IngredientMock.ingredientList.forEachIndexed { index, _ ->
+//            val ingredient = ingredientDb.getIngredientById(index + 1)
+//            println(ingredient.toString())
+//            assertEquals(
+//                IngredientMock.ingredientList[index].name,
+//                ingredient?.name,
+//            )
+//        }
+//    }
+//
+//
+//    @Test
+//    fun delete_all_ingredients_success() = runTest {
+//        writeHead("delete_all_ingredients_success")
+//        assertTrue(ingredientDb.getAllIngredients().isNotEmpty())
+//        ingredientDb.deleteAllIngredients()
+//
+//        assertTrue(
+//            ingredientDb.getAllIngredients().isEmpty(),
+//            "Delete All did not work"
+//        )
+//    }
+//
+//
+//    @Test
+//    fun delete_ingredient_by_id_success() = runTest {
+//        writeHead("delete_ingredient_by_id_success")
+//
+//        ingredientDb.getAllIngredients().forEachIndexed { index, ingredient ->
+//
+//            val ingredientId = ingredient.id
+//            println("Delete Ingredient with ID: $ingredientId")
+//            ingredientDb.deleteIngredientById(ingredientId)
+//
+//            assertEquals(
+//                ingredientDb.getAllIngredients().size,
+//                IngredientMock.ingredientList.size - (index + 1),
+//            )
+//
+//            assertNull(
+//                ingredientDb.getIngredientById(ingredientId)
+//            )
+//        }
+//    }
+//
+//    @Test
+//    fun insert_ingredient_success() = runTest {
+//        writeHead("insert_ingredient_success")
+//
+//        for (ingredient in ingredientDb.getAllIngredients()) {
+//            println(ingredient.toString())
+//        }
+//
+//        ingredientDb.insertIngredient(IngredientMock.ingredient)
+//
+//        for (ingredient in ingredientDb.getAllIngredients()) {
+//            println(ingredient.toString())
+//        }
+//
+//
+//        assertEquals(
+//            ingredientDb.getAllIngredients().last().name,
+//            IngredientMock.ingredient.name,
+//        )
+//
+//        assertEquals(
+//            ingredientDb.getAllIngredients().last().image,
+//            IngredientMock.ingredient.image,
+//        )
+//    }
+
+
 }

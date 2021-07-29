@@ -19,12 +19,12 @@ INSERT INTO ingredient_Entity(id,name, image)
 SELECT ?, ?, ?
 WHERE NOT EXISTS(SELECT 1 FROM ingredient_Entity WHERE name = ?);
 
+
 -- -----------------------------------------------------
 -- READ
 -- -----------------------------------------------------
 getAllIngredients:
 SELECT * FROM ingredient_Entity
--- ORDER BY date_updated DESC -- Ordering can cause duplicates in the results because they all have identical timestamps
 LIMIT :pageSize
 OFFSET :offset;
 
@@ -35,7 +35,6 @@ WHERE id = :id;
 searchIngredients:
 SELECT * FROM ingredient_Entity
 WHERE name LIKE ('%' || :query || '%')
--- ORDER BY date_updated DESC -- Ordering can cause duplicates in the results because they all have identical timestamps
 LIMIT :pageSize
 OFFSET :offset;
 

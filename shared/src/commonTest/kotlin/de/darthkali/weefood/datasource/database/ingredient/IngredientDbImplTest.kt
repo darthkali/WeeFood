@@ -11,7 +11,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
-class SqlDelightTest : BaseTest() {
+class IngredientDbImplTest : BaseTest() {
 
     private val weeFoodDatabase: WeeFoodDatabase = WeeFoodDatabase(testDbConnection())
     private val ingredientDb: IngredientDb by lazy {

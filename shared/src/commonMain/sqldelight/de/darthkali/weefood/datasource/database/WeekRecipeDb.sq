@@ -29,6 +29,11 @@ getAllWeekRecipes:
 SELECT *
 FROM weekRecipe_Entity;
 
+getAllWeekRecipesByWeekDay:
+SELECT *
+FROM weekRecipe_Entity
+WHERE weekday = :weekday;
+
 
 
 -- -----------------------------------------------------

@@ -15,7 +15,6 @@ class IngredientDbImpl(
     override fun insertIngredient(ingredient: Ingredient): Boolean {
 
         return try {
-            // TODO: check if Ingredient is already in the DB
             weeFoodDatabase.ingredientDbQueries.insertIngredient(
                 null,
                 name = ingredient.name ?: "",

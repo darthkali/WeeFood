@@ -27,9 +27,10 @@ VALUES(?, ?, ?, ?, ?);
 -- -----------------------------------------------------
 -- READ
 -- -----------------------------------------------------
-getAllRecipeIngredients:
+getAllRecipeIngredientsByRecipeId:
 SELECT *
-FROM recipeIngredient_Entity;
+FROM recipeIngredient_Entity
+WHERE recipe_id = :recipe_id;
 
 -- -----------------------------------------------------
 -- UPDATE
@@ -43,4 +44,7 @@ FROM recipeIngredient_Entity;
 -- -----------------------------------------------------
 deleteRecipeIngredientById:
 DELETE FROM recipeIngredient_Entity WHERE id = ?;
+
+deleteAllRecipeIngredients:
+DELETE FROM recipeIngredient_Entity;
 
