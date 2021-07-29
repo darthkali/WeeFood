@@ -5,13 +5,13 @@ import de.darthkali.weefood.interactors.recipe_list.SearchIngredient
 
 class SearchIngredientModule(
     val networkModule: NetworkModule,
-    val cacheModule: CacheModule,
+    val databaseModule: DatabaseModule,
 ) {
 
     val searchIngredient: SearchIngredient by lazy{
         SearchIngredient(
             ingredientService = networkModule.ingredientService,
-            recipeCache = cacheModule.recipeCache
+            ingredientDb = databaseModule.ingredientDb
         )
     }
 

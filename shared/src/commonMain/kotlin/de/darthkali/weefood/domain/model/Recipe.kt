@@ -7,4 +7,22 @@ data class Recipe(
     val cooking_time  : Int,
     val unit          : String,
     val description   : String? = ""
-)
+){
+    override fun toString(): String {
+        return StringBuilder()
+            .append("|id: ")
+            .append(this.id)
+            .append("| name: ")
+            .append(this.name)
+            .append("| image: ")
+            .append(this.image)
+            .append("| cooking_time: ")
+            .append(this.cooking_time)
+            .append("| unit: ")
+            .append(this.unit)
+            .append("| description: ")
+            .append(this.description)
+            .append("|")
+            .toString()
+    }
+}

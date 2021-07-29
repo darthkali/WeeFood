@@ -49,7 +49,7 @@ class SqlDelightTest : BaseTest() {
     @Test
     fun get_ingredient_by_id_success() = runTest {
         writeHead("get_ingredient_by_id_success")
-        IngredientMock.ingredientList.forEachIndexed { index, mockIngredient ->
+        IngredientMock.ingredientList.forEachIndexed { index, _ ->
             val ingredient = ingredientDb.getIngredientById(index + 1)
             println(ingredient.toString())
             assertEquals(

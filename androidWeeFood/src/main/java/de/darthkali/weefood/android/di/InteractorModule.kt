@@ -16,7 +16,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object InteractorsModule {
+object InteractorModule {
 
     @Singleton
     @Provides

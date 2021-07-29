@@ -19,10 +19,6 @@ INSERT INTO ingredient_Entity(id,name, image)
 SELECT ?, ?, ?
 WHERE NOT EXISTS(SELECT 1 FROM ingredient_Entity WHERE name = ?);
 
--- INSERT INTO ingredient_Entity(id,name, image)
--- VALUES(?, ?, ?);
-
-
 -- -----------------------------------------------------
 -- READ
 -- -----------------------------------------------------
