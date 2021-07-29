@@ -13,9 +13,17 @@ import SDWebImageSwiftUI
 struct IngredientCard: View {
 
     let ingredient: Ingredient
+    let onSaveIngredient: SaveIngredient
+    let getAll: GetAllIngredients
 
-    init(ingredient: Ingredient) {
+    init(
+        ingredient: Ingredient,
+        onSaveIngredient: SaveIngredient,
+        getAll: GetAllIngredients
+    ) {
         self.ingredient = ingredient
+        self.onSaveIngredient = onSaveIngredient
+        self.getAll = getAll
     }
 
     var body: some View {
@@ -45,8 +53,14 @@ struct IngredientCard: View {
                 Spacer()
                 
             }
+    
             Button("Hinzufügen"){
-                print("Ingredient hinzugefügt")
+                
+                self.onSaveIngredient.saveIngredient(ingredient: ingredient)
+            
+                for ingredient in getAll.GetAllIngredients() {
+                    print(ingredient)
+                }
             }
             .padding()
             .foregroundColor(.white)
@@ -62,7 +76,7 @@ struct IngredientCard: View {
     }
 }
 
-struct IngredientCard_Previews: PreviewProvider {
+/*struct IngredientCard_Previews: PreviewProvider {
     static let ingredient = Ingredient(
         id: 1,
         name: "Apfel",
@@ -71,6 +85,6 @@ struct IngredientCard_Previews: PreviewProvider {
     static var previews: some View {
         IngredientCard(ingredient: ingredient)
     }
-}
+}*/
 
 

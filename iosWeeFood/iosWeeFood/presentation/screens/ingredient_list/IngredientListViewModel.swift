@@ -15,19 +15,21 @@ class IngredientListViewModel: ObservableObject {
 
     // Dependencies
     let searchIngredients: SearchIngredient
-    //let foodCategoryUtil: FoodCategoryUtil
+    let saveIngredient: SaveIngredient
+    let getAllIngredients: GetAllIngredients
+
 
     // State
     @Published var state: IngredientListState = IngredientListState()
 
-    //@Published var showDialog: Bool = false
-
     init(
-        searchIngredients: SearchIngredient
-        //foodCategoryUtil: FoodCategoryUtil
+        searchIngredients: SearchIngredient,
+        saveIngredient: SaveIngredient,
+        getAllIngredients: GetAllIngredients
     ){
         self.searchIngredients = searchIngredients
-        //self.foodCategoryUtil = foodCategoryUtil
+        self.saveIngredient = saveIngredient
+        self.getAllIngredients = getAllIngredients
         onTriggerEvent(stateEvent: IngredientListEvents.LoadIngredient())
     }
 
@@ -39,12 +41,11 @@ class IngredientListViewModel: ObservableObject {
             newSearch()
         case is IngredientListEvents.NextPage:
             nextPage()
+        case is IngredientListEvents.SaveIngredient:
+            doNothing()
+            //saveIngredient(ingredient: (stateEvent as! IngredientListEvents.SaveIngredient).ingredient)
         case is IngredientListEvents.OnUpdateQuery:
             onUpdateQuery(query: (stateEvent as! IngredientListEvents.OnUpdateQuery).query)
-        //case is RecipeListEvents.OnSelectCategory:
-          //  onUpdateSelectedCategory(foodCategory: (stateEvent as! RecipeListEvents.OnSelectCategory).category)
-        //case RecipeListEvents.OnRemoveHeadMessageFromQueue():
-          //  removeHeadFromQueue()
         default:
             doNothing()
         }
@@ -52,6 +53,18 @@ class IngredientListViewModel: ObservableObject {
 
     func doNothing(){}
 
+    
+    private func saveIngredient(ingredient:Ingredient) {
+        saveIngredient.saveIngredient(ingredient: ingredient)
+        for _ in getAllIngredients.GetAllIngredients() {
+            print("Test")
+            self.logger.log(msg: "Ingredientien wurde gefunden: ${ingredientItem.name}")
+        }
+
+        self.logger.log(msg: "Ingredientien wurde geschpeichert junge${ingredient.name}")
+    }
+    
+    
     private func loadIngredients(){
         let currentState = (self.state.copy() as! IngredientListState)
         do{
@@ -71,9 +84,6 @@ class IngredientListViewModel: ObservableObject {
                     if(data != nil){
                         self.appendIngredients(ingredients: data as! [Ingredient])
                     }
-                   // if(message != nil){
-                     //   self.handleMessageByUIComponentType(message!.build())
-                    //}
                 }else{
                     self.logger.log(msg: "DataState is nil")
                 }
@@ -95,18 +105,12 @@ class IngredientListViewModel: ObservableObject {
 
     private func resetSearchState(){
         let currentState = (self.state.copy() as! IngredientListState)
-        //var foodCategory = currentState.selectedCategory
-       // if(foodCategory?.value != currentState.query){
-         //   foodCategory = nil
-        //}
         self.state = self.state.doCopy(
             isLoading: currentState.isLoading,
             page: 1, // reset
             query: currentState.query,
             ingredients: [], // reset
-            //selectedCategory: foodCategory, // Maybe reset (see logic above)
             bottomIngredient:  currentState.bottomIngredient
-            //queue: currentState.queue
         )
     }
 
