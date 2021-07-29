@@ -3,6 +3,7 @@ package de.darthkali.weefood.datasource.database.weekRecipe
 import de.darthkali.weefood.datasource.database.WeeFoodDatabase
 import de.darthkali.weefood.datasource.database.toWeekRecipeList
 import de.darthkali.weefood.domain.model.WeekRecipe
+import de.darthkali.weefood.domain.util.Weekday
 import de.darthkali.weefood.util.Logger
 
 class WeekRecipeDbImpl(
@@ -14,7 +15,7 @@ class WeekRecipeDbImpl(
         return try {
             weeFoodDatabase.weekRecipeDbQueries.insertWeekRecip(
                 null,
-                weekday = weekRecipe.weekday,
+                weekday = weekRecipe.weekday.ordinal, // TODO: SQL Delight bietet eine möglichkeit enums zu nutzen. Das muss hier eingebaut werden
                 portion = weekRecipe.portion,
                 recipe_id = weekRecipe.recipe_id,
             )
@@ -37,11 +38,11 @@ class WeekRecipeDbImpl(
         }
     }
 
-    override fun getAllWeekRecipesByWeekDay(weekday: Int): List<WeekRecipe> {
+    override fun getAllWeekRecipesByWeekDay(weekday: Weekday): List<WeekRecipe> {
         return try {
             logger.log("Get All WeekRecipe from database by WeekDay")
             weeFoodDatabase.weekRecipeDbQueries.getAllWeekRecipesByWeekDay(
-                weekday = weekday
+                weekday = weekday.ordinal // TODO: SQL Delight bietet eine möglichkeit enums zu nutzen. Das muss hier eingebaut werden
             ).executeAsList().toWeekRecipeList()
         } catch (e: Exception) {
             logger.log(e.toString())

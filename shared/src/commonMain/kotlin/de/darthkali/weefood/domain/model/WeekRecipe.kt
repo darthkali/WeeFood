@@ -1,8 +1,10 @@
 package de.darthkali.weefood.domain.model
 
+import de.darthkali.weefood.domain.util.Weekday
+
 data class WeekRecipe(
     val id          : Int = 0,
-    val weekday     : Int,
+    val weekday     : Weekday,
     val portion     : Int,
     val recipe_id   : Int,
 ){
