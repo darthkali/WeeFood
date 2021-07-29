@@ -16,7 +16,11 @@ CREATE TABLE ingredient_Entity(
 -- -----------------------------------------------------
 insertIngredient:
 INSERT INTO ingredient_Entity(id,name, image)
-VALUES(?, ?, ?);
+SELECT ?, ?, ?
+WHERE NOT EXISTS(SELECT 1 FROM ingredient_Entity WHERE name = ?);
+
+-- INSERT INTO ingredient_Entity(id,name, image)
+-- VALUES(?, ?, ?);
 
 
 -- -----------------------------------------------------

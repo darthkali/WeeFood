@@ -16,6 +16,6 @@ object IngredientMock {
         Ingredient(name = "Milch", image = "milk.png"),
         Ingredient(name = "Tee", image = "tea-bags.jpg"),
         Ingredient(name = "Kaffee", image = "brewed-coffee.jpg"),
-        Ingredient(name = "Milch", image = "milk.png"),
+        Ingredient(name = "Eier", image = "egg.png"),
     )
 }

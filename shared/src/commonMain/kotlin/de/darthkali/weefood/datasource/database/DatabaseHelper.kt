@@ -46,7 +46,12 @@ class DatabaseHelper(
     suspend fun insertIngredients(ingredients: List<Ingredient>) {
         logger.log("Inserting ${ingredients.size} ingredients into database")
         ingredients.forEach { ingredient ->
-            dbRef.ingredientDbQueries.insertIngredient(null, ingredient.name ?: "", "no.jpg")
+            dbRef.ingredientDbQueries.insertIngredient(
+                id = null,
+                name = ingredient.name ?: "",
+                image = "no.jpg",
+                name_ = ingredient.name ?: ""
+            )
         }
     }
 

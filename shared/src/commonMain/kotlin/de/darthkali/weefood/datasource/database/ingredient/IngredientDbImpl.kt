@@ -15,10 +15,12 @@ class IngredientDbImpl(
     override fun insertIngredient(ingredient: Ingredient): Boolean {
 
         return try {
+            // TODO: check if Ingredient is already in the DB
             weeFoodDatabase.ingredientDbQueries.insertIngredient(
-               null,
+                null,
                 name = ingredient.name ?: "",
-                image = ingredient.image ?: "no.jpg"
+                image = ingredient.image ?: "no.jpg",
+                name_ = ingredient.name ?: ""           // checkAttribute to avoid duplicates in DB
             )
             logger.log("Inserting ${ingredient.name} into database")
             true
