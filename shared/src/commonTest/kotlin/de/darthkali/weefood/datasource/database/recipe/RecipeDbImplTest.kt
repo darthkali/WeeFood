@@ -1,12 +1,8 @@
 package de.darthkali.weefood.datasource.database.recipe
 
 import de.darthkali.weefood.BaseTest
-import de.darthkali.weefood.datasource.database.DatabaseHelper
 import de.darthkali.weefood.datasource.database.WeeFoodDatabase
-import de.darthkali.weefood.datasource.database.ingredient.IngredientDb
-import de.darthkali.weefood.datasource.database.ingredient.IngredientDbImpl
-import de.darthkali.weefood.domain.model.Ingredient
-import de.darthkali.weefood.mockFactory.IngredientMock
+import de.darthkali.weefood.mockFactory.RecipeMock
 import de.darthkali.weefood.testDbConnection
 import de.darthkali.weefood.writeHead
 import kotlin.test.BeforeTest
@@ -14,7 +10,6 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
-
 
 class RecipeDbImplTest : BaseTest() {
 
@@ -25,104 +20,125 @@ class RecipeDbImplTest : BaseTest() {
         )
     }
 
-//
-//    @BeforeTest
-//    fun setup() = runTest {
-//        writeHead("setup")
-//        ingredientDb.deleteAllIngredients()
-//        val ingredients = IngredientMock.ingredientList
-//
-//        for (ingredient in ingredients) {
-//            ingredientDb.insertIngredient(ingredient)
-//        }
-//    }
-//
-//
-//    @Test
-//    fun get_all_ingredients_success() = runTest {
-//        writeHead("get_all_ingredients_success")
-//        val ingredients = ingredientDb.getAllIngredients()
-//        ingredients.forEachIndexed { index, ingredient ->
-//            println(ingredient.toString())
-//            assertEquals(
-//                IngredientMock.ingredientList[index].name,
-//                ingredient.name
-//            )
-//        }
-//    }
-//
-//    @Test
-//    fun get_ingredient_by_id_success() = runTest {
-//        writeHead("get_ingredient_by_id_success")
-//        IngredientMock.ingredientList.forEachIndexed { index, _ ->
-//            val ingredient = ingredientDb.getIngredientById(index + 1)
-//            println(ingredient.toString())
-//            assertEquals(
-//                IngredientMock.ingredientList[index].name,
-//                ingredient?.name,
-//            )
-//        }
-//    }
-//
-//
-//    @Test
-//    fun delete_all_ingredients_success() = runTest {
-//        writeHead("delete_all_ingredients_success")
-//        assertTrue(ingredientDb.getAllIngredients().isNotEmpty())
-//        ingredientDb.deleteAllIngredients()
-//
-//        assertTrue(
-//            ingredientDb.getAllIngredients().isEmpty(),
-//            "Delete All did not work"
-//        )
-//    }
-//
-//
-//    @Test
-//    fun delete_ingredient_by_id_success() = runTest {
-//        writeHead("delete_ingredient_by_id_success")
-//
-//        ingredientDb.getAllIngredients().forEachIndexed { index, ingredient ->
-//
-//            val ingredientId = ingredient.id
-//            println("Delete Ingredient with ID: $ingredientId")
-//            ingredientDb.deleteIngredientById(ingredientId)
-//
-//            assertEquals(
-//                ingredientDb.getAllIngredients().size,
-//                IngredientMock.ingredientList.size - (index + 1),
-//            )
-//
-//            assertNull(
-//                ingredientDb.getIngredientById(ingredientId)
-//            )
-//        }
-//    }
-//
-//    @Test
-//    fun insert_ingredient_success() = runTest {
-//        writeHead("insert_ingredient_success")
-//
-//        for (ingredient in ingredientDb.getAllIngredients()) {
-//            println(ingredient.toString())
-//        }
-//
-//        ingredientDb.insertIngredient(IngredientMock.ingredient)
-//
-//        for (ingredient in ingredientDb.getAllIngredients()) {
-//            println(ingredient.toString())
-//        }
-//
-//
-//        assertEquals(
-//            ingredientDb.getAllIngredients().last().name,
-//            IngredientMock.ingredient.name,
-//        )
-//
-//        assertEquals(
-//            ingredientDb.getAllIngredients().last().image,
-//            IngredientMock.ingredient.image,
-//        )
-//    }
+
+    @BeforeTest
+    fun setup() = runTest {
+        writeHead("setup")
+        recipeDb.deleteAllRecipes()
+        val recipes = RecipeMock.recipeList
+
+        for (recipe in recipes) {
+            recipeDb.insertRecipe(recipe)
+        }
+    }
+
+
+    @Test
+    fun get_all_recipes_success() = runTest {
+        writeHead("get_all_recipes_success")
+        val recipes = recipeDb.getAllRecipes()
+        recipes.forEachIndexed { index, recipe ->
+            println(recipe.toString())
+            assertEquals(
+                expected = RecipeMock.recipeList[index].name,
+                actual = recipe.name
+            )
+        }
+    }
+
+    @Test
+    fun get_recipe_by_id_success() = runTest {
+        writeHead("get_recipe_by_id_success")
+        RecipeMock.recipeList.forEachIndexed { index, _ ->
+            val recipe = recipeDb.getRecipeById(index + 1)
+            println(recipe.toString())
+            assertEquals(
+                expected = RecipeMock.recipeList[index].name,
+                actual = recipe?.name,
+            )
+        }
+    }
+
+    @Test
+    fun search_recipes_success() = runTest {
+        writeHead("search_recipes_success")
+
+        recipeDb.deleteAllRecipes()
+        val recipes = RecipeMock.recipeListForSearchByName
+
+        for (recipe in recipes) {
+            recipeDb.insertRecipe(recipe)
+        }
+
+        for (recipe in recipeDb.searchRecipes(RecipeMock.searchName)){
+            println(recipe.toString())
+            assertEquals(
+                expected = "true",
+                actual = recipe.image,
+            )
+        }
+    }
+
+
+    @Test
+    fun delete_all_recipes_success() = runTest {
+        writeHead("delete_all_recipes_success")
+        assertTrue(recipeDb.getAllRecipes().isNotEmpty())
+        recipeDb.deleteAllRecipes()
+
+        assertTrue(
+            recipeDb.getAllRecipes().isEmpty(),
+            "Delete All did not work"
+        )
+    }
+
+
+    @Test
+    fun delete_recipe_by_id_success() = runTest {
+        writeHead("delete_recipe_by_id_success")
+
+        recipeDb.getAllRecipes().forEachIndexed { index, recipe ->
+
+            val recipeId = recipe.id
+            println("Delete recipe with ID: $recipeId")
+            recipeDb.deleteRecipeById(recipeId)
+
+            assertEquals(
+                expected = recipeDb.getAllRecipes().size,
+                actual = RecipeMock.recipeList.size - (index + 1),
+            )
+
+            assertNull(
+                recipeDb.getRecipeById(recipeId)
+            )
+        }
+    }
+
+    @Test
+    fun insert_recipe_success() = runTest {
+        writeHead("insert_recipe_success")
+
+        for (recipe in recipeDb.getAllRecipes()) {
+            println(recipe.toString())
+        }
+
+        recipeDb.insertRecipe(RecipeMock.recipe)
+
+        for (recipe in recipeDb.getAllRecipes()) {
+            println(recipe.toString())
+        }
+
+
+        //cant check recipeMock == recipe, because the recipe in the Mock has a different id
+        assertEquals(
+            expected = recipeDb.getAllRecipes().last().name,
+            actual = RecipeMock.recipe.name,
+        )
+
+        assertEquals(
+            expected = recipeDb.getAllRecipes().last().image,
+            actual = RecipeMock.recipe.image,
+        )
+    }
 
 }

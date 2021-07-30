@@ -1,10 +1,10 @@
 package de.darthkali.weefood.domain.model
 
-import de.darthkali.weefood.domain.util.Weekday
+import de.darthkali.weefood.domain.util.enums.Weekday
 
 data class WeekRecipe(
     val id          : Int = 0,
-    val weekday     : Weekday,
+    val weekday     : Int,
     val portion     : Int,
     val recipe_id   : Int,
 ){

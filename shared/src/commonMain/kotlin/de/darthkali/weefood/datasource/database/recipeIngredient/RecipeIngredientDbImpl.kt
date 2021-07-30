@@ -41,6 +41,17 @@ class RecipeIngredientDbImpl(
         }
     }
 
+    override fun getAllRecipeIngredients(): List<RecipeIngredient> {
+        return try {
+            logger.log("Get all RecipeIngredients from database")
+            weeFoodDatabase.recipeIngredientDbQueries.getAllRecipeIngredients()
+                .executeAsList().toRecipeIngredientList()
+        } catch (e: Exception) {
+            logger.log(e.toString())
+            listOf()
+        }
+    }
+
     override fun deleteRecipeIngredientById(recipeId: Int): Boolean {
         return try {
             logger.log("Delete RecipeIngredient from database by ID")

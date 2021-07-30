@@ -32,6 +32,10 @@ SELECT *
 FROM recipeIngredient_Entity
 WHERE recipe_id = :recipe_id;
 
+getAllRecipeIngredients:
+SELECT *
+FROM recipeIngredient_Entity;
+
 -- -----------------------------------------------------
 -- UPDATE
 -- -----------------------------------------------------

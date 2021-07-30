@@ -5,6 +5,8 @@ import de.darthkali.weefood.domain.model.Ingredient
 import de.darthkali.weefood.domain.model.Recipe
 import de.darthkali.weefood.domain.model.RecipeIngredient
 import de.darthkali.weefood.domain.model.WeekRecipe
+import de.darthkali.weefood.domain.util.enums.CookingTimeUnit
+import de.darthkali.weefood.domain.util.enums.Weekday
 
 class WeeFoodDatabaseFactory(
     private val driverFactory: DriverFactory
@@ -68,7 +70,7 @@ fun Recipe_Entity.toRecipe(): Recipe {
         name = name,
         image = image,
         cooking_time = cooking_time,
-        unit = unit,
+        cooking_time_unit = cooking_time_unit,
         description = description
     )
 }

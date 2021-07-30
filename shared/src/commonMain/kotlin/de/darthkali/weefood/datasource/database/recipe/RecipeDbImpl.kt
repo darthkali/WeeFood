@@ -20,7 +20,7 @@ class RecipeDbImpl(
                 name = recipe.name,
                 image = recipe.image ?: "no.jpg",
                 cooking_time = recipe.cooking_time,
-                unit = recipe.unit,
+                cooking_time_unit = recipe.cooking_time_unit,
                 description = recipe.description,
             )
             logger.log("Inserting ${recipe.name} into database")

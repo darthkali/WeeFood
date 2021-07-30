@@ -44,20 +44,6 @@ class IngredientDbImpl(
         }
     }
 
-    override fun searchIngredients(name: String): List<Ingredient> {
-        return try {
-            logger.log("Search Ingredients in database")
-            weeFoodDatabase.ingredientDbQueries.searchIngredients(
-                query = name,
-                pageSize = 100,  // TODO replace with parameter
-                offset = 0       // TODO replace with parameter
-            ).executeAsList().toIngredientList()
-        } catch (e: Exception) {
-            logger.log(e.toString())
-            listOf()
-        }
-    }
-
     override fun getIngredientById(ingredientId: Int): Ingredient? {
         return try {
             logger.log("Get Ingredient from database by ID")
