@@ -2,14 +2,12 @@ package de.darthkali.weefood.datasource.database.ingredient
 
 import de.darthkali.weefood.BaseTest
 import de.darthkali.weefood.datasource.database.WeeFoodDatabase
+import de.darthkali.weefood.domain.model.Ingredient
 import de.darthkali.weefood.mockFactory.IngredientMock
+import de.darthkali.weefood.mockFactory.RecipeMock
 import de.darthkali.weefood.testDbConnection
 import de.darthkali.weefood.writeHead
-import kotlin.test.BeforeTest
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertNull
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 class IngredientDbImplTest : BaseTest() {
 
@@ -32,7 +30,6 @@ class IngredientDbImplTest : BaseTest() {
         }
     }
 
-
     @Test
     fun get_all_ingredients_success() = runTest {
         writeHead("get_all_ingredients_success")
@@ -49,16 +46,17 @@ class IngredientDbImplTest : BaseTest() {
     @Test
     fun get_ingredient_by_id_success() = runTest {
         writeHead("get_ingredient_by_id_success")
-        IngredientMock.ingredientList.forEachIndexed { index, _ ->
-            val ingredient = ingredientDb.getIngredientById(index + 1)
+        val ingredients = ingredientDb.getAllIngredients()
+
+        for(ingredientItem in ingredients){
+            val ingredient = ingredientDb.getIngredientById(ingredientItem.id)
             println(ingredient.toString())
             assertEquals(
-                IngredientMock.ingredientList[index].name,
-                ingredient?.name,
+                expected = ingredientItem.id,
+                actual = ingredient?.id,
             )
         }
     }
-
 
     @Test
     fun delete_all_ingredients_success() = runTest {
@@ -71,7 +69,6 @@ class IngredientDbImplTest : BaseTest() {
             "Delete All did not work"
         )
     }
-
 
     @Test
     fun delete_ingredient_by_id_success() = runTest {
@@ -108,18 +105,6 @@ class IngredientDbImplTest : BaseTest() {
             println(ingredient.toString())
         }
 
-
-        assertEquals(
-            ingredientDb.getAllIngredients().last().name,
-            IngredientMock.ingredient.name,
-        )
-
-        assertEquals(
-            ingredientDb.getAllIngredients().last().image,
-            IngredientMock.ingredient.image,
-        )
+        assertEquals(ingredientDb.getAllIngredients().last(), IngredientMock.ingredient)
     }
-
-    // TODO: fun searchIngredients(name: String): List<Ingredient>
-
 }

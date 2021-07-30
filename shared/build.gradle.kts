@@ -88,11 +88,8 @@ kotlin {
 
         val androidTest by getting {
             dependencies {
-
-
                 implementation(Kotlin.jvm)
                 implementation(Kotlin.junit)
-
                 implementation(Ktor.android)
                 implementation(SQLDelight.androidDriver)
                 implementation(AndroidXTest.core)

@@ -87,8 +87,8 @@ class RecipeIngredientDbImplTest : BaseTest() {
             recipeIngredientDb.deleteRecipeIngredientById(recipeIngredientId)
 
             assertEquals(
-                recipeIngredientDb.getAllRecipeIngredients().size,
-                RecipeIngredientMock.recipeIngredientList.size - (index + 1),
+                expected = recipeIngredientDb.getAllRecipeIngredients().size,
+                actual = RecipeIngredientMock.recipeIngredientList.size - (index + 1),
             )
         }
         assertEquals(
@@ -111,17 +111,9 @@ class RecipeIngredientDbImplTest : BaseTest() {
             println(recipeIngredient.toString())
         }
 
-
         assertEquals(
-            recipeIngredientDb.getAllRecipeIngredients().last().recipe_id,
-            RecipeIngredientMock.recipeIngredient.recipe_id,
-        )
-
-        assertEquals(
-            recipeIngredientDb.getAllRecipeIngredients().last().ingredient_id,
-            RecipeIngredientMock.recipeIngredient.ingredient_id,
+            expected = recipeIngredientDb.getAllRecipeIngredients().last(),
+            actual = RecipeIngredientMock.recipeIngredient,
         )
     }
-
-
 }

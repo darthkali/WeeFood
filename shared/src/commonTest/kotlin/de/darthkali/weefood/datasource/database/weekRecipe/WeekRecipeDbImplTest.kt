@@ -38,17 +38,10 @@ class WeekRecipeDbImplTest : BaseTest() {
         val weekRecipes = weekRecipeDb.getAllWeekRecipes()
         weekRecipes.forEachIndexed { index, weekRecipe ->
             println(weekRecipe.toString())
+
             assertEquals(
-                expected = WeekRecipeMock.weekRecipeList[index].weekday,
-                actual = weekRecipe.weekday
-            )
-            assertEquals(
-                expected = WeekRecipeMock.weekRecipeList[index].weekday,
-                actual = weekRecipe.weekday
-            )
-            assertEquals(
-                expected = WeekRecipeMock.weekRecipeList[index].recipe_id,
-                actual = weekRecipe.recipe_id
+                expected = WeekRecipeMock.weekRecipeList[index],
+                actual = weekRecipe
             )
         }
     }
@@ -117,22 +110,9 @@ class WeekRecipeDbImplTest : BaseTest() {
             println(weekRecipe.toString())
         }
 
-
         assertEquals(
-            expected = weekRecipeDb.getAllWeekRecipes().last().weekday,
-            actual = WeekRecipeMock.weekRecipe.weekday,
-        )
-
-        assertEquals(
-            expected = weekRecipeDb.getAllWeekRecipes().last().portion,
-            actual = WeekRecipeMock.weekRecipe.portion,
-        )
-
-        assertEquals(
-            expected = weekRecipeDb.getAllWeekRecipes().last().recipe_id,
-            actual = WeekRecipeMock.weekRecipe.recipe_id,
+            expected = weekRecipeDb.getAllWeekRecipes().last(),
+            actual = WeekRecipeMock.weekRecipe,
         )
     }
-
-
 }

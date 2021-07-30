@@ -49,12 +49,15 @@ class RecipeDbImplTest : BaseTest() {
     @Test
     fun get_recipe_by_id_success() = runTest {
         writeHead("get_recipe_by_id_success")
-        RecipeMock.recipeList.forEachIndexed { index, _ ->
-            val recipe = recipeDb.getRecipeById(index + 1)
+
+        val recipes = recipeDb.getAllRecipes()
+
+        for (recipeItem in recipes) {
+            val recipe = recipeDb.getRecipeById(recipeItem.id)
             println(recipe.toString())
             assertEquals(
-                expected = RecipeMock.recipeList[index].name,
-                actual = recipe?.name,
+                expected = recipeItem.id,
+                actual = recipe?.id,
             )
         }
     }
@@ -70,7 +73,7 @@ class RecipeDbImplTest : BaseTest() {
             recipeDb.insertRecipe(recipe)
         }
 
-        for (recipe in recipeDb.searchRecipes(RecipeMock.searchName)){
+        for (recipe in recipeDb.searchRecipes(RecipeMock.searchName)) {
             println(recipe.toString())
             assertEquals(
                 expected = "true",
@@ -129,15 +132,9 @@ class RecipeDbImplTest : BaseTest() {
         }
 
 
-        //cant check recipeMock == recipe, because the recipe in the Mock has a different id
         assertEquals(
-            expected = recipeDb.getAllRecipes().last().name,
-            actual = RecipeMock.recipe.name,
-        )
-
-        assertEquals(
-            expected = recipeDb.getAllRecipes().last().image,
-            actual = RecipeMock.recipe.image,
+            expected = recipeDb.getAllRecipes().last(),
+            actual = RecipeMock.recipe,
         )
     }
 
