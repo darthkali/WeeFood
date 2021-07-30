@@ -4,7 +4,7 @@ import de.darthkali.weefood.domain.util.enums.Weekday
 
 data class WeekRecipe(
     val id          : Int = 0,
-    val weekday     : Int,
+    val weekday     : Weekday,
     val portion     : Int,
     val recipe_id   : Int,
 ){

@@ -133,7 +133,7 @@ fun List<RecipeIngredient_Entity>.toRecipeIngredientList(): List<RecipeIngredien
 fun WeekRecipe_Entity.toWeekRecipe(): WeekRecipe {
     return WeekRecipe(
         id = id.toInt(),
-        weekday = weekday,
+        weekday = Weekday.fromInt(weekday),
         portion = portion,
         recipe_id = recipe_id,
     )

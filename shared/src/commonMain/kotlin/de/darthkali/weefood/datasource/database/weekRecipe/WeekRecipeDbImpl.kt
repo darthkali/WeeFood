@@ -15,7 +15,7 @@ class WeekRecipeDbImpl(
         return try {
             weeFoodDatabase.weekRecipeDbQueries.insertWeekRecip(
                 null,
-                weekday = weekRecipe.weekday, // TODO: SQL Delight bietet eine möglichkeit enums zu nutzen. Das muss hier eingebaut werden
+                weekday = weekRecipe.weekday.value, // TODO: SQL Delight bietet eine möglichkeit enums zu nutzen. Das muss hier eingebaut werden
                 portion = weekRecipe.portion,
                 recipe_id = weekRecipe.recipe_id,
             )
@@ -38,11 +38,11 @@ class WeekRecipeDbImpl(
         }
     }
 
-    override fun getAllWeekRecipesByWeekDay(weekday: Int): List<WeekRecipe> {
+    override fun getAllWeekRecipesByWeekDay(weekday: Weekday): List<WeekRecipe> {
         return try {
             logger.log("Get All WeekRecipe from database by WeekDay")
             weeFoodDatabase.weekRecipeDbQueries.getAllWeekRecipesByWeekDay(
-                weekday = weekday, //.ordinal // TODO: SQL Delight bietet eine möglichkeit enums zu nutzen. Das muss hier eingebaut werden
+                weekday = weekday.value, //.ordinal // TODO: SQL Delight bietet eine möglichkeit enums zu nutzen. Das muss hier eingebaut werden
             ).executeAsList().toWeekRecipeList()
         } catch (e: Exception) {
             logger.log(e.toString())
