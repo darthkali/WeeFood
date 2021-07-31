@@ -13,7 +13,7 @@ import shared
 struct BottomBar: View {
     
     private let networkModule = NetworkModule()
-    private let cacheModule = CacheModule()
+    private let cacheModule = DatabaseModule()
     
     
     var body: some View {

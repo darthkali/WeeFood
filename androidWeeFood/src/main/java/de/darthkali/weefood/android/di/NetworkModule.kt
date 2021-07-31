@@ -22,7 +22,7 @@ object NetworkModule{
 
     @Singleton
     @Provides
-    fun provideRecipeService(
+    fun provideIngredientService(
         httpClient: HttpClient,
     ): IngredientService {
         return IngredientServiceImpl(

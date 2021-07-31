@@ -13,7 +13,6 @@ import de.darthkali.weefood.android.presentation.components.RECIPE_IMAGE_HEIGHT
 import de.darthkali.weefood.android.presentation.screens.recipe_detail.components.LoadingRecipeShimmer
 import de.darthkali.weefood.android.presentation.screens.recipe_detail.components.RecipeView
 import de.darthkali.weefood.android.presentation.theme.AppTheme
-import de.darthkali.weefood.presentation.recipe_detail.RecipeDetailEvents
 import de.darthkali.weefood.presentation.recipe_detail.RecipeDetailState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -24,14 +23,10 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @Composable
 fun RecipeDetailScreen(
     state: RecipeDetailState,
-    onTriggerEvent: (RecipeDetailEvents) -> Unit,
+    //onTriggerEvent: (RecipeDetailEvents) -> Unit,
 ){
     AppTheme(
         displayProgressBar = state.isLoading,
-        //dialogQueue = state.queue,
-//        onRemoveHeadMessageFromQueue = {
-//            onTriggerEvent(RecipeDetailEvents.OnRemoveHeadMessageFromQueue)
-//        }
     ){
         if(state.ingredient == null && state.isLoading){
             LoadingRecipeShimmer(imageHeight = RECIPE_IMAGE_HEIGHT.dp)

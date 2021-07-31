@@ -61,6 +61,10 @@ fun IngredientListScreen(
                     onTriggerNextPage = {
                         onTriggerEvent(IngredientListEvents.NextPage)
                     },
+                    onSaveIngredient = {
+                        onTriggerEvent(IngredientListEvents.SaveIngredient(it))
+                    }
+
                 )
             }
         }
