@@ -24,3 +24,5 @@ internal actual fun testDbConnection(): SqlDriver {
         )
     )
 }
+
+//DB TestConnection wirklich nötig? Warum nicht die DB Factory nutzen

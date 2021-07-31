@@ -20,8 +20,8 @@ class SaveIngredient(
     }
 
     fun getAll(
-    ):List<Ingredient> {
-        return try  {
+    ): List<Ingredient> {
+        return try {
             ingredientDb.getAllIngredients()
         } catch (e: Exception) {
             logger.log(e.toString())

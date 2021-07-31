@@ -22,11 +22,9 @@ object InteractorModule {
     @Provides
     fun provideSearchIngredient(
         ingredientService: IngredientService,
-        ingredientDb: IngredientDb,
     ): SearchIngredient {
         return SearchIngredient(
             ingredientService = ingredientService,
-            ingredientDb = ingredientDb
         )
     }
 

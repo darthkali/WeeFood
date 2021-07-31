@@ -5,6 +5,8 @@ import com.squareup.sqldelight.drivers.native.NativeSqliteDriver
 
 actual class DriverFactory {
     actual fun createDriver(): SqlDriver {
-        return NativeSqliteDriver(WeeFoodDatabase.Schema, "weeFoodDatabase.db")
+        return NativeSqliteDriver(
+            schema = WeeFoodDatabase.Schema,
+            name = "weeFoodDatabase.db")
     }
 }

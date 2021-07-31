@@ -12,7 +12,8 @@ actual abstract class BaseTest {
     var coroutineTestRule = CoroutineTestRule()
 
 
-    actual fun <T> runTest(block: suspend CoroutineScope.() -> T) {
+    actual fun <T> runTest(
+        block: suspend CoroutineScope.() -> T) {
         runBlocking { block() }
     }
 }
