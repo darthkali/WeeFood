@@ -16,7 +16,7 @@ class RecipeDbImplTest : BaseTest() {
     private val weeFoodDatabase: WeeFoodDatabase = WeeFoodDatabase(testDbConnection())
     private val recipeDb: RecipeDb by lazy {
         RecipeDbImpl(
-            weeFoodDatabase = weeFoodDatabase
+//            weeFoodDatabase = weeFoodDatabase
         )
     }
 

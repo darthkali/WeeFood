@@ -9,13 +9,15 @@ import de.darthkali.weefood.util.BuildConfig
 import de.darthkali.weefood.util.Logger
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 /**
  * Retrieve a recipe from the cache given it's unique id.
  */
-class GetRecipe (
-    private val recipeCache: RecipeCache,
-){
+class GetRecipe: KoinComponent{
+
+    private val recipeCache: RecipeCache by inject()
     private val logger = Logger("SearchRecipes")
 
     fun execute(

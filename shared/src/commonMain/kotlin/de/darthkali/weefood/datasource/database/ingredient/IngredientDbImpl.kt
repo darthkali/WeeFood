@@ -1,19 +1,22 @@
 package de.darthkali.weefood.datasource.database.ingredient
 
-import de.darthkali.weefood.datasource.database.WeeFoodDatabase
+import de.darthkali.weefood.datasource.database.WeeFoodDatabaseFactory
 import de.darthkali.weefood.datasource.database.toIngredient
 import de.darthkali.weefood.datasource.database.toIngredientList
 import de.darthkali.weefood.domain.model.Ingredient
 import de.darthkali.weefood.util.Logger
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class IngredientDbImpl(
-    var weeFoodDatabase: WeeFoodDatabase
-) : IngredientDb {
+class IngredientDbImpl : IngredientDb, KoinComponent {
+
+    private val weeFoodDatabaseFactory: WeeFoodDatabaseFactory by inject()
+    private val weeFoodDatabase = weeFoodDatabaseFactory.createDatabase()
 
     private val logger = Logger("IngredientDbImpl")
 
-    override fun insertIngredient(ingredient: Ingredient): Boolean {
 
+    override fun insertIngredient(ingredient: Ingredient): Boolean {
         return try {
             weeFoodDatabase.ingredientDbQueries.insertIngredient(
                 null,
@@ -27,7 +30,6 @@ class IngredientDbImpl(
             logger.log(e.toString())
             false
         }
-
     }
 
     override fun getAllIngredients(): List<Ingredient> {

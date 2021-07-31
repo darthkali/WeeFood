@@ -5,8 +5,8 @@ import de.darthkali.weefood.domain.model.Ingredient
 import de.darthkali.weefood.domain.model.Recipe
 import de.darthkali.weefood.domain.model.RecipeIngredient
 import de.darthkali.weefood.domain.model.WeekRecipe
-import de.darthkali.weefood.domain.util.enums.CookingTimeUnit
 import de.darthkali.weefood.domain.util.enums.Weekday
+import org.koin.core.component.KoinComponent
 
 class WeeFoodDatabaseFactory(
     private val driverFactory: DriverFactory

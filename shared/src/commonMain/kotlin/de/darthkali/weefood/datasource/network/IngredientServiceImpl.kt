@@ -2,18 +2,15 @@ package de.darthkali.weefood.datasource.network
 
 import de.darthkali.weefood.datasource.network.model.IngredientSearchResponse
 import de.darthkali.weefood.domain.model.Ingredient
-import io.ktor.client.*
-import io.ktor.client.request.*
+import io.ktor.client.request.get
+import io.ktor.client.request.url
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class IngredientServiceImpl(
-) : IngredientService, KoinComponent {
+class IngredientServiceImpl: IngredientService, KoinComponent {
 
     private val ktorClientFactory: KtorClientFactory by inject()
-
     private val httpClient =  ktorClientFactory.build()
-
 
     override suspend fun searchIngredient(query: String, page: Int): List<Ingredient> {
 

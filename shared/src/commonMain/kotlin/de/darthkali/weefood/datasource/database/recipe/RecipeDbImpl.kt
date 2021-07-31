@@ -1,17 +1,19 @@
 package de.darthkali.weefood.datasource.database.recipe
 
 import de.darthkali.weefood.datasource.database.WeeFoodDatabase
+import de.darthkali.weefood.datasource.database.WeeFoodDatabaseFactory
 import de.darthkali.weefood.datasource.database.toRecipe
 import de.darthkali.weefood.datasource.database.toRecipeList
 import de.darthkali.weefood.domain.model.Recipe
 import de.darthkali.weefood.util.Logger
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class RecipeDbImpl(
-    var weeFoodDatabase: WeeFoodDatabase
-) : RecipeDb {
+class RecipeDbImpl: RecipeDb , KoinComponent {
 
+    private val weeFoodDatabaseFactory: WeeFoodDatabaseFactory by inject()
+    private val weeFoodDatabase = weeFoodDatabaseFactory.createDatabase()
     private val logger = Logger("RecipeDbImpl")
-
 
     override fun insertRecipe(recipe: Recipe): Boolean {
         return try {

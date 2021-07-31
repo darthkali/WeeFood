@@ -11,38 +11,38 @@ import de.darthkali.weefood.datasource.database.ingredient.IngredientDbImpl
 import de.darthkali.weefood.domain.util.DatetimeUtil
 import javax.inject.Singleton
 
-@Module
-@InstallIn(SingletonComponent::class)
-object DatabaseModule {
-
-    @Singleton
-    @Provides
-    fun provideWeeFoodDatabase(context: BaseApplication): WeeFoodDatabase {
-        return WeeFoodDatabaseFactory(driverFactory = DriverFactory(context)).createDatabase()
-    }
-
-    @Singleton
-    @Provides
-    fun provideIngredientDb(
-        weeFoodDatabase: WeeFoodDatabase
-    ): IngredientDb {
-        return IngredientDbImpl(
-            weeFoodDatabase = weeFoodDatabase
-        )
-    }
-
-
-    @Singleton
-    @Provides
-    fun provideRecipeCache(
-        weeFoodDatabase: WeeFoodDatabase,
-        datetimeUtil: DatetimeUtil,
-    ): RecipeCache {
-        return RecipeCacheImpl(
-            weeFoodDatabase = weeFoodDatabase,
-            datetimeUtil = datetimeUtil,
-        )
-    }
-
-
-}
+//@Module
+//@InstallIn(SingletonComponent::class)
+//object DatabaseModule {
+//
+//    @Singleton
+//    @Provides
+//    fun provideWeeFoodDatabase(context: BaseApplication): WeeFoodDatabase {
+//        return WeeFoodDatabaseFactory(driverFactory = DriverFactory(context)).createDatabase()
+//    }
+//
+//    @Singleton
+//    @Provides
+//    fun provideIngredientDb(
+//        weeFoodDatabase: WeeFoodDatabase
+//    ): IngredientDb {
+//        return IngredientDbImpl(
+//            weeFoodDatabase = weeFoodDatabase
+//        )
+//    }
+//
+//
+//    @Singleton
+//    @Provides
+//    fun provideRecipeCache(
+//        weeFoodDatabase: WeeFoodDatabase,
+//        datetimeUtil: DatetimeUtil,
+//    ): RecipeCache {
+//        return RecipeCacheImpl(
+//            weeFoodDatabase = weeFoodDatabase,
+//            datetimeUtil = datetimeUtil,
+//        )
+//    }
+//
+//
+//}

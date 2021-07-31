@@ -4,7 +4,6 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import de.darthkali.weefood.domain.model.Ingredient
 import de.darthkali.weefood.interactors.recipe_list.GetAllIngredients
 import de.darthkali.weefood.interactors.recipe_list.SaveIngredient
@@ -12,7 +11,6 @@ import de.darthkali.weefood.presentation.ingredient_list.IngredientListEvents
 import de.darthkali.weefood.interactors.recipe_list.SearchIngredient
 import de.darthkali.weefood.presentation.ingredient_list.IngredientListState
 import de.darthkali.weefood.util.Logger
-import javax.inject.Inject
 import kotlin.collections.ArrayList
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -25,7 +23,7 @@ class IngredientListViewModel: ViewModel(), KoinComponent {
     private val getAllIngredients: GetAllIngredients by inject()
 
 
-    private val logger = Logger("IngredientListViewModel")
+    private val logger = Logger("IngredientListViewModelssss")
 
     val state: MutableState<IngredientListState> = mutableStateOf(IngredientListState())
 
@@ -58,7 +56,7 @@ class IngredientListViewModel: ViewModel(), KoinComponent {
 
     private fun saveIngredient(ingredient:Ingredient) {
         saveIngredient.saveIngredient(ingredient)
-        for(ingredientItem in getAllIngredients.GetAllIngredients()){
+        for(ingredientItem in getAllIngredients.getAllIngredients()){
             logger.log(ingredientItem.toString())
         }
     }

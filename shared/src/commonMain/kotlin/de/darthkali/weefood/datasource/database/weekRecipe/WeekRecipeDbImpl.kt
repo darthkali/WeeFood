@@ -1,16 +1,20 @@
 package de.darthkali.weefood.datasource.database.weekRecipe
 
 import de.darthkali.weefood.datasource.database.WeeFoodDatabase
+import de.darthkali.weefood.datasource.database.WeeFoodDatabaseFactory
 import de.darthkali.weefood.datasource.database.toWeekRecipeList
 import de.darthkali.weefood.domain.model.WeekRecipe
 import de.darthkali.weefood.domain.util.enums.Weekday
 import de.darthkali.weefood.util.Logger
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class WeekRecipeDbImpl(
-    var weeFoodDatabase: WeeFoodDatabase
-) : WeekRecipeDb {
+class WeekRecipeDbImpl: WeekRecipeDb , KoinComponent {
 
+    private val weeFoodDatabaseFactory: WeeFoodDatabaseFactory by inject()
+    private val weeFoodDatabase = weeFoodDatabaseFactory.createDatabase()
     private val logger = Logger("WeekRecipeDbImpl")
+
     override fun insertWeekRecipe(weekRecipe: WeekRecipe): Boolean {
         return try {
             weeFoodDatabase.weekRecipeDbQueries.insertWeekRecip(

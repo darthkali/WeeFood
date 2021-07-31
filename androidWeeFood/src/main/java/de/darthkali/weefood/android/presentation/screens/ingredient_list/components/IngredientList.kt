@@ -11,14 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import de.darthkali.weefood.android.presentation.components.NothingHere
-import de.darthkali.weefood.datasource.database.DriverFactory
-import de.darthkali.weefood.datasource.database.WeeFoodDatabase
-import de.darthkali.weefood.datasource.database.ingredient.IngredientDb
-import de.darthkali.weefood.datasource.database.ingredient.IngredientDbImpl
 import de.darthkali.weefood.datasource.network.IngredientServiceImpl.Companion.PAGINATION_PAGE_SIZE
 import de.darthkali.weefood.domain.model.Ingredient
-import de.darthkali.weefood.interactors.recipe_list.SaveIngredient
-import de.darthkali.weefood.presentation.ingredient_list.IngredientListEvents
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 

@@ -15,7 +15,7 @@ class WeekRecipeDbImplTest : BaseTest() {
     private val weeFoodDatabase: WeeFoodDatabase = WeeFoodDatabase(testDbConnection())
     private val weekRecipeDb: WeekRecipeDb by lazy {
         WeekRecipeDbImpl(
-            weeFoodDatabase = weeFoodDatabase
+//            weeFoodDatabase = weeFoodDatabase
         )
     }
 

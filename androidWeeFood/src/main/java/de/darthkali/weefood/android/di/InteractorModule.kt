@@ -13,51 +13,51 @@ import de.darthkali.weefood.interactors.recipe_list.SaveIngredient
 import de.darthkali.weefood.interactors.recipe_list.SearchIngredient
 import io.ktor.util.*
 import javax.inject.Singleton
-
-@Module
-@InstallIn(SingletonComponent::class)
-object InteractorModule {
-
-    @Singleton
-    @Provides
-    fun provideSearchIngredient(
-        ingredientService: IngredientService,
-    ): SearchIngredient {
-        return SearchIngredient(
-            ingredientService = ingredientService,
-        )
-    }
-
-    @InternalAPI
-    @Singleton
-    @Provides
-    fun provideGetRecipe(
-        recipeCache: RecipeCache,
-    ): GetRecipe {
-        return GetRecipe(
-            recipeCache = recipeCache
-        )
-    }
-
-    @InternalAPI
-    @Singleton
-    @Provides
-    fun provideSaveIngredient(
-        ingredientDb: IngredientDb,
-    ): SaveIngredient {
-        return SaveIngredient(
-            ingredientDb = ingredientDb
-        )
-    }
-
-    @InternalAPI
-    @Singleton
-    @Provides
-    fun provideGetAllIngredients(
-        ingredientDb: IngredientDb,
-    ): GetAllIngredients {
-        return GetAllIngredients(
-            ingredientDb = ingredientDb
-        )
-    }
-}
+//
+//@Module
+//@InstallIn(SingletonComponent::class)
+//object InteractorModule {
+//
+//    @Singleton
+//    @Provides
+//    fun provideSearchIngredient(
+//        ingredientService: IngredientService,
+//    ): SearchIngredient {
+//        return SearchIngredient(
+//            ingredientService = ingredientService,
+//        )
+//    }
+//
+//    @InternalAPI
+//    @Singleton
+//    @Provides
+//    fun provideGetRecipe(
+//        recipeCache: RecipeCache,
+//    ): GetRecipe {
+//        return GetRecipe(
+//            recipeCache = recipeCache
+//        )
+//    }
+//
+//    @InternalAPI
+//    @Singleton
+//    @Provides
+//    fun provideSaveIngredient(
+//        ingredientDb: IngredientDb,
+//    ): SaveIngredient {
+//        return SaveIngredient(
+//            ingredientDb = ingredientDb
+//        )
+//    }
+//
+//    @InternalAPI
+//    @Singleton
+//    @Provides
+//    fun provideGetAllIngredients(
+//        ingredientDb: IngredientDb,
+//    ): GetAllIngredients {
+//        return GetAllIngredients(
+//            ingredientDb = ingredientDb
+//        )
+//    }
+//}

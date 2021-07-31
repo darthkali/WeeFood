@@ -1,5 +1,6 @@
 package de.darthkali.weefood.interactors.recipe_list
 
+import de.darthkali.weefood.datasource.database.ingredient.IngredientDb
 import de.darthkali.weefood.datasource.network.IngredientService
 import de.darthkali.weefood.domain.model.Ingredient
 import de.darthkali.weefood.domain.util.CommonFlow
@@ -7,11 +8,13 @@ import de.darthkali.weefood.domain.util.DataState
 import de.darthkali.weefood.domain.util.asCommonFlow
 import de.darthkali.weefood.util.Logger
 import kotlinx.coroutines.flow.flow
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 
-class SearchIngredient(
-    private val ingredientService: IngredientService,
-){
+class SearchIngredient: KoinComponent {
+
+    private val ingredientService: IngredientService by inject()
     private val logger = Logger("SearchRecipes")
 
     fun execute(
