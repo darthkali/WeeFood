@@ -1,0 +1,586 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
+		445B66DA8AA241A8A2800E56 /* Pods_iosWeeFood.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FA6B69DFC71DC1477124789 /* Pods_iosWeeFood.framework */; };
+		C235290A26ADC38400C11A17 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C235290926ADC38400C11A17 /* Navigation.swift */; };
+		C247688C26A5CD8300BD7FFD /* SearchAppBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C247688B26A5CD8300BD7FFD /* SearchAppBar.swift */; };
+		C247688E26A5F5F600BD7FFD /* FoodCategorieChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = C247688D26A5F5F600BD7FFD /* FoodCategorieChip.swift */; };
+		C247689026A5FD0B00BD7FFD /* IngredientCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C247688F26A5FD0B00BD7FFD /* IngredientCard.swift */; };
+		C247689326A6BE4E00BD7FFD /* RecipeDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C247689226A6BE4E00BD7FFD /* RecipeDetailViewModel.swift */; };
+		C247689526A6BFD600BD7FFD /* RecipeDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C247689426A6BFD600BD7FFD /* RecipeDetailScreen.swift */; };
+		C247689926A6C38600BD7FFD /* RecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C247689826A6C38600BD7FFD /* RecipeView.swift */; };
+		C249190E26AF385B00BC254F /* WeekListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C249190D26AF385B00BC254F /* WeekListScreen.swift */; };
+		C249191526AF3B5700BC254F /* DayListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C249191426AF3B5700BC254F /* DayListScreen.swift */; };
+		C249191726AF3B6C00BC254F /* NewRecipeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C249191626AF3B6C00BC254F /* NewRecipeScreen.swift */; };
+		C249191926AF3B8400BC254F /* RecipeListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C249191826AF3B8400BC254F /* RecipeListScreen.swift */; };
+		C249191C26AF3B9800BC254F /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C249191B26AF3B9800BC254F /* SettingsScreen.swift */; };
+		C249191F26AF3BB800BC254F /* ShoppingListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C249191E26AF3BB800BC254F /* ShoppingListScreen.swift */; };
+		C2738DAD269B6EF10030B47D /* IngredientListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2738DAC269B6EF10030B47D /* IngredientListScreen.swift */; };
+		C27A6BD826A74C8400A18B14 /* DefaultText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A6BD726A74C8400A18B14 /* DefaultText.swift */; };
+		C27A6BDC26A74F1000A18B14 /* Avenir.ttc in Resources */ = {isa = PBXBuildFile; fileRef = C27A6BDB26A74F1000A18B14 /* Avenir.ttc */; };
+		C27A6BDE26A74F4000A18B14 /* Color_a.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A6BDD26A74F4000A18B14 /* Color_a.swift */; };
+		C2D0017A269E0463005E92FC /* IngredientListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D00179269E0463005E92FC /* IngredientListViewModel.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1522A108DDED796E3705C7A8 /* Pods-iosWeeFood.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosWeeFood.release.xcconfig"; path = "Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood.release.xcconfig"; sourceTree = "<group>"; };
+		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
+		5FA6B69DFC71DC1477124789 /* Pods_iosWeeFood.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosWeeFood.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		68C8BF57FDD85B586521765E /* Pods-iosWeeFood.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosWeeFood.debug.xcconfig"; path = "Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood.debug.xcconfig"; sourceTree = "<group>"; };
+		7555FF7B242A565900829871 /* iosWeeFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosWeeFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C235290926ADC38400C11A17 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
+		C247688B26A5CD8300BD7FFD /* SearchAppBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAppBar.swift; sourceTree = "<group>"; };
+		C247688D26A5F5F600BD7FFD /* FoodCategorieChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCategorieChip.swift; sourceTree = "<group>"; };
+		C247688F26A5FD0B00BD7FFD /* IngredientCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientCard.swift; sourceTree = "<group>"; };
+		C247689226A6BE4E00BD7FFD /* RecipeDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailViewModel.swift; sourceTree = "<group>"; };
+		C247689426A6BFD600BD7FFD /* RecipeDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailScreen.swift; sourceTree = "<group>"; };
+		C247689826A6C38600BD7FFD /* RecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeView.swift; sourceTree = "<group>"; };
+		C249190D26AF385B00BC254F /* WeekListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekListScreen.swift; sourceTree = "<group>"; };
+		C249191426AF3B5700BC254F /* DayListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayListScreen.swift; sourceTree = "<group>"; };
+		C249191626AF3B6C00BC254F /* NewRecipeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRecipeScreen.swift; sourceTree = "<group>"; };
+		C249191826AF3B8400BC254F /* RecipeListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListScreen.swift; sourceTree = "<group>"; };
+		C249191B26AF3B9800BC254F /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
+		C249191E26AF3BB800BC254F /* ShoppingListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListScreen.swift; sourceTree = "<group>"; };
+		C2738DAC269B6EF10030B47D /* IngredientListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientListScreen.swift; sourceTree = "<group>"; };
+		C27A6BD726A74C8400A18B14 /* DefaultText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultText.swift; sourceTree = "<group>"; };
+		C27A6BDB26A74F1000A18B14 /* Avenir.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Avenir.ttc; sourceTree = "<group>"; };
+		C27A6BDD26A74F4000A18B14 /* Color_a.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color_a.swift; sourceTree = "<group>"; };
+		C2D00179269E0463005E92FC /* IngredientListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientListViewModel.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		37FBD735D328303F9D8FD98A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				445B66DA8AA241A8A2800E56 /* Pods_iosWeeFood.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		39A38FEB493004AB073AFFF7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				68C8BF57FDD85B586521765E /* Pods-iosWeeFood.debug.xcconfig */,
+				1522A108DDED796E3705C7A8 /* Pods-iosWeeFood.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		4E8B1906585666124345A0C7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5FA6B69DFC71DC1477124789 /* Pods_iosWeeFood.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7555FF72242A565900829871 = {
+			isa = PBXGroup;
+			children = (
+				7555FF7D242A565900829871 /* iosWeeFood */,
+				7555FF7C242A565900829871 /* Products */,
+				39A38FEB493004AB073AFFF7 /* Pods */,
+				4E8B1906585666124345A0C7 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		7555FF7C242A565900829871 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7555FF7B242A565900829871 /* iosWeeFood.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7555FF7D242A565900829871 /* iosWeeFood */ = {
+			isa = PBXGroup;
+			children = (
+				C27A6BD626A74BDE00A18B14 /* modifier */,
+				C27A6BD526A74B9600A18B14 /* fonts */,
+				C2738DAA269B6ECB0030B47D /* presentation */,
+				7555FF8C242A565B00829871 /* Info.plist */,
+				2152FB032600AC8F00CF470E /* iOSApp.swift */,
+			);
+			path = iosWeeFood;
+			sourceTree = "<group>";
+		};
+		C235290826ADC36100C11A17 /* navigation */ = {
+			isa = PBXGroup;
+			children = (
+				C235290926ADC38400C11A17 /* Navigation.swift */,
+			);
+			path = navigation;
+			sourceTree = "<group>";
+		};
+		C247688A26A5CD6900BD7FFD /* components */ = {
+			isa = PBXGroup;
+			children = (
+				C247688B26A5CD8300BD7FFD /* SearchAppBar.swift */,
+				C247688D26A5F5F600BD7FFD /* FoodCategorieChip.swift */,
+				C247688F26A5FD0B00BD7FFD /* IngredientCard.swift */,
+				C27A6BD726A74C8400A18B14 /* DefaultText.swift */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
+		C247689126A6BE2A00BD7FFD /* recipe_detail */ = {
+			isa = PBXGroup;
+			children = (
+				C247689726A6C37200BD7FFD /* components */,
+				C247689226A6BE4E00BD7FFD /* RecipeDetailViewModel.swift */,
+				C247689426A6BFD600BD7FFD /* RecipeDetailScreen.swift */,
+			);
+			path = recipe_detail;
+			sourceTree = "<group>";
+		};
+		C247689726A6C37200BD7FFD /* components */ = {
+			isa = PBXGroup;
+			children = (
+				C247689826A6C38600BD7FFD /* RecipeView.swift */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
+		C249190B26AF381400BC254F /* screens */ = {
+			isa = PBXGroup;
+			children = (
+				C249190F26AF3AAD00BC254F /* day_list */,
+				C2738DAB269B6ED60030B47D /* ingredient_list */,
+				C249191026AF3AC900BC254F /* new_recipe */,
+				C247689126A6BE2A00BD7FFD /* recipe_detail */,
+				C249191126AF3AF300BC254F /* recipe_list */,
+				C249191226AF3B0100BC254F /* settings */,
+				C249191326AF3B1600BC254F /* shopping_list */,
+				C249190C26AF382A00BC254F /* week_list */,
+			);
+			path = screens;
+			sourceTree = "<group>";
+		};
+		C249190C26AF382A00BC254F /* week_list */ = {
+			isa = PBXGroup;
+			children = (
+				C249190D26AF385B00BC254F /* WeekListScreen.swift */,
+			);
+			path = week_list;
+			sourceTree = "<group>";
+		};
+		C249190F26AF3AAD00BC254F /* day_list */ = {
+			isa = PBXGroup;
+			children = (
+				C249191426AF3B5700BC254F /* DayListScreen.swift */,
+			);
+			path = day_list;
+			sourceTree = "<group>";
+		};
+		C249191026AF3AC900BC254F /* new_recipe */ = {
+			isa = PBXGroup;
+			children = (
+				C249191626AF3B6C00BC254F /* NewRecipeScreen.swift */,
+			);
+			path = new_recipe;
+			sourceTree = "<group>";
+		};
+		C249191126AF3AF300BC254F /* recipe_list */ = {
+			isa = PBXGroup;
+			children = (
+				C249191826AF3B8400BC254F /* RecipeListScreen.swift */,
+			);
+			path = recipe_list;
+			sourceTree = "<group>";
+		};
+		C249191226AF3B0100BC254F /* settings */ = {
+			isa = PBXGroup;
+			children = (
+				C249191B26AF3B9800BC254F /* SettingsScreen.swift */,
+			);
+			path = settings;
+			sourceTree = "<group>";
+		};
+		C249191326AF3B1600BC254F /* shopping_list */ = {
+			isa = PBXGroup;
+			children = (
+				C249191E26AF3BB800BC254F /* ShoppingListScreen.swift */,
+			);
+			path = shopping_list;
+			sourceTree = "<group>";
+		};
+		C2738DAA269B6ECB0030B47D /* presentation */ = {
+			isa = PBXGroup;
+			children = (
+				C249190B26AF381400BC254F /* screens */,
+				C235290826ADC36100C11A17 /* navigation */,
+				C247688A26A5CD6900BD7FFD /* components */,
+			);
+			path = presentation;
+			sourceTree = "<group>";
+		};
+		C2738DAB269B6ED60030B47D /* ingredient_list */ = {
+			isa = PBXGroup;
+			children = (
+				C2738DAC269B6EF10030B47D /* IngredientListScreen.swift */,
+				C2D00179269E0463005E92FC /* IngredientListViewModel.swift */,
+			);
+			path = ingredient_list;
+			sourceTree = "<group>";
+		};
+		C27A6BD526A74B9600A18B14 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C27A6BDB26A74F1000A18B14 /* Avenir.ttc */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
+		C27A6BD626A74BDE00A18B14 /* modifier */ = {
+			isa = PBXGroup;
+			children = (
+				C27A6BDD26A74F4000A18B14 /* Color_a.swift */,
+			);
+			path = modifier;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7555FF7A242A565900829871 /* iosWeeFood */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7555FFA5242A565B00829871 /* Build configuration list for PBXNativeTarget "iosWeeFood" */;
+			buildPhases = (
+				05E2E139772A4AE346699617 /* [CP] Check Pods Manifest.lock */,
+				7555FF77242A565900829871 /* Sources */,
+				7555FF79242A565900829871 /* Resources */,
+				37FBD735D328303F9D8FD98A /* Frameworks */,
+				724A3BBB8E28D93843C076F6 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iosWeeFood;
+			productName = iosWeeFood;
+			productReference = 7555FF7B242A565900829871 /* iosWeeFood.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7555FF73242A565900829871 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = orgName;
+				TargetAttributes = {
+					7555FF7A242A565900829871 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 7555FF76242A565900829871 /* Build configuration list for PBXProject "iosWeeFood" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7555FF72242A565900829871;
+			productRefGroup = 7555FF7C242A565900829871 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7555FF7A242A565900829871 /* iosWeeFood */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7555FF79242A565900829871 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C27A6BDC26A74F1000A18B14 /* Avenir.ttc in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		05E2E139772A4AE346699617 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iosWeeFood-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		724A3BBB8E28D93843C076F6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7555FF77242A565900829871 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C247689926A6C38600BD7FFD /* RecipeView.swift in Sources */,
+				C2738DAD269B6EF10030B47D /* IngredientListScreen.swift in Sources */,
+				C247689326A6BE4E00BD7FFD /* RecipeDetailViewModel.swift in Sources */,
+				C247688C26A5CD8300BD7FFD /* SearchAppBar.swift in Sources */,
+				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
+				C249191926AF3B8400BC254F /* RecipeListScreen.swift in Sources */,
+				C2D0017A269E0463005E92FC /* IngredientListViewModel.swift in Sources */,
+				C27A6BDE26A74F4000A18B14 /* Color_a.swift in Sources */,
+				C27A6BD826A74C8400A18B14 /* DefaultText.swift in Sources */,
+				C249191F26AF3BB800BC254F /* ShoppingListScreen.swift in Sources */,
+				C235290A26ADC38400C11A17 /* Navigation.swift in Sources */,
+				C247688E26A5F5F600BD7FFD /* FoodCategorieChip.swift in Sources */,
+				C249191C26AF3B9800BC254F /* SettingsScreen.swift in Sources */,
+				C249191526AF3B5700BC254F /* DayListScreen.swift in Sources */,
+				C249191726AF3B6C00BC254F /* NewRecipeScreen.swift in Sources */,
+				C247689526A6BFD600BD7FFD /* RecipeDetailScreen.swift in Sources */,
+				C247689026A5FD0B00BD7FFD /* IngredientCard.swift in Sources */,
+				C249190E26AF385B00BC254F /* WeekListScreen.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		7555FFA3242A565B00829871 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		7555FFA4242A565B00829871 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7555FFA6242A565B00829871 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 68C8BF57FDD85B586521765E /* Pods-iosWeeFood.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ARZMSZ95U8;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = iosWeeFood/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-framework",
+					"\"shared\"",
+					"-lsqlite3",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = orgIdentifier.iosWeeFood;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7555FFA7242A565B00829871 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1522A108DDED796E3705C7A8 /* Pods-iosWeeFood.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ARZMSZ95U8;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = iosWeeFood/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-framework",
+					"\"shared\"",
+					"-lsqlite3",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = orgIdentifier.iosWeeFood;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7555FF76242A565900829871 /* Build configuration list for PBXProject "iosWeeFood" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7555FFA3242A565B00829871 /* Debug */,
+				7555FFA4242A565B00829871 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7555FFA5242A565B00829871 /* Build configuration list for PBXNativeTarget "iosWeeFood" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7555FFA6242A565B00829871 /* Debug */,
+				7555FFA7242A565B00829871 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7555FF73242A565900829871 /* Project object */;
+}
