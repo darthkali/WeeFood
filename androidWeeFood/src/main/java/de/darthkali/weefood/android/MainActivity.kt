@@ -15,7 +15,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalFoundationApi
 @ExperimentalComposeUiApi
 @ExperimentalMaterialApi
-@AndroidEntryPoint
+
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

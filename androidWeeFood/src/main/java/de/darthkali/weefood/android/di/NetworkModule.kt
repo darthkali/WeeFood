@@ -10,23 +10,23 @@ import de.darthkali.weefood.datasource.network.IngredientServiceImpl
 import io.ktor.client.*
 import javax.inject.Singleton
 
-@Module
-@InstallIn(SingletonComponent::class)
-object NetworkModule{
-
-    @Singleton
-    @Provides
-    fun provideHttpClient(): HttpClient{
-        return KtorClientFactory().build()
-    }
-
-    @Singleton
-    @Provides
-    fun provideIngredientService(
-        httpClient: HttpClient,
-    ): IngredientService {
-        return IngredientServiceImpl(
-            httpClient = httpClient,
-        )
-    }
-}
+//@Module
+//@InstallIn(SingletonComponent::class)
+//object NetworkModule{
+//
+//    @Singleton
+//    @Provides
+//    fun provideHttpClient(): HttpClient{
+//        return KtorClientFactory().build()
+//    }
+//
+//    @Singleton
+//    @Provides
+//    fun provideIngredientService(
+//        httpClient: HttpClient,
+//    ): IngredientService {
+//        return IngredientServiceImpl(
+//            httpClient = httpClient,
+//        )
+//    }
+//}

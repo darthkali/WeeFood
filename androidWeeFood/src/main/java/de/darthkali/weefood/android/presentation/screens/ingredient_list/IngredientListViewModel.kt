@@ -14,15 +14,16 @@ import de.darthkali.weefood.presentation.ingredient_list.IngredientListState
 import de.darthkali.weefood.util.Logger
 import javax.inject.Inject
 import kotlin.collections.ArrayList
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-@HiltViewModel
-class IngredientListViewModel
-@Inject
-constructor(
-    private val searchIngredient: SearchIngredient,
-    private val saveIngredient: SaveIngredient,
-    private val getAllIngredients: GetAllIngredients
-): ViewModel() {
+
+class IngredientListViewModel: ViewModel(), KoinComponent {
+
+    private val searchIngredient: SearchIngredient  by inject()
+    private val saveIngredient: SaveIngredient by inject()
+    private val getAllIngredients: GetAllIngredients by inject()
+
 
     private val logger = Logger("IngredientListViewModel")
 

@@ -4,13 +4,18 @@ import de.darthkali.weefood.datasource.network.model.IngredientSearchResponse
 import de.darthkali.weefood.domain.model.Ingredient
 import io.ktor.client.*
 import io.ktor.client.request.*
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 class IngredientServiceImpl(
-    private val httpClient: HttpClient,
-) : IngredientService {
+) : IngredientService, KoinComponent {
+
+    private val ktorClientFactory: KtorClientFactory by inject()
+
+    private val httpClient =  ktorClientFactory.build()
 
 
-    override suspend fun search(query: String, page: Int): List<Ingredient> {
+    override suspend fun searchIngredient(query: String, page: Int): List<Ingredient> {
 
         val offset: Int  = (page - 1)  * PAGINATION_PAGE_SIZE
 

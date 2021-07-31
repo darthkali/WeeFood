@@ -69,6 +69,7 @@ kotlin {
                 implementation(Kotlinx.common)
                 implementation(Kotlinx.serialization)
                 implementation(SQLDelight.runtime)
+                implementation(Koin.core)
             }
         }
 
@@ -76,6 +77,7 @@ kotlin {
             dependencies {
                 implementation(Kotlin.commonTest)
                 implementation(Kotlin.annotations)
+                implementation(Koin.test)
             }
         }
         val androidMain by getting {

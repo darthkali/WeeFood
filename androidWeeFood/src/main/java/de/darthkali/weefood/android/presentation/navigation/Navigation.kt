@@ -6,7 +6,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.HiltViewModelFactory
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -24,6 +23,8 @@ import de.darthkali.weefood.android.presentation.screens.recipe_list.RecipeListV
 import de.darthkali.weefood.android.presentation.screens.settings.SettingsScreen
 import de.darthkali.weefood.android.presentation.screens.shopping_list.ShoppingListScreen
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.koin.androidx.compose.getViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel as viewModel
 
 /**
  * Navigation Class
@@ -38,6 +39,9 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalMaterialApi
 @Composable
 fun Navigation(){
+
+
+
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = NavigationItem.WeekList.route) {
 
@@ -69,8 +73,9 @@ fun Navigation(){
         composable(
             route = NavigationItem.RecipeList.route
         ) { navBackStackEntry ->
-            val factory = HiltViewModelFactory(LocalContext.current, navBackStackEntry)
-            val viewModel: RecipeListViewModel = viewModel("RecipeListViewModel", factory)
+//            val factory = HiltViewModelFactory(LocalContext.current, navBackStackEntry)
+//            val viewModel: RecipeListViewModel = viewModel("RecipeListViewModel", factory)
+            val viewModel = getViewModel<RecipeListViewModel>()
             RecipeListScreen(
                 state = viewModel.state.value,
                 navController = navController,
@@ -91,8 +96,9 @@ fun Navigation(){
                 type = NavType.IntType
             })
         ) { navBackStackEntry ->
-            val factory = HiltViewModelFactory(LocalContext.current, navBackStackEntry)
-            val viewModel: RecipeDetailViewModel = viewModel("RecipeDetailViewModel", factory)
+//            val factory = HiltViewModelFactory(LocalContext.current, navBackStackEntry)
+//            val viewModel: RecipeDetailViewModel = viewModel("RecipeDetailViewModel", factory)
+            val viewModel = getViewModel<RecipeDetailViewModel>()
             RecipeDetailScreen(
                 state = viewModel.state.value,
                 //onTriggerEvent = viewModel::onTriggerEvent
@@ -116,8 +122,9 @@ fun Navigation(){
         composable(
             route = NavigationItem.IngredientList.route
         ) { navBackStackEntry ->
-            val factory = HiltViewModelFactory(LocalContext.current, navBackStackEntry)
-            val viewModel: IngredientListViewModel = viewModel("RecipeListViewModel", factory)
+//            val factory = HiltViewModelFactory(LocalContext.current, navBackStackEntry)
+//            val viewModel: IngredientListViewModel = viewModel("RecipeListViewModel", factory)
+            val viewModel = getViewModel<IngredientListViewModel>()
             IngredientListScreen(
                 state = viewModel.state.value,
                 navController = navController,
@@ -132,8 +139,9 @@ fun Navigation(){
         composable(
             route = NavigationItem.ShoppingList.route
         ) { navBackStackEntry ->
-            val factory = HiltViewModelFactory(LocalContext.current, navBackStackEntry)
-            val viewModel: IngredientListViewModel = viewModel("RecipeListViewModel", factory)
+//            val factory = HiltViewModelFactory(LocalContext.current, navBackStackEntry)
+//            val viewModel: IngredientListViewModel = viewModel("RecipeListViewModel", factory)
+            val viewModel = getViewModel<IngredientListViewModel>()
             IngredientListScreen(
                 state = viewModel.state.value,
                 navController = navController,

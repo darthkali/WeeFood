@@ -21,7 +21,7 @@ class SearchIngredient(
         try{
             emit(DataState.loading())
 
-            val ingredientList = ingredientService.search(
+            val ingredientList = ingredientService.searchIngredient(
                 query = query,
                 page = page,
             )

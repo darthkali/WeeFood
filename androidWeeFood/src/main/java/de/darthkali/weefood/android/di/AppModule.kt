@@ -1,28 +1,30 @@
 package de.darthkali.weefood.android.di
 
-import android.content.Context
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
-import de.darthkali.weefood.BaseApplication
-import de.darthkali.weefood.domain.util.DatetimeUtil
-import javax.inject.Singleton
+import de.darthkali.weefood.android.presentation.screens.ingredient_list.IngredientListViewModel
+import de.darthkali.weefood.android.presentation.screens.recipe_detail.RecipeDetailViewModel
+import de.darthkali.weefood.android.presentation.screens.recipe_list.RecipeListViewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.dsl.module
 
-@Module
-@InstallIn(SingletonComponent::class)
-object AppModule {
+//@Module
+//@InstallIn(SingletonComponent::class)
+//object AppModule {
+//
+//    @Singleton
+//    @Provides
+//    fun provideApplication(@ApplicationContext app: Context): BaseApplication {
+//        return app as BaseApplication
+//    }
+//
+//    @Singleton
+//    @Provides
+//    fun provideDateUtil(): DatetimeUtil {
+//        return DatetimeUtil()
+//    }
+//}
 
-    @Singleton
-    @Provides
-    fun provideApplication(@ApplicationContext app: Context): BaseApplication {
-        return app as BaseApplication
+    val appModule = module {
+        viewModel { IngredientListViewModel() }
+        viewModel { RecipeDetailViewModel(get(), get()) }
+        viewModel { RecipeListViewModel(get()) }
     }
-
-    @Singleton
-    @Provides
-    fun provideDateUtil(): DatetimeUtil {
-        return DatetimeUtil()
-    }
-}
