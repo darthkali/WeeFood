@@ -11,7 +11,6 @@ class SearchIngredientModule(
     val searchIngredient: SearchIngredient by lazy{
         SearchIngredient(
             ingredientService = networkModule.ingredientService,
-            ingredientDb = databaseModule.ingredientDb
         )
     }
 
