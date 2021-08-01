@@ -4,8 +4,6 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.platform.LocalContext
-import androidx.hilt.navigation.HiltViewModelFactory
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -16,15 +14,11 @@ import de.darthkali.weefood.android.presentation.screens.day_list.WeekListScreen
 import de.darthkali.weefood.android.presentation.screens.ingredient_list.IngredientListScreen
 import de.darthkali.weefood.android.presentation.screens.ingredient_list.IngredientListViewModel
 import de.darthkali.weefood.android.presentation.screens.new_recipe.NewRecipeScreen
-import de.darthkali.weefood.android.presentation.screens.recipe_detail.RecipeDetailScreen
-import de.darthkali.weefood.android.presentation.screens.recipe_detail.RecipeDetailViewModel
 import de.darthkali.weefood.android.presentation.screens.recipe_list.RecipeListScreen
 import de.darthkali.weefood.android.presentation.screens.recipe_list.RecipeListViewModel
 import de.darthkali.weefood.android.presentation.screens.settings.SettingsScreen
-import de.darthkali.weefood.android.presentation.screens.shopping_list.ShoppingListScreen
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.compose.getViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel as viewModel
 
 /**
  * Navigation Class
@@ -96,13 +90,7 @@ fun Navigation(){
                 type = NavType.IntType
             })
         ) { navBackStackEntry ->
-//            val factory = HiltViewModelFactory(LocalContext.current, navBackStackEntry)
-//            val viewModel: RecipeDetailViewModel = viewModel("RecipeDetailViewModel", factory)
-            val viewModel = getViewModel<RecipeDetailViewModel>()
-            RecipeDetailScreen(
-                state = viewModel.state.value,
-                //onTriggerEvent = viewModel::onTriggerEvent
-            )
+              NewRecipeScreen(navController)
         }
 
 

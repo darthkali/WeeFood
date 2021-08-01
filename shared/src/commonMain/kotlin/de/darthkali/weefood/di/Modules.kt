@@ -1,8 +1,6 @@
 package de.darthkali.weefood.di
 
-import de.darthkali.weefood.datasource.database.DriverFactory
 import de.darthkali.weefood.datasource.database.WeeFoodDatabase
-import de.darthkali.weefood.datasource.database.WeeFoodDatabaseFactory
 import de.darthkali.weefood.datasource.database.ingredient.IngredientDb
 import de.darthkali.weefood.datasource.database.ingredient.IngredientDbImpl
 import de.darthkali.weefood.datasource.database.recipe.RecipeDb
@@ -14,7 +12,6 @@ import de.darthkali.weefood.datasource.database.weekRecipe.WeekRecipeDbImpl
 import de.darthkali.weefood.datasource.network.IngredientService
 import de.darthkali.weefood.datasource.network.IngredientServiceImpl
 import de.darthkali.weefood.datasource.network.KtorClientFactory
-import de.darthkali.weefood.interactors.recipe_detail.GetRecipe
 import de.darthkali.weefood.interactors.recipe_list.GetAllIngredients
 import de.darthkali.weefood.interactors.recipe_list.SaveIngredient
 import de.darthkali.weefood.interactors.recipe_list.SearchIngredient
@@ -29,8 +26,6 @@ object Modules {
 
     val database = module {
         single { WeeFoodDatabase(get()) }
-        single { WeeFoodDatabaseFactory(get()) } //TODO .createDatabase
-        single { DriverFactory(get()) }
         single<IngredientDb> { IngredientDbImpl() }
         single<RecipeDb> { RecipeDbImpl() }
         single<RecipeIngredientDb> { RecipeIngredientDbImpl() }
@@ -41,6 +36,8 @@ object Modules {
         single { SearchIngredient() }
         single { SaveIngredient() }
         single { GetAllIngredients() }
-        single { GetRecipe() }
+
     }
+
+
 }
