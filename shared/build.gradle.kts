@@ -70,6 +70,7 @@ kotlin {
                 implementation(Kotlinx.serialization)
                 implementation(SQLDelight.runtime)
                 implementation(Koin.core)
+                implementation(Koin.test)
             }
         }
 
@@ -85,6 +86,8 @@ kotlin {
                 implementation(Ktor.android)
                 implementation(SQLDelight.androidDriver)
                 implementation(Kotlinx.android)
+                implementation(Koin.test)
+                implementation(Koin.testJunit4)
             }
         }
 
@@ -100,6 +103,7 @@ kotlin {
                 implementation(AndroidXTest.rules)
                 implementation(Kotlinx.test)
                 implementation(Robolectric.robolectric)
+                implementation(Koin.android)
             }
         }
 

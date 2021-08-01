@@ -5,11 +5,12 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.koin.test.KoinTest
 import platform.CoreFoundation.CFRunLoopGetCurrent
 import platform.CoreFoundation.CFRunLoopRun
 import platform.CoreFoundation.CFRunLoopStop
 
-actual abstract class BaseTest {
+actual abstract class BaseTest: KoinTest {
     @OptIn(DelicateCoroutinesApi::class)
     actual fun <T> runTest(block: suspend CoroutineScope.() -> T) {
         var error: Throwable? = null

@@ -2,6 +2,7 @@ package de.darthkali.weefood.datasource.database.ingredient
 
 import de.darthkali.weefood.BaseTest
 import de.darthkali.weefood.datasource.database.WeeFoodDatabase
+import de.darthkali.weefood.datasource.database.WeeFoodDatabaseFactory
 import de.darthkali.weefood.di.initKoin
 import de.darthkali.weefood.domain.model.Ingredient
 import de.darthkali.weefood.mockFactory.IngredientMock
@@ -9,19 +10,14 @@ import de.darthkali.weefood.mockFactory.RecipeMock
 import de.darthkali.weefood.testDbConnection
 import de.darthkali.weefood.writeHead
 import kotlin.test.*
+import org.koin.core.component.inject
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
+import org.koin.test.KoinTest
 
 class IngredientDbImplTest : BaseTest() {
 
-    private val weeFoodDatabase: WeeFoodDatabase = WeeFoodDatabase(testDbConnection())
-    private val ingredientDb: IngredientDb
-    by lazy {
-        IngredientDbImpl(
-//            weeFoodDatabase = weeFoodDatabase
-        )
-    }
-
+    private val ingredientDb: IngredientDb by inject()
 
     @BeforeTest
     fun setup() = runTest {
