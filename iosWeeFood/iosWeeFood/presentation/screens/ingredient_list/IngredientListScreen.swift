@@ -15,8 +15,9 @@ struct IngredientListScreen: View {
     private let networkModule: NetworkModule
     private let databaseModule: DatabaseModule
     private let searchIngredientsModule: SearchIngredientModule
-    private let saveIngredientsModuel: SaveIngredientModule
+    private let saveIngredientsModule: SaveIngredientModule
     private let getAllIngredientsModule: GetAllIngredientsModule
+
 
     @ObservedObject var viewModel: IngredientListViewModel
 
@@ -26,7 +27,7 @@ struct IngredientListScreen: View {
     ) {
         self.networkModule = networkModule
         self.databaseModule = cacheModule
-        self.saveIngredientsModuel = SaveIngredientModule(databaseModule: self.databaseModule)
+        self.saveIngredientsModule = SaveIngredientModule(databaseModule: self.databaseModule)
         self.getAllIngredientsModule = GetAllIngredientsModule(databaseModule: self.databaseModule)
         self.searchIngredientsModule = SearchIngredientModule(
             networkModule: self.networkModule,
@@ -34,7 +35,7 @@ struct IngredientListScreen: View {
         )
         self.viewModel = IngredientListViewModel(
             searchIngredients: searchIngredientsModule.searchIngredient,
-            saveIngredient: saveIngredientsModuel.saveIngredient,
+            saveIngredient: saveIngredientsModule.saveIngredient,
             getAllIngredients: getAllIngredientsModule.getAllIngredient
         )
         // dismiss keyboard when drag starts

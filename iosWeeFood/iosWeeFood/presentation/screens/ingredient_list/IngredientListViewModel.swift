@@ -18,7 +18,6 @@ class IngredientListViewModel: ObservableObject {
     let saveIngredient: SaveIngredient
     let getAllIngredients: GetAllIngredients
 
-
     // State
     @Published var state: IngredientListState = IngredientListState()
 
