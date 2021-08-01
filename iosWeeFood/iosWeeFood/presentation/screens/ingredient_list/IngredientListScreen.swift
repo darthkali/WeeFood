@@ -12,20 +12,17 @@ import shared
 @available(iOS 14.0, *)
 struct IngredientListScreen: View {
 
-    private let searchIngredient: SearchIngredient
-    private let saveIngredient: SaveIngredient
-    private let getAllIngredients: GetAllIngredients
+    private let searchIngredient = SearchIngredient()
+    //private let saveIngredient = SaveIngredient()
+    //private let getAllIngredients = GetAllIngredients()
 
     @ObservedObject var viewModel: IngredientListViewModel
 
     init() {
-        self.searchIngredient = SearchIngredient()
-        self.saveIngredient = SaveIngredient()
-        self.getAllIngredients = GetAllIngredients()
         self.viewModel = IngredientListViewModel(
-            searchIngredients: searchIngredient,
-            saveIngredient: saveIngredient,
-            getAllIngredients: getAllIngredients
+            //searchIngredients: searchIngredient
+            //saveIngredient: saveIngredient,
+            //getAllIngredients: getAllIngredients
         )
         // dismiss keyboard when drag starts
         UIScrollView.appearance().keyboardDismissMode = .onDrag
@@ -48,9 +45,9 @@ struct IngredientListScreen: View {
                             ZStack{
                                 VStack{
                                     IngredientCard(
-                                        ingredient: ingredient,
-                                        onSaveIngredient: viewModel.saveIngredient,
-                                        getAll: viewModel.getAllIngredients
+                                        ingredient: ingredient
+                                        //onSaveIngredient: viewModel.saveIngredient,
+                                        //getAll: viewModel.getAllIngredients
                                     )
                                         .onAppear(perform: {
                                             if viewModel.shouldQueryNextPage(ingredient: ingredient){

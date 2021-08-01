@@ -10,16 +10,23 @@ import shared
 
 struct ContentView: View {
     
-    //private let searchIngredient: SearchIngredient
     
+    private let searchIngredient = SearchIngredient()
     var body: some View {
-       BottomBar()
-        //Text("Hallo")
-    }
-}
+      
+        //Text("Jetzt kommt der Müll:")
+        //Text(searchIngredient.searchIngredientBla())
+        BottomBar()
+                
+        }
+    
+ 
 
+/*
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
+}
+ */
 }

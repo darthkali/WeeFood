@@ -2,9 +2,7 @@ package de.darthkali.weefood
 
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import de.darthkali.weefood.di.Modules
-import de.darthkali.weefood.di.initKoin
-import de.darthkali.weefood.di.platformModule
+import de.darthkali.weefood.di.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.runBlocking
 import org.junit.Rule
@@ -25,12 +23,10 @@ actual abstract class BaseTest: KoinTest {
             androidContext(ApplicationProvider.getApplicationContext())
             modules(
                 platformModule(),
-                Modules.network,
-                Modules.database,
-                Modules.interactor
-
+                network,
+                database,
+                interactor
             )
-
     }
 
 

@@ -11,24 +11,25 @@ import shared
 
 class IngredientListViewModel: ObservableObject {
 
+    private let searchIngredient = SearchIngredient()
     private let logger = Logger(className: "RecipeListViewModel")
 
     // Dependencies
-    let searchIngredients: SearchIngredient
-    let saveIngredient: SaveIngredient
-    let getAllIngredients: GetAllIngredients
+    //let searchIngredients: SearchIngredient
+    //let saveIngredient: SaveIngredient
+    //let getAllIngredients: GetAllIngredients
 
     // State
     @Published var state: IngredientListState = IngredientListState()
 
     init(
-        searchIngredients: SearchIngredient,
-        saveIngredient: SaveIngredient,
-        getAllIngredients: GetAllIngredients
+        //searchIngredients: SearchIngredient,
+        //saveIngredient: SaveIngredient,
+        //getAllIngredients: GetAllIngredients
     ){
-        self.searchIngredients = searchIngredients
-        self.saveIngredient = saveIngredient
-        self.getAllIngredients = getAllIngredients
+        //self.searchIngredients = searchIngredients
+        //self.saveIngredient = saveIngredient
+        //self.getAllIngredients = getAllIngredients
         onTriggerEvent(stateEvent: IngredientListEvents.LoadIngredient())
     }
 
@@ -52,7 +53,7 @@ class IngredientListViewModel: ObservableObject {
 
     func doNothing(){}
 
-    
+    /*
     private func saveIngredient(ingredient:Ingredient) {
         saveIngredient.saveIngredient(ingredient: ingredient)
         for _ in getAllIngredients.getAllIngredients() {
@@ -62,12 +63,12 @@ class IngredientListViewModel: ObservableObject {
 
         self.logger.log(msg: "Ingredientien wurde geschpeichert junge${ingredient.name}")
     }
-    
+    */
     
     private func loadIngredients(){
         let currentState = (self.state.copy() as! IngredientListState)
         do{
-            try searchIngredients.execute(
+            try searchIngredient.execute(
                 query: currentState.query,
                 page: Int32(currentState.page)
             ).collectCommon(

@@ -15,7 +15,7 @@ import org.koin.core.component.inject
 class SearchIngredient: KoinComponent {
 
     private val ingredientService: IngredientService by inject()
-    private val logger = Logger("SearchRecipes")
+    private val logger = Logger("SearchIngredient")
 
     fun execute(
         query: String,
