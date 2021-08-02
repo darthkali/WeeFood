@@ -11,27 +11,13 @@ import shared
 
 class IngredientListViewModel: ObservableObject {
 
+    private let searchIngredient = SearchIngredient()
     private let logger = Logger(className: "RecipeListViewModel")
-
-    // Dependencies
-    let searchIngredients: SearchIngredient
-    let saveIngredient: SaveIngredient
-    let getAllIngredients: GetAllIngredients
-
 
     // State
     @Published var state: IngredientListState = IngredientListState()
 
-    init(
-        searchIngredients: SearchIngredient,
-        saveIngredient: SaveIngredient,
-        getAllIngredients: GetAllIngredients
-    ){
-        self.searchIngredients = searchIngredients
-        self.saveIngredient = saveIngredient
-        self.getAllIngredients = getAllIngredients
-        onTriggerEvent(stateEvent: IngredientListEvents.LoadIngredient())
-    }
+    init(){onTriggerEvent(stateEvent: IngredientListEvents.LoadIngredient())}
 
     func onTriggerEvent(stateEvent: IngredientListEvents){
         switch stateEvent {
@@ -41,9 +27,6 @@ class IngredientListViewModel: ObservableObject {
             newSearch()
         case is IngredientListEvents.NextPage:
             nextPage()
-        case is IngredientListEvents.SaveIngredient:
-            doNothing()
-            //saveIngredient(ingredient: (stateEvent as! IngredientListEvents.SaveIngredient).ingredient)
         case is IngredientListEvents.OnUpdateQuery:
             onUpdateQuery(query: (stateEvent as! IngredientListEvents.OnUpdateQuery).query)
         default:
@@ -53,22 +36,10 @@ class IngredientListViewModel: ObservableObject {
 
     func doNothing(){}
 
-    
-    private func saveIngredient(ingredient:Ingredient) {
-        saveIngredient.saveIngredient(ingredient: ingredient)
-        for _ in getAllIngredients.GetAllIngredients() {
-            print("Test")
-            self.logger.log(msg: "Ingredientien wurde gefunden: ${ingredientItem.name}")
-        }
-
-        self.logger.log(msg: "Ingredientien wurde geschpeichert junge${ingredient.name}")
-    }
-    
-    
     private func loadIngredients(){
         let currentState = (self.state.copy() as! IngredientListState)
         do{
-            try searchIngredients.execute(
+            try searchIngredient.execute(
                 query: currentState.query,
                 page: Int32(currentState.page)
             ).collectCommon(

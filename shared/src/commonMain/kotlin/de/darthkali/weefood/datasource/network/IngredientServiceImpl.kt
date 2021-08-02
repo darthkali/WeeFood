@@ -2,21 +2,27 @@ package de.darthkali.weefood.datasource.network
 
 import de.darthkali.weefood.datasource.network.model.IngredientSearchResponse
 import de.darthkali.weefood.domain.model.Ingredient
-import io.ktor.client.*
-import io.ktor.client.request.*
+import io.ktor.client.request.get
+import io.ktor.client.request.url
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class IngredientServiceImpl(
-    private val httpClient: HttpClient,
-) : IngredientService {
+class IngredientServiceImpl: IngredientService, KoinComponent {
 
+    private val ktorClientFactory: KtorClientFactory by inject()
+    private val httpClient =  ktorClientFactory.build()
 
-    override suspend fun search(query: String, page: Int): List<Ingredient> {
+    override suspend fun searchIngredient(query: String, page: Int): List<Ingredient> {
 
         val offset: Int  = (page - 1)  * PAGINATION_PAGE_SIZE
 
         return httpClient.get<IngredientSearchResponse> {
             url("$BASE_URL/food/ingredients/search?apiKey=$API_KEY&query=$query&metaInformation=true&offset=$offset&number=$PAGINATION_PAGE_SIZE")
         }.results.toIngredientList()
+    }
+
+    override fun searchIngredientBla(): String {
+        return "IOS ist Scheiße"
     }
 
     companion object {

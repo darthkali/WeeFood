@@ -1,19 +1,24 @@
 package de.darthkali.weefood.datasource.database.weekRecipe
 
-import de.darthkali.weefood.datasource.database.WeeFoodDatabase
-import de.darthkali.weefood.datasource.database.toWeekRecipeList
+import de.darthkali.weefood.datasource.database.RecipeIngredient_Entity
+import de.darthkali.weefood.datasource.database.WeekRecipe_Entity
+import de.darthkali.weefood.datasource.database.WeeFoodDatabaseWrapper
+import de.darthkali.weefood.domain.model.RecipeIngredient
 import de.darthkali.weefood.domain.model.WeekRecipe
 import de.darthkali.weefood.domain.util.enums.Weekday
 import de.darthkali.weefood.util.Logger
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class WeekRecipeDbImpl(
-    var weeFoodDatabase: WeeFoodDatabase
-) : WeekRecipeDb {
+class WeekRecipeDbImpl: WeekRecipeDb , KoinComponent {
 
+    private val weeFoodDatabase: WeeFoodDatabaseWrapper by inject()
+    private val weeFoodDatabaseQueries = weeFoodDatabase.instance.weekRecipeDbQueries
     private val logger = Logger("WeekRecipeDbImpl")
+
     override fun insertWeekRecipe(weekRecipe: WeekRecipe): Boolean {
         return try {
-            weeFoodDatabase.weekRecipeDbQueries.insertWeekRecip(
+            weeFoodDatabaseQueries.insertWeekRecip(
                 null,
                 weekday = weekRecipe.weekday.value, // TODO: SQL Delight bietet eine möglichkeit enums zu nutzen. Das muss hier eingebaut werden
                 portion = weekRecipe.portion,
@@ -30,7 +35,7 @@ class WeekRecipeDbImpl(
     override fun getAllWeekRecipes(): List<WeekRecipe> {
         return try {
             logger.log("Get All WeekRecipes from database")
-            weeFoodDatabase.weekRecipeDbQueries.getAllWeekRecipes()
+            weeFoodDatabaseQueries.getAllWeekRecipes()
                 .executeAsList().toWeekRecipeList()
         } catch (e: Exception) {
             logger.log(e.toString())
@@ -41,7 +46,7 @@ class WeekRecipeDbImpl(
     override fun getAllWeekRecipesByWeekDay(weekday: Weekday): List<WeekRecipe> {
         return try {
             logger.log("Get All WeekRecipe from database by WeekDay")
-            weeFoodDatabase.weekRecipeDbQueries.getAllWeekRecipesByWeekDay(
+            weeFoodDatabaseQueries.getAllWeekRecipesByWeekDay(
                 weekday = weekday.value, //.ordinal // TODO: SQL Delight bietet eine möglichkeit enums zu nutzen. Das muss hier eingebaut werden
             ).executeAsList().toWeekRecipeList()
         } catch (e: Exception) {
@@ -53,7 +58,7 @@ class WeekRecipeDbImpl(
     override fun deleteWeekRecipeById(recipeId: Int): Boolean {
         return try {
             logger.log("Delete WeekRecipe from database by ID")
-            weeFoodDatabase.weekRecipeDbQueries.deleteWeekRecipeById(id = recipeId.toLong())
+            weeFoodDatabaseQueries.deleteWeekRecipeById(id = recipeId.toLong())
             true
         } catch (e: Exception) {
             logger.log(e.toString())
@@ -64,11 +69,69 @@ class WeekRecipeDbImpl(
     override fun deleteAllWeekRecipe(): Boolean {
         return try {
             logger.log("Delete all WeekRecipes from database")
-            weeFoodDatabase.weekRecipeDbQueries.deleteAllWeekRecipes()
+            weeFoodDatabaseQueries.deleteAllWeekRecipes()
             true
         } catch (e: Exception) {
             logger.log(e.toString())
             false
         }
     }
+
+
+/*
+-- -----------------------------------------------------
+-- recipeIngredient_Entity
+-- -----------------------------------------------------
+  id            INTEGER             NOT NULL PRIMARY KEY AUTOINCREMENT,
+  quantity      REAL AS Float       NOT NULL,
+  unit          TEXT                NOT NULL,
+  recipe_id     INTEGER AS Integer  NOT NULL,
+  ingredient_id INTEGER AS Integer  NOT NULL,
+
+  FOREIGN KEY (ingredient_id)   REFERENCES ingredient_Entity(id),
+  FOREIGN KEY (recipe_id)       REFERENCES recipe_Entity(id)
+-- -----------------------------------------------------
+*/
+
+    fun RecipeIngredient_Entity.toRecipeIngredient(): RecipeIngredient {
+        return RecipeIngredient(
+            id = id.toInt(),
+            quantity = quantity,
+            unit = unit,
+            recipe_id = recipe_id,
+            ingredient_id = ingredient_id,
+        )
+    }
+
+    fun List<RecipeIngredient_Entity>.toRecipeIngredientList(): List<RecipeIngredient> {
+        return map { it.toRecipeIngredient() }
+    }
+
+
+/*
+-- -----------------------------------------------------
+-- weekRecipe_Entity
+-- -----------------------------------------------------
+  id        INTEGER             NOT NULL PRIMARY KEY AUTOINCREMENT,
+  weekday   INTEGER AS Integer  NOT NULL,
+  portion   INTEGER AS Integer  NOT NULL,
+  recipe_id INTEGER AS Integer  NOT NULL,
+
+  FOREIGN KEY (recipe_id) REFERENCES recipe_Entity(id)
+-- -----------------------------------------------------
+*/
+
+    fun WeekRecipe_Entity.toWeekRecipe(): WeekRecipe {
+        return WeekRecipe(
+            id = id.toInt(),
+            weekday = Weekday.fromInt(weekday),
+            portion = portion,
+            recipe_id = recipe_id,
+        )
+    }
+
+    fun List<WeekRecipe_Entity>.toWeekRecipeList(): List<WeekRecipe> {
+        return map { it.toWeekRecipe() }
+    }
+
 }

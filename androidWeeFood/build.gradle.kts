@@ -65,5 +65,9 @@ dependencies {
 
     implementation(Ktor.android)
 
+    implementation(Koin.android)
+    implementation(Koin.compose)
+
+
     debugImplementation(SquareUp.leakCanary)
 }

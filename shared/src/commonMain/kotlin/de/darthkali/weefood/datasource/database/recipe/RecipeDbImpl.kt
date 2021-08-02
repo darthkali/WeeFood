@@ -1,21 +1,22 @@
 package de.darthkali.weefood.datasource.database.recipe
 
-import de.darthkali.weefood.datasource.database.WeeFoodDatabase
-import de.darthkali.weefood.datasource.database.toRecipe
-import de.darthkali.weefood.datasource.database.toRecipeList
+import de.darthkali.weefood.datasource.database.Recipe_Entity
+import de.darthkali.weefood.datasource.database.WeeFoodDatabaseWrapper
 import de.darthkali.weefood.domain.model.Recipe
 import de.darthkali.weefood.util.Logger
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class RecipeDbImpl(
-    var weeFoodDatabase: WeeFoodDatabase
-) : RecipeDb {
+class RecipeDbImpl: RecipeDb , KoinComponent {
+
+    private val weeFoodDatabase: WeeFoodDatabaseWrapper by inject()
+    private val weeFoodDatabaseQueries = weeFoodDatabase.instance.recipeDbQueries
 
     private val logger = Logger("RecipeDbImpl")
 
-
     override fun insertRecipe(recipe: Recipe): Boolean {
         return try {
-            weeFoodDatabase.recipeDbQueries.insertRecipe(
+            weeFoodDatabaseQueries.insertRecipe(
                 null,
                 name = recipe.name,
                 image = recipe.image ?: "no.jpg",
@@ -34,7 +35,7 @@ class RecipeDbImpl(
     override fun getAllRecipes(): List<Recipe> {
         return try {
             logger.log("Get All Recipes from database")
-            weeFoodDatabase.recipeDbQueries.getAllRecipes(
+            weeFoodDatabaseQueries.getAllRecipes(
                 pageSize = 100,  // TODO replace with parameter
                 offset = 0       // TODO replace with parameter
             ).executeAsList().toRecipeList()
@@ -48,7 +49,7 @@ class RecipeDbImpl(
     override fun getRecipeById(recipeId: Int): Recipe? {
         return try {
             logger.log("Get Recipe from database by ID")
-            weeFoodDatabase.recipeDbQueries.getRecipeById(
+            weeFoodDatabaseQueries.getRecipeById(
                 id = recipeId.toLong()
             ).executeAsOne().toRecipe()
         } catch (e: Exception) {
@@ -60,7 +61,7 @@ class RecipeDbImpl(
     override fun searchRecipes(name: String): List<Recipe> {
         return try {
             logger.log("Search Recipes in database")
-            weeFoodDatabase.recipeDbQueries.searchRecipes(
+            weeFoodDatabaseQueries.searchRecipes(
                 query = name,
                 pageSize = 100,  // TODO replace with parameter
                 offset = 0       // TODO replace with parameter
@@ -74,7 +75,7 @@ class RecipeDbImpl(
     override fun deleteRecipeById(recipeId: Int): Boolean {
         return try {
             logger.log("Delete Recipe from database by ID")
-            weeFoodDatabase.recipeDbQueries.deleteRecipeById(id = recipeId.toLong())
+            weeFoodDatabaseQueries.deleteRecipeById(id = recipeId.toLong())
             true
         } catch (e: Exception) {
             logger.log(e.toString())
@@ -85,11 +86,41 @@ class RecipeDbImpl(
     override fun deleteAllRecipes(): Boolean {
         return try {
             logger.log("Delete all Recipes from database")
-            weeFoodDatabase.recipeDbQueries.deleteAllRecipes()
+            weeFoodDatabaseQueries.deleteAllRecipes()
             true
         } catch (e: Exception) {
             logger.log(e.toString())
             false
         }
     }
+
+    /*
+-- -----------------------------------------------------
+-- recipe_Entity
+-- -----------------------------------------------------
+  id            INTEGER             NOT NULL PRIMARY KEY AUTOINCREMENT,
+  name          TEXT                NOT NULL,
+  image         TEXT,
+  cooking_time  INTEGER AS Integer  NOT NULL,
+  unit          TEXT                NOT NULL,
+  description   TEXT
+-- -----------------------------------------------------
+*/
+
+    fun Recipe_Entity.toRecipe(): Recipe {
+        return Recipe(
+            id = id.toInt(),
+            name = name,
+            image = image,
+            cooking_time = cooking_time,
+            cooking_time_unit = cooking_time_unit,
+            description = description
+        )
+    }
+
+    fun List<Recipe_Entity>.toRecipeList(): List<Recipe> {
+        return map { it.toRecipe() }
+    }
+
+
 }

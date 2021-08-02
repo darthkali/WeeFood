@@ -1,23 +1,17 @@
 package de.darthkali.weefood.datasource.database.ingredient
 
 import de.darthkali.weefood.BaseTest
-import de.darthkali.weefood.datasource.database.WeeFoodDatabase
-import de.darthkali.weefood.domain.model.Ingredient
+import de.darthkali.weefood.di.*
 import de.darthkali.weefood.mockFactory.IngredientMock
-import de.darthkali.weefood.mockFactory.RecipeMock
-import de.darthkali.weefood.testDbConnection
 import de.darthkali.weefood.writeHead
 import kotlin.test.*
+import org.koin.core.component.inject
+import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
 
 class IngredientDbImplTest : BaseTest() {
 
-    private val weeFoodDatabase: WeeFoodDatabase = WeeFoodDatabase(testDbConnection())
-    private val ingredientDb: IngredientDb by lazy {
-        IngredientDbImpl(
-            weeFoodDatabase = weeFoodDatabase
-        )
-    }
-
+    private val ingredientDb: IngredientDb by inject()
 
     @BeforeTest
     fun setup() = runTest {
@@ -48,7 +42,7 @@ class IngredientDbImplTest : BaseTest() {
         writeHead("get_ingredient_by_id_success")
         val ingredients = ingredientDb.getAllIngredients()
 
-        for(ingredientItem in ingredients){
+        for(ingredientItem in ingredients!!) {
             val ingredient = ingredientDb.getIngredientById(ingredientItem.id)
             println(ingredient.toString())
             assertEquals(
@@ -107,4 +101,5 @@ class IngredientDbImplTest : BaseTest() {
 
         assertEquals(ingredientDb.getAllIngredients().last(), IngredientMock.ingredient)
     }
+
 }

@@ -1,21 +1,23 @@
 package de.darthkali.weefood.datasource.database.ingredient
 
-import de.darthkali.weefood.datasource.database.WeeFoodDatabase
-import de.darthkali.weefood.datasource.database.toIngredient
-import de.darthkali.weefood.datasource.database.toIngredientList
+import de.darthkali.weefood.datasource.database.Ingredient_Entity
+import de.darthkali.weefood.datasource.database.WeeFoodDatabaseWrapper
 import de.darthkali.weefood.domain.model.Ingredient
 import de.darthkali.weefood.util.Logger
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class IngredientDbImpl(
-    var weeFoodDatabase: WeeFoodDatabase
-) : IngredientDb {
+class IngredientDbImpl : IngredientDb, KoinComponent {
+
+    private val weeFoodDatabase: WeeFoodDatabaseWrapper by inject()
+    private val weeFoodDatabaseQueries = weeFoodDatabase.instance.ingredientDbQueries
 
     private val logger = Logger("IngredientDbImpl")
 
-    override fun insertIngredient(ingredient: Ingredient): Boolean {
 
+    override fun insertIngredient(ingredient: Ingredient): Boolean {
         return try {
-            weeFoodDatabase.ingredientDbQueries.insertIngredient(
+            weeFoodDatabaseQueries.insertIngredient(
                 null,
                 name = ingredient.name ?: "",
                 image = ingredient.image ?: "no.jpg",
@@ -27,13 +29,12 @@ class IngredientDbImpl(
             logger.log(e.toString())
             false
         }
-
     }
 
     override fun getAllIngredients(): List<Ingredient> {
         return try {
             logger.log("Get All Ingredients from database")
-            weeFoodDatabase.ingredientDbQueries.getAllIngredients(
+            weeFoodDatabaseQueries.getAllIngredients(
                 pageSize = 100,  // TODO replace with parameter
                 offset = 0       // TODO replace with parameter
             ).executeAsList().toIngredientList()
@@ -47,7 +48,7 @@ class IngredientDbImpl(
     override fun getIngredientById(ingredientId: Int): Ingredient? {
         return try {
             logger.log("Get Ingredient from database by ID")
-            weeFoodDatabase.ingredientDbQueries.getIngredientById(
+            weeFoodDatabaseQueries.getIngredientById(
                 id = ingredientId.toLong()
             ).executeAsOne().toIngredient()
         } catch (e: Exception) {
@@ -59,7 +60,7 @@ class IngredientDbImpl(
     override fun deleteIngredientById(ingredientId: Int): Boolean {
         return try {
             logger.log("Delete Ingredient from database by ID")
-            weeFoodDatabase.ingredientDbQueries.deleteIngredientById(id = ingredientId.toLong())
+            weeFoodDatabaseQueries.deleteIngredientById(id = ingredientId.toLong())
             true
         } catch (e: Exception) {
             logger.log(e.toString())
@@ -70,11 +71,39 @@ class IngredientDbImpl(
     override fun deleteAllIngredients(): Boolean {
         return try {
             logger.log("Delete all Ingredients from database")
-            weeFoodDatabase.ingredientDbQueries.deleteAllIngredients()
+            weeFoodDatabaseQueries.deleteAllIngredients()
             true
         } catch (e: Exception) {
             logger.log(e.toString())
             false
         }
     }
+
+
+    /*
+-- -----------------------------------------------------
+-- ingredient_Entity
+-- -----------------------------------------------------
+    id      INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    name    TEXT    NOT NULL,
+    image   TEXT    NOT NULL
+
+//        aisle = featured_image,
+//        possibleUnits = ingredients.convertIngredientsToList(),
+-- -----------------------------------------------------
+*/
+
+    fun Ingredient_Entity.toIngredient(): Ingredient {
+        return Ingredient(
+            id = id.toInt(),
+            name = name,
+            image = image,
+        )
+    }
+
+
+    fun List<Ingredient_Entity>.toIngredientList(): List<Ingredient> {
+        return map { it.toIngredient() }
+    }
+
 }

@@ -12,8 +12,8 @@ import shared
 
 struct BottomBar: View {
     
-    private let networkModule = NetworkModule()
-    private let cacheModule = DatabaseModule()
+    //private let searchIngredient = SearchIngredient()
+    //private let cacheModule = DatabaseModule()
     
     
     var body: some View {
@@ -40,8 +40,7 @@ struct BottomBar: View {
             // Einkaufsliste
             NavigationView{
                 IngredientListScreen(
-                    networkModule: networkModule,
-                    cacheModule: cacheModule
+                    
                 ).navigationBarTitle("Zutatensuche")
             }
             .tabItem{

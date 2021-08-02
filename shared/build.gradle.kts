@@ -69,6 +69,8 @@ kotlin {
                 implementation(Kotlinx.common)
                 implementation(Kotlinx.serialization)
                 implementation(SQLDelight.runtime)
+                implementation(Koin.core)
+                implementation(Koin.test)
             }
         }
 
@@ -76,6 +78,7 @@ kotlin {
             dependencies {
                 implementation(Kotlin.commonTest)
                 implementation(Kotlin.annotations)
+                implementation(Koin.test)
             }
         }
         val androidMain by getting {
@@ -83,6 +86,8 @@ kotlin {
                 implementation(Ktor.android)
                 implementation(SQLDelight.androidDriver)
                 implementation(Kotlinx.android)
+                implementation(Koin.test)
+                implementation(Koin.testJunit4)
             }
         }
 
@@ -98,6 +103,7 @@ kotlin {
                 implementation(AndroidXTest.rules)
                 implementation(Kotlinx.test)
                 implementation(Robolectric.robolectric)
+                implementation(Koin.android)
             }
         }
 
@@ -106,6 +112,8 @@ kotlin {
             dependencies {
                 implementation(Ktor.ios)
                 implementation(SQLDelight.nativeDriver)
+                implementation(Koin.core)
+                implementation(Koin.test)
                 implementation(Kotlinx.common) {
                     version {
                         strictly(Kotlinx.coroutines)

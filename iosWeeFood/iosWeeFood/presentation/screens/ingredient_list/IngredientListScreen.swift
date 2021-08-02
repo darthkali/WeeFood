@@ -12,31 +12,10 @@ import shared
 @available(iOS 14.0, *)
 struct IngredientListScreen: View {
 
-    private let networkModule: NetworkModule
-    private let databaseModule: DatabaseModule
-    private let searchIngredientsModule: SearchIngredientModule
-    private let saveIngredientsModuel: SaveIngredientModule
-    private let getAllIngredientsModule: GetAllIngredientsModule
-
     @ObservedObject var viewModel: IngredientListViewModel
 
-    init(
-        networkModule: NetworkModule,
-        cacheModule: DatabaseModule
-    ) {
-        self.networkModule = networkModule
-        self.databaseModule = cacheModule
-        self.saveIngredientsModuel = SaveIngredientModule(databaseModule: self.databaseModule)
-        self.getAllIngredientsModule = GetAllIngredientsModule(databaseModule: self.databaseModule)
-        self.searchIngredientsModule = SearchIngredientModule(
-            networkModule: self.networkModule,
-            databaseModule: self.databaseModule
-        )
-        self.viewModel = IngredientListViewModel(
-            searchIngredients: searchIngredientsModule.searchIngredient,
-            saveIngredient: saveIngredientsModuel.saveIngredient,
-            getAllIngredients: getAllIngredientsModule.getAllIngredient
-        )
+    init() {
+        self.viewModel = IngredientListViewModel()
         // dismiss keyboard when drag starts
         UIScrollView.appearance().keyboardDismissMode = .onDrag
     }
@@ -57,11 +36,7 @@ struct IngredientListScreen: View {
                         ForEach(viewModel.state.ingredients, id: \.self.id){ ingredient in
                             ZStack{
                                 VStack{
-                                    IngredientCard(
-                                        ingredient: ingredient,
-                                        onSaveIngredient: viewModel.saveIngredient,
-                                        getAll: viewModel.getAllIngredients
-                                    )
+                                    IngredientCard(ingredient: ingredient)
                                         .onAppear(perform: {
                                             if viewModel.shouldQueryNextPage(ingredient: ingredient){
                                                 viewModel.onTriggerEvent(stateEvent: IngredientListEvents.NextPage())
@@ -74,7 +49,7 @@ struct IngredientListScreen: View {
                         }
                     }
                     .listStyle(PlainListStyle())
-                    .background(Color.init(hex: 0xf2f2f2))
+        
                 }
                 if viewModel.state.isLoading {
                     ProgressView("Searching ingredients...")
@@ -85,6 +60,7 @@ struct IngredientListScreen: View {
     }
 }
 
+/*
 @available(iOS 14.0, *)
 struct IngredientListScreen_Previews: PreviewProvider {
     static var previews: some View {
@@ -94,3 +70,4 @@ struct IngredientListScreen_Previews: PreviewProvider {
         )
     }
 }
+ */
