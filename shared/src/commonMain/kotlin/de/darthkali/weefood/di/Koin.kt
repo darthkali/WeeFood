@@ -16,7 +16,6 @@ import de.darthkali.weefood.interactors.recipe_list.GetAllIngredients
 import de.darthkali.weefood.interactors.recipe_list.SaveIngredient
 import de.darthkali.weefood.interactors.recipe_list.SearchIngredient
 import org.koin.core.context.startKoin
-import org.koin.core.KoinApplication
 import org.koin.core.module.Module
 import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module

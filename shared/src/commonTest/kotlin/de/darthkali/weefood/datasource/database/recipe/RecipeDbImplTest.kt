@@ -2,9 +2,11 @@ package de.darthkali.weefood.datasource.database.recipe
 
 import de.darthkali.weefood.BaseTest
 import de.darthkali.weefood.datasource.database.WeeFoodDatabase
+import de.darthkali.weefood.datasource.database.ingredient.IngredientDb
 import de.darthkali.weefood.mockFactory.RecipeMock
 import de.darthkali.weefood.testDbConnection
 import de.darthkali.weefood.writeHead
+import org.koin.core.component.inject
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -13,12 +15,7 @@ import kotlin.test.assertTrue
 
 class RecipeDbImplTest : BaseTest() {
 
-    private val weeFoodDatabase: WeeFoodDatabase = WeeFoodDatabase(testDbConnection())
-    private val recipeDb: RecipeDb by lazy {
-        RecipeDbImpl(
-//            weeFoodDatabase = weeFoodDatabase
-        )
-    }
+    private val recipeDb: RecipeDb by inject()
 
 
     @BeforeTest

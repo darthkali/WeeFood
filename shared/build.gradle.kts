@@ -112,6 +112,8 @@ kotlin {
             dependencies {
                 implementation(Ktor.ios)
                 implementation(SQLDelight.nativeDriver)
+                implementation(Koin.core)
+                implementation(Koin.test)
                 implementation(Kotlinx.common) {
                     version {
                         strictly(Kotlinx.coroutines)

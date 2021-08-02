@@ -1,10 +1,13 @@
 package de.darthkali.weefood.datasource.database.ingredient
 
 import de.darthkali.weefood.BaseTest
+import de.darthkali.weefood.di.*
 import de.darthkali.weefood.mockFactory.IngredientMock
 import de.darthkali.weefood.writeHead
 import kotlin.test.*
 import org.koin.core.component.inject
+import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
 
 class IngredientDbImplTest : BaseTest() {
 
@@ -39,7 +42,7 @@ class IngredientDbImplTest : BaseTest() {
         writeHead("get_ingredient_by_id_success")
         val ingredients = ingredientDb.getAllIngredients()
 
-        for(ingredientItem in ingredients!!){
+        for(ingredientItem in ingredients!!) {
             val ingredient = ingredientDb.getIngredientById(ingredientItem.id)
             println(ingredient.toString())
             assertEquals(
@@ -98,4 +101,5 @@ class IngredientDbImplTest : BaseTest() {
 
         assertEquals(ingredientDb.getAllIngredients().last(), IngredientMock.ingredient)
     }
+
 }
