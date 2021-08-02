@@ -12,18 +12,15 @@ import SDWebImageSwiftUI
 
 struct IngredientCard: View {
 
+    private let saveIngredient = SaveIngredient()
+    private let getAllIngredients = GetAllIngredients()
+    
     let ingredient: Ingredient
-    //let onSaveIngredient: SaveIngredient
-    //let getAll: GetAllIngredients
 
     init(
         ingredient: Ingredient
-        //onSaveIngredient: SaveIngredient,
-        //getAll: GetAllIngredients
     ) {
         self.ingredient = ingredient
-        //self.onSaveIngredient = onSaveIngredient
-        //self.getAll = getAll
     }
 
     var body: some View {
@@ -54,11 +51,11 @@ struct IngredientCard: View {
                 
             }
     
-            /*Button("Hinzufügen"){
+            Button("Hinzufügen"){
                 
-                self.onSaveIngredient.saveIngredient(ingredient: ingredient)
+                saveIngredient.saveIngredient(ingredient: ingredient)
             
-                for ingredient in getAll.getAllIngredients() {
+                for ingredient in getAllIngredients.getAllIngredients() {
                     print(ingredient)
                 }
             }
@@ -67,7 +64,7 @@ struct IngredientCard: View {
             .background(Color.green)
             .cornerRadius(8)
             Spacer()
- */
+ 
 
         }
         .background(Color.white)
