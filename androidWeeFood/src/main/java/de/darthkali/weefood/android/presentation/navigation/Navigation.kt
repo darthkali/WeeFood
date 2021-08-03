@@ -46,7 +46,8 @@ fun Navigation(){
         composable(
             route = NavigationItem.WeekList.route
         ) { navBackStackEntry ->
-            WeekListScreen(navController)
+            NewRecipeScreen(navController)
+            //WeekListScreen(navController)
         }
 
 

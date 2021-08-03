@@ -68,6 +68,5 @@ dependencies {
     implementation(Koin.android)
     implementation(Koin.compose)
 
-
     debugImplementation(SquareUp.leakCanary)
 }
