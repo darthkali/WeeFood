@@ -10,12 +10,15 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import de.darthkali.weefood.android.presentation.theme.AppTheme
@@ -27,7 +30,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalComposeUiApi
 @Composable
 fun IngredientUnitTextField(
-    value: String,
+    input: String = "",
+    onInputChanged: (String) -> Unit,
     label: String
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -35,8 +39,8 @@ fun IngredientUnitTextField(
         modifier = Modifier
             .width(120.dp)
             .padding(8.dp),
-        value = value,
-        onValueChange = { },
+        value = input,
+        onValueChange = { onInputChanged(it) },
         label = { Text(text = label) },
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Text,
@@ -54,17 +58,18 @@ fun IngredientUnitTextField(
 
 }
 
-@ExperimentalCoroutinesApi
-@ExperimentalMaterialApi
-@ExperimentalComposeUiApi
-@Preview(showBackground = true)
-@Composable
-fun IngredientUnitTextFieldPreview() {
-    AppTheme() {
-        IngredientUnitTextField(
-            value = RecipeIngredientMock.recipeIngredient.quantity.toString(),
-            label = "Menge")
-    }
-
-}
+//@ExperimentalCoroutinesApi
+//@ExperimentalMaterialApi
+//@ExperimentalComposeUiApi
+//@Preview(showBackground = true)
+//@Composable
+//fun IngredientUnitTextFieldPreview() {
+//    AppTheme() {
+//        val textState = remember { mutableStateOf(TextFieldValue()) }
+//        IngredientUnitTextField(
+//            value = "Test",
+//            label = "Menge")
+//    }
+//
+//}
 

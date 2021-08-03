@@ -20,6 +20,8 @@ import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -27,6 +29,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import de.darthkali.weefood.android.presentation.components.CircleImage
@@ -80,13 +83,16 @@ fun IngredientCard(
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
-                IngredientUnitTextField(
-                    value = RecipeIngredientMock.recipeIngredient.quantity.toString(),
-                    label = "Menge")
+                val textState = remember { mutableStateOf(TextFieldValue()) }
+                //textState.value.copy(RecipeIngredientMock.recipeIngredient.quantity.toString())
 
-                IngredientUnitTextField(
-                    value = RecipeIngredientMock.recipeIngredient.unit,
-                    label = "Einheit")
+//                IngredientUnitTextField(
+//                    value = textState.value,
+//                    label = "Menge")
+//
+//                IngredientUnitTextField(
+//                    value = textState.value,
+//                    label = "Einheit")
             }
 
 

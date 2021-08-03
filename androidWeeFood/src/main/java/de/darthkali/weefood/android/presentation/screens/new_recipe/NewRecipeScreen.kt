@@ -9,7 +9,10 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
@@ -20,6 +23,10 @@ import de.darthkali.weefood.android.presentation.screens.new_recipe.components.I
 import de.darthkali.weefood.android.presentation.theme.AppTheme
 import de.darthkali.weefood.mockFactory.IngredientMock
 import de.darthkali.weefood.mockFactory.RecipeIngredientMock
+import de.darthkali.weefood.presentation.ingredient_list.IngredientListEvents
+import de.darthkali.weefood.presentation.ingredient_list.IngredientListState
+import de.darthkali.weefood.presentation.new_recipe.NewRecipeEvents
+import de.darthkali.weefood.presentation.new_recipe.NewRecipeState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 
@@ -29,7 +36,9 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalFoundationApi
 @Composable
 fun NewRecipeScreen(
-    navController: NavController
+    state: NewRecipeState,
+    navController: NavController,
+    onTriggerEvent: (NewRecipeEvents) -> Unit,
 ) {
     AppTheme() {
         Scaffold(
@@ -38,9 +47,13 @@ fun NewRecipeScreen(
         ) {
             LazyColumn() {
                 item {
-
                     Text("Bild")
-                    IngredientUnitTextField(value = "Name", label = "Rezeptname")
+                    IngredientUnitTextField(
+                        input = state.name,
+                        onInputChanged = {
+                            onTriggerEvent(NewRecipeEvents.OnUpdateName(it))
+                        },
+                        label = "Rezeptname")
                     Row() {
                         Text("Zuatten pro Portion")
                         Text("Plus Button")
@@ -60,12 +73,28 @@ fun NewRecipeScreen(
 
                 item{
                     Text("Kochzeit")
+
                     Row() {
-                        IngredientUnitTextField(value = "20", label = "Zeit")
-                        IngredientUnitTextField(value = "min", label = "Einheit")
+                        IngredientUnitTextField(
+                            input = state.cooking_time.toString(),
+                            onInputChanged = {
+                                onTriggerEvent(NewRecipeEvents.OnUpdateCookingTime(it.toInt()))
+                            },
+                            label = "Zeit")
+                        IngredientUnitTextField(
+                            input = state.cooking_time_unit,
+                            onInputChanged = {
+                                onTriggerEvent(NewRecipeEvents.OnUpdateCookingTimeUnit(it))
+                            },
+                            label = "Einheit")
                     }
                     Text("Rezept")
-                    IngredientUnitTextField(value = "Gaaaaaanz viel Text", label = "Rezept")
+                    IngredientUnitTextField(
+                        input = state.description,
+                        onInputChanged = {
+                            onTriggerEvent(NewRecipeEvents.OnUpdateDescription(it))
+                        },
+                        label = "Rezept")
                 }
             }
         }
@@ -76,16 +105,16 @@ fun NewRecipeScreen(
 
 
 
-@ExperimentalFoundationApi
-@ExperimentalCoroutinesApi
-@ExperimentalMaterialApi
-@ExperimentalComposeUiApi
-@Preview(showBackground = true)
-@Composable
-fun NewRecipeScreenPreview() {
-
-    val navController = rememberNavController()
-    AppTheme() {
-        NewRecipeScreen(navController)
-    }
-}
+//@ExperimentalFoundationApi
+//@ExperimentalCoroutinesApi
+//@ExperimentalMaterialApi
+//@ExperimentalComposeUiApi
+//@Preview(showBackground = true)
+//@Composable
+//fun NewRecipeScreenPreview() {
+//
+//    val navController = rememberNavController()
+//    AppTheme() {
+//        NewRecipeScreen(navController)
+//    }
+//}
