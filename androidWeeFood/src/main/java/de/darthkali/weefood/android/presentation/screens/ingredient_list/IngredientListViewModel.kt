@@ -5,10 +5,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import de.darthkali.weefood.domain.model.Ingredient
-import de.darthkali.weefood.interactors.recipe_list.GetAllIngredients
-import de.darthkali.weefood.interactors.recipe_list.SaveIngredient
+import de.darthkali.weefood.interactors.ingredient_list.GetAllIngredients
+import de.darthkali.weefood.interactors.ingredient_list.SaveIngredient
 import de.darthkali.weefood.presentation.ingredient_list.IngredientListEvents
-import de.darthkali.weefood.interactors.recipe_list.SearchIngredient
+import de.darthkali.weefood.interactors.ingredient_list.SearchIngredient
 import de.darthkali.weefood.presentation.ingredient_list.IngredientListState
 import de.darthkali.weefood.util.Logger
 import kotlin.collections.ArrayList
@@ -18,12 +18,12 @@ import org.koin.core.component.inject
 
 class IngredientListViewModel: ViewModel(), KoinComponent {
 
-    private val searchIngredient: SearchIngredient  by inject()
+    private val searchIngredient: SearchIngredient by inject()
     private val saveIngredient: SaveIngredient by inject()
     private val getAllIngredients: GetAllIngredients by inject()
 
 
-    private val logger = Logger("IngredientListViewModelssss")
+    private val logger = Logger("IngredientListViewModel")
 
     val state: MutableState<IngredientListState> = mutableStateOf(IngredientListState())
 
@@ -55,10 +55,24 @@ class IngredientListViewModel: ViewModel(), KoinComponent {
     }
 
     private fun saveIngredient(ingredient:Ingredient) {
-        saveIngredient.saveIngredient(ingredient)
-        for(ingredientItem in getAllIngredients.getAllIngredients()){
+        saveIngredient.execute(ingredient)
+
+        getAllIngredients.execute().collectCommon(viewModelScope) { dataState ->
+            state.value = state.value.copy(isLoading = dataState.isLoading)
+
+            dataState.data?.let { ingredients ->
+                appendIngredients(ingredients)
+
+            }
+        }
+        for(ingredientItem in state.value.ingredients){
             logger.log(ingredientItem.toString())
         }
+
+//
+//        for(ingredientItem in getAllIngredients.execute()){
+//            logger.log(ingredientItem.toString())
+//        }
     }
 
 

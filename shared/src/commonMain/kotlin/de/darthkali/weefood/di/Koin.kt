@@ -12,9 +12,9 @@ import de.darthkali.weefood.datasource.database.weekRecipe.WeekRecipeDbImpl
 import de.darthkali.weefood.datasource.network.IngredientService
 import de.darthkali.weefood.datasource.network.IngredientServiceImpl
 import de.darthkali.weefood.datasource.network.KtorClientFactory
-import de.darthkali.weefood.interactors.recipe_list.GetAllIngredients
-import de.darthkali.weefood.interactors.recipe_list.SaveIngredient
-import de.darthkali.weefood.interactors.recipe_list.SearchIngredient
+import de.darthkali.weefood.interactors.ingredient_list.GetAllIngredients
+import de.darthkali.weefood.interactors.ingredient_list.SaveIngredient
+import de.darthkali.weefood.interactors.ingredient_list.SearchIngredient
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
 import org.koin.dsl.KoinAppDeclaration

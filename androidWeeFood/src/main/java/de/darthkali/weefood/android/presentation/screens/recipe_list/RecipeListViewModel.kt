@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import de.darthkali.weefood.domain.model.Ingredient
 import de.darthkali.weefood.presentation.ingredient_list.IngredientListEvents
-import de.darthkali.weefood.interactors.recipe_list.SearchIngredient
+import de.darthkali.weefood.interactors.ingredient_list.SearchIngredient
 import de.darthkali.weefood.presentation.ingredient_list.IngredientListState
 import de.darthkali.weefood.util.Logger
 import javax.inject.Inject

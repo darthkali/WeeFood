@@ -3,6 +3,8 @@ package de.darthkali.weefood.android.presentation.navigation
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -14,6 +16,7 @@ import de.darthkali.weefood.android.presentation.screens.day_list.WeekListScreen
 import de.darthkali.weefood.android.presentation.screens.ingredient_list.IngredientListScreen
 import de.darthkali.weefood.android.presentation.screens.ingredient_list.IngredientListViewModel
 import de.darthkali.weefood.android.presentation.screens.new_recipe.NewRecipeScreen
+import de.darthkali.weefood.android.presentation.screens.new_recipe.NewRecipeViewModel
 import de.darthkali.weefood.android.presentation.screens.recipe_list.RecipeListScreen
 import de.darthkali.weefood.android.presentation.screens.recipe_list.RecipeListViewModel
 import de.darthkali.weefood.android.presentation.screens.settings.SettingsScreen
@@ -46,7 +49,14 @@ fun Navigation(){
         composable(
             route = NavigationItem.WeekList.route
         ) { navBackStackEntry ->
-            WeekListScreen(navController)
+
+            val viewModel = getViewModel<NewRecipeViewModel>()
+            NewRecipeScreen(
+                state = viewModel.state.value,
+                navController = navController,
+                onTriggerEvent =  viewModel::onTriggerEvent)
+
+            //WeekListScreen(navController)
         }
 
 
@@ -81,27 +91,27 @@ fun Navigation(){
         }
 
 
-        /**
-         * Navigation -> RecipeDetail
-         */
-        composable(
-            route = NavigationItem.RecipeDetail.route + "/{recipeId}",
-            arguments = listOf(navArgument("recipeId") {
-                type = NavType.IntType
-            })
-        ) { navBackStackEntry ->
-              NewRecipeScreen(navController)
-        }
+//        /**
+//         * Navigation -> RecipeDetail
+//         */
+//        composable(
+//            route = NavigationItem.RecipeDetail.route + "/{recipeId}",
+//            arguments = listOf(navArgument("recipeId") {
+//                type = NavType.IntType
+//            })
+//        ) { navBackStackEntry ->
+//              NewRecipeScreen(navController)
+//        }
 
 
-        /**
-         * Navigation -> NewRecipe
-         */
-        composable(
-            route = NavigationItem.NewRecipe.route
-        ) { navBackStackEntry ->
-            NewRecipeScreen(navController)
-        }
+//        /**
+//         * Navigation -> NewRecipe
+//         */
+//        composable(
+//            route = NavigationItem.NewRecipe.route
+//        ) { navBackStackEntry ->
+//            NewRecipeScreen(navController)
+//        }
 
 
         /**
