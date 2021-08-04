@@ -59,27 +59,27 @@ before_script:
 
 # Basic android and gradle stuff
 # Check linting
-lintDebug:
-  interruptible: true
-  stage: build
-  script:
-    - ./gradlew -Pci --console=plain :app:lintDebug -PbuildDir=lint
+#lintDebug:
+#  interruptible: true
+#  stage: build
+#  script:
+#    - ./gradlew -Pci --console=plain :app:lintDebug -PbuildDir=lint
 
 # Make Project
-assembleDebug:
-  interruptible: true
-  stage: build
-  script:
-    - ./gradlew assembleDebug
-  artifacts:
-    paths:
-      - app/build/outputs/
+#assembleDebug:
+#  interruptible: true
+#  stage: build
+#  script:
+#    - ./gradlew assembleDebug
+#  artifacts:
+#    paths:
+#      - app/build/outputs/
 
 # Run all tests, if any fails, interrupt the pipeline(fail it)
 debugTests:
   interruptible: true
   stage: test
   script:
-    - ./gradlew -Pci --console=plain :app:testDebug
-    - ./gradlew --tests "de.darthkali.weefood.datasource.database.ingredient.IngredientDbImplTest"
 
+    - ./gradlew --tests "de.darthkali.weefood.datasource.database.ingredient.IngredientDbImplTest"
+        - ./gradlew -Pci --console=plain :app:testDebug
