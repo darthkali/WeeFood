@@ -50,8 +50,11 @@ fun SearchAppBar(
                 TextField(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(8.dp)
-                    ,
+                        .padding(
+                            start= 8.dp,
+                            end = 8.dp,
+                            top = 8.dp
+                        ),
                     value = query,
                     onValueChange = { onQueryChanged(it) },
                     label = { Text(text = "Search") },
