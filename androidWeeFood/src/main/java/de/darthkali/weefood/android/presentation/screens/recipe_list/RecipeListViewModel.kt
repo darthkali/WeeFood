@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import de.darthkali.weefood.datasource.database.model.IngredientDb
 import de.darthkali.weefood.domain.model.Ingredient
 import de.darthkali.weefood.presentation.ingredient_list.IngredientListEvents
 import de.darthkali.weefood.interactors.ingredient_list.SearchIngredient

@@ -10,14 +10,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import de.darthkali.weefood.android.presentation.components.CircleImage
-import de.darthkali.weefood.domain.model.Ingredient
+import de.darthkali.weefood.datasource.database.model.IngredientDb
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalStdlibApi
 @ExperimentalCoroutinesApi
 @Composable
 fun RecipeView(
-    ingredient: Ingredient,
+    ingredientDb: IngredientDb,
 ){
     LazyColumn(
         modifier = Modifier
@@ -25,8 +25,8 @@ fun RecipeView(
     ) {
         item {
             CircleImage(
-                url = ingredient.image,
-                contentDescription = ingredient.name
+                url = ingredientDb.image,
+                contentDescription = ingredientDb.name
             )
             Column(
                 modifier = Modifier
@@ -39,7 +39,7 @@ fun RecipeView(
                         .padding(bottom = 4.dp)
                 ){
                     Text(
-                        text = ingredient.name ?: "",    //if ingredient.name == null, then set "" as text
+                        text = ingredientDb.name ?: "",    //if ingredient.name == null, then set "" as text
                         modifier = Modifier
                             .fillMaxWidth(0.85f)
                             .wrapContentWidth(Alignment.Start)

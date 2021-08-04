@@ -2,8 +2,9 @@ package de.darthkali.weefood.android.presentation.screens.ingredient_list
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import de.darthkali.weefood.android.presentation.screens.BaseViewModel
+import de.darthkali.weefood.datasource.database.model.IngredientDb
 import de.darthkali.weefood.domain.model.Ingredient
 import de.darthkali.weefood.interactors.ingredient_list.GetAllIngredients
 import de.darthkali.weefood.interactors.ingredient_list.SaveIngredient
@@ -12,11 +13,10 @@ import de.darthkali.weefood.interactors.ingredient_list.SearchIngredient
 import de.darthkali.weefood.presentation.ingredient_list.IngredientListState
 import de.darthkali.weefood.util.Logger
 import kotlin.collections.ArrayList
-import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 
-class IngredientListViewModel: ViewModel(), KoinComponent {
+class IngredientListViewModel: BaseViewModel() {
 
     private val searchIngredient: SearchIngredient by inject()
     private val saveIngredient: SaveIngredient by inject()
@@ -54,20 +54,25 @@ class IngredientListViewModel: ViewModel(), KoinComponent {
         }
     }
 
-    private fun saveIngredient(ingredient:Ingredient) {
-        saveIngredient.execute(ingredient)
-
-        getAllIngredients.execute().collectCommon(viewModelScope) { dataState ->
-            state.value = state.value.copy(isLoading = dataState.isLoading)
-
-            dataState.data?.let { ingredients ->
-                appendIngredients(ingredients)
-
-            }
+    private fun saveIngredient(ingredient: Ingredient) {
+        saveIngredient.execute(ingredient).let {
+            logger.log("Ingredients ID was: ${it}")
         }
-        for(ingredientItem in state.value.ingredients){
-            logger.log(ingredientItem.toString())
-        }
+
+
+
+
+//        getAllIngredients.execute().collectCommon(viewModelScope) { dataState ->
+//            state.value = state.value.copy(isLoading = dataState.isLoading)
+//
+//            dataState.data?.let { ingredients ->
+//                appendIngredients(ingredients)
+//
+//            }
+//        }
+//        for(ingredientItem in getAllIngredients.execute()){
+//            logger.log(ingredientItem.toString())
+//        }
 
 //
 //        for(ingredientItem in getAllIngredients.execute()){

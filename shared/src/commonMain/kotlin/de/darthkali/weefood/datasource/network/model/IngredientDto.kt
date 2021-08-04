@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 data class IngredientDto(
 
     @SerialName("id")
-    val id: Int,
+    val apiId: Int,
 
     @SerialName("name")
     val name: String?,

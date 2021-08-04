@@ -4,7 +4,8 @@
 CREATE TABLE ingredient_Entity(
     id      INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     name    TEXT    NOT NULL,
-    image   TEXT    NOT NULL
+    image   TEXT    NOT NULL,
+    apiId   INTEGER    NOT NULL
 );
 
 -- -----------------------------------------------------
@@ -15,8 +16,8 @@ CREATE TABLE ingredient_Entity(
 -- INSERT
 -- -----------------------------------------------------
 insertIngredient:
-INSERT INTO ingredient_Entity(id,name, image)
-SELECT ?, ?, ?
+INSERT INTO ingredient_Entity(id,name, image, apiId)
+SELECT ?, ?, ?, ?
 WHERE NOT EXISTS(SELECT 1 FROM ingredient_Entity WHERE name = ?);
 
 
@@ -32,16 +33,28 @@ getIngredientById:
 SELECT * FROM ingredient_Entity
 WHERE id = :id;
 
+getIngredientByApiId:
+SELECT * FROM ingredient_Entity
+WHERE apiId = :apiId;
+
 searchIngredients:
 SELECT * FROM ingredient_Entity
 WHERE name LIKE ('%' || :query || '%')
 LIMIT :pageSize
 OFFSET :offset;
 
+getLastInsertRowId:
+SELECT last_insert_rowid();
+
 
 -- -----------------------------------------------------
 -- UPDATE
 -- -----------------------------------------------------
+updateIngredient:
+UPDATE ingredient_Entity
+SET name = ?, image = ?
+WHERE apiId = ?;
+
 
 -- -----------------------------------------------------
 -- DELETE

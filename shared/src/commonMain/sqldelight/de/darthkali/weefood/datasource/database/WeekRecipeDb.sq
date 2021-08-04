@@ -34,14 +34,17 @@ SELECT *
 FROM weekRecipe_Entity
 WHERE weekday = :weekday;
 
+getLastInsertRowId:
+SELECT last_insert_rowid();
 
 
 -- -----------------------------------------------------
 -- UPDATE
 -- -----------------------------------------------------
-
-
-
+updateWeekRecipe:
+UPDATE weekRecipe_Entity
+SET weekday = ?, portion = ?, recipe_id = ?
+WHERE id = ?;
 
 -- -----------------------------------------------------
 -- DELETE

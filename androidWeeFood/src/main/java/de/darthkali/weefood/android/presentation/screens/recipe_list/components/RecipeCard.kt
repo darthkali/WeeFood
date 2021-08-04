@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import de.darthkali.weefood.android.presentation.components.CircleImage
 import de.darthkali.weefood.datasource.network.IngredientServiceImpl.Companion.NO_IMAGE
+import de.darthkali.weefood.datasource.database.model.IngredientDb
 import de.darthkali.weefood.domain.model.Ingredient
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 

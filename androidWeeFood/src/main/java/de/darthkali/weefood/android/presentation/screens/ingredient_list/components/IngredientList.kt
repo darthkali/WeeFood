@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import de.darthkali.weefood.android.presentation.components.NothingHere
 import de.darthkali.weefood.datasource.network.IngredientServiceImpl.Companion.PAGINATION_PAGE_SIZE
+import de.darthkali.weefood.datasource.database.model.IngredientDb
 import de.darthkali.weefood.domain.model.Ingredient
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -44,7 +45,7 @@ fun IngredientList(
                         onTriggerNextPage()
                     }
                     IngredientCard(
-                        ingredient = ingredient,
+                        ingredientDb = ingredient,
                         onSaveIngredient = { onSaveIngredient(it) }
                     )
                 }

@@ -1,28 +1,32 @@
 package de.darthkali.weefood.presentation.new_recipe
 
-import de.darthkali.weefood.domain.model.Recipe
-import de.darthkali.weefood.domain.model.RecipeIngredient
+import de.darthkali.weefood.datasource.database.model.RecipeDb
+import de.darthkali.weefood.datasource.database.model.RecipeIngredientDb
 
 data class NewRecipeState(
 
     val isLoading: Boolean = false,
-    val name: String = "",
-    val image: String = "",
-    val cooking_time: Int = 0,
-    val cooking_time_unit: String = "",
-    val description: String = "",
 
-    val recipeIngredients: List<RecipeIngredient> = listOf(),
+    val recipeDb: RecipeDb = RecipeDb(
+        name = "",
+        image = "",
+        cooking_time = 0,
+        cooking_time_unit = "",
+        description = ""
+    ),
+    val recipeIngredientDbs: List<RecipeIngredientDb> = listOf(),
 ) {
     // Need secondary constructor to initialize with no args in SwiftUI
 
     constructor() : this(
         isLoading = false,
-        name = "",
-        image = "",
-        cooking_time = 0,
-        cooking_time_unit = "",
-        description = "",
-        recipeIngredients = listOf(),
+        recipeDb = RecipeDb(
+            name = "",
+            image = "",
+            cooking_time = 0,
+            cooking_time_unit = "",
+            description = ""
+        ),
+        recipeIngredientDbs = listOf(),
     )
 }

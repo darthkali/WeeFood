@@ -2,7 +2,6 @@ package de.darthkali.weefood.android.presentation.screens.new_recipe
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -11,23 +10,15 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import de.darthkali.weefood.android.presentation.navigation.BottomBar
 import de.darthkali.weefood.android.presentation.navigation.TopBar
 import de.darthkali.weefood.android.presentation.screens.new_recipe.components.IngredientCard
 import de.darthkali.weefood.android.presentation.screens.new_recipe.components.IngredientUnitTextField
 import de.darthkali.weefood.android.presentation.theme.AppTheme
 import de.darthkali.weefood.mockFactory.IngredientMock
-import de.darthkali.weefood.mockFactory.RecipeIngredientMock
-import de.darthkali.weefood.presentation.ingredient_list.IngredientListEvents
-import de.darthkali.weefood.presentation.ingredient_list.IngredientListState
 import de.darthkali.weefood.presentation.new_recipe.NewRecipeEvents
 import de.darthkali.weefood.presentation.new_recipe.NewRecipeState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -53,7 +44,7 @@ fun NewRecipeScreen(
                     item {
                         Text("Bild")
                         IngredientUnitTextField(
-                            input = state.name,
+                            input = state.recipeDb.name,
                             onInputChanged = {
                                 onTriggerEvent(NewRecipeEvents.OnUpdateName(it))
                             },
@@ -69,7 +60,7 @@ fun NewRecipeScreen(
                         items = IngredientMock.ingredientList
                     ) { _, recipeIngredient -> //hier haben wir ein recipe INgredient. Da muss ein Join erfolgen
                         IngredientCard(
-                            ingredient = recipeIngredient,
+                            ingredientDb = recipeIngredient,
                             onDeleteIngredient = { } //onDeleteIngredient(it)
                         )
                     }
@@ -81,14 +72,14 @@ fun NewRecipeScreen(
 
                         Row() {
                             IngredientUnitTextField(
-                                input = state.cooking_time.toString(),
+                                input = state.recipeDb.cooking_time.toString(),
                                 onInputChanged = {
                                     onTriggerEvent(NewRecipeEvents.OnUpdateCookingTime(it.toInt()))
                                 },
                                 label = "Zeit"
                             )
                             IngredientUnitTextField(
-                                input = state.cooking_time_unit,
+                                input = state.recipeDb.cooking_time_unit,
                                 onInputChanged = {
                                     onTriggerEvent(NewRecipeEvents.OnUpdateCookingTimeUnit(it))
                                 },
@@ -97,7 +88,7 @@ fun NewRecipeScreen(
                         }
                         Text("Rezept")
                         IngredientUnitTextField(
-                            input = state.description,
+                            input = state.recipeDb.description ?: "",
                             onInputChanged = {
                                 onTriggerEvent(NewRecipeEvents.OnUpdateDescription(it))
                             },

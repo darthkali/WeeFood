@@ -1,7 +1,7 @@
 //package de.darthkali.weefood.interactors.recipe_detail
 //
 //import de.darthkali.weefood.datasource.database.RecipeCache
-//import de.darthkali.weefood.domain.model.Ingredient
+//import de.darthkali.weefood.datasource.local.model.Ingredient
 //import de.darthkali.weefood.domain.util.CommonFlow
 //import de.darthkali.weefood.domain.util.DataState
 //import de.darthkali.weefood.domain.util.asCommonFlow

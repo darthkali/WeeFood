@@ -1,6 +1,7 @@
 package de.darthkali.weefood.presentation.ingredient_list
 
 
+import de.darthkali.weefood.datasource.database.model.IngredientDb
 import de.darthkali.weefood.domain.model.Ingredient
 
 actual data class IngredientListState(

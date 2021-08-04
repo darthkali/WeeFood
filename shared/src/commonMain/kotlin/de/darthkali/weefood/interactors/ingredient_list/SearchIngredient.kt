@@ -1,6 +1,7 @@
 package de.darthkali.weefood.interactors.ingredient_list
 
 import de.darthkali.weefood.datasource.network.IngredientService
+import de.darthkali.weefood.datasource.database.model.IngredientDb
 import de.darthkali.weefood.domain.model.Ingredient
 import de.darthkali.weefood.domain.util.CommonFlow
 import de.darthkali.weefood.domain.util.DataState
@@ -14,6 +15,7 @@ class SearchIngredient : KoinComponent {
 
     private val ingredientService: IngredientService by inject()
     private val logger = Logger("SearchIngredient")
+
 
     fun execute(
         query: String,

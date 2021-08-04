@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.navigation.NavController
 import de.darthkali.weefood.android.presentation.navigation.BottomBar
@@ -51,7 +50,7 @@ fun RecipeListScreen(
 
                 RecipeList(
                     loading = state.isLoading,
-                    ingredients = state.ingredients,
+                    ingredientDbs = state.ingredients,
                     page = state.page,
                     onTriggerNextPage = {
                         onTriggerEvent(IngredientListEvents.NextPage)

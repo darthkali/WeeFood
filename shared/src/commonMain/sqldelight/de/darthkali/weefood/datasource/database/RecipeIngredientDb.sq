@@ -36,12 +36,16 @@ getAllRecipeIngredients:
 SELECT *
 FROM recipeIngredient_Entity;
 
+getLastInsertRowId:
+SELECT last_insert_rowid();
+
 -- -----------------------------------------------------
 -- UPDATE
 -- -----------------------------------------------------
-
-
-
+updateRecipeIngredient:
+UPDATE recipeIngredient_Entity
+SET quantity = ?, unit = ?, recipe_id = ?, ingredient_id = ?
+WHERE id = ?;
 
 -- -----------------------------------------------------
 -- DELETE

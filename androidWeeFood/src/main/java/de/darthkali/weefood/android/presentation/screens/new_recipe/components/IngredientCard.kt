@@ -5,30 +5,18 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.TextField
 import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.material.Text
-import androidx.compose.material.TextFieldDefaults
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -36,17 +24,16 @@ import de.darthkali.weefood.android.presentation.components.CircleImage
 import de.darthkali.weefood.android.presentation.components.CommonButton
 import de.darthkali.weefood.android.presentation.components.button.ButtonStyle
 import de.darthkali.weefood.android.presentation.theme.AppTheme
-import de.darthkali.weefood.domain.model.Ingredient
+import de.darthkali.weefood.datasource.database.model.IngredientDb
 import de.darthkali.weefood.mockFactory.IngredientMock
-import de.darthkali.weefood.mockFactory.RecipeIngredientMock
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 
 @ExperimentalComposeUiApi
 @Composable
 fun IngredientCard(
-    ingredient: Ingredient,
-    onDeleteIngredient: (Ingredient) -> Unit
+    ingredientDb: IngredientDb,
+    onDeleteIngredient: (IngredientDb) -> Unit
 ) {
 
     Card(
@@ -65,11 +52,11 @@ fun IngredientCard(
         Column {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 CircleImage(
-                    url = ingredient.image,
-                    contentDescription = ingredient.name
+                    url = ingredientDb.image,
+                    contentDescription = ingredientDb.name
                 )
                 Text(
-                    text = ingredient.name
+                    text = ingredientDb.name
                         ?: "",   //if ingredient.name == null, then set "" as text
                     modifier = Modifier
                         .fillMaxWidth(0.85f)
@@ -91,6 +78,14 @@ fun IngredientCard(
 //                    label = "Menge")
 //
 //                IngredientUnitTextField(
+//                    input = state.recipe.cooking_time_unit,
+//                    onInputChanged = {
+//                        onTriggerEvent(NewRecipeEvents.OnUpdateCookingTimeUnit(it))
+//                    },
+//                    label = "Einheit"
+//                )
+//
+//                IngredientUnitTextField(
 //                    value = textState.value,
 //                    label = "Einheit")
             }
@@ -109,7 +104,7 @@ fun IngredientCard(
                 CommonButton(
                     text = "Löschen",
                     buttonStyle = ButtonStyle.DELETE_BUTTON,
-                    onClick = { onDeleteIngredient(ingredient) })
+                    onClick = { onDeleteIngredient(ingredientDb) })
                 CommonButton(
                     text = "Schliessen",
                     buttonStyle = ButtonStyle.CLOSE_BUTTON,
@@ -127,6 +122,6 @@ fun IngredientCard(
 @Composable
 fun UserProfileDetailsPreview() {
     AppTheme() {
-        IngredientCard(ingredient = IngredientMock.ingredient, onDeleteIngredient = {})
+        IngredientCard(ingredientDb = IngredientMock.ingredient, onDeleteIngredient = {})
     }
 }
