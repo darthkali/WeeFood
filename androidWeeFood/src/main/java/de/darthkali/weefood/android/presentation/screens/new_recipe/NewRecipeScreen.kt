@@ -2,17 +2,24 @@ package de.darthkali.weefood.android.presentation.screens.new_recipe
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import de.darthkali.weefood.android.presentation.components.MyFloatingActionButton
 import de.darthkali.weefood.android.presentation.navigation.BottomBar
 import de.darthkali.weefood.android.presentation.navigation.TopBar
 import de.darthkali.weefood.android.presentation.screens.new_recipe.components.IngredientCard
@@ -38,13 +45,23 @@ fun NewRecipeScreen(
         Scaffold(
             topBar = { TopBar(title = "Neues Rezept") },
             bottomBar = { BottomBar(navController) }
-        ) { innerPadding ->
+        ) {
+
+                innerPadding ->
+            Column(){
+                MyFloatingActionButton(
+                    onClick = { onTriggerEvent(NewRecipeEvents.OnSaveRecipe(state.recipe)) },
+                    color = MaterialTheme.colors.primary
+                )
+
+
             Box(modifier = Modifier.padding(innerPadding)) {
+
                 LazyColumn() {
                     item {
                         Text("Bild")
                         IngredientUnitTextField(
-                            input = state.recipeDb.name,
+                            input = state.recipe.name,
                             onInputChanged = {
                                 onTriggerEvent(NewRecipeEvents.OnUpdateName(it))
                             },
@@ -72,14 +89,14 @@ fun NewRecipeScreen(
 
                         Row() {
                             IngredientUnitTextField(
-                                input = state.recipeDb.cooking_time.toString(),
+                                input = state.recipe.cooking_time.toString(),
                                 onInputChanged = {
                                     onTriggerEvent(NewRecipeEvents.OnUpdateCookingTime(it.toInt()))
                                 },
                                 label = "Zeit"
                             )
                             IngredientUnitTextField(
-                                input = state.recipeDb.cooking_time_unit,
+                                input = state.recipe.cooking_time_unit,
                                 onInputChanged = {
                                     onTriggerEvent(NewRecipeEvents.OnUpdateCookingTimeUnit(it))
                                 },
@@ -88,7 +105,7 @@ fun NewRecipeScreen(
                         }
                         Text("Rezept")
                         IngredientUnitTextField(
-                            input = state.recipeDb.description ?: "",
+                            input = state.recipe.description ?: "",
                             onInputChanged = {
                                 onTriggerEvent(NewRecipeEvents.OnUpdateDescription(it))
                             },
@@ -96,6 +113,7 @@ fun NewRecipeScreen(
                         )
                     }
                 }
+            }
             }
         }
     }

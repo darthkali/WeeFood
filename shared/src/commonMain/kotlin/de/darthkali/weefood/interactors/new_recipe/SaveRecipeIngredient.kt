@@ -14,7 +14,6 @@ class SaveRecipeIngredient : KoinComponent {
 
     private val recipeIngredientQueries: RecipeIngredientQueries by inject()
     private val logger = Logger("SaveRecipeIngredient")
-//    private val mapper = IngredientMapper()
 
     /**
      * search ingredient by AppId
@@ -26,12 +25,10 @@ class SaveRecipeIngredient : KoinComponent {
             recipeIngredientQueries.getAllRecipeIngredientByRecipeId(recipeIngredient.recipe_id)
                 .forEach {
                     if (it.ingredient_id == recipeIngredient.ingredient_id) {
-//                        return recipeIngredientQueries.updateRecipeIngredient(recipeIngredient) //TODO: create method
-                        return 1
+                        return recipeIngredientQueries.updateRecipeIngredient(recipeIngredient)
                     }
                 }
-            recipeIngredientQueries.insertRecipeIngredient(recipeIngredient) // TODO: return INt
-            0
+            recipeIngredientQueries.insertRecipeIngredient(recipeIngredient)
         } catch (e: Exception) {
             logger.log(e.toString())
             return null

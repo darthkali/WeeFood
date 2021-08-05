@@ -1,14 +1,21 @@
 package de.darthkali.weefood.android.presentation.components
 
+import android.graphics.drawable.Icon
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -25,14 +32,14 @@ fun CommonButton(
     text: String = "",
     buttonStyle: ButtonStyle = ButtonStyle.OPEN_BUTTON,
     onClick: () -> Unit
-){
+) {
 
-    when(buttonStyle){
+    when (buttonStyle) {
         ButtonStyle.OPEN_BUTTON ->
             Button(
                 onClick = onClick,
                 colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.primary),
-            ){
+            ) {
                 ButtonText(text = text, color = MaterialTheme.colors.onPrimary)
             }
 
@@ -40,14 +47,14 @@ fun CommonButton(
             Button(
                 onClick = onClick,
                 colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.primaryVariant),
-            ){
+            ) {
                 ButtonText(text = text, color = MaterialTheme.colors.onBackground)
             }
 
         ButtonStyle.CLOSE_BUTTON ->
             TextButton(
                 onClick = onClick,
-            ){
+            ) {
                 ButtonText(text = text, color = MaterialTheme.colors.onBackground)
             }
 
@@ -55,7 +62,7 @@ fun CommonButton(
             Button(
                 onClick = onClick,
                 colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary),
-            ){
+            ) {
                 ButtonText(text = text, color = MaterialTheme.colors.onSecondary)
             }
     }
@@ -65,7 +72,7 @@ fun CommonButton(
 fun ButtonText(
     text: String = "",
     color: Color = MaterialTheme.colors.onPrimary,
-){
+) {
     Text(
         color = color,
         style = MaterialTheme.typography.button,
@@ -73,6 +80,19 @@ fun ButtonText(
     )
 }
 
+
+@Composable
+fun MyFloatingActionButton(
+    onClick: () -> Unit,
+    color: Color = MaterialTheme.colors.primary,
+) {
+    FloatingActionButton(
+        onClick = onClick,
+        backgroundColor = color
+    ) {
+        Icon(Icons.Filled.Check, "")
+    }
+}
 
 
 @ExperimentalCoroutinesApi
@@ -82,10 +102,11 @@ fun ButtonText(
 @Composable
 fun DefaultPreview() {
     AppTheme {
-        CommonButton( text = "Open",  buttonStyle = ButtonStyle.OPEN_BUTTON, onClick = {})
-        CommonButton( text = "Add",  buttonStyle = ButtonStyle.ADD_BUTTON, onClick = {})
-        CommonButton( text = "Delete",  buttonStyle = ButtonStyle.DELETE_BUTTON, onClick = {})
-        CommonButton( text = "Close ",  buttonStyle = ButtonStyle.CLOSE_BUTTON, onClick = {})
+        CommonButton(text = "Open", buttonStyle = ButtonStyle.OPEN_BUTTON, onClick = {})
+        CommonButton(text = "Add", buttonStyle = ButtonStyle.ADD_BUTTON, onClick = {})
+        CommonButton(text = "Delete", buttonStyle = ButtonStyle.DELETE_BUTTON, onClick = {})
+        CommonButton(text = "Close ", buttonStyle = ButtonStyle.CLOSE_BUTTON, onClick = {})
+        MyFloatingActionButton({})
     }
 
 }

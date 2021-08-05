@@ -14,7 +14,7 @@ class RecipeIngredientQueriesImpl: RecipeIngredientQueries, KoinComponent {
     private val weeFoodDatabaseQueries = weeFoodDatabase.instance.recipeIngredientDbQueries
     private val logger = Logger("RecipeIngredientDbImpl")
 
-    override fun insertRecipeIngredient(recipeIngredientDb: RecipeIngredientDb): Boolean {
+    override fun insertRecipeIngredient(recipeIngredientDb: RecipeIngredientDb): Int? {
         return try {
             weeFoodDatabaseQueries.insertRecipeIngredient(
                 null,
@@ -23,11 +23,28 @@ class RecipeIngredientQueriesImpl: RecipeIngredientQueries, KoinComponent {
                 recipe_id = recipeIngredientDb.recipe_id,
                 ingredient_id = recipeIngredientDb.ingredient_id,
             )
-            logger.log("Inserting with RecipeId: ${recipeIngredientDb.recipe_id} into database")
-            true
+            logger.log("Inserting RecipeIngredient with RecipeId: ${recipeIngredientDb.recipe_id} into database")
+            weeFoodDatabaseQueries.getLastInsertRowId().executeAsOne().toInt()
         } catch (e: Exception) {
             logger.log(e.toString())
-            false
+            null
+        }
+    }
+
+    override fun updateRecipeIngredient(recipeIngredientDb: RecipeIngredientDb): Int? {
+        return try {
+            weeFoodDatabaseQueries.updateRecipeIngredient(
+                quantity = recipeIngredientDb.quantity,
+                unit = recipeIngredientDb.unit,
+                recipe_id = recipeIngredientDb.recipe_id,
+                ingredient_id = recipeIngredientDb.ingredient_id,
+                id = recipeIngredientDb.id.toLong()
+            )
+            logger.log("Updated RecipeIngredient with RecipeId: ${recipeIngredientDb.recipe_id} into database")
+            recipeIngredientDb.id
+        } catch (e: Exception) {
+            logger.log(e.toString())
+            null
         }
     }
 

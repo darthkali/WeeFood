@@ -15,6 +15,8 @@ import de.darthkali.weefood.datasource.network.KtorClientFactory
 import de.darthkali.weefood.interactors.ingredient_list.GetAllIngredients
 import de.darthkali.weefood.interactors.ingredient_list.SaveIngredient
 import de.darthkali.weefood.interactors.ingredient_list.SearchIngredient
+import de.darthkali.weefood.interactors.new_recipe.SaveRecipe
+import de.darthkali.weefood.interactors.new_recipe.SaveRecipeIngredient
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
 import org.koin.dsl.KoinAppDeclaration
@@ -55,6 +57,8 @@ val interactor = module {
     single { SearchIngredient() }
     single { SaveIngredient() }
     single { GetAllIngredients() }
+    single { SaveRecipe() }
+    single { SaveRecipeIngredient() }
 
 }
 
