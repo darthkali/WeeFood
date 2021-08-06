@@ -14,9 +14,7 @@ import de.darthkali.weefood.util.Logger
 import org.koin.core.component.inject
 
 
-class NewRecipeViewModel(
-    private val handle: SavedStateHandle,
-): BaseViewModel() {
+class NewRecipeViewModel() : BaseViewModel() {
 
     private val logger = Logger("NewRecipeViewModel")
     private val saveRecipe: SaveRecipe by inject()
@@ -25,15 +23,21 @@ class NewRecipeViewModel(
     val state: MutableState<NewRecipeState> = mutableStateOf(NewRecipeState())
 
     init {
-        handle.get<Int>("recipeId")?.let { recipeId ->
-            onTriggerEvent(NewRecipeEvents.GetRecipe(recipeId = recipeId))
+        state.value.recipe.internalId?.let {
+
+            NewRecipeEvents.GetRecipe(recipeId = it) //TODO
+            NewRecipeEvents.OnUpdateName(state.value.recipe.name)
+
         }
+//            onTriggerEvent(NewRecipeEvents.GetRecipe(recipeId = state.value.recipe.internalId!!))
     }
 
-    fun onTriggerEvent(event: NewRecipeEvents){
-        when (event){
+
+    fun onTriggerEvent(event: NewRecipeEvents) {
+        when (event) {
             is NewRecipeEvents.GetRecipe -> {
-                state.value = state.value.copy(recipe = getRecipe.execute(recipeId = event.recipeId)!!)
+                state.value =
+                    state.value.copy(recipe = getRecipe.execute(recipeId = event.recipeId)!!)
             }
             is NewRecipeEvents.OnUpdateName -> {
                 onUpdateRecipe(state.value.recipe.copy(name = event.name))
@@ -61,7 +65,7 @@ class NewRecipeViewModel(
         }
     }
 
-    private fun onUpdateRecipe(recipe: Recipe){
+    private fun onUpdateRecipe(recipe: Recipe) {
         state.value = state.value.copy(recipe = recipe)
     }
 

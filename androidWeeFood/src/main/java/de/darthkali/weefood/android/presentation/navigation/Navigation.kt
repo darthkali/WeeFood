@@ -110,8 +110,9 @@ fun Navigation() {
             arguments = listOf(navArgument("recipeId") {
                 type = NavType.IntType
             })
-        ) {
+        ) { backStackEntry  ->
             val viewModel = getViewModel<NewRecipeViewModel>()
+            viewModel.state.value.recipe.internalId = backStackEntry.arguments?.getInt("recipeId")
             NewRecipeScreen(
                 state = viewModel.state.value,
                 navController = navController,
