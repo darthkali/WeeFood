@@ -13,7 +13,8 @@ import de.darthkali.weefood.android.presentation.screens.recipe_list.components.
 import de.darthkali.weefood.android.presentation.screens.recipe_list.components.SearchAppBar
 import de.darthkali.weefood.android.presentation.theme.AppTheme
 import de.darthkali.weefood.presentation.ingredient_list.IngredientListEvents
-import de.darthkali.weefood.presentation.ingredient_list.IngredientListState
+import de.darthkali.weefood.presentation.recipe_list.RecipeListEvents
+import de.darthkali.weefood.presentation.recipe_list.RecipeListState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 
@@ -23,9 +24,9 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalFoundationApi
 @Composable
 fun RecipeListScreen(
-    state: IngredientListState,
+    state: RecipeListState,
     navController: NavController,
-    onTriggerEvent: (IngredientListEvents) -> Unit,
+    onTriggerEvent: (RecipeListEvents) -> Unit,
     onClickRecipeListItem: (Int) -> Unit,
 ) {
     AppTheme(
@@ -33,7 +34,7 @@ fun RecipeListScreen(
     ) {
         Scaffold(
             topBar = {
-                TopBar(title = "Einkaufsliste")
+                TopBar(title = "Rezeptliste")
             },
             bottomBar = { BottomBar(navController) }
         ) {
@@ -41,19 +42,19 @@ fun RecipeListScreen(
                 SearchAppBar(
                     query = state.query,
                     onQueryChanged = {
-                        onTriggerEvent(IngredientListEvents.OnUpdateQuery(it))
+                        onTriggerEvent(RecipeListEvents.OnUpdateQuery(it))
                     },
                     onExecuteSearch = {
-                        onTriggerEvent(IngredientListEvents.NewSearch)
+                        onTriggerEvent(RecipeListEvents.NewSearch)
                     },
                 )
 
                 RecipeList(
                     loading = state.isLoading,
-                    ingredientDbs = state.ingredients,
+                    recipeDbs = state.recipeDbs,
                     page = state.page,
                     onTriggerNextPage = {
-                        onTriggerEvent(IngredientListEvents.NextPage)
+                        onTriggerEvent(RecipeListEvents.NextPage)
                     },
                     onClickRecipeListItem = onClickRecipeListItem
                 )

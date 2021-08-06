@@ -3,6 +3,7 @@ package de.darthkali.weefood.datasource.database.queries.recipe
 import de.darthkali.weefood.datasource.database.Recipe_Entity
 import de.darthkali.weefood.datasource.database.WeeFoodDatabaseWrapper
 import de.darthkali.weefood.datasource.database.model.RecipeDb
+import de.darthkali.weefood.datasource.network.IngredientServiceImpl
 import de.darthkali.weefood.util.Logger
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -86,13 +87,13 @@ class RecipeQueriesImpl: RecipeQueries, KoinComponent {
         }
     }
 
-    override fun searchRecipes(name: String): List<RecipeDb> {
+    override fun searchRecipes(name: String, page: Int): List<RecipeDb> {
         return try {
             logger.log("Search Recipes in database")
             weeFoodDatabaseQueries.searchRecipes(
                 query = name,
-                pageSize = 100,  // TODO replace with parameter
-                offset = 0       // TODO replace with parameter
+                pageSize = 30.toLong(),
+                offset =   ((page - 1) * 30).toLong(),    //TODO: Replace 30 with Pagination Size
             ).executeAsList().toRecipeList()
         } catch (e: Exception) {
             logger.log(e.toString())

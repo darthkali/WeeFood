@@ -1,7 +1,7 @@
 package de.darthkali.weefood.datasource.database.model
 
 data class RecipeDb(
-    val id: Int = 0,
+    var id: Int = 0,
     var name: String,
     var image: String? = "",
     var cooking_time: Int,

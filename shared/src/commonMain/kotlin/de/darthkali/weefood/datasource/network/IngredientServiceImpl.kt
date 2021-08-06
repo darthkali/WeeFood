@@ -26,10 +26,6 @@ class IngredientServiceImpl : IngredientService, KoinComponent {
         )
     }
 
-    override fun searchIngredientBla(): String {
-        return "IOS ist Scheiße"
-    }
-
     companion object {
         const val API_KEY = "a18522db266047e4b92632a17b82bd6f"
         const val BASE_URL = "https://api.spoonacular.com"

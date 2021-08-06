@@ -5,7 +5,7 @@ import de.darthkali.weefood.domain.model.Ingredient
 
 interface IngredientQueries {
     fun insertIngredient(ingredientDb: IngredientDb): Int?
-    fun updateIngredient(ingredientDb: IngredientDb): Int?
+    fun updateIngredientByApiId(ingredientDb: IngredientDb): Int?
     fun getAllIngredients(): List<IngredientDb>
     fun getIngredientById(ingredientId: Int): IngredientDb?
     fun getIngredientByApiId(apiId: Int): IngredientDb?

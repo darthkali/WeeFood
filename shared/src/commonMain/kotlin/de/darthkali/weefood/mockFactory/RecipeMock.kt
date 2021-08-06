@@ -1,9 +1,15 @@
 package de.darthkali.weefood.mockFactory
 
 import de.darthkali.weefood.datasource.database.model.RecipeDb
+import de.darthkali.weefood.domain.model.Ingredient
+import de.darthkali.weefood.domain.model.Recipe
 
 object RecipeMock {
 
+
+    // -----------------------------------------------------
+    // Member
+    // -----------------------------------------------------
 
     val shortDescription = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam " +
             "nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam " +
@@ -18,7 +24,9 @@ object RecipeMock {
             "accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata " +
             "sanctus est Lorem ipsum dolor sit amet."
 
-
+    // -----------------------------------------------------
+    // Recipe Database Mock
+    // -----------------------------------------------------
     val recipeDb = RecipeDb(
         name = "Spinatauflauf",
         image = "spinatauflauf.jpg",
@@ -90,5 +98,82 @@ object RecipeMock {
             cooking_time_unit = "min",
             description = longDescription
         )
+    )
+
+    const val recipeDbUpdateIndex = 2
+    val recipeDbUpdate = RecipeDb(
+        id = recipeDbUpdateIndex + 1,
+        name = "${recipeListDb[recipeDbUpdateIndex].name} update",
+        image = "${recipeListDb[recipeDbUpdateIndex].image} update",
+        cooking_time = recipeListDb[recipeDbUpdateIndex].cooking_time + 1,
+        cooking_time_unit = "${recipeListDb[recipeDbUpdateIndex].cooking_time_unit} update",
+        description = "${recipeListDb[recipeDbUpdateIndex].description} update"
+    )
+
+
+    // -----------------------------------------------------
+    // Recipe Domain Mock
+    // -----------------------------------------------------
+    val recipe = Recipe(
+        name = "Spinatauflauf",
+        image = "spinatauflauf.jpg",
+        cooking_time = 20,
+        cooking_time_unit = "min",
+        description = longDescription,
+        portion = 2,
+        ingredients = IngredientMock.ingredientList,
+    )
+
+
+    val recipeList = listOf(
+        Recipe(
+            name = "Kartoffelbrei mit Sauerkraut und Bratwurs",
+            image = "kartoffelbrei_sauerkraut_bratwurst.jpg",
+            cooking_time = 120,
+            cooking_time_unit = "min",
+            description = longDescription,
+            portion = 2,
+            ingredients = IngredientMock.ingredientList,
+        ),
+        Recipe(
+            name = "Tomentensuppe",
+            image = "tomentensuppe.jpg",
+            cooking_time = 90,
+            cooking_time_unit = "min",
+            description = longDescription,
+            portion = 2,
+            ingredients = IngredientMock.ingredientList,
+        ),
+        Recipe(
+            name = "Tomaten Hirse Salat",
+            image = "tomaten_hirse_salat.jpg",
+            cooking_time = 20,
+            cooking_time_unit = "min",
+            description = longDescription,
+            portion = 2,
+            ingredients = IngredientMock.ingredientList,
+        ),
+        Recipe(
+            name = "Gebackener Schafskäse",
+            image = "gebackener_schafskaese.jpg",
+            cooking_time = 20,
+            cooking_time_unit = "min",
+            description = longDescription,
+            portion = 2,
+            ingredients = IngredientMock.ingredientList,
+        )
+    )
+
+    const val recipeUpdateIndex = 2
+
+    val recipeUpdate = Recipe(
+        internalId = recipeUpdateIndex + 1,
+        name = "${recipeList[recipeDbUpdateIndex].name} update",
+        image = "${recipeList[recipeDbUpdateIndex].image} update",
+        cooking_time = recipeList[recipeDbUpdateIndex].cooking_time!! + 1,
+        cooking_time_unit = "${recipeList[recipeDbUpdateIndex].cooking_time_unit} update",
+        description = "${recipeList[recipeDbUpdateIndex].description} update",
+        portion = recipeList[recipeDbUpdateIndex].portion!! + 1,
+        ingredients = recipeList[recipeDbUpdateIndex].ingredients,
     )
 }

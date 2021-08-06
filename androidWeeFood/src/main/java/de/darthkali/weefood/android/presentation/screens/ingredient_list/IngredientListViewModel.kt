@@ -20,7 +20,6 @@ class IngredientListViewModel: BaseViewModel() {
 
     private val searchIngredient: SearchIngredient by inject()
     private val saveIngredient: SaveIngredient by inject()
-    private val getAllIngredients: GetAllIngredients by inject()
 
 
     private val logger = Logger("IngredientListViewModel")
@@ -58,26 +57,6 @@ class IngredientListViewModel: BaseViewModel() {
         saveIngredient.execute(ingredient).let {
             logger.log("Ingredients ID was: ${it}")
         }
-
-
-
-
-//        getAllIngredients.execute().collectCommon(viewModelScope) { dataState ->
-//            state.value = state.value.copy(isLoading = dataState.isLoading)
-//
-//            dataState.data?.let { ingredients ->
-//                appendIngredients(ingredients)
-//
-//            }
-//        }
-//        for(ingredientItem in getAllIngredients.execute()){
-//            logger.log(ingredientItem.toString())
-//        }
-
-//
-//        for(ingredientItem in getAllIngredients.execute()){
-//            logger.log(ingredientItem.toString())
-//        }
     }
 
 

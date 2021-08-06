@@ -22,7 +22,7 @@ class SaveIngredient : KoinComponent {
         return try {
             ingredientQueries.getIngredientByApiId(ingredient.apiId).let {
                 if (it != null) {
-                    ingredientQueries.updateIngredient(mapper.mapBack(ingredient))
+                    ingredientQueries.updateIngredientByApiId(mapper.mapBack(ingredient))
                 } else {
                     ingredientQueries.insertIngredient(mapper.mapBack(ingredient))
                 }

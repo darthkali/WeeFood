@@ -99,4 +99,25 @@ class IngredientDbQueriesImplTest : BaseTest() {
         assertEquals(ingredientQueries.getAllIngredients().last(), IngredientMock.ingredientDb)
     }
 
+    @Test
+    fun update_recipe_success() = runTest {
+        writeHead("update_recipe_success")
+
+        for (recipe in ingredientQueries.getAllIngredients()) {
+            println(recipe.toString())
+        }
+
+        ingredientQueries.updateIngredientByApiId(IngredientMock.ingredientDbUpdate)
+
+        for (recipe in ingredientQueries.getAllIngredients()) {
+            println(recipe.toString())
+        }
+
+
+        assertEquals(
+            expected = IngredientMock.ingredientDbUpdate ,
+            actual = ingredientQueries.getAllIngredients()[IngredientMock.ingredientDbUpdateIndex],
+        )
+    }
+
 }

@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import de.darthkali.weefood.android.presentation.components.NothingHere
 import de.darthkali.weefood.datasource.network.IngredientServiceImpl.Companion.PAGINATION_PAGE_SIZE
 import de.darthkali.weefood.datasource.database.model.IngredientDb
+import de.darthkali.weefood.datasource.database.model.RecipeDb
 import de.darthkali.weefood.domain.model.Ingredient
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -22,7 +23,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @Composable
 fun RecipeList(
     loading: Boolean,
-    ingredientDbs: List<Ingredient>,
+    recipeDbs: List<RecipeDb>,
     page: Int,
     onTriggerNextPage: () -> Unit,
     onClickRecipeListItem: (Int) -> Unit,
@@ -30,22 +31,22 @@ fun RecipeList(
     Box(modifier = Modifier
         .background(color = MaterialTheme.colors.surface)
     ) {
-        if (loading && ingredientDbs.isEmpty()) {
+        if (loading && recipeDbs.isEmpty()) {
             LoadingRecipeListShimmer(imageHeight = 250.dp,)
         }
-        else if(ingredientDbs.isEmpty()){
+        else if(recipeDbs.isEmpty()){
             NothingHere()
         }
         else {
             LazyColumn{
                 itemsIndexed(
-                    items = ingredientDbs
+                    items = recipeDbs
                 ) { index, recipe ->
                     if ((index + 1) >= (page * PAGINATION_PAGE_SIZE) && !loading) {
                         onTriggerNextPage()
                     }
                     RecipeCard(
-                        ingredient = recipe,
+                        recipe = recipe,
                         onClick = {
                             onClickRecipeListItem(0) //TODO: replace 0
                         }

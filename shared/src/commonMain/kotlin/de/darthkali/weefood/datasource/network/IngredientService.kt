@@ -1,6 +1,5 @@
 package de.darthkali.weefood.datasource.network
 
-import de.darthkali.weefood.datasource.database.model.IngredientDb
 import de.darthkali.weefood.domain.model.Ingredient
 
 interface IngredientService {
@@ -9,6 +8,4 @@ interface IngredientService {
         query: String,
         page: Int,
     ): List<Ingredient>
-
-     fun searchIngredientBla(): String
 }

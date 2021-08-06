@@ -1,6 +1,5 @@
 package de.darthkali.weefood.datasource.database.model
 
-
 data class IngredientDb(
     val id: Int = 0,
     val name: String? = "",
@@ -8,6 +7,7 @@ data class IngredientDb(
     val apiId: Int
 ) {
     override fun toString(): String {
+
         return StringBuilder()
             .append("|id: ")
             .append(this.id)
@@ -15,6 +15,9 @@ data class IngredientDb(
             .append(this.name)
             .append("| image: ")
             .append(this.image)
+            .append("|")
+            .append("| apiId: ")
+            .append(this.apiId)
             .append("|")
             .toString()
     }

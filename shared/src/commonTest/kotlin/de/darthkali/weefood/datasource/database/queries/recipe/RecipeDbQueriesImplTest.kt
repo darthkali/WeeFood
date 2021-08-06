@@ -132,4 +132,25 @@ class RecipeDbQueriesImplTest : BaseTest() {
         )
     }
 
+    @Test
+    fun update_recipe_success() = runTest {
+        writeHead("update_recipe_success")
+
+        for (recipe in recipeQueries.getAllRecipes()) {
+            println(recipe.toString())
+        }
+
+        recipeQueries.updateRecipe(RecipeMock.recipeDbUpdate)
+
+        for (recipe in recipeQueries.getAllRecipes()) {
+            println(recipe.toString())
+        }
+
+
+        assertEquals(
+            expected = recipeQueries.getAllRecipes()[RecipeMock.recipeDbUpdateIndex],
+            actual = RecipeMock.recipeDbUpdate,
+        )
+    }
+
 }

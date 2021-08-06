@@ -33,7 +33,7 @@ class IngredientQueriesImpl : IngredientQueries, KoinComponent {
         }
     }
 
-    override fun updateIngredient(ingredientDb: IngredientDb): Int? {
+    override fun updateIngredientByApiId(ingredientDb: IngredientDb): Int? {
         return try {
             weeFoodDatabaseQueries.updateIngredient(
                 name = ingredientDb.name ?: "",

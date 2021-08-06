@@ -8,6 +8,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Rule
 import org.junit.runner.RunWith
 import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
 import org.koin.core.component.KoinComponent
 import org.koin.test.KoinTest
 import org.koin.test.KoinTestRule
@@ -20,6 +21,7 @@ actual abstract class BaseTest: KoinTest {
     @get:Rule
     val koinTestRule = KoinTestRule.create{
             androidContext(ApplicationProvider.getApplicationContext())
+            androidLogger()
             modules(
                 platformModule(),
                 network,

@@ -2,6 +2,7 @@ package de.darthkali.weefood.datasource.database.queries.recipeIngredient
 
 import de.darthkali.weefood.BaseTest
 import de.darthkali.weefood.mockFactory.RecipeIngredientMock
+import de.darthkali.weefood.mockFactory.RecipeMock
 import de.darthkali.weefood.writeHead
 import org.koin.core.component.inject
 import kotlin.test.BeforeTest
@@ -108,6 +109,27 @@ class RecipeDbIngredientDbQueriesImplTest : BaseTest() {
         assertEquals(
             expected = recipeIngredientQueries.getAllRecipeIngredients().last(),
             actual = RecipeIngredientMock.recipeIngredientDb,
+        )
+    }
+
+    @Test
+    fun update_recipe_ingredient_success() = runTest {
+        writeHead("update_recipe_ingredient_success")
+
+        for (recipeIngredient in recipeIngredientQueries.getAllRecipeIngredients()) {
+            println(recipeIngredient.toString())
+        }
+
+        recipeIngredientQueries.updateRecipeIngredient(RecipeIngredientMock.recipeIngredientDbUpdate)
+
+        for (recipe in recipeIngredientQueries.getAllRecipeIngredients()) {
+            println(recipe.toString())
+        }
+
+
+        assertEquals(
+            expected = recipeIngredientQueries.getAllRecipeIngredients()[RecipeIngredientMock.recipeIngredientDbUpdateIndex],
+            actual = RecipeIngredientMock.recipeIngredientDbUpdate,
         )
     }
 }

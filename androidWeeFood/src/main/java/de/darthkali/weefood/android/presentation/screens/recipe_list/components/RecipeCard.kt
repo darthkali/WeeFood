@@ -12,13 +12,14 @@ import androidx.compose.ui.unit.dp
 import de.darthkali.weefood.android.presentation.components.CircleImage
 import de.darthkali.weefood.datasource.network.IngredientServiceImpl.Companion.NO_IMAGE
 import de.darthkali.weefood.datasource.database.model.IngredientDb
+import de.darthkali.weefood.datasource.database.model.RecipeDb
 import de.darthkali.weefood.domain.model.Ingredient
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
 @Composable
 fun RecipeCard(
-    ingredient: Ingredient,
+    recipe: RecipeDb, //TODO: change to Recipe
     onClick: () -> Unit,
 ) {
     Card(
@@ -34,8 +35,8 @@ fun RecipeCard(
     ) {
         Column() {
             CircleImage(
-                url = ingredient.image ?: NO_IMAGE,
-                contentDescription = ingredient.name ?: "not valid"
+                url = recipe.image ?: NO_IMAGE,
+                contentDescription = recipe.name ?: "not valid"
             )
             Row(
                 modifier = Modifier
@@ -43,7 +44,7 @@ fun RecipeCard(
                     .padding(top = 12.dp, bottom = 12.dp, start = 8.dp, end = 8.dp)
             ) {
                 Text(
-                    text = ingredient.name ?: "",    //if ingredient.name == null, then set "" as text
+                    text = recipe.name ?: "",    //if recipe.name == null, then set "" as text
                     modifier = Modifier
                         .fillMaxWidth(0.85f)
                         .wrapContentWidth(Alignment.Start),

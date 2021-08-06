@@ -33,6 +33,7 @@ getIngredientById:
 SELECT * FROM ingredient_Entity
 WHERE id = :id;
 
+
 getIngredientByApiId:
 SELECT * FROM ingredient_Entity
 WHERE apiId = :apiId;
