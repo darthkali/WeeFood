@@ -48,7 +48,7 @@ fun RecipeList(
                     RecipeCard(
                         recipe = recipe,
                         onClick = {
-                            onClickRecipeListItem(0) //TODO: replace 0
+                            onClickRecipeListItem(recipe.id) //TODO: replace 0
                         }
                     )
                 }

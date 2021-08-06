@@ -9,4 +9,6 @@ sealed class NewRecipeEvents{
     data class OnUpdateCookingTimeUnit(val cooking_time_unit: String): NewRecipeEvents()
     data class OnUpdateDescription(val description: String): NewRecipeEvents()
     data class OnSaveRecipe(val recipe: Recipe): NewRecipeEvents()
+    data class GetRecipe(val recipeId: Int): NewRecipeEvents()
+
 }
