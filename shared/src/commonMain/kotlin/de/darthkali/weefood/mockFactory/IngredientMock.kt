@@ -5,9 +5,9 @@ import de.darthkali.weefood.domain.model.Ingredient
 
 object IngredientMock {
 
-    val ingredient = IngredientDb(name = "Butter", image = "butter-sliced.jpg", apiId = 1001)
+    val ingredientDb = IngredientDb(name = "Butter", image = "butter-sliced.jpg", apiId = 1001)
 
-    val ingredientList = listOf(
+    val ingredientDbList = listOf(
         IngredientDb(name = "Banane", image = "bananas.jpg", apiId = 9040),
         IngredientDb(name = "Apfel", image = "apple.jpg", apiId = 9003),
         IngredientDb(name = "Mehl", image = "flour.png", apiId = 20081),
@@ -21,7 +21,7 @@ object IngredientMock {
     )
 
 
-    val ingredientDomainList = listOf(
+    val ingredientList = listOf(
         Ingredient(name = "Banane", image = "bananas.jpg", apiId = 9040, quantity = 5F, unit =  "Hase"),
         Ingredient(name = "Apfel", image = "apple.jpg", apiId = 9003, quantity = 6F, unit =  "Hase"),
         Ingredient(name = "Mehl", image = "flour.png", apiId = 20081, quantity = 7F, unit =  "Hase"),

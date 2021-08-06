@@ -4,14 +4,14 @@ import de.darthkali.weefood.datasource.database.model.RecipeIngredientDb
 
 object RecipeIngredientMock {
 
-    val sizeRecipes = RecipeMock.recipeList.size
-    val sizeIngredients = IngredientMock.ingredientList.size
+    val sizeRecipes = RecipeMock.recipeListDb.size
+    val sizeIngredients = IngredientMock.ingredientDbList.size
     // TODO: Die Liste ist abänhing von den Rezepten und den Zutaten. Muss man ggf noch was anpassen
 
 
-    val recipeIngredient = RecipeIngredientDb(quantity = 2F, unit = "gramm", recipe_id = 1, ingredient_id = 1)
+    val recipeIngredientDb = RecipeIngredientDb(quantity = 2F, unit = "gramm", recipe_id = 1, ingredient_id = 1)
 
-    val recipeIngredientList = listOf(
+    val recipeIngredientDbList = listOf(
         RecipeIngredientDb(quantity = 200F, unit = "gramm", recipe_id = 1, ingredient_id = 1),
         RecipeIngredientDb(quantity = 1F, unit = "Stück", recipe_id = 1, ingredient_id = 2),
         RecipeIngredientDb(quantity = 0.5F, unit = "Stück", recipe_id = 2, ingredient_id = 3),

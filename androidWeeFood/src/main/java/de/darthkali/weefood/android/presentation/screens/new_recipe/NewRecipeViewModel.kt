@@ -3,9 +3,7 @@ package de.darthkali.weefood.android.presentation.screens.new_recipe
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import de.darthkali.weefood.android.presentation.screens.BaseViewModel
-import de.darthkali.weefood.datasource.database.model.RecipeDb
 import de.darthkali.weefood.domain.model.Recipe
-import de.darthkali.weefood.interactors.ingredient_list.SaveIngredient
 import de.darthkali.weefood.interactors.new_recipe.SaveRecipe
 import de.darthkali.weefood.mockFactory.IngredientMock
 import de.darthkali.weefood.presentation.new_recipe.NewRecipeEvents
@@ -40,7 +38,7 @@ class NewRecipeViewModel: BaseViewModel() {
                 onUpdateRecipe(state.value.recipe.copy(description = event.description))
             }
             is NewRecipeEvents.OnSaveRecipe -> {
-                state.value.recipe.ingredients = IngredientMock.ingredientDomainList // TODO: nur zum testen
+                state.value.recipe.ingredients = IngredientMock.ingredientList // TODO: nur zum testen
                 state.value.recipe.internalId = 23
                 saveRecipe.execute(state.value.recipe)
             }

@@ -1,7 +1,6 @@
-package de.darthkali.weefood.datasource.database.weekRecipe
+package de.darthkali.weefood.datasource.database.queries.weekRecipe
 
 import de.darthkali.weefood.BaseTest
-import de.darthkali.weefood.datasource.database.queries.weekRecipe.WeekRecipeQueries
 import de.darthkali.weefood.mockFactory.WeekRecipeMock
 import de.darthkali.weefood.writeHead
 import org.koin.core.component.inject
@@ -19,7 +18,7 @@ class WeekRecipeDbDbQueriesImplTest : BaseTest() {
     fun setup() = runTest {
         writeHead("setup")
         weekRecipeQueries.deleteAllWeekRecipe()
-        val weekRecipes = WeekRecipeMock.weekRecipeList
+        val weekRecipes = WeekRecipeMock.weekRecipeDbList
 
         for (weekRecipe in weekRecipes) {
             weekRecipeQueries.insertWeekRecipe(weekRecipe)
@@ -35,7 +34,7 @@ class WeekRecipeDbDbQueriesImplTest : BaseTest() {
             println(weekRecipe.toString())
 
             assertEquals(
-                expected = WeekRecipeMock.weekRecipeList[index],
+                expected = WeekRecipeMock.weekRecipeDbList[index],
                 actual = weekRecipe
             )
         }
@@ -82,7 +81,7 @@ class WeekRecipeDbDbQueriesImplTest : BaseTest() {
 
             assertEquals(
                 expected = weekRecipeQueries.getAllWeekRecipes().size,
-                actual = WeekRecipeMock.weekRecipeList.size - (index + 1),
+                actual = WeekRecipeMock.weekRecipeDbList.size - (index + 1),
             )
         }
         assertEquals(
@@ -99,7 +98,7 @@ class WeekRecipeDbDbQueriesImplTest : BaseTest() {
             println(weekRecipe.toString())
         }
 
-        weekRecipeQueries.insertWeekRecipe(WeekRecipeMock.weekRecipe)
+        weekRecipeQueries.insertWeekRecipe(WeekRecipeMock.weekRecipeDb)
 
         for (weekRecipe in weekRecipeQueries.getAllWeekRecipes()) {
             println(weekRecipe.toString())
@@ -107,7 +106,7 @@ class WeekRecipeDbDbQueriesImplTest : BaseTest() {
 
         assertEquals(
             expected = weekRecipeQueries.getAllWeekRecipes().last(),
-            actual = WeekRecipeMock.weekRecipe,
+            actual = WeekRecipeMock.weekRecipeDb,
         )
     }
 }

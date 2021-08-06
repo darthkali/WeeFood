@@ -19,7 +19,6 @@ actual abstract class BaseTest: KoinTest {
 
     @get:Rule
     val koinTestRule = KoinTestRule.create{
-
             androidContext(ApplicationProvider.getApplicationContext())
             modules(
                 platformModule(),

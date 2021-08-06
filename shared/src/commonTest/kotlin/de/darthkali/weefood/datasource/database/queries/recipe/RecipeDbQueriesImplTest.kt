@@ -1,7 +1,6 @@
-package de.darthkali.weefood.datasource.database.recipe
+package de.darthkali.weefood.datasource.database.queries.recipe
 
 import de.darthkali.weefood.BaseTest
-import de.darthkali.weefood.datasource.database.queries.recipe.RecipeQueries
 import de.darthkali.weefood.mockFactory.RecipeMock
 import de.darthkali.weefood.writeHead
 import org.koin.core.component.inject
@@ -20,7 +19,7 @@ class RecipeDbQueriesImplTest : BaseTest() {
     fun setup() = runTest {
         writeHead("setup")
         recipeQueries.deleteAllRecipes()
-        val recipes = RecipeMock.recipeList
+        val recipes = RecipeMock.recipeListDb
 
         for (recipe in recipes) {
             recipeQueries.insertRecipe(recipe)
@@ -35,7 +34,7 @@ class RecipeDbQueriesImplTest : BaseTest() {
         recipes.forEachIndexed { index, recipe ->
             println(recipe.toString())
             assertEquals(
-                expected = RecipeMock.recipeList[index].name,
+                expected = RecipeMock.recipeListDb[index].name,
                 actual = recipe.name
             )
         }
@@ -103,7 +102,7 @@ class RecipeDbQueriesImplTest : BaseTest() {
 
             assertEquals(
                 expected = recipeQueries.getAllRecipes().size,
-                actual = RecipeMock.recipeList.size - (index + 1),
+                actual = RecipeMock.recipeListDb.size - (index + 1),
             )
 
             assertNull(
@@ -120,7 +119,7 @@ class RecipeDbQueriesImplTest : BaseTest() {
             println(recipe.toString())
         }
 
-        recipeQueries.insertRecipe(RecipeMock.recipe)
+        recipeQueries.insertRecipe(RecipeMock.recipeDb)
 
         for (recipe in recipeQueries.getAllRecipes()) {
             println(recipe.toString())
@@ -129,7 +128,7 @@ class RecipeDbQueriesImplTest : BaseTest() {
 
         assertEquals(
             expected = recipeQueries.getAllRecipes().last(),
-            actual = RecipeMock.recipe,
+            actual = RecipeMock.recipeDb,
         )
     }
 

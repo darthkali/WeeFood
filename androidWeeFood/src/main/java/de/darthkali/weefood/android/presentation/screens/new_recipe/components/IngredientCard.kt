@@ -122,6 +122,6 @@ fun IngredientCard(
 @Composable
 fun UserProfileDetailsPreview() {
     AppTheme() {
-        IngredientCard(ingredientDb = IngredientMock.ingredient, onDeleteIngredient = {})
+        IngredientCard(ingredientDb = IngredientMock.ingredientDb, onDeleteIngredient = {})
     }
 }

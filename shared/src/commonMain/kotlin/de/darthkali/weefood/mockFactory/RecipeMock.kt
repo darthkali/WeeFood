@@ -19,7 +19,7 @@ object RecipeMock {
             "sanctus est Lorem ipsum dolor sit amet."
 
 
-    val recipe = RecipeDb(
+    val recipeDb = RecipeDb(
         name = "Spinatauflauf",
         image = "spinatauflauf.jpg",
         cooking_time = 20,
@@ -27,7 +27,7 @@ object RecipeMock {
         description = longDescription
     )
 
-    val recipeList = listOf(
+    val recipeListDb = listOf(
         RecipeDb(
             name = "Kartoffelbrei mit Sauerkraut und Bratwurs",
             image = "kartoffelbrei_sauerkraut_bratwurst.jpg",

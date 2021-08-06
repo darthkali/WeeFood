@@ -1,7 +1,6 @@
-package de.darthkali.weefood.datasource.database.ingredient
+package de.darthkali.weefood.datasource.database.queries.ingredient
 
 import de.darthkali.weefood.BaseTest
-import de.darthkali.weefood.datasource.database.queries.ingredient.IngredientQueries
 import de.darthkali.weefood.mockFactory.IngredientMock
 import de.darthkali.weefood.writeHead
 import kotlin.test.*
@@ -15,7 +14,7 @@ class IngredientDbQueriesImplTest : BaseTest() {
     fun setup() = runTest {
         writeHead("setup")
         ingredientQueries.deleteAllIngredients()
-        val ingredients = IngredientMock.ingredientList
+        val ingredients = IngredientMock.ingredientDbList
 
         for (ingredient in ingredients) {
             ingredientQueries.insertIngredient(ingredient)
@@ -29,7 +28,7 @@ class IngredientDbQueriesImplTest : BaseTest() {
         ingredients.forEachIndexed { index, ingredient ->
             println(ingredient.toString())
             assertEquals(
-                IngredientMock.ingredientList[index].name,
+                IngredientMock.ingredientDbList[index].name,
                 ingredient.name
             )
         }
@@ -74,7 +73,7 @@ class IngredientDbQueriesImplTest : BaseTest() {
 
             assertEquals(
                 ingredientQueries.getAllIngredients().size,
-                IngredientMock.ingredientList.size - (index + 1),
+                IngredientMock.ingredientDbList.size - (index + 1),
             )
 
             assertNull(
@@ -91,13 +90,13 @@ class IngredientDbQueriesImplTest : BaseTest() {
             println(ingredient.toString())
         }
 
-        ingredientQueries.insertIngredient(IngredientMock.ingredient)
+        ingredientQueries.insertIngredient(IngredientMock.ingredientDb)
 
         for (ingredient in ingredientQueries.getAllIngredients()) {
             println(ingredient.toString())
         }
 
-        assertEquals(ingredientQueries.getAllIngredients().last(), IngredientMock.ingredient)
+        assertEquals(ingredientQueries.getAllIngredients().last(), IngredientMock.ingredientDb)
     }
 
 }

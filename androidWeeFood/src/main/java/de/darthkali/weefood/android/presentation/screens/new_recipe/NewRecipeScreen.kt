@@ -8,13 +8,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -74,7 +70,7 @@ fun NewRecipeScreen(
                     }
 
                     itemsIndexed(
-                        items = IngredientMock.ingredientList
+                        items = IngredientMock.ingredientDbList
                     ) { _, recipeIngredient -> //hier haben wir ein recipe INgredient. Da muss ein Join erfolgen
                         IngredientCard(
                             ingredientDb = recipeIngredient,
