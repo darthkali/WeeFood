@@ -33,7 +33,7 @@ struct IngredientListScreen: View {
                         }
                     )
                     List{
-                        ForEach(viewModel.state.ingredients, id: \.self.id){ ingredient in
+                        ForEach(viewModel.state.ingredients, id: \.self.internalId){ ingredient in
                             ZStack{
                                 VStack{
                                     IngredientCard(ingredient: ingredient)

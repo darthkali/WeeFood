@@ -17,8 +17,7 @@ CREATE TABLE ingredient_Entity(
 -- -----------------------------------------------------
 insertIngredient:
 INSERT INTO ingredient_Entity(id,name, image, apiId)
-SELECT ?, ?, ?, ?
-WHERE NOT EXISTS(SELECT 1 FROM ingredient_Entity WHERE name = ?);
+SELECT ?, ?, ?, ?;
 
 
 -- -----------------------------------------------------

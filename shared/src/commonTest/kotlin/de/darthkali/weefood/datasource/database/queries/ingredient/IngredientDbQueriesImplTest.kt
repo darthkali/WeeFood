@@ -43,7 +43,7 @@ class IngredientDbQueriesImplTest : BaseTest() {
         writeHead("get_ingredient_by_id_success")
         val ingredients = ingredientQueries.getAllIngredients()
 
-        for (ingredientItem in ingredients!!) {
+        for (ingredientItem in ingredients) {
             val ingredient = ingredientQueries.getIngredientById(ingredientItem.id)
             println(ingredient.toString())
             assertEquals(

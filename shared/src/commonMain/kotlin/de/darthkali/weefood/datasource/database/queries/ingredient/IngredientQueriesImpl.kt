@@ -22,8 +22,6 @@ class IngredientQueriesImpl : IngredientQueries, KoinComponent {
                 apiId = ingredientDb.apiId.toLong(),
                 name = ingredientDb.name ?: "",
                 image = ingredientDb.image ?: "no.jpg",
-                name_ = ingredientDb.name
-                    ?: ""           // checkAttribute to avoid duplicates in DB
             )
             logger.log("Inserting ${ingredientDb.name} into database")
             weeFoodDatabaseQueries.getLastInsertRowId().executeAsOne().toInt()

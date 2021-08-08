@@ -7,7 +7,7 @@ actual data class RecipeListState(
     val isLoading: Boolean = false,
     val page: Int = 1,
     val query: String = "",
-    val recipe: List<Recipe> = listOf(),
+    val recipes: List<Recipe> = listOf(),
     val bottomRecipe: Recipe? = null, // track the recipe at the bottom of the list so we know when to trigger pagination
 ) {
     // Need secondary constructor to initialize with no args in SwiftUI
@@ -16,7 +16,7 @@ actual data class RecipeListState(
         isLoading = false,
         page = 1,
         query = "",
-        recipe = listOf(),
+        recipes = listOf(),
         bottomRecipe = null,
     )
 

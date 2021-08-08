@@ -127,7 +127,7 @@ class IngredientListViewModel: ObservableObject {
         // if !queryInProgress
         // else -> do nothing
         let currentState = (self.state.copy() as! IngredientListState)
-        if(ingredient.id == currentState.bottomIngredient?.id){
+        if(ingredient.internalId == currentState.bottomIngredient?.internalId){
             if(IngredientListState.Companion().RECIPE_PAGINATION_PAGE_SIZE * currentState.page <= currentState.ingredients.count){
                 if(!currentState.isLoading){
                     return true

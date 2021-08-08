@@ -9,7 +9,7 @@ actual data class IngredientListState(
     val isLoading: Boolean = false,
     val page: Int = 1,
     val query: String = "",
-    val ingredient: List<Ingredient> = listOf(),
+    val ingredients: List<Ingredient> = listOf(),
     val bottomIngredient: Ingredient? = null, // track the recipe at the bottom of the list so we know when to trigger pagination
 ) {
     // Need secondary constructor to initialize with no args in SwiftUI
@@ -18,7 +18,7 @@ actual data class IngredientListState(
         isLoading = false,
         page = 1,
         query = "",
-        ingredient = listOf(),
+        ingredients = listOf(),
         bottomIngredient = null,
     )
 
