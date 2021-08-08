@@ -15,7 +15,16 @@ class SearchIngredient : KoinComponent {
     private val ingredientService: IngredientService by inject()
     private val logger = Logger("SearchIngredient")
 
-
+    /**
+     * @param query: String
+     * @param page: Int
+     *
+     * search ingredient by name (query)
+     * result depends on the page (pagination)
+     * emits the result in a data object
+     *
+     * @return DataState
+     */
     fun execute(
         query: String,
         page: Int

@@ -1,4 +1,4 @@
-package de.darthkali.weefood.android.presentation.components
+package de.darthkali.weefood.android.presentation.components.button
 
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -15,7 +15,6 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import de.darthkali.weefood.android.presentation.components.button.ButtonStyle
 import de.darthkali.weefood.android.presentation.theme.AppTheme
 import java.util.Locale
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -43,7 +42,7 @@ fun CommonButton(
                 onClick = onClick,
                 colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.primaryVariant),
                 modifier = modifier
-                ) {
+            ) {
                 ButtonText(text = text, color = MaterialTheme.colors.onBackground)
             }
 

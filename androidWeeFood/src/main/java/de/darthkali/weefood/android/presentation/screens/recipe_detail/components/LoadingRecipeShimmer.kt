@@ -1,8 +1,18 @@
 package de.darthkali.weefood.android.presentation.screens.recipe_detail.components
 
-import androidx.compose.animation.core.*
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -64,7 +74,10 @@ fun LoadingRecipeShimmer(
             item {
                 val brush = Brush.linearGradient(
                     colors,
-                    start = Offset(xCardShimmer.value - gradientWidth, yCardShimmer.value - gradientWidth),
+                    start = Offset(
+                        xCardShimmer.value - gradientWidth,
+                        yCardShimmer.value - gradientWidth
+                    ),
                     end = Offset(xCardShimmer.value, yCardShimmer.value)
                 )
                 Surface(

@@ -1,11 +1,7 @@
 package de.darthkali.weefood.interactors.recipe
 
-import de.darthkali.weefood.datasource.network.IngredientService
-import de.darthkali.weefood.datasource.database.model.IngredientDb
 import de.darthkali.weefood.datasource.database.model.RecipeDb
 import de.darthkali.weefood.datasource.database.queries.recipe.RecipeQueries
-import de.darthkali.weefood.domain.model.Ingredient
-import de.darthkali.weefood.domain.model.Recipe
 import de.darthkali.weefood.domain.util.CommonFlow
 import de.darthkali.weefood.domain.util.DataState
 import de.darthkali.weefood.domain.util.asCommonFlow
@@ -19,7 +15,16 @@ class SearchRecipes : KoinComponent {
     private val recipeQueries: RecipeQueries by inject()
     private val logger = Logger("SearchRecipe")
 
-
+    /**
+     * @param query: String
+     * @param page: Int
+     *
+     * search recipe by name (query)
+     * result depends on the page (pagination)
+     * emits the result in a data object
+     *
+     * @return DataState
+     */
     fun execute(
         query: String,
         page: Int
@@ -36,5 +41,4 @@ class SearchRecipes : KoinComponent {
             logger.log(e.toString())
         }
     }.asCommonFlow()
-
 }

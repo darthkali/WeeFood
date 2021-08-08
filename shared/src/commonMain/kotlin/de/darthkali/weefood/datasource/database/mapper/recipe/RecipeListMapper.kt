@@ -1,12 +1,10 @@
 package de.darthkali.weefood.datasource.database.mapper.recipe
 
 import de.darthkali.weefood.datasource.BaseMapper
-import de.darthkali.weefood.datasource.database.model.IngredientDb
 import de.darthkali.weefood.datasource.database.model.RecipeDb
-import de.darthkali.weefood.domain.model.Ingredient
 import de.darthkali.weefood.domain.model.Recipe
 
-class RecipeListMapper: BaseMapper<List<Recipe>, List<RecipeDb>> {
+class RecipeListMapper : BaseMapper<List<Recipe>, List<RecipeDb>> {
 
     private val internalMapper = RecipeMapper()
 

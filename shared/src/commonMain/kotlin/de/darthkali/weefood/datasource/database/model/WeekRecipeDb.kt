@@ -1,4 +1,4 @@
-package de.darthkali.weefood.datasource.database.dao
+package de.darthkali.weefood.datasource.database.model
 
 import de.darthkali.weefood.domain.util.enums.Weekday
 

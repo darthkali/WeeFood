@@ -25,8 +25,8 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import de.darthkali.weefood.android.presentation.components.CommonButton
-import de.darthkali.weefood.android.presentation.components.MyFloatingActionButton
+import de.darthkali.weefood.android.presentation.components.button.CommonButton
+import de.darthkali.weefood.android.presentation.components.button.MyFloatingActionButton
 import de.darthkali.weefood.android.presentation.components.button.ButtonStyle
 import de.darthkali.weefood.android.presentation.navigation.BottomBar
 import de.darthkali.weefood.android.presentation.navigation.NavigationItem
@@ -37,7 +37,6 @@ import de.darthkali.weefood.android.presentation.theme.AppTheme
 import de.darthkali.weefood.presentation.new_recipe.NewRecipeEvents
 import de.darthkali.weefood.presentation.new_recipe.NewRecipeState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-
 
 @ExperimentalCoroutinesApi
 @ExperimentalMaterialApi
@@ -62,7 +61,8 @@ fun NewRecipeScreen(
                         onTriggerEvent(NewRecipeEvents.OnSaveRecipe(state.recipe))
                         navController.navigate(
                             "${NavigationItem.RecipeList.route}?query=${state.recipe.name}"
-                        )},
+                        )
+                    },
                     color = MaterialTheme.colors.primary
                 )
 
@@ -99,7 +99,13 @@ fun NewRecipeScreen(
                         ) { _, ingredients ->
                             IngredientCard(
                                 ingredient = ingredients,
-                                onDeleteIngredient = {onTriggerEvent(NewRecipeEvents.OnDeleteIngredient(it)) } //onDeleteIngredient(it)
+                                onDeleteIngredient = {
+                                    onTriggerEvent(
+                                        NewRecipeEvents.OnDeleteIngredient(
+                                            it
+                                        )
+                                    )
+                                } //onDeleteIngredient(it)
                             )
                         }
 
@@ -116,7 +122,13 @@ fun NewRecipeScreen(
                                         .width(120.dp)
                                         .padding(8.dp),
                                     value = state.recipe.cooking_time.toString(),
-                                    onValueChange = { onTriggerEvent(NewRecipeEvents.OnUpdateCookingTime(it.toInt())) },
+                                    onValueChange = {
+                                        onTriggerEvent(
+                                            NewRecipeEvents.OnUpdateCookingTime(
+                                                it.toInt()
+                                            )
+                                        )
+                                    },
                                     label = { Text(text = "Zeit") },
                                     keyboardOptions = KeyboardOptions(
                                         keyboardType = KeyboardType.Text,

@@ -10,7 +10,6 @@ data class Ingredient(
     val unit: String,
 ) {
 
-
     override fun toString(): String {
         return StringBuilder()
             .append("|internalId: ")
@@ -59,6 +58,5 @@ data class Ingredient(
     override fun hashCode(): Int {
         return super.hashCode()
     }
-
 }
 

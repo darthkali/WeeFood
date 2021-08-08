@@ -3,9 +3,7 @@ package de.darthkali.weefood.interactors.recipe
 import de.darthkali.weefood.datasource.database.mapper.recipe.RecipeMapper
 import de.darthkali.weefood.datasource.database.model.RecipeIngredientDb
 import de.darthkali.weefood.datasource.database.queries.recipe.RecipeQueries
-import de.darthkali.weefood.datasource.database.queries.recipeIngredient.RecipeIngredientQueries
 import de.darthkali.weefood.domain.model.Recipe
-import de.darthkali.weefood.interactors.ingredient.SaveIngredient
 import de.darthkali.weefood.interactors.recipe_ingredient.SaveRecipeIngredient
 import de.darthkali.weefood.util.Logger
 import org.koin.core.component.KoinComponent
@@ -14,22 +12,20 @@ import org.koin.core.component.inject
 class SaveRecipe : KoinComponent {
 
     private val recipeQueries: RecipeQueries by inject()
-    private val recipeIngredientQueries: RecipeIngredientQueries by inject()
-    private val saveIngredient: SaveIngredient by inject()
     private val saveRecipeIngredient: SaveRecipeIngredient by inject()
     private val logger = Logger("SaveRecipe")
     private val mapper = RecipeMapper()
 
 
     /**
-     * exits the recipe already?
+     * @param recipe: Recipe
      *
-     * then update recipe in database
-     * update recipeIngredients in database
+     * exists the recipe in the database, then update it
+     * else insert a new recipe
      *
-     * else insert a new recipe to database
-     * insert recipeIngredients to database
+     * save all for all ingredients from the recipe, save it as a recipeIngredient
      *
+     * @return recipeId
      */
     fun execute(recipe: Recipe): Int? {
         return try {

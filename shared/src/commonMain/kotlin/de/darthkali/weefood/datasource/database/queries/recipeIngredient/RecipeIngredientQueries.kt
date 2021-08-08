@@ -8,6 +8,10 @@ interface RecipeIngredientQueries {
     fun getAllRecipeIngredientByRecipeId(recipeId: Int): List<RecipeIngredientDb>
     fun getAllRecipeIngredients(): List<RecipeIngredientDb>
     fun deleteRecipeIngredientById(recipeId: Int): Boolean
-    fun deleteRecipeIngredientByRecipeIdAndIngredientId(recipeDbId: Int, ingredientDbId: Int): Boolean
+    fun deleteRecipeIngredientByRecipeIdAndIngredientId(
+        recipeDbId: Int,
+        ingredientDbId: Int
+    ): Boolean
+
     fun deleteAllRecipeIngredients(): Boolean
 }

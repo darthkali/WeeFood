@@ -109,7 +109,6 @@ object RecipeMock {
         description = "${recipeListDb[recipeDbUpdateIndex].description} update"
     )
 
-
     // -----------------------------------------------------
     // Recipe Domain Mock
     // -----------------------------------------------------
@@ -122,7 +121,6 @@ object RecipeMock {
         portion = 2,
         ingredients = IngredientMock.ingredientList,
     )
-
 
     val recipeList = listOf(
         Recipe(

@@ -1,6 +1,5 @@
 package de.darthkali.weefood.android.presentation.screens.recipe_list.components
 
-
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.lazy.LazyColumn
@@ -17,7 +16,6 @@ import de.darthkali.weefood.datasource.database.model.RecipeDb
 import de.darthkali.weefood.domain.model.Ingredient
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-
 @ExperimentalMaterialApi
 @ExperimentalCoroutinesApi
 @Composable
@@ -27,18 +25,17 @@ fun RecipeList(
     page: Int,
     onTriggerNextPage: () -> Unit,
     onClickRecipeListItem: (Int) -> Unit,
-){
-    Box(modifier = Modifier
-        .background(color = MaterialTheme.colors.background)
+) {
+    Box(
+        modifier = Modifier
+            .background(color = MaterialTheme.colors.background)
     ) {
         if (loading && recipeDbs.isEmpty()) {
-            LoadingRecipeListShimmer(imageHeight = 250.dp,)
-        }
-        else if(recipeDbs.isEmpty()){
+            LoadingRecipeListShimmer(imageHeight = 250.dp)
+        } else if (recipeDbs.isEmpty()) {
             NothingHere()
-        }
-        else {
-            LazyColumn{
+        } else {
+            LazyColumn {
                 itemsIndexed(
                     items = recipeDbs
                 ) { index, recipe ->

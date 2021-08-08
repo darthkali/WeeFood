@@ -10,24 +10,28 @@ data class Recipe(
     var portion: Int? = 0,
     var ingredients: List<Ingredient>
 ) {
-//    override fun toString(): String {
-//        return StringBuilder()
-//            .append("|id: ")
-//            .append(this.id)
-//            .append("| name: ")
-//            .append(this.name)
-//            .append("| image: ")
-//            .append(this.image)
-//            .append("| cooking_time: ")
-//            .append(this.cooking_time)
-//            .append("| unit: ")
-//            .append(this.cooking_time_unit)
-//            .append("| description: ")
-//            .append(this.description)
-//            .append("|")
-//            .toString()
-//    }
-//
+    override fun toString(): String {
+        return StringBuilder()
+            .append("|databaseId: ")
+            .append(this.databaseId)
+            .append("| name: ")
+            .append(this.name)
+            .append("| image: ")
+            .append(this.image)
+            .append("| cooking_time: ")
+            .append(this.cooking_time)
+            .append("| unit: ")
+            .append(this.cooking_time_unit)
+            .append("| description: ")
+            .append(this.description)
+            .append("| portion: ")
+            .append(this.portion)
+            .append("| ingredients: ")
+            .append(this.ingredients)
+            .append("|")
+            .toString()
+    }
+
     /**
      * to check that 2 Recipes are the same
      * without the id

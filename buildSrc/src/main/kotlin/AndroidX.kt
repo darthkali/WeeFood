@@ -1,4 +1,4 @@
-object Versions{
+object Versions {
     const val appCompatVersion = "1.3.0-rc01"
     const val fragmentKtxVersion = "1.3.3"
     const val test = "1.3.0"
@@ -10,7 +10,7 @@ object AndroidX {
     const val fragmentKtx = "androidx.fragment:fragment-ktx:${Versions.fragmentKtxVersion}"
 }
 
-object AndroidXTest{
+object AndroidXTest {
     const val core = "androidx.test:core-ktx:${Versions.test}"
     const val junit = "androidx.test.ext:junit:${Versions.test_ext}"
     const val runner = "androidx.test:runner:${Versions.test}"

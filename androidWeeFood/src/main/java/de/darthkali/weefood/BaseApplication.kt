@@ -6,7 +6,6 @@ import de.darthkali.weefood.di.initKoin
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.component.KoinComponent
 
-
 class BaseApplication : Application(), KoinComponent {
     override fun onCreate() {
         super.onCreate()

@@ -3,17 +3,14 @@ package de.darthkali.weefood.android.presentation.navigation
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
 import de.darthkali.weefood.android.presentation.screens.day_list.DayListScreen
-import de.darthkali.weefood.android.presentation.screens.day_list.WeekListScreen
+import de.darthkali.weefood.android.presentation.screens.week_list.WeekListScreen
 import de.darthkali.weefood.android.presentation.screens.ingredient_list.IngredientListScreen
 import de.darthkali.weefood.android.presentation.screens.ingredient_list.IngredientListViewModel
 import de.darthkali.weefood.android.presentation.screens.new_recipe.NewRecipeScreen
@@ -24,7 +21,6 @@ import de.darthkali.weefood.android.presentation.screens.settings.SettingsScreen
 import de.darthkali.weefood.android.presentation.screens.shopping_list.ShoppingListScreen
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.compose.getViewModel
-import org.koin.core.component.KoinComponent
 import org.koin.core.parameter.parametersOf
 
 /**

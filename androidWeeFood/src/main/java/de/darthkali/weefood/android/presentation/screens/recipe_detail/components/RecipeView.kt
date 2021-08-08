@@ -1,7 +1,10 @@
 package de.darthkali.weefood.android.presentation.screens.recipe_detail.components
 
-
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -18,7 +21,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @Composable
 fun RecipeView(
     ingredientDb: IngredientDb,
-){
+) {
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth()
@@ -37,46 +40,15 @@ fun RecipeView(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 4.dp)
-                ){
+                ) {
                     Text(
-                        text = ingredientDb.name ?: "",    //if ingredient.name == null, then set "" as text
+                        text = ingredientDb.name ?: "",
                         modifier = Modifier
                             .fillMaxWidth(0.85f)
-                            .wrapContentWidth(Alignment.Start)
-                        ,
+                            .wrapContentWidth(Alignment.Start),
                         style = MaterialTheme.typography.h3
                     )
-                    //val rank = recipe.rating.toString()
-//                    Text(
-//                        text = rank,
-//                        modifier = Modifier
-//                            .fillMaxWidth()
-//                            .wrapContentWidth(Alignment.End)
-//                            .align(Alignment.CenterVertically)
-//                        ,
-//                        style = MaterialTheme.typography.h5
-//                    )
                 }
-//                val datetimeUtil = remember{DatetimeUtil()}
-//                Text(
-//                    text = "Updated ${datetimeUtil.humanizeDatetime(recipe.dateUpdated)} by ${recipe.publisher}"
-//                    ,
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .padding(bottom = 8.dp)
-//                    ,
-//                    style = MaterialTheme.typography.caption
-//                )
-//                for(ingredient in recipe.ingredients){
-//                    Text(
-//                        text = ingredient,
-//                        modifier = Modifier
-//                            .fillMaxWidth()
-//                            .padding(bottom = 4.dp)
-//                        ,
-//                        style = MaterialTheme.typography.body1
-//                    )
-//                }
             }
         }
     }

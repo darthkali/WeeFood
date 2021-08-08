@@ -3,7 +3,11 @@ package de.darthkali.weefood.datasource.database.queries.ingredient
 import de.darthkali.weefood.BaseTest
 import de.darthkali.weefood.mockFactory.IngredientMock
 import de.darthkali.weefood.writeHead
-import kotlin.test.*
+import kotlin.test.BeforeTest
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNull
+import kotlin.test.assertTrue
 import org.koin.core.component.inject
 
 class IngredientDbQueriesImplTest : BaseTest() {
@@ -39,7 +43,7 @@ class IngredientDbQueriesImplTest : BaseTest() {
         writeHead("get_ingredient_by_id_success")
         val ingredients = ingredientQueries.getAllIngredients()
 
-        for(ingredientItem in ingredients!!) {
+        for (ingredientItem in ingredients!!) {
             val ingredient = ingredientQueries.getIngredientById(ingredientItem.id)
             println(ingredient.toString())
             assertEquals(
@@ -75,7 +79,6 @@ class IngredientDbQueriesImplTest : BaseTest() {
                 ingredientQueries.getAllIngredients().size,
                 IngredientMock.ingredientDbList.size - (index + 1),
             )
-
             assertNull(
                 ingredientQueries.getIngredientById(ingredientId)
             )
@@ -95,7 +98,6 @@ class IngredientDbQueriesImplTest : BaseTest() {
         for (ingredient in ingredientQueries.getAllIngredients()) {
             println(ingredient.toString())
         }
-
         assertEquals(ingredientQueries.getAllIngredients().last(), IngredientMock.ingredientDb)
     }
 
@@ -112,12 +114,9 @@ class IngredientDbQueriesImplTest : BaseTest() {
         for (recipe in ingredientQueries.getAllIngredients()) {
             println(recipe.toString())
         }
-
-
         assertEquals(
-            expected = IngredientMock.ingredientDbUpdate ,
+            expected = IngredientMock.ingredientDbUpdate,
             actual = ingredientQueries.getAllIngredients()[IngredientMock.ingredientDbUpdateIndex],
         )
     }
-
 }

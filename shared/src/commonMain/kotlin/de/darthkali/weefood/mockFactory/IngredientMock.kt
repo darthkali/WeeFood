@@ -1,14 +1,18 @@
 package de.darthkali.weefood.mockFactory
 
 import de.darthkali.weefood.datasource.database.model.IngredientDb
-import de.darthkali.weefood.datasource.database.model.RecipeIngredientDb
 import de.darthkali.weefood.domain.model.Ingredient
 
 object IngredientMock {
 
     val ingredientDb = IngredientDb(name = "Butter", image = "butter-sliced.jpg", apiId = 1001)
-    val ingredient = Ingredient(name = "Butter", image = "butter-sliced.jpg", apiId = 1001, quantity = 0F, unit = "")
-
+    val ingredient = Ingredient(
+        name = "Butter",
+        image = "butter-sliced.jpg",
+        apiId = 1001,
+        quantity = 0F,
+        unit = ""
+    )
 
     val ingredientDbList = listOf(
         IngredientDb(name = "Banane", image = "bananas.jpg", apiId = 9040),
@@ -22,7 +26,6 @@ object IngredientMock {
         IngredientDb(name = "Kaffee", image = "brewed-coffee.jpg", apiId = 14209),
         IngredientDb(name = "Eier", image = "egg.png", apiId = 1123),
     )
-
 
     val ingredientList = listOf(
         Ingredient(
@@ -89,6 +92,6 @@ object IngredientMock {
         id = ingredientDbUpdateIndex + 1,
         name = "${IngredientMock.ingredientDbList[ingredientDbUpdateIndex].name} update",
         image = "${IngredientMock.ingredientDbList[ingredientDbUpdateIndex].image} update",
-        apiId = IngredientMock.ingredientDbList[ingredientDbUpdateIndex].apiId ,
+        apiId = IngredientMock.ingredientDbList[ingredientDbUpdateIndex].apiId,
     )
 }

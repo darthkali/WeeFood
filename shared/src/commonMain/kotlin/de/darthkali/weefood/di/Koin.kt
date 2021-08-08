@@ -20,7 +20,7 @@ import de.darthkali.weefood.interactors.recipe.SaveRecipe
 import de.darthkali.weefood.interactors.recipe_ingredient.SaveRecipeIngredient
 import de.darthkali.weefood.interactors.recipe.SearchRecipes
 import de.darthkali.weefood.interactors.recipe_ingredient.DeleteRecipeIngredient
-import de.darthkali.weefood.interactors.recipe_ingredient.GetRecipeIngredients
+import de.darthkali.weefood.interactors.recipe_ingredient.GetIngredientsFromRecipe
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
 import org.koin.dsl.KoinAppDeclaration
@@ -36,8 +36,6 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) =
             interactor
         )
     }
-
-
 
 // called by iOS
 fun initKoin() = initKoin() {}
@@ -66,7 +64,7 @@ val interactor = module {
     single { GetRecipe() }
     single { SearchRecipes() }
     single { DeleteRecipeIngredient() }
-    single { GetRecipeIngredients() }
+    single { GetIngredientsFromRecipe() }
 
 }
 

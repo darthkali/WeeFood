@@ -4,8 +4,7 @@ import de.darthkali.weefood.BaseTest
 import de.darthkali.weefood.datasource.database.queries.ingredient.IngredientQueries
 import de.darthkali.weefood.datasource.database.queries.recipe.RecipeQueries
 import de.darthkali.weefood.datasource.database.queries.recipeIngredient.RecipeIngredientQueries
-import de.darthkali.weefood.interactors.recipe_ingredient.GetRecipeIngredients
-import de.darthkali.weefood.interactors.recipe_ingredient.SaveRecipeIngredient
+import de.darthkali.weefood.interactors.recipe_ingredient.GetIngredientsFromRecipe
 import de.darthkali.weefood.mockFactory.IngredientMock
 import de.darthkali.weefood.mockFactory.RecipeIngredientMock
 import de.darthkali.weefood.mockFactory.RecipeMock
@@ -15,13 +14,12 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.koin.core.component.inject
 
-class GetRecipeIngredientsTest : BaseTest() {
+class GetIngredientsFromRecipeTest : BaseTest() {
 
     private val ingredientQueries: IngredientQueries by inject()
     private val recipeQueries: RecipeQueries by inject()
     private val recipeIngredientQueries: RecipeIngredientQueries by inject()
-    private val saveRecipeIngredient: SaveRecipeIngredient by inject()
-    private val getRecipeIngredients: GetRecipeIngredients by inject()
+    private val getIngredientsFromRecipe: GetIngredientsFromRecipe by inject()
 
     @BeforeTest
     fun setup() = runTest {
@@ -57,7 +55,7 @@ class GetRecipeIngredientsTest : BaseTest() {
     fun get_recipe_ingredients_success() = runTest {
         writeHead("get_recipe_ingredients_success")
 
-        val ingredients = getRecipeIngredients.execute(recipeQueries.getAllRecipes().first().id)
+        val ingredients = getIngredientsFromRecipe.execute(recipeQueries.getAllRecipes().first().id)
 
         println("All RecipeIngredients:-----------------------------------------")
         for (recipeIngredient in recipeIngredientQueries.getAllRecipeIngredients()) {
@@ -65,19 +63,21 @@ class GetRecipeIngredientsTest : BaseTest() {
         }
 
         println("Found Ingredients with RecipeID:-------------------------------")
-        for (ingredient in ingredients) {
-            println(ingredient.toString())
+        if (ingredients != null) {
+            for (ingredient in ingredients) {
+                println(ingredient.toString())
+            }
         }
 
         println("AssertEqual:---------------------------------------------------")
-        ingredients.forEachIndexed { index, ingredient ->
+        ingredients?.forEachIndexed { index, ingredient ->
             println(ingredient.toString())
             println("expected ${RecipeIngredientMock.recipeIngredientDbList[index]}")
             println("actual ${ingredient}")
 
 
             assertEquals(
-                expected = RecipeIngredientMock.recipeIngredientDbList[index].ingredient_id ,
+                expected = RecipeIngredientMock.recipeIngredientDbList[index].ingredient_id,
                 actual = ingredient.internalId,
             )
         }

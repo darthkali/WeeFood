@@ -23,7 +23,6 @@ class SaveRecipeTest : BaseTest() {
     private val saveRecipe: SaveRecipe by inject()
     private val getRecipe: GetRecipe by inject()
 
-
     @BeforeTest
     fun setup() = runTest {
         writeHead("setup")
@@ -34,7 +33,6 @@ class SaveRecipeTest : BaseTest() {
         val ingredients = IngredientMock.ingredientDbList
         val recipes = RecipeMock.recipeListDb
         val recipeIngredients = RecipeIngredientMock.recipeIngredientDbList
-
 
         for (ingredient in ingredients) {
             ingredientQueries.insertIngredient(ingredient)
@@ -98,5 +96,4 @@ class SaveRecipeTest : BaseTest() {
             actual = getRecipe.execute(RecipeMock.recipeUpdate.databaseId!!),
         )
     }
-
 }

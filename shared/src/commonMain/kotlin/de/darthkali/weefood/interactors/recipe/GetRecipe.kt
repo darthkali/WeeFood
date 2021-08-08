@@ -1,10 +1,8 @@
 package de.darthkali.weefood.interactors.recipe
 
-import de.darthkali.weefood.datasource.database.queries.ingredient.IngredientQueries
 import de.darthkali.weefood.datasource.database.queries.recipe.RecipeQueries
-import de.darthkali.weefood.datasource.database.queries.recipeIngredient.RecipeIngredientQueries
 import de.darthkali.weefood.domain.model.Recipe
-import de.darthkali.weefood.interactors.recipe_ingredient.GetRecipeIngredients
+import de.darthkali.weefood.interactors.recipe_ingredient.GetIngredientsFromRecipe
 import de.darthkali.weefood.util.Logger
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -12,26 +10,24 @@ import org.koin.core.component.inject
 class GetRecipe : KoinComponent {
 
     private val recipeQueries: RecipeQueries by inject()
-    private val ingredientQueries: IngredientQueries by inject()
-    private val recipeIngredientQueries: RecipeIngredientQueries by inject()
-    private val getRecipeIngredients: GetRecipeIngredients by inject()
+    private val getIngredientsFromRecipe: GetIngredientsFromRecipe by inject()
     private val logger = Logger("SaveRecipe")
 
 
     /**
-     * exits the recipe already?
+     * @param recipeId: Int
      *
-     * then update recipe in database
-     * update recipeIngredients in database
+     * check if we have a valid recipeId?
      *
-     * else insert a new recipe to database
-     * insert recipeIngredients to database
+     * is the response not null, then create a Recipe and return it
+     * else return null and place a log message
      *
+     * @return Recipe
      */
     fun execute(recipeId: Int): Recipe? {
         return try {
-            if(recipeId > 0){
-                recipeQueries.getRecipeById(recipeId)?.let{
+            if (recipeId > 0) {
+                recipeQueries.getRecipeById(recipeId)?.let {
                     return Recipe(
                         databaseId = it.id,
                         name = it.name,
@@ -39,7 +35,7 @@ class GetRecipe : KoinComponent {
                         cooking_time = it.cooking_time,
                         cooking_time_unit = it.cooking_time_unit,
                         description = it.description,
-                        ingredients = getRecipeIngredients.execute(it.id)!!,
+                        ingredients = getIngredientsFromRecipe.execute(it.id)!!,
                     )
                 }
             }

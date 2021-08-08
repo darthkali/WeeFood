@@ -1,7 +1,6 @@
 package de.darthkali.weefood.datasource.network.mapper
 
 import de.darthkali.weefood.datasource.BaseMapper
-import de.darthkali.weefood.datasource.database.model.IngredientDb
 import de.darthkali.weefood.datasource.network.model.IngredientDto
 import de.darthkali.weefood.domain.model.Ingredient
 
@@ -12,8 +11,8 @@ class IngredientMapper : BaseMapper<Ingredient, IngredientDto> {
             apiId = db.apiId,
             name = db.name,
             image = db.image,
-            quantity = 0F, // TODO: korrekter Wert?
-            unit =  "", // TODO: korrekter Wert?
+            quantity = 0F,
+            unit = "",
         )
     }
 

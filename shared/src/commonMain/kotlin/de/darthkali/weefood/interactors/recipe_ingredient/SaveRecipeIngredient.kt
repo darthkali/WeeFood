@@ -12,10 +12,18 @@ class SaveRecipeIngredient : KoinComponent {
     private val recipeIngredientQueries: RecipeIngredientQueries by inject()
     private val logger = Logger("SaveRecipeIngredient")
 
+
     /**
-     * search ingredient by AppId
-     * is there a result, then return the database-id
-     * is the result == null, then insert new ingredient and return the new database-id
+     * @param recipeIngredient: RecipeIngredientDb
+     *
+     * search all ingredients for the recipe in database
+     * iterates through the recipeIngredient-List
+     * when the ingredient is the same, as the one we want to save
+     * then make an update and return the database-id
+     *
+     * if no ingredient matches, then insert a ne recipeIngredient to the database
+     * and return the database-id
+     * @return recipeIngredient-ID
      */
     fun execute(recipeIngredient: RecipeIngredientDb): Int? {
         return try {

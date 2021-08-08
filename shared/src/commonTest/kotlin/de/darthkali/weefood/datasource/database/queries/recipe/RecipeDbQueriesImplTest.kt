@@ -3,17 +3,16 @@ package de.darthkali.weefood.datasource.database.queries.recipe
 import de.darthkali.weefood.BaseTest
 import de.darthkali.weefood.mockFactory.RecipeMock
 import de.darthkali.weefood.writeHead
-import org.koin.core.component.inject
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
+import org.koin.core.component.inject
 
 class RecipeDbQueriesImplTest : BaseTest() {
 
     private val recipeQueries: RecipeQueries by inject()
-
 
     @BeforeTest
     fun setup() = runTest {
@@ -25,7 +24,6 @@ class RecipeDbQueriesImplTest : BaseTest() {
             recipeQueries.insertRecipe(recipe)
         }
     }
-
 
     @Test
     fun get_all_recipes_success() = runTest {
@@ -67,7 +65,7 @@ class RecipeDbQueriesImplTest : BaseTest() {
             recipeQueries.insertRecipe(recipe)
         }
 
-        for (recipe in recipeQueries.searchRecipes(RecipeMock.searchName,1)) {
+        for (recipe in recipeQueries.searchRecipes(RecipeMock.searchName, 1)) {
             println(recipe.toString())
             assertEquals(
                 expected = "true",
@@ -75,7 +73,6 @@ class RecipeDbQueriesImplTest : BaseTest() {
             )
         }
     }
-
 
     @Test
     fun delete_all_recipes_success() = runTest {
@@ -88,7 +85,6 @@ class RecipeDbQueriesImplTest : BaseTest() {
             "Delete All did not work"
         )
     }
-
 
     @Test
     fun delete_recipe_by_id_success() = runTest {
@@ -125,7 +121,6 @@ class RecipeDbQueriesImplTest : BaseTest() {
             println(recipe.toString())
         }
 
-
         assertEquals(
             expected = recipeQueries.getAllRecipes().last(),
             actual = RecipeMock.recipeDb,
@@ -146,11 +141,9 @@ class RecipeDbQueriesImplTest : BaseTest() {
             println(recipe.toString())
         }
 
-
         assertEquals(
             expected = recipeQueries.getAllRecipes()[RecipeMock.recipeDbUpdateIndex],
             actual = RecipeMock.recipeDbUpdate,
         )
     }
-
 }

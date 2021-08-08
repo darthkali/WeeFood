@@ -7,12 +7,11 @@ import de.darthkali.weefood.domain.model.Recipe
 import de.darthkali.weefood.interactors.recipe.GetRecipe
 import de.darthkali.weefood.interactors.recipe.SaveRecipe
 import de.darthkali.weefood.interactors.recipe_ingredient.DeleteRecipeIngredient
-import de.darthkali.weefood.interactors.recipe_ingredient.GetRecipeIngredients
+import de.darthkali.weefood.interactors.recipe_ingredient.GetIngredientsFromRecipe
 import de.darthkali.weefood.presentation.new_recipe.NewRecipeEvents
 import de.darthkali.weefood.presentation.new_recipe.NewRecipeState
 import de.darthkali.weefood.util.Logger
 import org.koin.core.component.inject
-
 
 class NewRecipeViewModel(
     recipeId: Int,
@@ -22,7 +21,7 @@ class NewRecipeViewModel(
     private val saveRecipe: SaveRecipe by inject()
     private val getRecipe: GetRecipe by inject()
     private val deleteRecipeIngredient: DeleteRecipeIngredient by inject()
-    private val getRecipeIngredients: GetRecipeIngredients by inject()
+    private val getIngredientsFromRecipe: GetIngredientsFromRecipe by inject()
 
     val state: MutableState<NewRecipeState> = mutableStateOf(NewRecipeState())
 
@@ -60,8 +59,13 @@ class NewRecipeViewModel(
                 onUpdateRecipe(state.value.recipe.copy(databaseId = saveRecipe.execute(state.value.recipe)))
             }
             is NewRecipeEvents.OnDeleteIngredient -> {
-                if (deleteRecipeIngredient.execute(state.value.recipe.databaseId!!,  event.ingredient.internalId!!)) {
-                    val ingredients = getRecipeIngredients.execute(state.value.recipe.databaseId!!)
+                if (deleteRecipeIngredient.execute(
+                        state.value.recipe.databaseId!!,
+                        event.ingredient.internalId!!
+                    )
+                ) {
+                    val ingredients =
+                        getIngredientsFromRecipe.execute(state.value.recipe.databaseId!!)
                     onUpdateRecipe(state.value.recipe.copy(ingredients = ingredients!!))
                 }
             }

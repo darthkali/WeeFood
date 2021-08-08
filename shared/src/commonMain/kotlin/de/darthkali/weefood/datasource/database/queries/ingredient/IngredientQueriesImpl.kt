@@ -55,7 +55,7 @@ class IngredientQueriesImpl : IngredientQueries, KoinComponent {
             weeFoodDatabaseQueries.getAllIngredients(
                 pageSize = 100,  // TODO replace with parameter
                 offset = 0       // TODO replace with parameter
-            ).executeAsList().toIngredientDbList()
+            ).executeAsList().toIngredientDbList() //TODO WF-140: Mapper nutzen
 
         } catch (e: Exception) {
             logger.log(e.toString())
@@ -68,7 +68,7 @@ class IngredientQueriesImpl : IngredientQueries, KoinComponent {
             logger.log("Get Ingredient from database by ID")
             weeFoodDatabaseQueries.getIngredientById(
                 id = ingredientId.toLong()
-            ).executeAsOne().toIngredientDb()
+            ).executeAsOne().toIngredientDb() //TODO WF-140: Mapper nutzen
         } catch (e: Exception) {
             logger.log(e.toString())
             null
@@ -80,7 +80,7 @@ class IngredientQueriesImpl : IngredientQueries, KoinComponent {
             logger.log("Get Ingredient from database by ApiID")
             weeFoodDatabaseQueries.getIngredientByApiId(
                 apiId = apiId.toLong()
-            ).executeAsOne().toIngredientDb()
+            ).executeAsOne().toIngredientDb() //TODO WF-140: Mapper nutzen
         } catch (e: Exception) {
             logger.log(e.toString())
             null
@@ -133,7 +133,7 @@ class IngredientQueriesImpl : IngredientQueries, KoinComponent {
 -- -----------------------------------------------------
 */
 
-    fun Ingredient_Entity.toIngredientDb(): IngredientDb {
+    fun Ingredient_Entity.toIngredientDb(): IngredientDb { //TODO WF-140: Mapper nutzen
         return IngredientDb(
             name = name,
             image = image,
@@ -143,7 +143,7 @@ class IngredientQueriesImpl : IngredientQueries, KoinComponent {
     }
 
 
-    fun List<Ingredient_Entity>.toIngredientDbList(): List<IngredientDb> {
+    fun List<Ingredient_Entity>.toIngredientDbList(): List<IngredientDb> { //TODO WF-140: Mapper nutzen
         return map { it.toIngredientDb() }
     }
 

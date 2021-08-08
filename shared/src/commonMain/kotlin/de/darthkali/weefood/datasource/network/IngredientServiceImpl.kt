@@ -1,6 +1,5 @@
 package de.darthkali.weefood.datasource.network
 
-
 import de.darthkali.weefood.datasource.network.mapper.IngredientListMapper
 import de.darthkali.weefood.datasource.network.model.IngredientSearchResponse
 import de.darthkali.weefood.domain.model.Ingredient

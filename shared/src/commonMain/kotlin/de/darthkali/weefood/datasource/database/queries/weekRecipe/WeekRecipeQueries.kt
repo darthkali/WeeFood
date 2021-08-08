@@ -1,6 +1,6 @@
 package de.darthkali.weefood.datasource.database.queries.weekRecipe
 
-import de.darthkali.weefood.datasource.database.dao.WeekRecipeDb
+import de.darthkali.weefood.datasource.database.model.WeekRecipeDb
 import de.darthkali.weefood.domain.util.enums.Weekday
 
 interface WeekRecipeQueries {

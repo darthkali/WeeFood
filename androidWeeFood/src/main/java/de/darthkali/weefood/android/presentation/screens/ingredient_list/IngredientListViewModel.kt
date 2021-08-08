@@ -6,15 +6,11 @@ import androidx.lifecycle.viewModelScope
 import de.darthkali.weefood.android.presentation.screens.BaseViewModel
 import de.darthkali.weefood.domain.model.Ingredient
 import de.darthkali.weefood.interactors.ingredient.SaveIngredient
-import de.darthkali.weefood.presentation.ingredient_list.IngredientListEvents
 import de.darthkali.weefood.interactors.ingredient.SearchIngredient
-import de.darthkali.weefood.interactors.recipe_ingredient.SaveRecipeIngredient
+import de.darthkali.weefood.presentation.ingredient_list.IngredientListEvents
 import de.darthkali.weefood.presentation.ingredient_list.IngredientListState
-import de.darthkali.weefood.presentation.new_recipe.NewRecipeEvents
 import de.darthkali.weefood.util.Logger
-import kotlin.collections.ArrayList
 import org.koin.core.component.inject
-
 
 class IngredientListViewModel(
     recipeId: Int
@@ -22,8 +18,6 @@ class IngredientListViewModel(
 
     private val searchIngredient: SearchIngredient by inject()
     private val saveIngredient: SaveIngredient by inject()
-
-
     private val logger = Logger("IngredientListViewModel")
 
     val state: MutableState<IngredientListState> = mutableStateOf(IngredientListState())

@@ -3,16 +3,15 @@ package de.darthkali.weefood.datasource.database.queries.weekRecipe
 import de.darthkali.weefood.BaseTest
 import de.darthkali.weefood.mockFactory.WeekRecipeMock
 import de.darthkali.weefood.writeHead
-import org.koin.core.component.inject
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
+import org.koin.core.component.inject
 
 class WeekRecipeDbDbQueriesImplTest : BaseTest() {
 
     private val weekRecipeQueries: WeekRecipeQueries by inject()
-
 
     @BeforeTest
     fun setup() = runTest {
@@ -24,7 +23,6 @@ class WeekRecipeDbDbQueriesImplTest : BaseTest() {
             weekRecipeQueries.insertWeekRecipe(weekRecipe)
         }
     }
-
 
     @Test
     fun get_all_week_recipes_success() = runTest {
@@ -44,7 +42,8 @@ class WeekRecipeDbDbQueriesImplTest : BaseTest() {
     fun get_all_week_recipe_by_weekday() = runTest {
         writeHead("get_all_week_recipe_by_weekday")
 
-        val weekRecipes = weekRecipeQueries.getAllWeekRecipesByWeekDay(WeekRecipeMock.weekDayForSearch)
+        val weekRecipes =
+            weekRecipeQueries.getAllWeekRecipesByWeekDay(WeekRecipeMock.weekDayForSearch)
 
         for (weekRecipe in weekRecipes) {
             println(weekRecipe.toString())
@@ -54,7 +53,6 @@ class WeekRecipeDbDbQueriesImplTest : BaseTest() {
             )
         }
     }
-
 
     @Test
     fun delete_all_week_recipes_success() = runTest {
@@ -67,7 +65,6 @@ class WeekRecipeDbDbQueriesImplTest : BaseTest() {
             "Delete All did not work"
         )
     }
-
 
     @Test
     fun delete_week_recipe_by_id_success() = runTest {

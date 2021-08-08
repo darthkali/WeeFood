@@ -1,6 +1,5 @@
 package de.darthkali.weefood.android.presentation.screens.recipe_list.components
 
-
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.toggleable
@@ -16,7 +15,7 @@ fun FoodCategoryChip(
     category: String,
     isSelected: Boolean = false,
     onSelectedCategoryChanged: (String) -> Unit,
-){
+) {
     Surface(
         modifier = Modifier.padding(start = 4.dp, end = 4.dp),
         elevation = 8.dp,

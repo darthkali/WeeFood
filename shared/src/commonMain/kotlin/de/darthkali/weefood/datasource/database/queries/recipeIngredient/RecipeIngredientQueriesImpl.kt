@@ -7,7 +7,6 @@ import de.darthkali.weefood.util.Logger
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-
 class RecipeIngredientQueriesImpl : RecipeIngredientQueries, KoinComponent {
 
     private val weeFoodDatabase: WeeFoodDatabaseWrapper by inject()
@@ -53,7 +52,7 @@ class RecipeIngredientQueriesImpl : RecipeIngredientQueries, KoinComponent {
             logger.log("Get RecipeIngredient from database by ID")
             weeFoodDatabaseQueries.getAllRecipeIngredientsByRecipeId(
                 recipe_id = recipeId
-            ).executeAsList().toRecipeIngredientList()
+            ).executeAsList().toRecipeIngredientList() //TODO WF-140: Mapper nutzen
         } catch (e: Exception) {
             logger.log(e.toString())
             listOf()
@@ -64,7 +63,7 @@ class RecipeIngredientQueriesImpl : RecipeIngredientQueries, KoinComponent {
         return try {
             logger.log("Get all RecipeIngredients from database")
             weeFoodDatabaseQueries.getAllRecipeIngredients()
-                .executeAsList().toRecipeIngredientList()
+                .executeAsList().toRecipeIngredientList() //TODO WF-140: Mapper nutzen
         } catch (e: Exception) {
             logger.log(e.toString())
             listOf()
@@ -127,7 +126,7 @@ class RecipeIngredientQueriesImpl : RecipeIngredientQueries, KoinComponent {
 -- -----------------------------------------------------
 */
 
-    fun RecipeIngredient_Entity.toRecipeIngredient(): RecipeIngredientDb {
+    fun RecipeIngredient_Entity.toRecipeIngredient(): RecipeIngredientDb { //TODO WF-140: Mapper nutzen
         return RecipeIngredientDb(
             id = id.toInt(),
             quantity = quantity,
@@ -137,7 +136,7 @@ class RecipeIngredientQueriesImpl : RecipeIngredientQueries, KoinComponent {
         )
     }
 
-    fun List<RecipeIngredient_Entity>.toRecipeIngredientList(): List<RecipeIngredientDb> {
+    fun List<RecipeIngredient_Entity>.toRecipeIngredientList(): List<RecipeIngredientDb> { //TODO WF-140: Mapper nutzen
         return map { it.toRecipeIngredient() }
     }
 

@@ -2,19 +2,16 @@ package de.darthkali.weefood.datasource.database.queries.recipeIngredient
 
 import de.darthkali.weefood.BaseTest
 import de.darthkali.weefood.mockFactory.RecipeIngredientMock
-import de.darthkali.weefood.mockFactory.RecipeMock
 import de.darthkali.weefood.writeHead
-import org.koin.core.component.inject
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
-
+import org.koin.core.component.inject
 
 class RecipeDbIngredientDbQueriesImplTest : BaseTest() {
 
     private val recipeIngredientQueries: RecipeIngredientQueries by inject()
-
 
     @BeforeTest
     fun setup() = runTest {
@@ -26,7 +23,6 @@ class RecipeDbIngredientDbQueriesImplTest : BaseTest() {
             recipeIngredientQueries.insertRecipeIngredient(recipeIngredient)
         }
     }
-
 
     @Test
     fun get_all_recipe_ingredients_success() = runTest {
@@ -46,8 +42,9 @@ class RecipeDbIngredientDbQueriesImplTest : BaseTest() {
         writeHead("get_all_recipe_ingredient_by_recipe_id_success")
 
         RecipeIngredientMock.recipeIngredientDbList.forEachIndexed { index, recipeMock ->
-            for (recipeIngredient in recipeIngredientQueries.getAllRecipeIngredientByRecipeId(recipeMock.recipe_id)) {
-
+            for (recipeIngredient in recipeIngredientQueries.getAllRecipeIngredientByRecipeId(
+                recipeMock.recipe_id
+            )) {
                 println(recipeIngredient.toString())
                 assertEquals(
                     RecipeIngredientMock.recipeIngredientDbList[index].recipe_id,
@@ -56,7 +53,6 @@ class RecipeDbIngredientDbQueriesImplTest : BaseTest() {
             }
         }
     }
-
 
     @Test
     fun delete_all_recipe_ingredients_success() = runTest {
@@ -70,22 +66,22 @@ class RecipeDbIngredientDbQueriesImplTest : BaseTest() {
         )
     }
 
-
     @Test
     fun delete_recipe_ingredient_by_id_success() = runTest {
         writeHead("delete_recipe_ingredient_by_id_success")
 
-        recipeIngredientQueries.getAllRecipeIngredients().forEachIndexed { index, recipeIngredient ->
+        recipeIngredientQueries.getAllRecipeIngredients()
+            .forEachIndexed { index, recipeIngredient ->
 
-            val recipeIngredientId = recipeIngredient.id
-            println("Delete recipeIngredient with ID: $recipeIngredientId")
-            recipeIngredientQueries.deleteRecipeIngredientById(recipeIngredientId)
+                val recipeIngredientId = recipeIngredient.id
+                println("Delete recipeIngredient with ID: $recipeIngredientId")
+                recipeIngredientQueries.deleteRecipeIngredientById(recipeIngredientId)
 
-            assertEquals(
-                expected = recipeIngredientQueries.getAllRecipeIngredients().size,
-                actual = RecipeIngredientMock.recipeIngredientDbList.size - (index + 1),
-            )
-        }
+                assertEquals(
+                    expected = recipeIngredientQueries.getAllRecipeIngredients().size,
+                    actual = RecipeIngredientMock.recipeIngredientDbList.size - (index + 1),
+                )
+            }
         assertEquals(
             expected = 0,
             actual = recipeIngredientQueries.getAllRecipeIngredients().size,
@@ -125,8 +121,6 @@ class RecipeDbIngredientDbQueriesImplTest : BaseTest() {
         for (recipe in recipeIngredientQueries.getAllRecipeIngredients()) {
             println(recipe.toString())
         }
-
-
         assertEquals(
             expected = recipeIngredientQueries.getAllRecipeIngredients()[RecipeIngredientMock.recipeIngredientDbUpdateIndex],
             actual = RecipeIngredientMock.recipeIngredientDbUpdate,

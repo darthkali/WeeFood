@@ -4,7 +4,7 @@ import de.darthkali.weefood.datasource.BaseMapper
 import de.darthkali.weefood.datasource.database.model.IngredientDb
 import de.darthkali.weefood.domain.model.Ingredient
 
-class IngredientListMapper: BaseMapper<List<Ingredient>, List<IngredientDb>> {
+class IngredientListMapper : BaseMapper<List<Ingredient>, List<IngredientDb>> {
 
     private val internalMapper = IngredientMapper()
 

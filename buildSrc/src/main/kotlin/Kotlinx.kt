@@ -7,5 +7,6 @@ object Kotlinx {
     const val common = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutines}"
     const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutines}"
     const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${coroutines}"
-    const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-core:${kotlinxSerialization}"
+    const val serialization =
+        "org.jetbrains.kotlinx:kotlinx-serialization-core:${kotlinxSerialization}"
 }

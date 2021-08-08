@@ -12,7 +12,6 @@ import de.darthkali.weefood.android.presentation.navigation.TopBar
 import de.darthkali.weefood.android.presentation.theme.AppTheme
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-
 @ExperimentalCoroutinesApi
 @ExperimentalMaterialApi
 @ExperimentalComposeUiApi

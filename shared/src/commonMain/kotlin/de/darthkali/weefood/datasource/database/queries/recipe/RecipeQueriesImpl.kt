@@ -3,12 +3,11 @@ package de.darthkali.weefood.datasource.database.queries.recipe
 import de.darthkali.weefood.datasource.database.Recipe_Entity
 import de.darthkali.weefood.datasource.database.WeeFoodDatabaseWrapper
 import de.darthkali.weefood.datasource.database.model.RecipeDb
-import de.darthkali.weefood.datasource.network.IngredientServiceImpl
 import de.darthkali.weefood.util.Logger
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class RecipeQueriesImpl: RecipeQueries, KoinComponent {
+class RecipeQueriesImpl : RecipeQueries, KoinComponent {
 
     private val weeFoodDatabase: WeeFoodDatabaseWrapper by inject()
     private val weeFoodDatabaseQueries = weeFoodDatabase.instance.recipeDbQueries
@@ -36,7 +35,7 @@ class RecipeQueriesImpl: RecipeQueries, KoinComponent {
     override fun updateRecipe(recipeDb: RecipeDb): Int? {
         return try {
             weeFoodDatabaseQueries.updateRecipe(
-                name = recipeDb.name ,
+                name = recipeDb.name,
                 image = recipeDb.image ?: "no.jpg",
                 cooking_time = recipeDb.cooking_time,
                 cooking_time_unit = recipeDb.cooking_time_unit,
@@ -57,8 +56,7 @@ class RecipeQueriesImpl: RecipeQueries, KoinComponent {
             weeFoodDatabaseQueries.getAllRecipes(
                 pageSize = 100,  // TODO replace with parameter
                 offset = 0       // TODO replace with parameter
-            ).executeAsList().toRecipeList()
-
+            ).executeAsList().toRecipeList() //TODO WF-140: Mapper nutzen
         } catch (e: Exception) {
             logger.log(e.toString())
             listOf()
@@ -70,7 +68,7 @@ class RecipeQueriesImpl: RecipeQueries, KoinComponent {
             logger.log("Get Recipe from database by ID")
             weeFoodDatabaseQueries.getRecipeById(
                 id = recipeId.toLong()
-            ).executeAsOne().toRecipe()
+            ).executeAsOne().toRecipe() //TODO WF-140: Mapper nutzen
         } catch (e: Exception) {
             logger.log(e.toString())
             null
@@ -93,8 +91,8 @@ class RecipeQueriesImpl: RecipeQueries, KoinComponent {
             weeFoodDatabaseQueries.searchRecipes(
                 query = name,
                 pageSize = 30.toLong(),
-                offset =   ((page - 1) * 30).toLong(),    //TODO: Replace 30 with Pagination Size
-            ).executeAsList().toRecipeList()
+                offset = ((page - 1) * 30).toLong(),    //TODO: Replace 30 with Pagination Size
+            ).executeAsList().toRecipeList() //TODO WF-140: Mapper nutzen
         } catch (e: Exception) {
             logger.log(e.toString())
             listOf()
@@ -124,7 +122,6 @@ class RecipeQueriesImpl: RecipeQueries, KoinComponent {
     }
 
 
-
     /*
 -- -----------------------------------------------------
 -- recipe_Entity
@@ -138,7 +135,7 @@ class RecipeQueriesImpl: RecipeQueries, KoinComponent {
 -- -----------------------------------------------------
 */
 
-    fun Recipe_Entity.toRecipe(): RecipeDb {
+    fun Recipe_Entity.toRecipe(): RecipeDb { //TODO WF-140: Mapper nutzen
         return RecipeDb(
             id = id.toInt(),
             name = name,
@@ -149,7 +146,7 @@ class RecipeQueriesImpl: RecipeQueries, KoinComponent {
         )
     }
 
-    fun List<Recipe_Entity>.toRecipeList(): List<RecipeDb> {
+    fun List<Recipe_Entity>.toRecipeList(): List<RecipeDb> { //TODO WF-140: Mapper nutzen
         return map { it.toRecipe() }
     }
 

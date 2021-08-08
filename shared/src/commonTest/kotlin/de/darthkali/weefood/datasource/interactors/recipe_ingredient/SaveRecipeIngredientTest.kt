@@ -46,7 +46,6 @@ class SaveRecipeIngredientTest : BaseTest() {
         }
     }
 
-
     /**
      * should save a new recipeIngredient to the database
      * because the recipeId and the ingredientId are not the same
@@ -66,11 +65,10 @@ class SaveRecipeIngredientTest : BaseTest() {
         }
 
         assertEquals(
-            expected = RecipeIngredientMock.recipeIngredientDb ,
+            expected = RecipeIngredientMock.recipeIngredientDb,
             actual = recipeIngredientQueries.getAllRecipeIngredients().last(),
         )
     }
-
 
     /**
      * should update the recipeIngredient in the database
@@ -91,9 +89,8 @@ class SaveRecipeIngredientTest : BaseTest() {
         }
 
         assertEquals(
-            expected = RecipeIngredientMock.recipeIngredientDbUpdate ,
+            expected = RecipeIngredientMock.recipeIngredientDbUpdate,
             actual = recipeIngredientQueries.getAllRecipeIngredients()[RecipeIngredientMock.recipeIngredientDbUpdateIndex],
         )
     }
-
 }
