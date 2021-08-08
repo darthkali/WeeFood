@@ -1,6 +1,5 @@
 package de.darthkali.weefood.android.presentation.screens.recipe_detail
 
-
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
@@ -24,22 +23,20 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 fun RecipeDetailScreen(
     state: RecipeDetailState,
     //onTriggerEvent: (RecipeDetailEvents) -> Unit,
-){
+) {
     AppTheme(
         displayProgressBar = state.isLoading,
-    ){
-        if(state.ingredient == null && state.isLoading){
+    ) {
+        if (state.ingredientDb == null && state.isLoading) {
             LoadingRecipeShimmer(imageHeight = RECIPE_IMAGE_HEIGHT.dp)
-        }
-        else if(state.ingredient == null){
+        } else if (state.ingredientDb == null) {
             Text(
                 modifier = Modifier.padding(16.dp),
                 text = "We were unable to retrieve the details for this recipe.\nTry resetting the app.",
                 style = MaterialTheme.typography.body1
             )
-        }
-        else{
-            RecipeView(ingredient = state.ingredient!!)
+        } else {
+            RecipeView(ingredientDb = state.ingredientDb!!)
         }
     }
 }

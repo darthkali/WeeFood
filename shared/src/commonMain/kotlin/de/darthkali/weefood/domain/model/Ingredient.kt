@@ -1,19 +1,29 @@
 package de.darthkali.weefood.domain.model
 
+
 data class Ingredient(
-    val id: Int = 0,
+    var internalId: Int? = null,
     val name: String? = "",
     val image: String? = "",
-    // TODO:  APi ID
+    val apiId: Int,
+    val quantity: Float,
+    val unit: String,
 ) {
+
     override fun toString(): String {
         return StringBuilder()
-            .append("|id: ")
-            .append(this.id)
+            .append("|internalId: ")
+            .append(this.internalId)
             .append("| name: ")
             .append(this.name)
             .append("| image: ")
             .append(this.image)
+            .append("| apiId: ")
+            .append(this.apiId)
+            .append("| quantity: ")
+            .append(this.quantity)
+            .append("| unit: ")
+            .append(this.unit)
             .append("|")
             .toString()
     }
@@ -31,8 +41,11 @@ data class Ingredient(
      */
     override fun equals(other: Any?): Boolean {
         return ((other is Ingredient)
+                && other.internalId == this.internalId
                 && other.name == this.name
-                && other.image == this.image)
+                && other.image == this.image
+                && other.apiId == this.apiId
+                )
     }
 
 
@@ -45,6 +58,5 @@ data class Ingredient(
     override fun hashCode(): Int {
         return super.hashCode()
     }
-
 }
 

@@ -6,8 +6,6 @@ import com.squareup.sqldelight.drivers.native.NativeSqliteDriver
 import com.squareup.sqldelight.drivers.native.wrapConnection
 import de.darthkali.weefood.datasource.database.WeeFoodDatabase
 
-
-
 internal actual fun testDbConnection(): SqlDriver {
     val schema = WeeFoodDatabase.Schema
     return NativeSqliteDriver(
@@ -25,4 +23,4 @@ internal actual fun testDbConnection(): SqlDriver {
     )
 }
 
-//DB TestConnection wirklich nötig? Warum nicht die DB Factory nutzen
+//TODO: DB TestConnection wirklich nötig? Warum nicht die DB Factory nutzen

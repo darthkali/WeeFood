@@ -3,8 +3,6 @@ package de.darthkali.weefood.android.presentation.navigation
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -12,7 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
 import de.darthkali.weefood.android.presentation.screens.day_list.DayListScreen
-import de.darthkali.weefood.android.presentation.screens.day_list.WeekListScreen
+import de.darthkali.weefood.android.presentation.screens.week_list.WeekListScreen
 import de.darthkali.weefood.android.presentation.screens.ingredient_list.IngredientListScreen
 import de.darthkali.weefood.android.presentation.screens.ingredient_list.IngredientListViewModel
 import de.darthkali.weefood.android.presentation.screens.new_recipe.NewRecipeScreen
@@ -20,8 +18,10 @@ import de.darthkali.weefood.android.presentation.screens.new_recipe.NewRecipeVie
 import de.darthkali.weefood.android.presentation.screens.recipe_list.RecipeListScreen
 import de.darthkali.weefood.android.presentation.screens.recipe_list.RecipeListViewModel
 import de.darthkali.weefood.android.presentation.screens.settings.SettingsScreen
+import de.darthkali.weefood.android.presentation.screens.shopping_list.ShoppingListScreen
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 
 /**
  * Navigation Class
@@ -35,8 +35,7 @@ import org.koin.androidx.compose.getViewModel
 @ExperimentalComposeUiApi
 @ExperimentalMaterialApi
 @Composable
-fun Navigation(){
-
+fun Navigation() {
 
 
     val navController = rememberNavController()
@@ -48,15 +47,8 @@ fun Navigation(){
          */
         composable(
             route = NavigationItem.WeekList.route
-        ) { navBackStackEntry ->
-
-            val viewModel = getViewModel<NewRecipeViewModel>()
-            NewRecipeScreen(
-                state = viewModel.state.value,
-                navController = navController,
-                onTriggerEvent =  viewModel::onTriggerEvent)
-
-            //WeekListScreen(navController)
+        ) {
+            WeekListScreen(navController)
         }
 
 
@@ -70,27 +62,32 @@ fun Navigation(){
         }
 
 
-
         /**
          * Navigation -> RecipeList
          */
         composable(
-            route = NavigationItem.RecipeList.route
-        ) { navBackStackEntry ->
-//            val factory = HiltViewModelFactory(LocalContext.current, navBackStackEntry)
-//            val viewModel: RecipeListViewModel = viewModel("RecipeListViewModel", factory)
-            val viewModel = getViewModel<RecipeListViewModel>()
+            route = NavigationItem.RecipeList.route + "?query={query}",
+            arguments = listOf(navArgument("query") {
+                defaultValue = ""
+                type = NavType.StringType
+            })
+        ) { backStackEntry ->
+            val viewModel = getViewModel<RecipeListViewModel> {
+                parametersOf(backStackEntry.arguments?.getString("query"))
+            }
             RecipeListScreen(
                 state = viewModel.state.value,
                 navController = navController,
                 onTriggerEvent = viewModel::onTriggerEvent,
                 onClickRecipeListItem = { recipeId ->
-                    navController.navigate("${NavigationItem.RecipeDetail.route}/$recipeId")
+                    navController.popBackStack() //TODO: Why
+                    navController.navigate("${NavigationItem.NewRecipe.route}/$recipeId")
                 }
             )
         }
 
 
+//
 //        /**
 //         * Navigation -> RecipeDetail
 //         */
@@ -104,25 +101,38 @@ fun Navigation(){
 //        }
 
 
-//        /**
-//         * Navigation -> NewRecipe
-//         */
-//        composable(
-//            route = NavigationItem.NewRecipe.route
-//        ) { navBackStackEntry ->
-//            NewRecipeScreen(navController)
-//        }
+        /**
+         * Navigation -> NewRecipe
+         */
+        composable(
+            route = NavigationItem.NewRecipe.route + "/{recipeId}",
+            arguments = listOf(navArgument("recipeId") {
+                type = NavType.IntType
+            })
+        ) { backStackEntry ->
+            val viewModel = getViewModel<NewRecipeViewModel> {
+                parametersOf(backStackEntry.arguments?.getInt("recipeId"))
+            }
+            NewRecipeScreen(
+                state = viewModel.state.value,
+                navController = navController,
+                onTriggerEvent = viewModel::onTriggerEvent,
+            )
+        }
 
 
         /**
          * Navigation -> IngredientList
          */
         composable(
-            route = NavigationItem.IngredientList.route
-        ) { navBackStackEntry ->
-//            val factory = HiltViewModelFactory(LocalContext.current, navBackStackEntry)
-//            val viewModel: IngredientListViewModel = viewModel("RecipeListViewModel", factory)
-            val viewModel = getViewModel<IngredientListViewModel>()
+            route = NavigationItem.IngredientList.route + "/{recipeId}",
+            arguments = listOf(navArgument("recipeId") {
+                type = NavType.IntType
+            })
+        ) { backStackEntry ->
+            val viewModel = getViewModel<IngredientListViewModel> {
+                parametersOf(backStackEntry.arguments?.getInt("recipeId"))
+            }
             IngredientListScreen(
                 state = viewModel.state.value,
                 navController = navController,
@@ -136,15 +146,8 @@ fun Navigation(){
          */
         composable(
             route = NavigationItem.ShoppingList.route
-        ) { navBackStackEntry ->
-//            val factory = HiltViewModelFactory(LocalContext.current, navBackStackEntry)
-//            val viewModel: IngredientListViewModel = viewModel("RecipeListViewModel", factory)
-            val viewModel = getViewModel<IngredientListViewModel>()
-            IngredientListScreen(
-                state = viewModel.state.value,
-                navController = navController,
-                onTriggerEvent = viewModel::onTriggerEvent,
-            )
+        ) {
+            ShoppingListScreen(navController)
         }
 
 
@@ -153,7 +156,7 @@ fun Navigation(){
          */
         composable(
             route = NavigationItem.Settings.route
-        ) { navBackStackEntry ->
+        ) {
             SettingsScreen(navController)
         }
 

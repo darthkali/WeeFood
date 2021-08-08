@@ -1,6 +1,5 @@
 package de.darthkali.weefood.android.presentation.screens.ingredient_list.components
 
-
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -27,7 +26,6 @@ import androidx.compose.ui.unit.dp
 import de.darthkali.weefood.android.presentation.theme.AppTheme
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-
 @ExperimentalComposeUiApi
 @Composable
 fun SearchAppBar(
@@ -50,8 +48,11 @@ fun SearchAppBar(
                 TextField(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(8.dp)
-                    ,
+                        .padding(
+                            start = 8.dp,
+                            end = 8.dp,
+                            top = 8.dp
+                        ),
                     value = query,
                     onValueChange = { onQueryChanged(it) },
                     label = { Text(text = "Search") },

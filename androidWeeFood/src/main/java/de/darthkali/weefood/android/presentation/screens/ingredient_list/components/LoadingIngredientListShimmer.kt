@@ -1,6 +1,5 @@
 package de.darthkali.weefood.android.presentation.screens.ingredient_list.components
 
-
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -11,16 +10,15 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-
 @Composable
 fun LoadingIngredientListShimmer(
     imageHeight: Dp,
     padding: Dp = 16.dp
-){
+) {
     BoxWithConstraints(
         modifier = Modifier.fillMaxSize()
     ) {
-        val cardWidthPx = with(LocalDensity.current) { (maxWidth - (padding*2)).toPx() }
+        val cardWidthPx = with(LocalDensity.current) { (maxWidth - (padding * 2)).toPx() }
         val cardHeightPx = with(LocalDensity.current) { (imageHeight - padding).toPx() }
         val gradientWidth: Float = (0.2f * cardHeightPx)
 
@@ -57,7 +55,7 @@ fun LoadingIngredientListShimmer(
         )
 
         LazyColumn {
-            items(5){
+            items(5) {
                 ShimmerIngredientCardItem(
                     colors = colors,
                     xShimmer = xCardShimmer.value,

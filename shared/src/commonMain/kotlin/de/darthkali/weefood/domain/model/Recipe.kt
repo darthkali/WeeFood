@@ -1,19 +1,19 @@
 package de.darthkali.weefood.domain.model
 
-import de.darthkali.weefood.domain.util.enums.CookingTimeUnit
-
 data class Recipe(
-    val id: Int = 0,
-    val name: String,
-    val image: String? = "",
-    val cooking_time: Int,
-    val cooking_time_unit: String,
-    val description: String? = ""
+    var databaseId: Int? = null,
+    var name: String,
+    var image: String? = "",
+    var cooking_time: Int? = 0,
+    var cooking_time_unit: String,
+    var description: String? = "",
+    var portion: Int? = 0,
+    var ingredients: List<Ingredient>
 ) {
     override fun toString(): String {
         return StringBuilder()
-            .append("|id: ")
-            .append(this.id)
+            .append("|databaseId: ")
+            .append(this.databaseId)
             .append("| name: ")
             .append(this.name)
             .append("| image: ")
@@ -24,6 +24,10 @@ data class Recipe(
             .append(this.cooking_time_unit)
             .append("| description: ")
             .append(this.description)
+            .append("| portion: ")
+            .append(this.portion)
+            .append("| ingredients: ")
+            .append(this.ingredients)
             .append("|")
             .toString()
     }
@@ -40,12 +44,22 @@ data class Recipe(
      * @return a boolean true / false
      */
     override fun equals(other: Any?): Boolean {
+
+
+        // if we will only get a recipe without a portion, we will set the portion equal to the other portions
+        if (this.portion == 0 && (other is Recipe)) {
+            this.portion = other.portion
+        }
+
+
         return ((other is Recipe)
                 && other.name == this.name
                 && other.image == this.image)
                 && other.cooking_time == this.cooking_time
                 && other.cooking_time_unit == this.cooking_time_unit
                 && other.description == this.description
+//                && other.portion == this.portion
+//                && other.ingredients.hashCode() == this.ingredients.hashCode()
     }
 
     /**

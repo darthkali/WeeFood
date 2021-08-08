@@ -53,11 +53,11 @@ struct IngredientCard: View {
     
             Button("Hinzufügen"){
                 
-                saveIngredient.saveIngredient(ingredient: ingredient)
+                //saveIngredient.execute(ingredient: ingredient)
             
-                for ingredient in getAllIngredients.getAllIngredients() {
-                    print(ingredient)
-                }
+                //for ingredient in getAllIngredients.execute() {
+                  //  print(ingredient)
+                //}
             }
             .padding()
             .foregroundColor(.white)

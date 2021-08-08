@@ -8,6 +8,4 @@ interface IngredientService {
         query: String,
         page: Int,
     ): List<Ingredient>
-
-     fun searchIngredientBla(): String
 }

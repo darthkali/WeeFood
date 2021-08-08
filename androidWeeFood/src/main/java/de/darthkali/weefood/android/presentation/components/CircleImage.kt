@@ -1,15 +1,11 @@
 package de.darthkali.weefood.android.presentation.components
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -22,7 +18,7 @@ import de.darthkali.weefood.datasource.network.IngredientServiceImpl.Companion.I
 fun CircleImage(
     url: String?,
     contentDescription: String?,
-){
+) {
     val painter = rememberCoilPainter("$IMAGE_URL_MEDIUM/$url")
     Card(
         shape = CircleShape,
@@ -46,7 +42,7 @@ fun CircleImage(
                     modifier = Modifier
                         .size(64.dp),
                     elevation = 4.dp,
-                ){
+                ) {
                     // empty for white background
                     //TODO: insert loading image
                 }

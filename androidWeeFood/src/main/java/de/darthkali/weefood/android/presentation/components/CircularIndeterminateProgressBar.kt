@@ -1,6 +1,5 @@
 package de.darthkali.weefood.android.presentation.components
 
-
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme

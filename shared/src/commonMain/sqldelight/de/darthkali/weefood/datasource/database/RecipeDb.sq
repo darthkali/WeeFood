@@ -44,10 +44,16 @@ WHERE name LIKE ('%' || :query || '%')
 LIMIT :pageSize
 OFFSET :offset;
 
+getLastInsertRowId:
+SELECT last_insert_rowid();
+
 -- -----------------------------------------------------
 -- UPDATE
 -- -----------------------------------------------------
-
+updateRecipe:
+UPDATE recipe_Entity
+SET name = ?, image = ?, cooking_time = ?, cooking_time_unit = ?, description = ?
+WHERE id = ?;
 
 -- -----------------------------------------------------
 -- DELETE

@@ -5,10 +5,9 @@ actual class Logger actual constructor(
 ) {
 
     actual fun log(msg: String) {
-        if(!BuildConfig().isDebug()){
+        if (!BuildConfig().isDebug()) {
             // Crashlytics or whatever
-        }
-        else{
+        } else {
             println("$className: $msg")
         }
     }

@@ -1,6 +1,5 @@
 package de.darthkali.weefood.domain.util
 
-
 data class DataState<T>(
     val error: String = "",
     val data: T? = null,
@@ -25,6 +24,6 @@ data class DataState<T>(
             )
         }
 
-        fun <T>loading() = DataState<T>(isLoading = true)
+        fun <T> loading() = DataState<T>(isLoading = true)
     }
 }

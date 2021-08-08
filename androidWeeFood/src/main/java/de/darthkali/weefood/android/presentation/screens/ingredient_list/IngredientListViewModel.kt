@@ -2,37 +2,33 @@ package de.darthkali.weefood.android.presentation.screens.ingredient_list
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import de.darthkali.weefood.android.presentation.screens.BaseViewModel
 import de.darthkali.weefood.domain.model.Ingredient
-import de.darthkali.weefood.interactors.ingredient_list.GetAllIngredients
-import de.darthkali.weefood.interactors.ingredient_list.SaveIngredient
+import de.darthkali.weefood.interactors.ingredient.SaveIngredient
+import de.darthkali.weefood.interactors.ingredient.SearchIngredient
 import de.darthkali.weefood.presentation.ingredient_list.IngredientListEvents
-import de.darthkali.weefood.interactors.ingredient_list.SearchIngredient
 import de.darthkali.weefood.presentation.ingredient_list.IngredientListState
 import de.darthkali.weefood.util.Logger
-import kotlin.collections.ArrayList
-import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-
-class IngredientListViewModel: ViewModel(), KoinComponent {
+class IngredientListViewModel(
+    recipeId: Int
+) : BaseViewModel() {
 
     private val searchIngredient: SearchIngredient by inject()
     private val saveIngredient: SaveIngredient by inject()
-    private val getAllIngredients: GetAllIngredients by inject()
-
-
     private val logger = Logger("IngredientListViewModel")
 
     val state: MutableState<IngredientListState> = mutableStateOf(IngredientListState())
 
     init {
+        state.value.recipeId = recipeId
         loadIngredients()
     }
 
-    fun onTriggerEvent(event: IngredientListEvents){
-        when (event){
+    fun onTriggerEvent(event: IngredientListEvents) {
+        when (event) {
             IngredientListEvents.LoadIngredient -> {
                 loadIngredients()
             }
@@ -46,7 +42,7 @@ class IngredientListViewModel: ViewModel(), KoinComponent {
                 saveIngredient(event.ingredient)
             }
             is IngredientListEvents.OnUpdateQuery -> {
-                state.value = state.value.copy(query =  event.query)
+                state.value = state.value.copy(query = event.query)
             }
             else -> {
                 logger.log("Something went wrong.")
@@ -54,32 +50,17 @@ class IngredientListViewModel: ViewModel(), KoinComponent {
         }
     }
 
-    private fun saveIngredient(ingredient:Ingredient) {
-        saveIngredient.execute(ingredient)
-
-        getAllIngredients.execute().collectCommon(viewModelScope) { dataState ->
-            state.value = state.value.copy(isLoading = dataState.isLoading)
-
-            dataState.data?.let { ingredients ->
-                appendIngredients(ingredients)
-
-            }
+    private fun saveIngredient(ingredient: Ingredient) {
+        saveIngredient.execute(ingredient, state.value.recipeId).let {
+            logger.log("Ingredients ID was: ${it}")
         }
-        for(ingredientItem in state.value.ingredients){
-            logger.log(ingredientItem.toString())
-        }
-
-//
-//        for(ingredientItem in getAllIngredients.execute()){
-//            logger.log(ingredientItem.toString())
-//        }
     }
 
 
     /**
      * Get the next page of recipes
      */
-    private fun nextPage(){
+    private fun nextPage() {
         state.value = state.value.copy(page = state.value.page + 1)
         loadIngredients()
     }
@@ -89,12 +70,12 @@ class IngredientListViewModel: ViewModel(), KoinComponent {
      * 1. page = 1
      * 2. list position needs to be reset
      */
-    private fun newSearch(){
+    private fun newSearch() {
         state.value = state.value.copy(page = 1, ingredients = listOf())
         loadIngredients()
     }
 
-    private fun loadIngredients(){
+    private fun loadIngredients() {
         searchIngredient.execute(
             query = state.value.query,
             page = state.value.page,
@@ -107,7 +88,7 @@ class IngredientListViewModel: ViewModel(), KoinComponent {
         }
     }
 
-    private fun appendIngredients(ingredients: List<Ingredient>){
+    private fun appendIngredients(ingredients: List<Ingredient>) {
         val curr = ArrayList(state.value.ingredients)
         curr.addAll(ingredients)
         state.value = state.value.copy(ingredients = curr)

@@ -6,7 +6,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class IngredientSearchResponse(
 
-
     @SerialName("results")
     var results: List<IngredientDto>,
 
@@ -18,5 +17,4 @@ data class IngredientSearchResponse(
 
     @SerialName("totalResults")
     var totalResults: Int,
-
-    )
+)

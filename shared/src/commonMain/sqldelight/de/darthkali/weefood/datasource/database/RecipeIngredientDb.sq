@@ -36,18 +36,25 @@ getAllRecipeIngredients:
 SELECT *
 FROM recipeIngredient_Entity;
 
+getLastInsertRowId:
+SELECT last_insert_rowid();
+
 -- -----------------------------------------------------
 -- UPDATE
 -- -----------------------------------------------------
-
-
-
+updateRecipeIngredient:
+UPDATE recipeIngredient_Entity
+SET quantity = ?, unit = ?, recipe_id = ?, ingredient_id = ?
+WHERE id = ?;
 
 -- -----------------------------------------------------
 -- DELETE
 -- -----------------------------------------------------
 deleteRecipeIngredientById:
 DELETE FROM recipeIngredient_Entity WHERE id = ?;
+
+deleteRecipeIngredientByRecipeIdAndIngredientId:
+DELETE FROM recipeIngredient_Entity WHERE recipe_id = ? AND ingredient_id = ?;
 
 deleteAllRecipeIngredients:
 DELETE FROM recipeIngredient_Entity;

@@ -2,48 +2,84 @@ package de.darthkali.weefood.android.presentation.screens.new_recipe
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import de.darthkali.weefood.domain.model.Ingredient
-import de.darthkali.weefood.interactors.ingredient_list.GetAllIngredients
-import de.darthkali.weefood.interactors.ingredient_list.SaveIngredient
-import de.darthkali.weefood.presentation.ingredient_list.IngredientListEvents
-import de.darthkali.weefood.interactors.ingredient_list.SearchIngredient
-import de.darthkali.weefood.presentation.ingredient_list.IngredientListState
+import de.darthkali.weefood.android.presentation.screens.BaseViewModel
+import de.darthkali.weefood.domain.model.Recipe
+import de.darthkali.weefood.interactors.recipe.GetRecipe
+import de.darthkali.weefood.interactors.recipe.SaveRecipe
+import de.darthkali.weefood.interactors.recipe_ingredient.DeleteRecipeIngredient
+import de.darthkali.weefood.interactors.recipe_ingredient.GetIngredientsFromRecipe
 import de.darthkali.weefood.presentation.new_recipe.NewRecipeEvents
 import de.darthkali.weefood.presentation.new_recipe.NewRecipeState
 import de.darthkali.weefood.util.Logger
-import kotlin.collections.ArrayList
-import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-
-class NewRecipeViewModel: ViewModel(), KoinComponent {
+class NewRecipeViewModel(
+    recipeId: Int,
+) : BaseViewModel() {
 
     private val logger = Logger("NewRecipeViewModel")
+    private val saveRecipe: SaveRecipe by inject()
+    private val getRecipe: GetRecipe by inject()
+    private val deleteRecipeIngredient: DeleteRecipeIngredient by inject()
+    private val getIngredientsFromRecipe: GetIngredientsFromRecipe by inject()
 
     val state: MutableState<NewRecipeState> = mutableStateOf(NewRecipeState())
 
-    fun onTriggerEvent(event: NewRecipeEvents){
-        when (event){
+    init {
+        if (recipeId != 0) { //TODO: vlt nicht nötig, da wir im getRecipe schon auf > 0 prüfen
+            onTriggerEvent(NewRecipeEvents.GetRecipe(recipeId = recipeId))
+        }
+    }
+
+
+    fun onTriggerEvent(event: NewRecipeEvents) {
+        when (event) {
+            is NewRecipeEvents.GetRecipe -> {
+
+                val recipe: Recipe = getRecipe.execute(recipeId = event.recipeId)!!
+                state.value = state.value.copy(recipe = recipe)
+
+            }
             is NewRecipeEvents.OnUpdateName -> {
-                state.value = state.value.copy(name = event.name)
+                onUpdateRecipe(state.value.recipe.copy(name = event.name))
             }
             is NewRecipeEvents.OnUpdateImage -> {
-                state.value = state.value.copy(image = event.image)
+                onUpdateRecipe(state.value.recipe.copy(image = event.image))
             }
             is NewRecipeEvents.OnUpdateCookingTime -> {
-                state.value = state.value.copy(cooking_time = event.cooking_time)
+                onUpdateRecipe(state.value.recipe.copy(cooking_time = event.cooking_time))
             }
             is NewRecipeEvents.OnUpdateCookingTimeUnit -> {
-                state.value = state.value.copy(cooking_time_unit = event.cooking_time_unit)
+                onUpdateRecipe(state.value.recipe.copy(cooking_time_unit = event.cooking_time_unit))
             }
             is NewRecipeEvents.OnUpdateDescription -> {
-                state.value = state.value.copy(description = event.description)
+                onUpdateRecipe(state.value.recipe.copy(description = event.description))
+            }
+            is NewRecipeEvents.OnAddIngredient -> {
+                onUpdateRecipe(state.value.recipe.copy(databaseId = saveRecipe.execute(state.value.recipe)))
+            }
+            is NewRecipeEvents.OnDeleteIngredient -> {
+                if (deleteRecipeIngredient.execute(
+                        state.value.recipe.databaseId!!,
+                        event.ingredient.internalId!!
+                    )
+                ) {
+                    val ingredients =
+                        getIngredientsFromRecipe.execute(state.value.recipe.databaseId!!)
+                    onUpdateRecipe(state.value.recipe.copy(ingredients = ingredients!!))
+                }
+            }
+            is NewRecipeEvents.OnSaveRecipe -> {
+                saveRecipe.execute(state.value.recipe)
             }
             else -> {
                 logger.log("Something went wrong.")
             }
         }
     }
+
+    private fun onUpdateRecipe(recipe: Recipe) {
+        state.value = state.value.copy(recipe = recipe, changed = state.value.changed + 1)
+    }
+
 }

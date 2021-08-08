@@ -16,9 +16,9 @@ import org.koin.core.module.Module
 import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module
 
-actual abstract class BaseTest: KoinTest {
+actual abstract class BaseTest : KoinTest {
 
-    
+
     @OptIn(DelicateCoroutinesApi::class)
     actual fun <T> runTest(block: suspend CoroutineScope.() -> T) {
         var error: Throwable? = null

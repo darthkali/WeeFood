@@ -1,15 +1,16 @@
 package de.darthkali.weefood
 
+import java.util.concurrent.Executors
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExecutorCoroutineDispatcher
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
-import java.util.concurrent.Executors
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+//TODO JavaDoc einfügen
 /**
  * Use this rule to update the Main dispatcher ahead of tests. By delegating the main dispatcher to a new thread.
  * we can block the current thread and still dispatch main coroutines

@@ -1,32 +1,29 @@
 package de.darthkali.weefood.android.presentation.screens.ingredient_list.components
 
-
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.Card
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import de.darthkali.weefood.android.presentation.components.CircleImage
-import de.darthkali.weefood.android.presentation.components.CommonButton
 import de.darthkali.weefood.android.presentation.components.button.ButtonStyle
-import de.darthkali.weefood.android.presentation.theme.AppTheme
+import de.darthkali.weefood.android.presentation.components.button.CommonButton
 import de.darthkali.weefood.domain.model.Ingredient
-import de.darthkali.weefood.presentation.ingredient_list.IngredientListEvents
-import java.util.Locale
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-
 
 @ExperimentalCoroutinesApi
 @Composable
 fun IngredientCard(
-    ingredient: Ingredient,
+    ingredientDb: Ingredient,
     onSaveIngredient: (Ingredient) -> Unit
 ) {
     Card(
@@ -45,11 +42,12 @@ fun IngredientCard(
         Column() {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 CircleImage(
-                    url = ingredient.image,
-                    contentDescription = ingredient.name
+                    url = ingredientDb.image,
+                    contentDescription = ingredientDb.name
                 )
                 Text(
-                    text = ingredient.name ?: "",   //if ingredient.name == null, then set "" as text
+                    text = ingredientDb.name
+                        ?: "",   //if ingredient.name == null, then set "" as text
                     modifier = Modifier
                         .fillMaxWidth(0.85f)
                         .wrapContentWidth(Alignment.Start),
@@ -59,18 +57,21 @@ fun IngredientCard(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(end= 8.dp, bottom = 8.dp),
+                    .padding(end = 8.dp, bottom = 8.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.End
 
             ) {
-                CommonButton( text = "Schliessen",  buttonStyle = ButtonStyle.CLOSE_BUTTON, onClick = {})
-                CommonButton( text = "Hinzufügen",  buttonStyle = ButtonStyle.ADD_BUTTON, onClick = { onSaveIngredient(ingredient) })
+                CommonButton(text = "Schliessen", buttonStyle = ButtonStyle.CLOSE_BUTTON) {}
+                CommonButton(text = "Hinzufügen", buttonStyle = ButtonStyle.ADD_BUTTON) {
+                    onSaveIngredient(
+                        ingredientDb
+                    )
+                }
             }
         }
     }
 }
-
 
 
 //@ExperimentalCoroutinesApi
