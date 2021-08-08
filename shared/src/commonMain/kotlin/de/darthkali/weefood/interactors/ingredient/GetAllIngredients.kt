@@ -1,4 +1,4 @@
-package de.darthkali.weefood.interactors.ingredient_list
+package de.darthkali.weefood.interactors.ingredient
 
 import de.darthkali.weefood.datasource.database.queries.ingredient.IngredientQueries
 import de.darthkali.weefood.datasource.database.mapper.ingredient.IngredientListMapper

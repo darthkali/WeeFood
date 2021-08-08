@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import de.darthkali.weefood.android.presentation.components.CircleImage
 import de.darthkali.weefood.android.presentation.components.CommonButton
 import de.darthkali.weefood.android.presentation.components.button.ButtonStyle
-import de.darthkali.weefood.datasource.database.model.IngredientDb
+import de.darthkali.weefood.android.presentation.navigation.NavigationItem
 import de.darthkali.weefood.domain.model.Ingredient
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -59,8 +59,12 @@ fun IngredientCard(
                 horizontalArrangement = Arrangement.End
 
             ) {
-                CommonButton( text = "Schliessen",  buttonStyle = ButtonStyle.CLOSE_BUTTON, onClick = {})
-                CommonButton( text = "Hinzufügen",  buttonStyle = ButtonStyle.ADD_BUTTON, onClick = { onSaveIngredient(ingredientDb) })
+                CommonButton( text = "Schliessen",  buttonStyle = ButtonStyle.CLOSE_BUTTON) {}
+                CommonButton( text = "Hinzufügen",  buttonStyle = ButtonStyle.ADD_BUTTON) {
+                    onSaveIngredient(
+                        ingredientDb
+                    )
+                }
             }
         }
     }

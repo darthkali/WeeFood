@@ -1,15 +1,15 @@
 package de.darthkali.weefood.presentation.new_recipe
 
-import de.darthkali.weefood.datasource.database.model.RecipeDb
-import de.darthkali.weefood.datasource.database.model.RecipeIngredientDb
 import de.darthkali.weefood.domain.model.Recipe
 
 data class NewRecipeState(
 
     val isLoading: Boolean = false,
+    var changed: Int = 0,
 
-    val recipe: Recipe = Recipe(
-        name = "",
+    var recipe: Recipe = Recipe(
+        databaseId = 0,
+        name = " ",//TODO: leerzeichen, damit er das element im ViewModel kopiert? Häääää
         image = "",
         cooking_time = 0,
         cooking_time_unit = "",
@@ -24,13 +24,14 @@ data class NewRecipeState(
         isLoading = false,
 
         recipe = Recipe(
-            name = "",
+            databaseId = 0,
+            name = " ",
             image = "",
             cooking_time = 0,
             cooking_time_unit = "",
             description = "",
             portion = 0,
-            ingredients = listOf(),
+            ingredients = listOf()
         )
     )
 }

@@ -6,8 +6,8 @@ import de.darthkali.weefood.android.presentation.screens.recipe_list.RecipeListV
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-    val appModule = module {
-        viewModel { IngredientListViewModel() }
-        viewModel { RecipeListViewModel() }
-        viewModel { NewRecipeViewModel( ) }
-    }
+val appModule = module {
+    viewModel { IngredientListViewModel(get()) }
+    viewModel { RecipeListViewModel(get()) }
+    viewModel { NewRecipeViewModel(get()) }
+}

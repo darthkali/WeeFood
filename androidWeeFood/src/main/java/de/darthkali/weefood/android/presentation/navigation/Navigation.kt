@@ -21,8 +21,11 @@ import de.darthkali.weefood.android.presentation.screens.new_recipe.NewRecipeVie
 import de.darthkali.weefood.android.presentation.screens.recipe_list.RecipeListScreen
 import de.darthkali.weefood.android.presentation.screens.recipe_list.RecipeListViewModel
 import de.darthkali.weefood.android.presentation.screens.settings.SettingsScreen
+import de.darthkali.weefood.android.presentation.screens.shopping_list.ShoppingListScreen
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.compose.getViewModel
+import org.koin.core.component.KoinComponent
+import org.koin.core.parameter.parametersOf
 
 /**
  * Navigation Class
@@ -49,13 +52,6 @@ fun Navigation() {
         composable(
             route = NavigationItem.WeekList.route
         ) {
-//            val viewModel = getViewModel<NewRecipeViewModel>()
-//            NewRecipeScreen(
-//                state = viewModel.state.value,
-//                navController = navController,
-//                onTriggerEvent = viewModel::onTriggerEvent
-//            )
-
             WeekListScreen(navController)
         }
 
@@ -74,9 +70,15 @@ fun Navigation() {
          * Navigation -> RecipeList
          */
         composable(
-            route = NavigationItem.RecipeList.route
-        ) {
-            val viewModel = getViewModel<RecipeListViewModel>()
+            route = NavigationItem.RecipeList.route + "?query={query}",
+            arguments = listOf(navArgument("query") {
+                defaultValue = ""
+                type = NavType.StringType
+            })
+        ) { backStackEntry ->
+            val viewModel = getViewModel<RecipeListViewModel> {
+                parametersOf(backStackEntry.arguments?.getString("query"))
+            }
             RecipeListScreen(
                 state = viewModel.state.value,
                 navController = navController,
@@ -89,6 +91,7 @@ fun Navigation() {
         }
 
 
+//
 //        /**
 //         * Navigation -> RecipeDetail
 //         */
@@ -110,13 +113,14 @@ fun Navigation() {
             arguments = listOf(navArgument("recipeId") {
                 type = NavType.IntType
             })
-        ) { backStackEntry  ->
-            val viewModel = getViewModel<NewRecipeViewModel>()
-            viewModel.state.value.recipe.internalId = backStackEntry.arguments?.getInt("recipeId")
+        ) { backStackEntry ->
+            val viewModel = getViewModel<NewRecipeViewModel> {
+                parametersOf(backStackEntry.arguments?.getInt("recipeId"))
+            }
             NewRecipeScreen(
                 state = viewModel.state.value,
                 navController = navController,
-                onTriggerEvent = viewModel::onTriggerEvent
+                onTriggerEvent = viewModel::onTriggerEvent,
             )
         }
 
@@ -125,9 +129,14 @@ fun Navigation() {
          * Navigation -> IngredientList
          */
         composable(
-            route = NavigationItem.IngredientList.route
-        ) {
-            val viewModel = getViewModel<IngredientListViewModel>()
+            route = NavigationItem.IngredientList.route + "/{recipeId}",
+            arguments = listOf(navArgument("recipeId") {
+                type = NavType.IntType
+            })
+        ) { backStackEntry ->
+            val viewModel = getViewModel<IngredientListViewModel> {
+                parametersOf(backStackEntry.arguments?.getInt("recipeId"))
+            }
             IngredientListScreen(
                 state = viewModel.state.value,
                 navController = navController,
@@ -142,12 +151,7 @@ fun Navigation() {
         composable(
             route = NavigationItem.ShoppingList.route
         ) {
-            val viewModel = getViewModel<IngredientListViewModel>()
-            IngredientListScreen(
-                state = viewModel.state.value,
-                navController = navController,
-                onTriggerEvent = viewModel::onTriggerEvent,
-            )
+            ShoppingListScreen(navController)
         }
 
 
@@ -156,7 +160,7 @@ fun Navigation() {
          */
         composable(
             route = NavigationItem.Settings.route
-        ) { navBackStackEntry ->
+        ) {
             SettingsScreen(navController)
         }
 

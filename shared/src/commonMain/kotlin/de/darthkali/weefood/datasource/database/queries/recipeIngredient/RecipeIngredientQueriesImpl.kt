@@ -8,11 +8,11 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 
-class RecipeIngredientQueriesImpl: RecipeIngredientQueries, KoinComponent {
+class RecipeIngredientQueriesImpl : RecipeIngredientQueries, KoinComponent {
 
     private val weeFoodDatabase: WeeFoodDatabaseWrapper by inject()
     private val weeFoodDatabaseQueries = weeFoodDatabase.instance.recipeIngredientDbQueries
-    private val logger = Logger("RecipeIngredientDbImpl")
+    private val logger = Logger("RecipeIngredientQueriesImpl")
 
     override fun insertRecipeIngredient(recipeIngredientDb: RecipeIngredientDb): Int? {
         return try {
@@ -81,6 +81,25 @@ class RecipeIngredientQueriesImpl: RecipeIngredientQueries, KoinComponent {
             false
         }
     }
+
+
+    override fun deleteRecipeIngredientByRecipeIdAndIngredientId(
+        recipeDbId: Int,
+        ingredientDbId: Int
+    ): Boolean {
+        return try {
+            logger.log("Delete RecipeIngredient from database by RecipeDbId and IngredientDbId")
+            weeFoodDatabaseQueries.deleteRecipeIngredientByRecipeIdAndIngredientId(
+                recipe_id = recipeDbId,
+                ingredient_id = ingredientDbId
+            )
+            true
+        } catch (e: Exception) {
+            logger.log(e.toString())
+            false
+        }
+    }
+
 
     override fun deleteAllRecipeIngredients(): Boolean {
         return try {

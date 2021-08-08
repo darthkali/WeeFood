@@ -1,11 +1,7 @@
-package de.darthkali.weefood.interactors.recipe_list
+package de.darthkali.weefood.interactors.ingredient
 
 import de.darthkali.weefood.datasource.network.IngredientService
-import de.darthkali.weefood.datasource.database.model.IngredientDb
-import de.darthkali.weefood.datasource.database.model.RecipeDb
-import de.darthkali.weefood.datasource.database.queries.recipe.RecipeQueries
 import de.darthkali.weefood.domain.model.Ingredient
-import de.darthkali.weefood.domain.model.Recipe
 import de.darthkali.weefood.domain.util.CommonFlow
 import de.darthkali.weefood.domain.util.DataState
 import de.darthkali.weefood.domain.util.asCommonFlow
@@ -14,24 +10,24 @@ import kotlinx.coroutines.flow.flow
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class SearchRecipes : KoinComponent {
+class SearchIngredient : KoinComponent {
 
-    private val recipeQueries: RecipeQueries by inject()
-    private val logger = Logger("SearchRecipe")
+    private val ingredientService: IngredientService by inject()
+    private val logger = Logger("SearchIngredient")
 
 
     fun execute(
         query: String,
         page: Int
-    ): CommonFlow<DataState<List<RecipeDb>>> = flow {
+    ): CommonFlow<DataState<List<Ingredient>>> = flow {
         try {
             emit(DataState.loading())
 
-            val recipeList = recipeQueries.searchRecipes(
-                name = query,
+            val ingredientList = ingredientService.searchIngredient(
+                query = query,
                 page = page,
             )
-            emit(DataState.data(data = recipeList))
+            emit(DataState.data(data = ingredientList))
         } catch (e: Exception) {
             logger.log(e.toString())
         }

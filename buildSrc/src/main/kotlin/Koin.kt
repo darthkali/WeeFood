@@ -7,4 +7,5 @@ object Koin {
     const val compose = "io.insert-koin:koin-androidx-compose:${koin}"
     const val test = "io.insert-koin:koin-test:${koin}"
     const val testJunit4 = "io.insert-koin:koin-test-junit4:${koin}"
+
 }

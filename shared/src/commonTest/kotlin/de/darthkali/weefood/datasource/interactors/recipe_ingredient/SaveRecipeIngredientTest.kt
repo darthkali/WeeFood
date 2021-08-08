@@ -1,10 +1,10 @@
-package de.darthkali.weefood.datasource.interactors.new_recipe
+package de.darthkali.weefood.datasource.interactors.recipe_ingredient
 
 import de.darthkali.weefood.BaseTest
 import de.darthkali.weefood.datasource.database.queries.ingredient.IngredientQueries
 import de.darthkali.weefood.datasource.database.queries.recipe.RecipeQueries
 import de.darthkali.weefood.datasource.database.queries.recipeIngredient.RecipeIngredientQueries
-import de.darthkali.weefood.interactors.new_recipe.SaveRecipeIngredient
+import de.darthkali.weefood.interactors.recipe_ingredient.SaveRecipeIngredient
 import de.darthkali.weefood.mockFactory.IngredientMock
 import de.darthkali.weefood.mockFactory.RecipeIngredientMock
 import de.darthkali.weefood.mockFactory.RecipeMock
@@ -12,8 +12,6 @@ import de.darthkali.weefood.writeHead
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertNull
-import kotlin.test.assertTrue
 import org.koin.core.component.inject
 
 class SaveRecipeIngredientTest : BaseTest() {

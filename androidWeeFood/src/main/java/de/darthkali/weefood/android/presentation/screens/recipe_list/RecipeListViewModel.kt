@@ -5,28 +5,30 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
 import de.darthkali.weefood.android.presentation.screens.BaseViewModel
 import de.darthkali.weefood.datasource.database.model.RecipeDb
-import de.darthkali.weefood.domain.model.Ingredient
-import de.darthkali.weefood.interactors.ingredient_list.SaveIngredient
-import de.darthkali.weefood.interactors.recipe_list.SearchRecipes
+import de.darthkali.weefood.interactors.recipe.SearchRecipes
 import de.darthkali.weefood.presentation.recipe_list.RecipeListEvents
 import de.darthkali.weefood.presentation.recipe_list.RecipeListState
 import de.darthkali.weefood.util.Logger
 import kotlin.collections.ArrayList
 import org.koin.core.component.inject
 
-class RecipeListViewModel: BaseViewModel() {
+class RecipeListViewModel(
+    query: String = ""
+) : BaseViewModel() {
 
     private val searchRecipes: SearchRecipes by inject()
     private val logger = Logger("RecipeListViewModel")
 
+
     val state: MutableState<RecipeListState> = mutableStateOf(RecipeListState())
 
     init {
+        state.value.query = query
         loadRecipes()
     }
 
     fun onTriggerEvent(event: RecipeListEvents) {
-        when (event){
+        when (event) {
             RecipeListEvents.LoadRecipe -> {
                 loadRecipes()
             }
@@ -37,7 +39,7 @@ class RecipeListViewModel: BaseViewModel() {
                 nextPage()
             }
             is RecipeListEvents.OnUpdateQuery -> {
-                state.value = state.value.copy(query =  event.query)
+                state.value = state.value.copy(query = event.query)
             }
             else -> {
                 logger.log("Something went wrong.")
@@ -49,7 +51,7 @@ class RecipeListViewModel: BaseViewModel() {
     /**
      * Get the next page of recipes
      */
-    private fun nextPage(){
+    private fun nextPage() {
         state.value = state.value.copy(page = state.value.page + 1)
         loadRecipes()
     }
@@ -59,12 +61,12 @@ class RecipeListViewModel: BaseViewModel() {
      * 1. page = 1
      * 2. list position needs to be reset
      */
-    private fun newSearch(){
+    private fun newSearch() {
         state.value = state.value.copy(page = 1, recipeDbs = listOf())
         loadRecipes()
     }
 
-    private fun loadRecipes(){
+    private fun loadRecipes() {
         searchRecipes.execute(
             query = state.value.query,
             page = state.value.page,
@@ -77,7 +79,7 @@ class RecipeListViewModel: BaseViewModel() {
         }
     }
 
-    private fun appendRecipes(recipes: List<RecipeDb>){
+    private fun appendRecipes(recipes: List<RecipeDb>) {
         val curr = ArrayList(state.value.recipeDbs)
         curr.addAll(recipes)
         state.value = state.value.copy(recipeDbs = curr)

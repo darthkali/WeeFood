@@ -1,11 +1,8 @@
-package de.darthkali.weefood.interactors.new_recipe
+package de.darthkali.weefood.interactors.recipe_ingredient
 
 
-import de.darthkali.weefood.datasource.database.queries.ingredient.IngredientQueries
-import de.darthkali.weefood.datasource.database.mapper.ingredient.IngredientMapper
 import de.darthkali.weefood.datasource.database.model.RecipeIngredientDb
 import de.darthkali.weefood.datasource.database.queries.recipeIngredient.RecipeIngredientQueries
-import de.darthkali.weefood.domain.model.Ingredient
 import de.darthkali.weefood.util.Logger
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject

@@ -1,7 +1,7 @@
 package de.darthkali.weefood.domain.model
 
 data class Recipe(
-    var internalId: Int? = null,
+    var databaseId: Int? = null,
     var name: String,
     var image: String? = "",
     var cooking_time: Int? = 0,

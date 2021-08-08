@@ -13,7 +13,7 @@ class RecipeQueriesImpl: RecipeQueries, KoinComponent {
     private val weeFoodDatabase: WeeFoodDatabaseWrapper by inject()
     private val weeFoodDatabaseQueries = weeFoodDatabase.instance.recipeDbQueries
 
-    private val logger = Logger("RecipeDbImpl")
+    private val logger = Logger("RecipeQueriesImpl")
 
     override fun insertRecipe(recipeDb: RecipeDb): Int? {
         return try {
@@ -36,7 +36,7 @@ class RecipeQueriesImpl: RecipeQueries, KoinComponent {
     override fun updateRecipe(recipeDb: RecipeDb): Int? {
         return try {
             weeFoodDatabaseQueries.updateRecipe(
-                name = recipeDb.name ?: "",
+                name = recipeDb.name ,
                 image = recipeDb.image ?: "no.jpg",
                 cooking_time = recipeDb.cooking_time,
                 cooking_time_unit = recipeDb.cooking_time_unit,

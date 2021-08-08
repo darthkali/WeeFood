@@ -1,7 +1,6 @@
 package de.darthkali.weefood.mockFactory
 
 import de.darthkali.weefood.datasource.database.model.RecipeDb
-import de.darthkali.weefood.domain.model.Ingredient
 import de.darthkali.weefood.domain.model.Recipe
 
 object RecipeMock {
@@ -167,7 +166,7 @@ object RecipeMock {
     const val recipeUpdateIndex = 2
 
     val recipeUpdate = Recipe(
-        internalId = recipeUpdateIndex + 1,
+        databaseId = recipeUpdateIndex + 1,
         name = "${recipeList[recipeDbUpdateIndex].name} update",
         image = "${recipeList[recipeDbUpdateIndex].image} update",
         cooking_time = recipeList[recipeDbUpdateIndex].cooking_time!! + 1,

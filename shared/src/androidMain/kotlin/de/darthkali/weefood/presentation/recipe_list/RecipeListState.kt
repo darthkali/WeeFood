@@ -5,7 +5,7 @@ import de.darthkali.weefood.datasource.database.model.RecipeDb
 actual data class RecipeListState(
     val isLoading: Boolean = false,
     val page: Int = 1,
-    val query: String = "",
+    var query: String = "",
     val recipeDbs: List<RecipeDb> = listOf(),
 )  {
     // Need secondary constructor to initialize with no args in SwiftUI

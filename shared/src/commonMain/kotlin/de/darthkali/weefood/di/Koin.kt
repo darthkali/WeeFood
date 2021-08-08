@@ -12,13 +12,15 @@ import de.darthkali.weefood.datasource.database.queries.weekRecipe.WeekRecipeQue
 import de.darthkali.weefood.datasource.network.IngredientService
 import de.darthkali.weefood.datasource.network.IngredientServiceImpl
 import de.darthkali.weefood.datasource.network.KtorClientFactory
-import de.darthkali.weefood.interactors.ingredient_list.GetAllIngredients
-import de.darthkali.weefood.interactors.ingredient_list.SaveIngredient
-import de.darthkali.weefood.interactors.ingredient_list.SearchIngredient
-import de.darthkali.weefood.interactors.new_recipe.GetRecipe
-import de.darthkali.weefood.interactors.new_recipe.SaveRecipe
-import de.darthkali.weefood.interactors.new_recipe.SaveRecipeIngredient
-import de.darthkali.weefood.interactors.recipe_list.SearchRecipes
+import de.darthkali.weefood.interactors.ingredient.GetAllIngredients
+import de.darthkali.weefood.interactors.ingredient.SaveIngredient
+import de.darthkali.weefood.interactors.ingredient.SearchIngredient
+import de.darthkali.weefood.interactors.recipe.GetRecipe
+import de.darthkali.weefood.interactors.recipe.SaveRecipe
+import de.darthkali.weefood.interactors.recipe_ingredient.SaveRecipeIngredient
+import de.darthkali.weefood.interactors.recipe.SearchRecipes
+import de.darthkali.weefood.interactors.recipe_ingredient.DeleteRecipeIngredient
+import de.darthkali.weefood.interactors.recipe_ingredient.GetRecipeIngredients
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
 import org.koin.dsl.KoinAppDeclaration
@@ -63,6 +65,8 @@ val interactor = module {
     single { SaveRecipeIngredient() }
     single { GetRecipe() }
     single { SearchRecipes() }
+    single { DeleteRecipeIngredient() }
+    single { GetRecipeIngredients() }
 
 }
 

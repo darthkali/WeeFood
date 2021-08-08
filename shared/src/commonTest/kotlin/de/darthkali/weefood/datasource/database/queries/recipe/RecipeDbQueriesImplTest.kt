@@ -67,7 +67,7 @@ class RecipeDbQueriesImplTest : BaseTest() {
             recipeQueries.insertRecipe(recipe)
         }
 
-        for (recipe in recipeQueries.searchRecipes(RecipeMock.searchName)) {
+        for (recipe in recipeQueries.searchRecipes(RecipeMock.searchName,1)) {
             println(recipe.toString())
             assertEquals(
                 expected = "true",

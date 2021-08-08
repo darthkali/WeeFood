@@ -7,6 +7,8 @@ import de.darthkali.weefood.domain.model.Ingredient
 object IngredientMock {
 
     val ingredientDb = IngredientDb(name = "Butter", image = "butter-sliced.jpg", apiId = 1001)
+    val ingredient = Ingredient(name = "Butter", image = "butter-sliced.jpg", apiId = 1001, quantity = 0F, unit = "")
+
 
     val ingredientDbList = listOf(
         IngredientDb(name = "Banane", image = "bananas.jpg", apiId = 9040),

@@ -12,7 +12,7 @@ class IngredientQueriesImpl : IngredientQueries, KoinComponent {
     private val weeFoodDatabase: WeeFoodDatabaseWrapper by inject()
     private val weeFoodDatabaseQueries = weeFoodDatabase.instance.ingredientDbQueries
 
-    private val logger = Logger("IngredientDbImpl")
+    private val logger = Logger("IngredientQueriesImpl")
 
 
     override fun insertIngredient(ingredientDb: IngredientDb): Int? {

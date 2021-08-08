@@ -24,7 +24,7 @@ import de.darthkali.weefood.android.presentation.components.CircleImage
 import de.darthkali.weefood.android.presentation.components.CommonButton
 import de.darthkali.weefood.android.presentation.components.button.ButtonStyle
 import de.darthkali.weefood.android.presentation.theme.AppTheme
-import de.darthkali.weefood.datasource.database.model.IngredientDb
+import de.darthkali.weefood.domain.model.Ingredient
 import de.darthkali.weefood.mockFactory.IngredientMock
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -32,8 +32,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalComposeUiApi
 @Composable
 fun IngredientCard(
-    ingredientDb: IngredientDb,
-    onDeleteIngredient: (IngredientDb) -> Unit
+    ingredient: Ingredient,
+    onDeleteIngredient: (Ingredient) -> Unit
 ) {
 
     Card(
@@ -52,11 +52,11 @@ fun IngredientCard(
         Column {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 CircleImage(
-                    url = ingredientDb.image,
-                    contentDescription = ingredientDb.name
+                    url = ingredient.image,
+                    contentDescription = ingredient.name
                 )
                 Text(
-                    text = ingredientDb.name
+                    text = ingredient.name
                         ?: "",   //if ingredient.name == null, then set "" as text
                     modifier = Modifier
                         .fillMaxWidth(0.85f)
@@ -64,34 +64,6 @@ fun IngredientCard(
                     style = typography.h2
                 )
             }
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                modifier = Modifier
-                    .fillMaxWidth()
-            ) {
-                val textState = remember { mutableStateOf(TextFieldValue()) }
-                //textState.value.copy(RecipeIngredientMock.recipeIngredient.quantity.toString())
-
-//                IngredientUnitTextField(
-//                    value = textState.value,
-//                    label = "Menge")
-//
-//                IngredientUnitTextField(
-//                    input = state.recipe.cooking_time_unit,
-//                    onInputChanged = {
-//                        onTriggerEvent(NewRecipeEvents.OnUpdateCookingTimeUnit(it))
-//                    },
-//                    label = "Einheit"
-//                )
-//
-//                IngredientUnitTextField(
-//                    value = textState.value,
-//                    label = "Einheit")
-            }
-
-
-
 
             Row(
                 modifier = Modifier
@@ -103,12 +75,12 @@ fun IngredientCard(
             ) {
                 CommonButton(
                     text = "Löschen",
-                    buttonStyle = ButtonStyle.DELETE_BUTTON,
-                    onClick = { onDeleteIngredient(ingredientDb) })
+                    buttonStyle = ButtonStyle.DELETE_BUTTON
+                ) { onDeleteIngredient(ingredient) }
                 CommonButton(
                     text = "Schliessen",
-                    buttonStyle = ButtonStyle.CLOSE_BUTTON,
-                    onClick = {})
+                    buttonStyle = ButtonStyle.CLOSE_BUTTON
+                ) {}
             }
         }
     }
@@ -122,6 +94,6 @@ fun IngredientCard(
 @Composable
 fun UserProfileDetailsPreview() {
     AppTheme() {
-        IngredientCard(ingredientDb = IngredientMock.ingredientDb, onDeleteIngredient = {})
+        IngredientCard(ingredient = IngredientMock.ingredient, onDeleteIngredient = {})
     }
 }

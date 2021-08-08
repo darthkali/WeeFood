@@ -29,7 +29,7 @@ fun RecipeList(
     onClickRecipeListItem: (Int) -> Unit,
 ){
     Box(modifier = Modifier
-        .background(color = MaterialTheme.colors.surface)
+        .background(color = MaterialTheme.colors.background)
     ) {
         if (loading && recipeDbs.isEmpty()) {
             LoadingRecipeListShimmer(imageHeight = 250.dp,)

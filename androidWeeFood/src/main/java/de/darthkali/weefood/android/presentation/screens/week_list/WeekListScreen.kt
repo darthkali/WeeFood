@@ -9,6 +9,8 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.navigation.NavController
+import de.darthkali.weefood.android.presentation.components.CommonButton
+import de.darthkali.weefood.android.presentation.components.button.ButtonStyle
 import de.darthkali.weefood.android.presentation.navigation.BottomBar
 import de.darthkali.weefood.android.presentation.navigation.NavigationItem
 import de.darthkali.weefood.android.presentation.navigation.TopBar
@@ -34,8 +36,18 @@ fun WeekListScreen(
             bottomBar = { BottomBar(navController) }
         ) {
             Text(text = "WeekList")
+            CommonButton(
+                text = "Datenbank",
+                buttonStyle = ButtonStyle.DELETE_BUTTON
+            ) { datenbank() }
         }
     }
 
+}
+
+fun datenbank(){
+//    RecipeMock.recipeListDb.forEach { recipe
+//
+//    }
 }
 

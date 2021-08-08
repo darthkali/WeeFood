@@ -1,7 +1,6 @@
 package de.darthkali.weefood.presentation.ingredient_list
 
 
-import de.darthkali.weefood.datasource.database.model.IngredientDb
 import de.darthkali.weefood.domain.model.Ingredient
 
 actual data class IngredientListState(
@@ -9,6 +8,7 @@ actual data class IngredientListState(
     val page: Int = 1,
     val query: String = "",
     val ingredients: List<Ingredient> = listOf(),
+    var recipeId: Int = 0
 )  {
     // Need secondary constructor to initialize with no args in SwiftUI
     constructor(): this(
@@ -16,6 +16,7 @@ actual data class IngredientListState(
         page = 1,
         query = "",
         ingredients = listOf(),
+        recipeId = 0
     )
 
 }

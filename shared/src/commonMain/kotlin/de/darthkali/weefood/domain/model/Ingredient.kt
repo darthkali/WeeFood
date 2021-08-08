@@ -1,8 +1,5 @@
 package de.darthkali.weefood.domain.model
 
-import de.darthkali.weefood.datasource.database.Ingredient_Entity
-import de.darthkali.weefood.datasource.database.model.IngredientDb
-
 
 data class Ingredient(
     var internalId: Int? = null,
