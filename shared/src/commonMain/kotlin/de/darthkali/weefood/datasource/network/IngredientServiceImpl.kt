@@ -1,6 +1,7 @@
 package de.darthkali.weefood.datasource.network
 
 import de.darthkali.weefood.datasource.network.mapper.IngredientListMapper
+import de.darthkali.weefood.datasource.network.model.IngredientDto
 import de.darthkali.weefood.datasource.network.model.IngredientSearchResponse
 import de.darthkali.weefood.domain.model.Ingredient
 import io.ktor.client.request.get
@@ -14,15 +15,14 @@ class IngredientServiceImpl : IngredientService, KoinComponent {
     private val httpClient = ktorClientFactory.build()
     private val mapper = IngredientListMapper()
 
-    override suspend fun searchIngredient(query: String, page: Int): List<Ingredient> {
+    override suspend fun searchIngredient(query: String, page: Int): List<IngredientDto> {
 
         val offset: Int = (page - 1) * PAGINATION_PAGE_SIZE
 
-        return mapper.mapTo(
-            httpClient.get<IngredientSearchResponse> {
+        return httpClient.get<IngredientSearchResponse> {
                 url("$BASE_URL/food/ingredients/search?apiKey=$API_KEY&query=$query&metaInformation=true&offset=$offset&number=$PAGINATION_PAGE_SIZE")
             }.results
-        )
+
     }
 
     companion object {

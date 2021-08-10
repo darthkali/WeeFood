@@ -9,26 +9,26 @@
 import SwiftUI
 import shared
 
-class IngredientListViewModel: ObservableObject {
+class RecipeListViewModel: ObservableObject {
 
-    private let searchIngredient = SearchIngredient()
-    private let logger = Logger(className: "IngredientListViewModel")
+    private let searchRecipe = SearchRecipes()
+    private let logger = Logger(className: "RecipeListViewModel")
 
     // State
-    @Published var state: IngredientListState = IngredientListState()
+    @Published var state: RecipeListState = RecipeListState()
 
-    init(){onTriggerEvent(stateEvent: IngredientListEvents.LoadIngredient())}
+    init(){onTriggerEvent(stateEvent: RecipeListEvents.LoadRecipe())}
 
-    func onTriggerEvent(stateEvent: IngredientListEvents){
+    func onTriggerEvent(stateEvent: RecipeListEvents){
         switch stateEvent {
-        case is IngredientListEvents.LoadIngredient:
-            loadIngredients()
-        case is IngredientListEvents.NewSearch:
+        case is RecipeListEvents.LoadRecipe:
+            loadRecipes()
+        case is RecipeListEvents.NewSearch:
             newSearch()
-        case is IngredientListEvents.NextPage:
+        case is RecipeListEvents.NextPage:
             nextPage()
-        case is IngredientListEvents.OnUpdateQuery:
-            onUpdateQuery(query: (stateEvent as! IngredientListEvents.OnUpdateQuery).query)
+        case is RecipeListEvents.OnUpdateQuery:
+            onUpdateQuery(query: (stateEvent as! RecipeListEvents.OnUpdateQuery).query)
         default:
             doNothing()
         }
@@ -36,10 +36,10 @@ class IngredientListViewModel: ObservableObject {
 
     func doNothing(){}
 
-    private func loadIngredients(){
-        let currentState = (self.state.copy() as! IngredientListState)
+    private func loadRecipes(){
+        let currentState = (self.state.copy() as! RecipeListState)
         do{
-            try searchIngredient.execute(
+            try searchRecipe.execute(
                 query: currentState.query,
                 page: Int32(currentState.page)
             ).collectCommon(
@@ -53,7 +53,7 @@ class IngredientListViewModel: ObservableObject {
                     self.updateState(isLoading: loading)
 
                     if(data != nil){
-                        self.appendIngredients(ingredients: data as! [Ingredient])
+                        self.appendRecipes(recipes: data as! [Recipe])
                     }
                 }else{
                     self.logger.log(msg: "DataState is nil")
@@ -66,22 +66,22 @@ class IngredientListViewModel: ObservableObject {
 
     private func newSearch() {
         resetSearchState()
-        loadIngredients()
+        loadRecipes()
     }
 
     private func nextPage(){
         incrementPage()
-        loadIngredients()
+        loadRecipes()
     }
 
     private func resetSearchState(){
-        let currentState = (self.state.copy() as! IngredientListState)
+        let currentState = (self.state.copy() as! RecipeListState)
         self.state = self.state.doCopy(
             isLoading: currentState.isLoading,
             page: 1, // reset
             query: currentState.query,
-            ingredients: [], // reset
-            bottomIngredient:  currentState.bottomIngredient
+            recipes: [], // reset
+            bottomRecipe:  currentState.bottomRecipe
         )
     }
 
@@ -91,44 +91,44 @@ class IngredientListViewModel: ObservableObject {
         updateState(query: query)
     }
 
-    private func onUpdateBottomIngredient(ingredient: Ingredient){
-        updateState(bottomIngredient: ingredient)
+    private func onUpdateBottomRecipe(recipe: Recipe){
+        updateState(bottomRecipe: recipe)
     }
 
     private func incrementPage(){
-        let currentState = (self.state.copy() as! IngredientListState)
+        let currentState = (self.state.copy() as! RecipeListState)
         updateState(page: Int(currentState.page) + 1)
     }
 
-    private func appendIngredients(ingredients: [Ingredient]){
-        var currentState = (self.state.copy() as! IngredientListState)
-        var currentIngredients = currentState.ingredients
-        currentIngredients.append(contentsOf: ingredients)
+    private func appendRecipes(recipes: [Recipe]){
+        var currentState = (self.state.copy() as! RecipeListState)
+        var currentRecipes = currentState.recipes
+        currentRecipes.append(contentsOf: recipes)
         self.state = self.state.doCopy(
             isLoading: currentState.isLoading,
             page: currentState.page,
             query: currentState.query,
-            ingredients: currentIngredients, // update recipes
-            bottomIngredient:  currentState.bottomIngredient
+            recipes: currentRecipes, // update recipes
+            bottomRecipe:  currentState.bottomRecipe
         )
-        currentState = (self.state.copy() as! IngredientListState)
+        currentState = (self.state.copy() as! RecipeListState)
         
-        if(currentState.ingredients.count != 0){
-            self.onUpdateBottomIngredient(ingredient: currentState.ingredients[currentState.ingredients.count - 1 ])
+        if(currentState.recipes.count != 0){
+            self.onUpdateBottomRecipe(recipe: currentState.recipes[currentState.recipes.count - 1 ])
         }
         
     }
 
 
-    func shouldQueryNextPage(ingredient: Ingredient) -> Bool {
+    func shouldQueryNextPage(recipe: Recipe) -> Bool {
         // check if looking at the bottom recipe
         // if lookingAtBottom -> proceed
         // if PAGE_SIZE * page <= recipes.length
         // if !queryInProgress
         // else -> do nothing
-        let currentState = (self.state.copy() as! IngredientListState)
-        if(ingredient.internalId == currentState.bottomIngredient?.internalId){
-            if(IngredientListState.Companion().RECIPE_PAGINATION_PAGE_SIZE * currentState.page <= currentState.ingredients.count){
+        let currentState = (self.state.copy() as! RecipeListState)
+        if(recipe.databaseId == currentState.bottomRecipe?.databaseId){
+            if(RecipeListState.Companion().RECIPE_PAGINATION_PAGE_SIZE * currentState.page <= currentState.recipes.count){
                 if(!currentState.isLoading){
                     return true
                 }
@@ -145,17 +145,18 @@ class IngredientListViewModel: ObservableObject {
         isLoading: Bool? = nil,
         page: Int? = nil,
         query: String? = nil,
-        bottomIngredient: Ingredient? = nil
+        bottomRecipe: Recipe? = nil
     ){
-        let currentState = (self.state.copy() as! IngredientListState)
+        let currentState = (self.state.copy() as! RecipeListState)
         self.state = self.state.doCopy(
             isLoading: isLoading ?? currentState.isLoading,
             page: Int32(page ?? Int(currentState.page)),
             query: query ?? currentState.query,
-            ingredients: currentState.ingredients ,
-            bottomIngredient:  bottomIngredient ?? currentState.bottomIngredient
+            recipes: currentState.recipes ,
+            bottomRecipe:  bottomRecipe ?? currentState.bottomRecipe
         )
     }
 }
+
 
 

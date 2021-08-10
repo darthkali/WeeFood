@@ -64,7 +64,7 @@ fun RecipeListScreen(
 
                         RecipeList(
                             loading = state.isLoading,
-                            recipeDbs = state.recipeDbs,
+                            recipes = state.recipes,
                             page = state.page,
                             onTriggerNextPage = {
                                 onTriggerEvent(RecipeListEvents.NextPage)

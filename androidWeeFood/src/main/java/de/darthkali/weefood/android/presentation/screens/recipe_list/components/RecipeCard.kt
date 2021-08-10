@@ -18,12 +18,13 @@ import de.darthkali.weefood.android.presentation.components.button.ButtonStyle
 import de.darthkali.weefood.android.presentation.components.button.CommonButton
 import de.darthkali.weefood.datasource.database.model.RecipeDb
 import de.darthkali.weefood.datasource.network.IngredientServiceImpl.Companion.NO_IMAGE
+import de.darthkali.weefood.domain.model.Recipe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
 @Composable
 fun RecipeCard(
-    recipe: RecipeDb, //TODO: change to Recipe
+    recipe: Recipe, //TODO: change to Recipe
     onClick: () -> Unit,
 ) {
     Card(

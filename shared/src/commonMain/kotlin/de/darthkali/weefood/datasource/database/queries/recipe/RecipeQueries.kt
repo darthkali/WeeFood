@@ -1,6 +1,7 @@
 package de.darthkali.weefood.datasource.database.queries.recipe
 
 import de.darthkali.weefood.datasource.database.model.RecipeDb
+import de.darthkali.weefood.domain.model.Recipe
 
 interface RecipeQueries {
     fun insertRecipe(recipeDb: RecipeDb): Int?
