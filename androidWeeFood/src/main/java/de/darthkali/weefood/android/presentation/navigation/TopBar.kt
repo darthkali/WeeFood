@@ -12,6 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 
 @Composable
 fun TopBar(
@@ -20,13 +22,15 @@ fun TopBar(
     navigationIconClickAction: (() -> Unit)? = null,
     actionIcon: ImageVector? = null,
     actionIconIconClickAction: (() -> Unit)? = null,
+    navController: NavController?
 ) {
     TopAppBar(
-        navigationIcon = setIcon(navigationIcon, navigationIconClickAction),
+        navigationIcon = setIcon(navigationIcon, navController = navController),
         title = { Text(title) },
         actions = {
             actionIconIconClickAction?.let { it ->
                 IconButton(onClick = it) {
+
                     actionIcon?.let { Icon(it, "") }
                 }
             }
@@ -39,6 +43,7 @@ fun TopBar(
 fun setIcon(
     icon: ImageVector? = null,
     iconClickAction: (() -> Unit)? = null,
+    navController: NavController?
 ): @Composable() (() -> Unit)? {
     icon?.let {
         return {
@@ -47,7 +52,7 @@ fun setIcon(
                 contentDescription = "Back",
                 modifier = Modifier
                     .padding(horizontal = 12.dp)
-                    .clickable(onClick = { iconClickAction?.invoke() })
+                    .clickable(onClick = { navController?.navigateUp() })
                     .fillMaxHeight()
             )
         }

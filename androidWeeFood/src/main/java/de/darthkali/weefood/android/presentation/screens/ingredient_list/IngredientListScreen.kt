@@ -41,7 +41,8 @@ fun IngredientListScreen(
                     title = "Zutaten Suche",
                     navigationIcon = Icons.Filled.ArrowBack,
                     navigationIconClickAction = { navController.navigate(NavigationItem.NewRecipe.route + "/${state.recipeId}") },
-                )
+                    navController = navController
+                    )
             },
             bottomBar = { BottomBar(navController) }
         ) { innerPadding ->
@@ -68,10 +69,9 @@ fun IngredientListScreen(
                         },
                         onSaveIngredient = {
                             onTriggerEvent(IngredientListEvents.SaveIngredient(it))
-                            navController.popBackStack() //TODO: Why
-                            navController.navigate("${NavigationItem.NewRecipe.route}/${state.recipeId}")
+//                            navController.navigateUp()
+                            navController.navigate("${NavigationItem.NewRecipe.route}?recipeId=${state.recipeId}")
                         }
-
                     )
                 }
             }

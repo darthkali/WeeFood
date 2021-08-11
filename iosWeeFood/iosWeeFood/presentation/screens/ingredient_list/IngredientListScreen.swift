@@ -26,7 +26,7 @@ struct IngredientListScreen: View {
          
             ZStack{
                 VStack{
-                    SearchAppBar(
+                    IngredientSearchAppBar(
                         query: viewModel.state.query,
                         onTriggerEvent: { event in
                             viewModel.onTriggerEvent(stateEvent: event)

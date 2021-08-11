@@ -1,15 +1,33 @@
 package de.darthkali.weefood.presentation.recipe_detail
 
 import de.darthkali.weefood.datasource.database.model.IngredientDb
+import de.darthkali.weefood.domain.model.Recipe
 
 data class RecipeDetailState(
-    val isLoading: Boolean = false,
-    val ingredientDb: IngredientDb? = null,
+    var changed: Int = 0,
+
+    var recipe: Recipe = Recipe(
+        databaseId = 0,
+        name = " ",//TODO WF-137 :leerzeichen, damit er das element im ViewModel kopiert? Häääää
+        image = "",
+        cooking_time = 0,
+        cooking_time_unit = "",
+        recipeDescription = "",
+        portion = 0,
+        ingredients = listOf(),
+    )
 ) {
     // Need secondary constructor to initialize with no args in SwiftUI
     constructor() : this(
-        isLoading = false,
-        ingredientDb = null,
+        recipe = Recipe(
+            databaseId = 0,
+            name = " ",
+            image = "",
+            cooking_time = 0,
+            cooking_time_unit = "",
+            recipeDescription = "",
+            portion = 0,
+            ingredients = listOf()
+        )
     )
-
 }

@@ -13,7 +13,7 @@ class RecipeMapper : BaseMapper<Recipe, RecipeDb> {
             image = db.image,
             cooking_time = db.cooking_time,
             cooking_time_unit = db.cooking_time_unit,
-            description = db.description,
+            recipeDescription = db.description,
             portion = 0,
             ingredients = listOf(),
         )
@@ -26,7 +26,7 @@ class RecipeMapper : BaseMapper<Recipe, RecipeDb> {
             image = internal.image,
             cooking_time = internal.cooking_time ?: 0,
             cooking_time_unit = internal.cooking_time_unit,
-            description = internal.description,
+            description = internal.recipeDescription,
         )
     }
 }

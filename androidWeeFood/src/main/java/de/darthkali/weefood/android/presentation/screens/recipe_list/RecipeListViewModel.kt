@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
 import de.darthkali.weefood.android.presentation.screens.BaseViewModel
 import de.darthkali.weefood.datasource.database.model.RecipeDb
+import de.darthkali.weefood.domain.model.Recipe
 import de.darthkali.weefood.interactors.recipe.SearchRecipes
 import de.darthkali.weefood.presentation.recipe_list.RecipeListEvents
 import de.darthkali.weefood.presentation.recipe_list.RecipeListState
@@ -62,7 +63,7 @@ class RecipeListViewModel(
      * 2. list position needs to be reset
      */
     private fun newSearch() {
-        state.value = state.value.copy(page = 1, recipeDbs = listOf())
+        state.value = state.value.copy(page = 1, recipes = listOf())
         loadRecipes()
     }
 
@@ -79,9 +80,9 @@ class RecipeListViewModel(
         }
     }
 
-    private fun appendRecipes(recipes: List<RecipeDb>) {
-        val curr = ArrayList(state.value.recipeDbs)
+    private fun appendRecipes(recipes: List<Recipe>) {
+        val curr = ArrayList(state.value.recipes)
         curr.addAll(recipes)
-        state.value = state.value.copy(recipeDbs = curr)
+        state.value = state.value.copy(recipes = curr)
     }
 }
