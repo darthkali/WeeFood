@@ -11,7 +11,7 @@ data class NewRecipeState(
         image = "",
         cooking_time = 0,
         cooking_time_unit = "",
-        description = "",
+        recipeDescription = "",
         portion = 0,
         ingredients = listOf(),
     )
@@ -24,7 +24,7 @@ data class NewRecipeState(
             image = "",
             cooking_time = 0,
             cooking_time_unit = "",
-            description = "",
+            recipeDescription = "",
             portion = 0,
             ingredients = listOf()
         )

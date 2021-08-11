@@ -34,7 +34,7 @@ class GetRecipe : KoinComponent {
                         image = it.image,
                         cooking_time = it.cooking_time,
                         cooking_time_unit = it.cooking_time_unit,
-                        description = it.description,
+                        recipeDescription = it.description,
                         ingredients = getIngredientsFromRecipe.execute(it.id)!!,
                     )
                 }

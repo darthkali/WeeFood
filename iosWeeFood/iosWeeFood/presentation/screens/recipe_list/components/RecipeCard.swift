@@ -8,16 +8,18 @@ import SwiftUI
 import shared
 import SDWebImageSwiftUI
 
-struct RecipeCardView: View {
+struct RecipeCard: View {
 
     //private let saveRecipe = SaveRecipe()
     
-    let ingredient: Ingredient
+    let recipe: Recipe
 
+    
     init(
-        ingredient: Ingredient
+        recipe: Recipe
     ) {
-        self.ingredient = ingredient
+        self.recipe = recipe
+    
     }
 
     var body: some View {
@@ -25,9 +27,13 @@ struct RecipeCardView: View {
             
             HStack(){
                 
-                let ingredientImage = ingredient.image ?? "no.jpg"
+                // Image
+                // Text: RecipeName
+                
+                //let recipeImage = recipe.image ?? "no.jpg"
 
-                WebImage(url: URL(string: "https://spoonacular.com/cdn/ingredients_500x500/" +  ingredientImage ))
+                WebImage(url: URL(string: "https://spoonacular.com/cdn/ingredients_500x500/" +  "" ))
+                    //TODO replace with correct image implementation
                             .resizable()
                             .placeholder(Image(systemName: "photo")) // Placeholder Image
                             .placeholder {
@@ -40,28 +46,46 @@ struct RecipeCardView: View {
                             .clipped() // 3
 
               
-                    DefaultText(ingredient.name ?? "", size: 19)
+                DefaultText(recipe.name , size: 19)
                         .font(.body)
                         .frame(alignment: .center)
                     
                 Spacer()
                 
             }
-    
-            Button("Hinzufügen"){
-                
-                //saveIngredient.execute(ingredient: ingredient)
             
-                //for ingredient in getAllIngredients.execute() {
-                  //  print(ingredient)
-                //}
+            HStack(){
+                NavigationLink(destination: NewRecipeScreen(recipeId: recipe.databaseId as! Int)) {
+                      Text("Öffnen")
+                   }
+                /*
+                Button("Öffnen"){
+                    viewModel.onTriggerEvent(event: RecipeListEvents.OnLoadRecipe(recipe: viewModel.state.recipe))
+                }
+                .padding()
+                .foregroundColor(.white)
+                .background(Color.green)
+                .cornerRadius(8)
+                Spacer()
+                */
+                Button("Hinzufügen"){
+                    
+                    //saveIngredient.execute(ingredient: ingredient)
+                
+                    //for ingredient in getAllIngredients.execute() {
+                      //  print(ingredient)
+                    //}
+                }
+                .padding()
+                .foregroundColor(.white)
+                .background(Color.green)
+                .cornerRadius(8)
+                Spacer()
             }
-            .padding()
-            .foregroundColor(.white)
-            .background(Color.green)
-            .cornerRadius(8)
-            Spacer()
- 
+            //HStack
+            // Button Öffnen
+            // Button Hinzufügen
+
 
         }
         .background(Color.white)

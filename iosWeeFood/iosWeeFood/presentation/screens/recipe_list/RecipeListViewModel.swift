@@ -1,5 +1,5 @@
 //
-//  IngredientListViewModel.swift
+//  RecipeListViewModel.swift
 //  iosWeeFood
 //
 //  Created by Danny Steinbrecher on 13.07.21.

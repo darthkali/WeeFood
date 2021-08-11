@@ -53,7 +53,7 @@ class NewRecipeViewModel(
                 onUpdateRecipe(state.value.recipe.copy(cooking_time_unit = event.cooking_time_unit))
             }
             is NewRecipeEvents.OnUpdateDescription -> {
-                onUpdateRecipe(state.value.recipe.copy(description = event.description))
+                onUpdateRecipe(state.value.recipe.copy(recipeDescription = event.description))
             }
             is NewRecipeEvents.OnAddIngredient -> {
                 onUpdateRecipe(state.value.recipe.copy(databaseId = saveRecipe.execute(state.value.recipe)))

@@ -24,8 +24,28 @@ struct RecipeListScreen: View {
         NavigationView{
          
             ZStack{
+       
                 VStack{
-                    SearchAppBar(
+
+                 
+                    /*NavigationLink(destination: NewRecipeScreen(recipeId: 0)) {
+                        Button("Neues Rezept"){
+                            
+                            //saveIngredient.execute(ingredient: ingredient)
+                        
+                            //for ingredient in getAllIngredients.execute() {
+                              //  print(ingredient)
+                            //}
+                        }
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(Color.green)
+                        .cornerRadius(8)
+                        Spacer()
+                    }*/
+                   
+                    
+                    RecipeSearchAppBar(
                         query: viewModel.state.query,
                         onTriggerEvent: { event in
                             viewModel.onTriggerEvent(stateEvent: event)

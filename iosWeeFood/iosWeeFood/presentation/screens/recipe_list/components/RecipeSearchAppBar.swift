@@ -10,18 +10,18 @@ import SwiftUI
 import shared
 
 @available(iOS 14.0, *)
-struct SearchAppBar: View {
+struct RecipeSearchAppBar: View {
 
     @State var query: String
     //let selectedCategory: FoodCategory?
     //let foodCategories: [FoodCategory]
-    let onTriggerEvent: (IngredientListEvents) -> Void
+    let onTriggerEvent: (RecipeListEvents) -> Void
 
     init(
         query: String,
         //selectedCategory: FoodCategory?,
         //foodCategories: [FoodCategory],
-        onTriggerEvent: @escaping (IngredientListEvents) -> Void
+        onTriggerEvent: @escaping (RecipeListEvents) -> Void
     ) {
         //self.selectedCategory = selectedCategory
         //self.foodCategories = foodCategories
@@ -37,11 +37,11 @@ struct SearchAppBar: View {
                     "Search...",
                     text: $query,
                     onCommit:{
-                        onTriggerEvent(IngredientListEvents.NewSearch())
+                        onTriggerEvent(RecipeListEvents.NewSearch())
                     }
                 )
                 .onChange(of: query, perform: { value in
-                    onTriggerEvent(IngredientListEvents.OnUpdateQuery(query: value))
+                    onTriggerEvent(RecipeListEvents.OnUpdateQuery(query: value))
                 })
             }
             .padding(.bottom, 8)
@@ -94,5 +94,6 @@ struct SearchAppBar: View {
 //        SearchAppBar(viewModel: viewModel)
 //    }
 //}
+
 
 

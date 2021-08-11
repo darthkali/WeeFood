@@ -154,7 +154,7 @@ fun NewRecipeScreen(
                             }
                             Text("Rezept")
                             IngredientUnitTextField(
-                                input = state.recipe.description ?: "",
+                                input = state.recipe.recipeDescription ?: "",
                                 onInputChanged = {
                                     onTriggerEvent(NewRecipeEvents.OnUpdateDescription(it))
                                 },

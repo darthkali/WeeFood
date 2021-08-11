@@ -21,7 +21,15 @@ struct BottomBar: View {
             
             // Meine Rezepte
             NavigationView{
+                VStack{
+                    NavigationLink(destination: NewRecipeScreen(recipeId: 0)) {
+                          Text("Neues Rezept anlegen")
+                       }
+                    
+                
+
                 RecipeListScreen().navigationBarTitle("Meine Rezepte")
+                }
             }
             .tabItem{
                 Image(systemName: "book.fill")

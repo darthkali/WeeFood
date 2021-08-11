@@ -6,7 +6,7 @@ data class Recipe(
     var image: String? = "",
     var cooking_time: Int? = 0,
     var cooking_time_unit: String,
-    var description: String? = "",
+    var recipeDescription: String? = "",
     var portion: Int? = 0,
     var ingredients: List<Ingredient>
 ) {
@@ -23,7 +23,7 @@ data class Recipe(
             .append("| unit: ")
             .append(this.cooking_time_unit)
             .append("| description: ")
-            .append(this.description)
+            .append(this.recipeDescription)
             .append("| portion: ")
             .append(this.portion)
             .append("| ingredients: ")
@@ -57,7 +57,7 @@ data class Recipe(
                 && other.image == this.image)
                 && other.cooking_time == this.cooking_time
                 && other.cooking_time_unit == this.cooking_time_unit
-                && other.description == this.description
+                && other.recipeDescription == this.recipeDescription
 //                && other.portion == this.portion
 //                && other.ingredients.hashCode() == this.ingredients.hashCode()
     }
