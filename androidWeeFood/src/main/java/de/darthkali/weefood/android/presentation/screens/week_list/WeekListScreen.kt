@@ -32,6 +32,7 @@ fun WeekListScreen(
                     title = "WeeFood",
                     actionIcon = Icons.Filled.Settings,
                     actionIconIconClickAction = { navController.navigate(NavigationItem.Settings.route) }
+                    ,navController = navController
                 )
             },
             bottomBar = { BottomBar(navController) }

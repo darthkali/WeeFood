@@ -1,54 +1,57 @@
-//package de.darthkali.weefood.android.presentation.screens.recipe_detail
-//
-//import androidx.compose.runtime.MutableState
-//import androidx.compose.runtime.mutableStateOf
-//import androidx.lifecycle.SavedStateHandle
-//import androidx.lifecycle.ViewModel
-//import androidx.lifecycle.viewModelScope
-//import dagger.hilt.android.lifecycle.HiltViewModel
-//import de.darthkali.weefood.presentation.recipe_detail.RecipeDetailEvents
-//import de.darthkali.weefood.presentation.recipe_detail.RecipeDetailState
-//import de.darthkali.weefood.util.Logger
-//import java.util.*
-//import javax.inject.Inject
-//
-//@HiltViewModel
-//class RecipeDetailViewModel
-//@Inject
-//constructor(
-//    private val savedStateHandle: SavedStateHandle,
-////    private val getRecipe: GetRecipe,
-//): ViewModel() {
-//
-////    private val logger = Logger("RecipeDetailViewModel")
-////
-////    val state: MutableState<RecipeDetailState> = mutableStateOf(RecipeDetailState())
-////
-////    init {
-////        savedStateHandle.get<Int>("recipeId")?.let { recipeId ->
-////            onTriggerEvent(RecipeDetailEvents.GetRecipe(recipeId = recipeId))
-////        }
-////    }
-////
-////    fun onTriggerEvent(event: RecipeDetailEvents){
-////        when (event){
-////            is RecipeDetailEvents.GetRecipe -> {
-////                getRecipe(recipeId = event.recipeId)
-////            }
-////            else -> {
-////               //TODO: Logger
-////            }
-////        }
-////    }
-//
-////    private fun getRecipe(recipeId: Int){
-////        getRecipe.execute(recipeId = recipeId).collectCommon(viewModelScope) { dataState ->
-////            state.value = state.value.copy(isLoading = dataState.isLoading)
-////
-////            dataState.data?.let { recipe ->
-////                state.value = state.value.copy(ingredient = recipe)
-////            }
-////        }
-////    }
-//
-//}
+package de.darthkali.weefood.android.presentation.screens.new_recipe
+
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.SavedStateHandle
+import de.darthkali.weefood.android.presentation.screens.BaseViewModel
+import de.darthkali.weefood.domain.model.Recipe
+import de.darthkali.weefood.interactors.recipe.GetRecipe
+import de.darthkali.weefood.interactors.recipe.SaveRecipe
+import de.darthkali.weefood.interactors.recipe_ingredient.DeleteRecipeIngredient
+import de.darthkali.weefood.interactors.recipe_ingredient.GetIngredientsFromRecipe
+import de.darthkali.weefood.presentation.new_recipe.NewRecipeEvents
+import de.darthkali.weefood.presentation.new_recipe.NewRecipeState
+import de.darthkali.weefood.presentation.recipe_detail.RecipeDetailEvents
+import de.darthkali.weefood.presentation.recipe_detail.RecipeDetailState
+import de.darthkali.weefood.util.Logger
+import org.koin.core.component.inject
+
+class RecipeDetailViewModel(
+    savedStateHandle: SavedStateHandle,
+) : BaseViewModel() {
+
+    private val logger = Logger("RecipeDetailViewModel")
+    private val getRecipe: GetRecipe by inject()
+
+    private var _state = mutableStateOf(RecipeDetailState())
+        private set
+
+    val state: MutableState<RecipeDetailState>
+        get() = _state
+
+
+
+    init {
+        savedStateHandle.get<String>("recipeId")?.let { id ->
+            onTriggerEvent(RecipeDetailEvents.GetRecipe(recipeId = id.toInt()))
+        }
+    }
+
+
+    fun onTriggerEvent(event: RecipeDetailEvents) {
+        when (event) {
+            is RecipeDetailEvents.GetRecipe -> {
+                val recipe: Recipe = getRecipe.execute(recipeId = event.recipeId)!!
+                state.value = state.value.copy(recipe = recipe)
+            }
+            else -> {
+                logger.log("Something went wrong.")
+            }
+        }
+    }
+
+    private fun onUpdateRecipe(recipe: Recipe) {
+        state.value = state.value.copy(recipe = recipe, changed = state.value.changed + 1)
+    }
+
+}

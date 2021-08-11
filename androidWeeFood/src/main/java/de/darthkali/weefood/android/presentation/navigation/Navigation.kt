@@ -15,11 +15,14 @@ import de.darthkali.weefood.android.presentation.screens.ingredient_list.Ingredi
 import de.darthkali.weefood.android.presentation.screens.ingredient_list.IngredientListViewModel
 import de.darthkali.weefood.android.presentation.screens.new_recipe.NewRecipeScreen
 import de.darthkali.weefood.android.presentation.screens.new_recipe.NewRecipeViewModel
+import de.darthkali.weefood.android.presentation.screens.new_recipe.RecipeDetailScreen
+import de.darthkali.weefood.android.presentation.screens.new_recipe.RecipeDetailViewModel
 import de.darthkali.weefood.android.presentation.screens.recipe_list.RecipeListScreen
 import de.darthkali.weefood.android.presentation.screens.recipe_list.RecipeListViewModel
 import de.darthkali.weefood.android.presentation.screens.settings.SettingsScreen
 import de.darthkali.weefood.android.presentation.screens.shopping_list.ShoppingListScreen
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.koin.androidx.compose.getStateViewModel
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -81,43 +84,55 @@ fun Navigation() {
                 onTriggerEvent = viewModel::onTriggerEvent,
                 onClickRecipeListItem = { recipeId ->
                     navController.popBackStack() //TODO: Why
-                    navController.navigate("${NavigationItem.NewRecipe.route}/$recipeId")
+                    navController.navigate("${NavigationItem.RecipeDetail.route}?recipeId=$recipeId")
                 }
             )
         }
 
 
-//
-//        /**
-//         * Navigation -> RecipeDetail
-//         */
-//        composable(
-//            route = NavigationItem.RecipeDetail.route + "/{recipeId}",
-//            arguments = listOf(navArgument("recipeId") {
-//                type = NavType.IntType
-//            })
-//        ) { navBackStackEntry ->
-//              NewRecipeScreen(navController)
-//        }
+        /**
+         * Navigation -> RecipeDetail
+         */
+        composable(
+            route = NavigationItem.RecipeDetail.route + "?recipeId={recipeId}",
+            arguments = listOf(
+                navArgument("recipeId") {
+                    nullable = true
+                    defaultValue = null
+                    type = NavType.StringType
+                },
+            )
+        ) { backStackEntry ->
+            val recipeDetailViewModel = getStateViewModel<RecipeDetailViewModel>(state = { backStackEntry.arguments!! })
+            RecipeDetailScreen(
+                state = recipeDetailViewModel.state.value,
+                navController = navController,
+                viewModel = recipeDetailViewModel
+            )
+        }
 
 
         /**
          * Navigation -> NewRecipe
          */
         composable(
-            route = NavigationItem.NewRecipe.route + "/{recipeId}",
-            arguments = listOf(navArgument("recipeId") {
-                type = NavType.IntType
-            })
-        ) { backStackEntry ->
-            val viewModel = getViewModel<NewRecipeViewModel> {
-                parametersOf(backStackEntry.arguments?.getInt("recipeId"))
-            }
-            NewRecipeScreen(
-                state = viewModel.state.value,
-                navController = navController,
-                onTriggerEvent = viewModel::onTriggerEvent,
+            route = NavigationItem.NewRecipe.route + "?recipeId={recipeId}",
+            arguments = listOf(
+                navArgument("recipeId") {
+                    nullable = true
+                    defaultValue = null
+                    type = NavType.StringType
+                },
             )
+        ) { backStackEntry ->
+            val newRecipeViewModel = getStateViewModel<NewRecipeViewModel>(state = { backStackEntry.arguments!! })
+            NewRecipeScreen(
+                state = newRecipeViewModel.state.value,
+                navController = navController,
+                onTriggerEvent = newRecipeViewModel::onTriggerEvent,
+                viewModel = newRecipeViewModel
+            )
+
         }
 
 

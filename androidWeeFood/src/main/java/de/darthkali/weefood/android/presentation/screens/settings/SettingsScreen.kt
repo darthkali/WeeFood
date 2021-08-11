@@ -30,6 +30,7 @@ fun SettingsScreen(
                     title = "Einstellungen",
                     navigationIcon = Icons.Filled.ArrowBack,
                     navigationIconClickAction = { navController.navigate(NavigationItem.WeekList.route) },
+                    navController = navController
                 )
             },
             bottomBar = { BottomBar(navController) }

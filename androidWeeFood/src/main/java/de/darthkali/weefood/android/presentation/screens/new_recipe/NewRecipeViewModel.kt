@@ -2,6 +2,7 @@ package de.darthkali.weefood.android.presentation.screens.new_recipe
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.SavedStateHandle
 import de.darthkali.weefood.android.presentation.screens.BaseViewModel
 import de.darthkali.weefood.domain.model.Recipe
 import de.darthkali.weefood.interactors.recipe.GetRecipe
@@ -14,7 +15,7 @@ import de.darthkali.weefood.util.Logger
 import org.koin.core.component.inject
 
 class NewRecipeViewModel(
-    recipeId: Int,
+    savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
 
     private val logger = Logger("NewRecipeViewModel")
@@ -23,11 +24,17 @@ class NewRecipeViewModel(
     private val deleteRecipeIngredient: DeleteRecipeIngredient by inject()
     private val getIngredientsFromRecipe: GetIngredientsFromRecipe by inject()
 
-    val state: MutableState<NewRecipeState> = mutableStateOf(NewRecipeState())
+    private var _state = mutableStateOf(NewRecipeState())
+        private set
+
+    val state: MutableState<NewRecipeState>
+        get() = _state
+
+
 
     init {
-        if (recipeId != 0) { //TODO: vlt nicht nötig, da wir im getRecipe schon auf > 0 prüfen
-            onTriggerEvent(NewRecipeEvents.GetRecipe(recipeId = recipeId))
+        savedStateHandle.get<String>("recipeId")?.let { id ->
+            onTriggerEvent(NewRecipeEvents.GetRecipe(recipeId = id.toInt()))
         }
     }
 
@@ -70,7 +77,7 @@ class NewRecipeViewModel(
                 }
             }
             is NewRecipeEvents.OnSaveRecipe -> {
-                saveRecipe.execute(state.value.recipe)
+                onUpdateRecipe(state.value.recipe.copy(databaseId = saveRecipe.execute(state.value.recipe)))
             }
             else -> {
                 logger.log("Something went wrong.")
@@ -82,4 +89,7 @@ class NewRecipeViewModel(
         state.value = state.value.copy(recipe = recipe, changed = state.value.changed + 1)
     }
 
+    fun saveRec(): Int?{
+        return saveRecipe.execute(state.value.recipe)
+    }
 }
