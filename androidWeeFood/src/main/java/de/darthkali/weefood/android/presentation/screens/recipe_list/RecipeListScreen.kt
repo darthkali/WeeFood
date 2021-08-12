@@ -13,13 +13,11 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import de.darthkali.weefood.android.presentation.components.button.MyFloatingActionButton
 import de.darthkali.weefood.android.presentation.navigation.BottomBar
 import de.darthkali.weefood.android.presentation.navigation.NavigationItem
 import de.darthkali.weefood.android.presentation.navigation.TopBar
@@ -46,7 +44,7 @@ fun RecipeListScreen(
     ) {
         Scaffold(
             topBar = {
-                TopBar(title = "Rezeptliste", navController = navController)
+                TopBar(title = "Rezeptliste")
             },
             bottomBar = { BottomBar(navController) },
 
@@ -54,7 +52,7 @@ fun RecipeListScreen(
             floatingActionButton = {
                 FloatingActionButton(
                     onClick = {
-                        navController.navigate("${NavigationItem.NewRecipe.route}")
+                        navController.navigate("${NavigationItem.RecipeDetail.route}?editable=true")
                     },
                     backgroundColor = MaterialTheme.colors.primary,
 //                        contentColor = Color.White,
@@ -67,7 +65,7 @@ fun RecipeListScreen(
 
         ) { innerPadding ->
             Box(modifier = Modifier.padding(innerPadding)) {
-                Column() {
+                Column {
                     SearchAppBar(
                         query = state.query,
                         onQueryChanged = {

@@ -22,10 +22,9 @@ fun TopBar(
     navigationIconClickAction: (() -> Unit)? = null,
     actionIcon: ImageVector? = null,
     actionIconIconClickAction: (() -> Unit)? = null,
-    navController: NavController?
 ) {
     TopAppBar(
-        navigationIcon = setIcon(navigationIcon, navController = navController),
+        navigationIcon = setIcon(navigationIcon, navigationIconClickAction = navigationIconClickAction),
         title = { Text(title) },
         actions = {
             actionIconIconClickAction?.let { it ->
@@ -42,8 +41,7 @@ fun TopBar(
 //@Composable
 fun setIcon(
     icon: ImageVector? = null,
-    iconClickAction: (() -> Unit)? = null,
-    navController: NavController?
+    navigationIconClickAction: (() -> Unit)? = null,
 ): @Composable() (() -> Unit)? {
     icon?.let {
         return {
@@ -52,7 +50,7 @@ fun setIcon(
                 contentDescription = "Back",
                 modifier = Modifier
                     .padding(horizontal = 12.dp)
-                    .clickable(onClick = { navController?.navigateUp() })
+                    .clickable(onClick = navigationIconClickAction!!)
                     .fillMaxHeight()
             )
         }

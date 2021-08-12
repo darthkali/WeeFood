@@ -10,17 +10,15 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
 import de.darthkali.weefood.android.presentation.screens.day_list.DayListScreen
-import de.darthkali.weefood.android.presentation.screens.week_list.WeekListScreen
 import de.darthkali.weefood.android.presentation.screens.ingredient_list.IngredientListScreen
 import de.darthkali.weefood.android.presentation.screens.ingredient_list.IngredientListViewModel
 import de.darthkali.weefood.android.presentation.screens.new_recipe.NewRecipeScreen
-import de.darthkali.weefood.android.presentation.screens.new_recipe.NewRecipeViewModel
-import de.darthkali.weefood.android.presentation.screens.new_recipe.RecipeDetailScreen
 import de.darthkali.weefood.android.presentation.screens.new_recipe.RecipeDetailViewModel
 import de.darthkali.weefood.android.presentation.screens.recipe_list.RecipeListScreen
 import de.darthkali.weefood.android.presentation.screens.recipe_list.RecipeListViewModel
 import de.darthkali.weefood.android.presentation.screens.settings.SettingsScreen
 import de.darthkali.weefood.android.presentation.screens.shopping_list.ShoppingListScreen
+import de.darthkali.weefood.android.presentation.screens.week_list.WeekListScreen
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.compose.getStateViewModel
 import org.koin.androidx.compose.getViewModel
@@ -89,48 +87,28 @@ fun Navigation() {
             )
         }
 
-
-        /**
-         * Navigation -> RecipeDetail
-         */
-        composable(
-            route = NavigationItem.RecipeDetail.route + "?recipeId={recipeId}",
-            arguments = listOf(
-                navArgument("recipeId") {
-                    nullable = true
-                    defaultValue = null
-                    type = NavType.StringType
-                },
-            )
-        ) { backStackEntry ->
-            val recipeDetailViewModel = getStateViewModel<RecipeDetailViewModel>(state = { backStackEntry.arguments!! })
-            RecipeDetailScreen(
-                state = recipeDetailViewModel.state.value,
-                navController = navController,
-                viewModel = recipeDetailViewModel
-            )
-        }
-
-
         /**
          * Navigation -> NewRecipe
          */
         composable(
-            route = NavigationItem.NewRecipe.route + "?recipeId={recipeId}",
+            route = NavigationItem.RecipeDetail.route + "?recipeId={recipeId}&editable={editable}",
             arguments = listOf(
                 navArgument("recipeId") {
                     nullable = true
                     defaultValue = null
                     type = NavType.StringType
                 },
+                navArgument("editable") {
+                    defaultValue = false
+                    type = NavType.BoolType
+                },
             )
         ) { backStackEntry ->
-            val newRecipeViewModel = getStateViewModel<NewRecipeViewModel>(state = { backStackEntry.arguments!! })
+            val newRecipeViewModel = getStateViewModel<RecipeDetailViewModel>(state = { backStackEntry.arguments!! })
             NewRecipeScreen(
-                state = newRecipeViewModel.state.value,
                 navController = navController,
                 onTriggerEvent = newRecipeViewModel::onTriggerEvent,
-                viewModel = newRecipeViewModel
+                detailViewModel = newRecipeViewModel
             )
 
         }

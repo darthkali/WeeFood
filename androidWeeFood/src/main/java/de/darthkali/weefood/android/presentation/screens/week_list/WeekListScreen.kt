@@ -32,24 +32,13 @@ fun WeekListScreen(
                     title = "WeeFood",
                     actionIcon = Icons.Filled.Settings,
                     actionIconIconClickAction = { navController.navigate(NavigationItem.Settings.route) }
-                    ,navController = navController
                 )
             },
             bottomBar = { BottomBar(navController) }
         ) {
             Text(text = "WeekList")
-            CommonButton(
-                text = "Datenbank",
-                buttonStyle = ButtonStyle.DELETE_BUTTON
-            ) { datenbank() }
         }
     }
-
 }
 
-fun datenbank() {
-//    RecipeMock.recipeListDb.forEach { recipe
-//
-//    }
-}
 

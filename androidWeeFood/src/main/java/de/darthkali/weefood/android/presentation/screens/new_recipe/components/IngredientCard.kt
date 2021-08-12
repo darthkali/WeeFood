@@ -1,4 +1,4 @@
-package de.darthkali.weefood.android.presentation.screens.new_recipe.components
+package de.darthkali.weefood.android.presentation.screens.recipe_detail.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

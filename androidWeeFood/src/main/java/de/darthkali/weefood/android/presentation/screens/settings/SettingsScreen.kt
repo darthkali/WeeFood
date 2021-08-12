@@ -29,8 +29,7 @@ fun SettingsScreen(
                 TopBar(
                     title = "Einstellungen",
                     navigationIcon = Icons.Filled.ArrowBack,
-                    navigationIconClickAction = { navController.navigate(NavigationItem.WeekList.route) },
-                    navController = navController
+                    navigationIconClickAction = { navController.navigate(NavigationItem.WeekList.route) }
                 )
             },
             bottomBar = { BottomBar(navController) }

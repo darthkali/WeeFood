@@ -23,7 +23,7 @@ fun DayListScreen(
 ) {
     AppTheme() {
         Scaffold(
-            topBar = { TopBar(title = "Mittwoch",navController = navController) },
+            topBar = { TopBar(title = "Mittwoch") },
             bottomBar = { BottomBar(navController) }
         ) {
             Text(text = "DayListScreen")

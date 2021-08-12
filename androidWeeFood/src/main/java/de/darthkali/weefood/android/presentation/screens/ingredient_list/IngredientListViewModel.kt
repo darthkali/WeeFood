@@ -52,7 +52,7 @@ class IngredientListViewModel(
 
     private fun saveIngredient(ingredient: Ingredient) {
         saveIngredient.execute(ingredient, state.value.recipeId).let {
-            logger.log("Ingredients ID was: ${it}")
+            logger.log("Ingredients ID was: $it")
         }
     }
 

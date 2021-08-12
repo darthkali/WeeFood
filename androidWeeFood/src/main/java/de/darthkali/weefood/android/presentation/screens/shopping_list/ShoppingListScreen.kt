@@ -22,7 +22,7 @@ fun ShoppingListScreen(
 ) {
     AppTheme() {
         Scaffold(
-            topBar = { TopBar(title = "WeeFood",navController = navController) },
+            topBar = { TopBar(title = "WeeFood") },
             bottomBar = { BottomBar(navController) }
         ) {
             Text(text = "ShoppingListScreen")

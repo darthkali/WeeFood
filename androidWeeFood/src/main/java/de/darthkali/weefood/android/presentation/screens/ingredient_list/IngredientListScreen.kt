@@ -40,8 +40,7 @@ fun IngredientListScreen(
                 TopBar(
                     title = "Zutaten Suche",
                     navigationIcon = Icons.Filled.ArrowBack,
-                    navigationIconClickAction = { navController.navigate(NavigationItem.NewRecipe.route + "/${state.recipeId}") },
-                    navController = navController
+                    navigationIconClickAction = { navController.navigate(NavigationItem.RecipeDetail.route + "?${state.recipeId}&editable=true") },
                     )
             },
             bottomBar = { BottomBar(navController) }
@@ -70,7 +69,7 @@ fun IngredientListScreen(
                         onSaveIngredient = {
                             onTriggerEvent(IngredientListEvents.SaveIngredient(it))
 //                            navController.navigateUp()
-                            navController.navigate("${NavigationItem.NewRecipe.route}?recipeId=${state.recipeId}")
+                            navController.navigate("${NavigationItem.RecipeDetail.route}?recipeId=${state.recipeId}&editable=true")
                         }
                     )
                 }
