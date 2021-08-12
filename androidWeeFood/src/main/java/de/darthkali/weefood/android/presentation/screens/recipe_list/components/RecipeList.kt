@@ -22,7 +22,7 @@ fun RecipeList(
     recipes: List<Recipe>,
     page: Int,
     onTriggerNextPage: () -> Unit,
-    onClickRecipeListItem: (Int) -> Unit,
+    onClickOpenRecipe: (Int) -> Unit,
 ) {
     Box(
         modifier = Modifier
@@ -43,7 +43,7 @@ fun RecipeList(
                     RecipeCard(
                         recipe = recipe,
                         onClick = {
-                            onClickRecipeListItem(recipe.databaseId!!) //TODO: replace 0
+                            onClickOpenRecipe(recipe.databaseId!!)
                         }
                     )
                 }

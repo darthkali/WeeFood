@@ -19,7 +19,6 @@ import de.darthkali.weefood.android.presentation.screens.ingredient_list.compone
 import de.darthkali.weefood.android.presentation.screens.ingredient_list.components.SearchAppBar
 import de.darthkali.weefood.android.presentation.theme.AppTheme
 import de.darthkali.weefood.presentation.ingredient_list.IngredientListEvents
-import de.darthkali.weefood.presentation.ingredient_list.IngredientListState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
@@ -28,29 +27,33 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalFoundationApi
 @Composable
 fun IngredientListScreen(
-    state: IngredientListState,
+    viewModel: IngredientListViewModel,
     navController: NavController,
     onTriggerEvent: (IngredientListEvents) -> Unit,
+    onClickSaveIngredient: (Int?) -> Unit,
+    onClickBack: (Int?) -> Unit,
 ) {
     AppTheme(
-        displayProgressBar = state.isLoading,
+        displayProgressBar = viewModel.state.value.isLoading,
     ) {
         Scaffold(
             topBar = {
                 TopBar(
                     title = "Zutaten Suche",
                     navigationIcon = Icons.Filled.ArrowBack,
-                    navigationIconClickAction = { navController.navigate(NavigationItem.RecipeDetail.route + "?${state.recipeId}&editable=true") },
-                    )
+                    navigationIconClickAction = {
+                        onClickBack(viewModel.state.value.recipeId)
+                    },
+                )
             },
             bottomBar = { BottomBar(navController) }
         ) { innerPadding ->
             Box(modifier = Modifier.padding(innerPadding)) {
 
 
-                Column() {
+                Column {
                     SearchAppBar(
-                        query = state.query,
+                        query = viewModel.state.value.query,
                         onQueryChanged = {
                             onTriggerEvent(IngredientListEvents.OnUpdateQuery(it))
                         },
@@ -60,16 +63,15 @@ fun IngredientListScreen(
                     )
 
                     IngredientList(
-                        loading = state.isLoading,
-                        ingredients = state.ingredients,
-                        page = state.page,
+                        loading = viewModel.state.value.isLoading,
+                        ingredients = viewModel.state.value.ingredients,
+                        page = viewModel.state.value.page,
                         onTriggerNextPage = {
                             onTriggerEvent(IngredientListEvents.NextPage)
                         },
                         onSaveIngredient = {
                             onTriggerEvent(IngredientListEvents.SaveIngredient(it))
-//                            navController.navigateUp()
-                            navController.navigate("${NavigationItem.RecipeDetail.route}?recipeId=${state.recipeId}&editable=true")
+                            onClickSaveIngredient(viewModel.state.value.recipeId)
                         }
                     )
                 }

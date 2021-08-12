@@ -1,4 +1,4 @@
-package de.darthkali.weefood.android.presentation.screens.new_recipe
+package de.darthkali.weefood.android.presentation.screens.recipe_detail
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf

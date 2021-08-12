@@ -12,8 +12,8 @@ import androidx.navigation.compose.rememberNavController
 import de.darthkali.weefood.android.presentation.screens.day_list.DayListScreen
 import de.darthkali.weefood.android.presentation.screens.ingredient_list.IngredientListScreen
 import de.darthkali.weefood.android.presentation.screens.ingredient_list.IngredientListViewModel
-import de.darthkali.weefood.android.presentation.screens.new_recipe.NewRecipeScreen
-import de.darthkali.weefood.android.presentation.screens.new_recipe.RecipeDetailViewModel
+import de.darthkali.weefood.android.presentation.screens.recipe_detail.NewRecipeScreen
+import de.darthkali.weefood.android.presentation.screens.recipe_detail.RecipeDetailViewModel
 import de.darthkali.weefood.android.presentation.screens.recipe_list.RecipeListScreen
 import de.darthkali.weefood.android.presentation.screens.recipe_list.RecipeListViewModel
 import de.darthkali.weefood.android.presentation.screens.settings.SettingsScreen
@@ -77,18 +77,20 @@ fun Navigation() {
                 parametersOf(backStackEntry.arguments?.getString("query"))
             }
             RecipeListScreen(
-                state = viewModel.state.value,
+                viewModel = viewModel,
                 navController = navController,
                 onTriggerEvent = viewModel::onTriggerEvent,
-                onClickRecipeListItem = { recipeId ->
-                    navController.popBackStack() //TODO: Why
+                onClickOpenRecipe = { recipeId ->
                     navController.navigate("${NavigationItem.RecipeDetail.route}?recipeId=$recipeId")
+                },
+                onClickAddNewRecipe = {
+                    navController.navigate("${NavigationItem.RecipeDetail.route}?editable=true")
                 }
             )
         }
 
         /**
-         * Navigation -> NewRecipe
+         * Navigation -> RecipeDetail
          */
         composable(
             route = NavigationItem.RecipeDetail.route + "?recipeId={recipeId}&editable={editable}",
@@ -104,13 +106,38 @@ fun Navigation() {
                 },
             )
         ) { backStackEntry ->
-            val newRecipeViewModel = getStateViewModel<RecipeDetailViewModel>(state = { backStackEntry.arguments!! })
+            val viewModel =
+                getStateViewModel<RecipeDetailViewModel>(state = { backStackEntry.arguments!! })
             NewRecipeScreen(
                 navController = navController,
-                onTriggerEvent = newRecipeViewModel::onTriggerEvent,
-                detailViewModel = newRecipeViewModel
+                onTriggerEvent = viewModel::onTriggerEvent,
+                viewModel = viewModel,
+                onClickSaveRecipeDetailFAB = { recipeId ->
+                    navController.navigate(
+                        "${NavigationItem.RecipeDetail.route}?recipeId=${recipeId}"
+                    )
+                },
+                onClickEditRecipeDetailFAB = { recipeId ->
+                    navController.navigate(
+                        "${NavigationItem.RecipeDetail.route}?recipeId=${recipeId}&editable=true"
+                    )
+                },
+                onClickBackInEditableRecipeDetailScreen = { recipeId ->
+                    navController.navigate(
+                        "${NavigationItem.RecipeDetail.route}?recipeId=${recipeId}"
+                    )
+                },
+                onClickBackInViewableRecipeDetailScreen = { recipeName ->
+                    navController.navigate(
+                        "${NavigationItem.RecipeList.route}?query=${recipeName}"
+                    )
+                },
+                onClickAddIngredient = { recipeId ->
+                    navController.navigate(
+                        "${NavigationItem.IngredientList.route}/${recipeId}"
+                    )
+                }
             )
-
         }
 
 
@@ -127,9 +154,19 @@ fun Navigation() {
                 parametersOf(backStackEntry.arguments?.getInt("recipeId"))
             }
             IngredientListScreen(
-                state = viewModel.state.value,
+                viewModel = viewModel,
                 navController = navController,
                 onTriggerEvent = viewModel::onTriggerEvent,
+                onClickBack = { recipeId ->
+                    navController.navigate(
+                        "${NavigationItem.RecipeDetail.route}?recipeId=${recipeId}&editable=true"
+                    )
+                },
+                onClickSaveIngredient = { recipeId ->
+                    navController.navigate(
+                        "${NavigationItem.RecipeDetail.route}?recipeId=${recipeId}&editable=true"
+                    )
+                }
             )
         }
 
@@ -155,3 +192,4 @@ fun Navigation() {
 
     }
 }
+

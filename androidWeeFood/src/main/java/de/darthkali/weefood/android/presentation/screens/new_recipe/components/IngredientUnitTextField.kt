@@ -47,19 +47,3 @@ fun IngredientUnitTextField(
     )
 
 }
-
-//@ExperimentalCoroutinesApi
-//@ExperimentalMaterialApi
-//@ExperimentalComposeUiApi
-//@Preview(showBackground = true)
-//@Composable
-//fun IngredientUnitTextFieldPreview() {
-//    AppTheme() {
-//        val textState = remember { mutableStateOf(TextFieldValue()) }
-//        IngredientUnitTextField(
-//            value = "Test",
-//            label = "Menge")
-//    }
-//
-//}
-

@@ -1,7 +1,8 @@
-package de.darthkali.weefood.android.presentation.screens.new_recipe
+package de.darthkali.weefood.android.presentation.screens.recipe_detail
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FabPosition
@@ -10,6 +11,7 @@ import androidx.compose.material.FloatingActionButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
@@ -21,7 +23,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import de.darthkali.weefood.android.presentation.navigation.NavigationItem
 import de.darthkali.weefood.android.presentation.navigation.TopBar
-import de.darthkali.weefood.android.presentation.screens.recipe_detail.ViewableRecipeDetail
 import de.darthkali.weefood.android.presentation.theme.AppTheme
 import de.darthkali.weefood.domain.model.Recipe
 import de.darthkali.weefood.presentation.recipe_detail.RecipeDetailEvents
@@ -34,40 +35,46 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalFoundationApi
 @Composable
 fun NewRecipeScreen(
+    viewModel: RecipeDetailViewModel,
     navController: NavController,
     onTriggerEvent: (RecipeDetailEvents) -> Unit,
-    detailViewModel: RecipeDetailViewModel
+    onClickAddIngredient: (Int?) -> Unit,
+    onClickSaveRecipeDetailFAB: (Int?) -> Unit,
+    onClickEditRecipeDetailFAB: (Int?) -> Unit,
+    onClickBackInEditableRecipeDetailScreen: (Int?) -> Unit,
+    onClickBackInViewableRecipeDetailScreen: (String) -> Unit,
 ) {
 
     AppTheme {
         Scaffold(
             topBar = {
-                if (detailViewModel.editable.value) {
+                if (viewModel.editable.value) {
                     EditableRecipeDetailScreenTopBar(
-                        recipe = detailViewModel.state.value.recipe,
+                        recipe = viewModel.state.value.recipe,
                         navController = navController,
+                        onClickBackInEditableRecipeDetailScreen = onClickBackInEditableRecipeDetailScreen
                     )
                 } else {
                     ViewableRecipeDetailScreenTopBar(
-                        recipe = detailViewModel.state.value.recipe,
-                        navController = navController,
+                        recipe = viewModel.state.value.recipe,
+                        onClickBackInViewableRecipeDetailScreen = onClickBackInViewableRecipeDetailScreen
                     )
                 }
             },
             floatingActionButtonPosition = FabPosition.End,
             floatingActionButton = {
-                if (detailViewModel.editable.value) {
+                if (viewModel.editable.value) {
                     SaveRecipeDetailFAB(
-                        recipe = detailViewModel.state.value.recipe,
-                        navController = navController,
+                        recipe = viewModel.state.value.recipe,
+                        onClickSaveRecipeDetailFAB = onClickSaveRecipeDetailFAB,
                         onTriggerEvent = onTriggerEvent
                     )
 
                 } else {
                     EditRecipeDetailFAB(
-                        recipe = detailViewModel.state.value.recipe,
-                        navController = navController,
-                        onTriggerEvent = onTriggerEvent
+                        recipe = viewModel.state.value.recipe,
+                        onTriggerEvent = onTriggerEvent,
+                        onClickEditRecipeDetailFAB = onClickEditRecipeDetailFAB
                     )
                 }
             }
@@ -75,15 +82,15 @@ fun NewRecipeScreen(
         ) { innerPadding ->
             Box(modifier = Modifier.padding(innerPadding)) {
 
-                if (detailViewModel.editable.value) {
+                if (viewModel.editable.value) {
                     EditableRecipeDetail(
-                        recipe = detailViewModel.state.value.recipe,
+                        recipe = viewModel.state.value.recipe,
                         onTriggerEvent = onTriggerEvent,
-                        navController = navController
+                        onClickAddIngredient = onClickAddIngredient,
                     )
                 } else {
                     ViewableRecipeDetail(
-                        recipe = detailViewModel.state.value.recipe,
+                        recipe = viewModel.state.value.recipe,
                     )
                 }
 
@@ -96,15 +103,13 @@ fun NewRecipeScreen(
 @Composable
 fun SaveRecipeDetailFAB(
     recipe: Recipe,
-    navController: NavController,
     onTriggerEvent: (RecipeDetailEvents) -> Unit,
+    onClickSaveRecipeDetailFAB: (Int?) -> Unit,
 ) {
     FloatingActionButton(
         onClick = {
             onTriggerEvent(RecipeDetailEvents.OnSaveRecipe)
-            navController.navigate(
-                "${NavigationItem.RecipeDetail.route}?recipeId=${recipe.databaseId}"
-            )
+            onClickSaveRecipeDetailFAB(recipe.databaseId)
         },
         backgroundColor = MaterialTheme.colors.primary,
         elevation = FloatingActionButtonDefaults.elevation(6.dp)
@@ -116,15 +121,13 @@ fun SaveRecipeDetailFAB(
 @Composable
 fun EditRecipeDetailFAB(
     recipe: Recipe,
-    navController: NavController,
     onTriggerEvent: (RecipeDetailEvents) -> Unit,
+    onClickEditRecipeDetailFAB: (Int?) -> Unit,
 ) {
     FloatingActionButton(
         onClick = {
             onTriggerEvent(RecipeDetailEvents.OnSaveRecipe)
-            navController.navigate(
-                "${NavigationItem.RecipeDetail.route}?recipeId=${recipe.databaseId}&editable=true"
-            )
+            onClickEditRecipeDetailFAB(recipe.databaseId)
         },
         backgroundColor = MaterialTheme.colors.primary,
         elevation = FloatingActionButtonDefaults.elevation(6.dp)
@@ -138,19 +141,19 @@ fun EditRecipeDetailFAB(
 fun EditableRecipeDetailScreenTopBar(
     recipe: Recipe,
     navController: NavController,
+    onClickBackInEditableRecipeDetailScreen: (Int?) -> Unit,
 ) {
+
     TopBar(
         title = "Neues Rezept",
         navigationIcon = Icons.Filled.ArrowBack,
         navigationIconClickAction = {
 
             recipe.databaseId?.let {
+                onClickBackInEditableRecipeDetailScreen(recipe.databaseId)
+            } ?: run {
                 navController.navigate(
-                    "${NavigationItem.RecipeDetail.route}?recipeId=${recipe.databaseId}"
-                )
-            }.run {
-                navController.navigate(
-                    NavigationItem.RecipeList.route
+                    NavigationItem.Settings.route // TODO: Wenn wir ein neues REzept erstellen und es noch keine ID hat
                 )
             }
         }
@@ -160,15 +163,13 @@ fun EditableRecipeDetailScreenTopBar(
 @Composable
 fun ViewableRecipeDetailScreenTopBar(
     recipe: Recipe,
-    navController: NavController,
+    onClickBackInViewableRecipeDetailScreen: (String) -> Unit,
 ) {
     TopBar(
         title = recipe.name,
         navigationIcon = Icons.Filled.ArrowBack,
         navigationIconClickAction = {
-            navController.navigate(
-                "${NavigationItem.RecipeList.route}?query=${recipe.name}"
-            )
+            onClickBackInViewableRecipeDetailScreen(recipe.name)
         }
     )
 }

@@ -1,4 +1,4 @@
-package de.darthkali.weefood.android.presentation.screens.new_recipe
+package de.darthkali.weefood.android.presentation.screens.recipe_detail
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Row
@@ -21,10 +21,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import de.darthkali.weefood.android.presentation.components.button.ButtonStyle
 import de.darthkali.weefood.android.presentation.components.button.CommonButton
-import de.darthkali.weefood.android.presentation.navigation.NavigationItem
 import de.darthkali.weefood.android.presentation.screens.recipe_detail.components.IngredientCard
 import de.darthkali.weefood.android.presentation.screens.recipe_detail.components.IngredientUnitTextField
 import de.darthkali.weefood.domain.model.Recipe
@@ -38,8 +36,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @Composable
 fun EditableRecipeDetail(
     recipe: Recipe,
-    navController: NavController,
     onTriggerEvent: (RecipeDetailEvents) -> Unit,
+    onClickAddIngredient: (Int?) -> Unit,
 ) {
     LazyColumn() {
         item {
@@ -64,10 +62,7 @@ fun EditableRecipeDetail(
                 onTriggerEvent(RecipeDetailEvents.OnSaveRecipe)
                 recipe.databaseId?.let {
                     if (it != 0) {
-                        navController.navigate(
-                            "${NavigationItem.IngredientList.route}/${it}"
-                        )
-
+                        onClickAddIngredient(it)
                     }
                 }
             }
