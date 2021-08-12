@@ -1,4 +1,4 @@
-package de.darthkali.weefood.android.presentation.screens.new_recipe.components
+package de.darthkali.weefood.android.presentation.screens.recipe_detail.components
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -47,19 +47,3 @@ fun IngredientUnitTextField(
     )
 
 }
-
-//@ExperimentalCoroutinesApi
-//@ExperimentalMaterialApi
-//@ExperimentalComposeUiApi
-//@Preview(showBackground = true)
-//@Composable
-//fun IngredientUnitTextFieldPreview() {
-//    AppTheme() {
-//        val textState = remember { mutableStateOf(TextFieldValue()) }
-//        IngredientUnitTextField(
-//            value = "Test",
-//            label = "Menge")
-//    }
-//
-//}
-

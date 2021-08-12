@@ -13,21 +13,17 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import de.darthkali.weefood.android.presentation.components.button.MyFloatingActionButton
 import de.darthkali.weefood.android.presentation.navigation.BottomBar
-import de.darthkali.weefood.android.presentation.navigation.NavigationItem
 import de.darthkali.weefood.android.presentation.navigation.TopBar
 import de.darthkali.weefood.android.presentation.screens.recipe_list.components.RecipeList
 import de.darthkali.weefood.android.presentation.screens.recipe_list.components.SearchAppBar
 import de.darthkali.weefood.android.presentation.theme.AppTheme
 import de.darthkali.weefood.presentation.recipe_list.RecipeListEvents
-import de.darthkali.weefood.presentation.recipe_list.RecipeListState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
@@ -36,28 +32,26 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalFoundationApi
 @Composable
 fun RecipeListScreen(
-    state: RecipeListState,
+    viewModel: RecipeListViewModel,
     navController: NavController,
     onTriggerEvent: (RecipeListEvents) -> Unit,
-    onClickRecipeListItem: (Int) -> Unit,
+    onClickOpenRecipe: (Int) -> Unit,
+    onClickAddNewRecipe: () -> Unit
 ) {
     AppTheme(
-        displayProgressBar = state.isLoading,
+        displayProgressBar = viewModel.state.value.isLoading,
     ) {
         Scaffold(
             topBar = {
-                TopBar(title = "Rezeptliste", navController = navController)
+                TopBar(title = "Rezeptliste")
             },
             bottomBar = { BottomBar(navController) },
 
             floatingActionButtonPosition = FabPosition.End,
             floatingActionButton = {
                 FloatingActionButton(
-                    onClick = {
-                        navController.navigate("${NavigationItem.NewRecipe.route}")
-                    },
+                    onClick = { onClickAddNewRecipe() },
                     backgroundColor = MaterialTheme.colors.primary,
-//                        contentColor = Color.White,
                     elevation = FloatingActionButtonDefaults.elevation(6.dp)
                 ) {
                     Icon(Icons.Filled.Add, "")
@@ -67,9 +61,9 @@ fun RecipeListScreen(
 
         ) { innerPadding ->
             Box(modifier = Modifier.padding(innerPadding)) {
-                Column() {
+                Column {
                     SearchAppBar(
-                        query = state.query,
+                        query = viewModel.state.value.query,
                         onQueryChanged = {
                             onTriggerEvent(RecipeListEvents.OnUpdateQuery(it))
                         },
@@ -79,13 +73,13 @@ fun RecipeListScreen(
                     )
 
                     RecipeList(
-                        loading = state.isLoading,
-                        recipes = state.recipes,
-                        page = state.page,
+                        loading = viewModel.state.value.isLoading,
+                        recipes = viewModel.state.value.recipes,
+                        page = viewModel.state.value.page,
                         onTriggerNextPage = {
                             onTriggerEvent(RecipeListEvents.NextPage)
                         },
-                        onClickRecipeListItem = onClickRecipeListItem
+                        onClickOpenRecipe = onClickOpenRecipe
                     )
                 }
             }

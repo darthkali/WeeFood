@@ -16,7 +16,6 @@ sealed class NavigationItem(
     object Settings : NavigationItem("settings")
     object DayList : NavigationItem("dayList")
     object RecipeDetail : NavigationItem("recipeDetail")
-    object NewRecipe : NavigationItem("newRecipe")
     object IngredientList : NavigationItem("ingredientList")
 }
 
