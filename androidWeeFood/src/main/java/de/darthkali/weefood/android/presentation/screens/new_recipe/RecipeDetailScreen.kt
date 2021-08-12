@@ -39,7 +39,7 @@ fun NewRecipeScreen(
     detailViewModel: RecipeDetailViewModel
 ) {
 
-    AppTheme() {
+    AppTheme {
         Scaffold(
             topBar = {
                 if (detailViewModel.editable.value) {
