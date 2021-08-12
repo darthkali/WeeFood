@@ -36,7 +36,7 @@ class WeekRecipeQueriesImpl : WeekRecipeQueries, KoinComponent {
         return try {
             logger.log("Get All WeekRecipes from database")
             weeFoodDatabaseQueries.getAllWeekRecipes()
-                .executeAsList().toWeekRecipeList() //TODO WF-140: Mapper nutzen
+                .executeAsList().toWeekRecipeList()
         } catch (e: Exception) {
             logger.log(e.toString())
             listOf()
@@ -48,7 +48,7 @@ class WeekRecipeQueriesImpl : WeekRecipeQueries, KoinComponent {
             logger.log("Get All WeekRecipe from database by WeekDay")
             weeFoodDatabaseQueries.getAllWeekRecipesByWeekDay(
                 weekday = weekday.value, //.ordinal // TODO: SQL Delight bietet eine möglichkeit enums zu nutzen. Das muss hier eingebaut werden
-            ).executeAsList().toWeekRecipeList() //TODO WF-140: Mapper nutzen
+            ).executeAsList().toWeekRecipeList()
         } catch (e: Exception) {
             logger.log(e.toString())
             listOf()
@@ -93,7 +93,7 @@ class WeekRecipeQueriesImpl : WeekRecipeQueries, KoinComponent {
 -- -----------------------------------------------------
 */
 
-    fun RecipeIngredient_Entity.toRecipeIngredient(): RecipeIngredientDb {  //TODO WF-140: Mapper nutzen
+    fun RecipeIngredient_Entity.toRecipeIngredient(): RecipeIngredientDb {
         return RecipeIngredientDb(
             id = id.toInt(),
             quantity = quantity,
@@ -103,7 +103,7 @@ class WeekRecipeQueriesImpl : WeekRecipeQueries, KoinComponent {
         )
     }
 
-    fun List<RecipeIngredient_Entity>.toRecipeIngredientList(): List<RecipeIngredientDb> {  //TODO WF-140: Mapper nutzen
+    fun List<RecipeIngredient_Entity>.toRecipeIngredientList(): List<RecipeIngredientDb> {
         return map { it.toRecipeIngredient() }
     }
 
@@ -121,7 +121,7 @@ class WeekRecipeQueriesImpl : WeekRecipeQueries, KoinComponent {
 -- -----------------------------------------------------
 */
 
-    fun WeekRecipe_Entity.toWeekRecipe(): WeekRecipeDb {  //TODO WF-140: Mapper nutzen
+    fun WeekRecipe_Entity.toWeekRecipe(): WeekRecipeDb {
         return WeekRecipeDb(
             id = id.toInt(),
             weekday = Weekday.fromInt(weekday),
@@ -130,7 +130,7 @@ class WeekRecipeQueriesImpl : WeekRecipeQueries, KoinComponent {
         )
     }
 
-    fun List<WeekRecipe_Entity>.toWeekRecipeList(): List<WeekRecipeDb> {  //TODO WF-140: Mapper nutzen
+    fun List<WeekRecipe_Entity>.toWeekRecipeList(): List<WeekRecipeDb> {
         return map { it.toWeekRecipe() }
     }
 

@@ -16,7 +16,6 @@ import androidx.compose.ui.unit.dp
 import de.darthkali.weefood.android.presentation.components.CircleImage
 import de.darthkali.weefood.android.presentation.components.button.ButtonStyle
 import de.darthkali.weefood.android.presentation.components.button.CommonButton
-import de.darthkali.weefood.datasource.database.model.RecipeDb
 import de.darthkali.weefood.datasource.network.IngredientServiceImpl.Companion.NO_IMAGE
 import de.darthkali.weefood.domain.model.Recipe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -37,7 +36,6 @@ fun RecipeCard(
                 end = 16.dp
             )
             .fillMaxWidth(),
-        //.clickable(onClick = onClick),
         elevation = 8.dp,
         backgroundColor = MaterialTheme.colors.surface
     ) {
@@ -49,14 +47,15 @@ fun RecipeCard(
                 )
                 Column {
                     Text(
-                        text = recipe.name ?: "",    //if recipe.name == null, then set "" as text
+                        text = recipe.name,
                         modifier = Modifier
                             .fillMaxWidth(0.85f)
                             .wrapContentWidth(Alignment.Start),
                         style = MaterialTheme.typography.h2
                     )
-
-                    CustomChip("${recipe.cooking_time} ${recipe.cooking_time_unit}")
+                    if (recipe.cooking_time != 0) {
+                        CustomChip("${recipe.cooking_time} ${recipe.cooking_time_unit}")
+                    }
                 }
             }
             Row(

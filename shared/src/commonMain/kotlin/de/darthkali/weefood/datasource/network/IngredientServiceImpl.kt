@@ -13,7 +13,7 @@ class IngredientServiceImpl : IngredientService, KoinComponent {
 
     private val ktorClientFactory: KtorClientFactory by inject()
     private val httpClient = ktorClientFactory.build()
-    private val mapper = IngredientListMapper()
+
 
     override suspend fun searchIngredient(query: String, page: Int): List<IngredientDto> {
 
