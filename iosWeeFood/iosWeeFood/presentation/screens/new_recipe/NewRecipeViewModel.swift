@@ -19,21 +19,21 @@ class NewRecipeViewModel: ObservableObject {
    
 
     // State
-    @Published var state: NewRecipeState =  NewRecipeState()
+    @Published var state: RecipeDetailState =  RecipeDetailState()
 
     init(
         recipeId: Int
     ) {
-        onTriggerEvent(event: NewRecipeEvents.GetRecipe(recipeId: Int32(recipeId)))
+        onTriggerEvent(event: RecipeDetailEvents.GetRecipe(recipeId: Int32(recipeId)))
     }
 
-    func onTriggerEvent(event: NewRecipeEvents){
+    func onTriggerEvent(event: RecipeDetailEvents){
         var currentRecipe = (self.state.recipe.copy() as! Recipe)
         
         switch event {
-            case is NewRecipeEvents.GetRecipe:
+            case is RecipeDetailEvents.GetRecipe:
                 
-                let recipeId = Int32((event as! NewRecipeEvents.GetRecipe).recipeId)
+                let recipeId = Int32((event as! RecipeDetailEvents.GetRecipe).recipeId)
                 
                 let emptyRecipe = Recipe(
                     databaseId: 0,
@@ -49,29 +49,29 @@ class NewRecipeViewModel: ObservableObject {
                 
                 self.updateState(recipe: currentRecipe)
                 
-            case is NewRecipeEvents.OnUpdateName:
-                currentRecipe.name = (event as! NewRecipeEvents.OnUpdateName).name
+            case is RecipeDetailEvents.OnUpdateName:
+                currentRecipe.name = (event as! RecipeDetailEvents.OnUpdateName).name
                 self.updateState(recipe: currentRecipe)
 
-            case is NewRecipeEvents.OnUpdateImage:
-                currentRecipe.image = (event as! NewRecipeEvents.OnUpdateImage).image
+            case is RecipeDetailEvents.OnUpdateImage:
+                currentRecipe.image = (event as! RecipeDetailEvents.OnUpdateImage).image
                 self.updateState(recipe: currentRecipe)
 
-            case is NewRecipeEvents.OnUpdateCookingTime:
-                currentRecipe.cooking_time = Int32(exactly: (event as! NewRecipeEvents.OnUpdateCookingTime).cooking_time) as? KotlinInt
+            case is RecipeDetailEvents.OnUpdateCookingTime:
+                currentRecipe.cooking_time = Int32(exactly: (event as! RecipeDetailEvents.OnUpdateCookingTime).cooking_time) as? KotlinInt
                 self.updateState(recipe: currentRecipe)
                 
-            case is NewRecipeEvents.OnUpdateCookingTimeUnit:
-                currentRecipe.cooking_time_unit = (event as! NewRecipeEvents.OnUpdateCookingTimeUnit).cooking_time_unit
+            case is RecipeDetailEvents.OnUpdateCookingTimeUnit:
+                currentRecipe.cooking_time_unit = (event as! RecipeDetailEvents.OnUpdateCookingTimeUnit).cooking_time_unit
                 self.updateState(recipe: currentRecipe)
                 
-            case is NewRecipeEvents.OnUpdateDescription:
-                currentRecipe.recipeDescription = (event as! NewRecipeEvents.OnUpdateDescription).description
+            case is RecipeDetailEvents.OnUpdateDescription:
+                currentRecipe.recipeDescription = (event as! RecipeDetailEvents.OnUpdateDescription).description
                 self.updateState(recipe: currentRecipe)
                 
-            case is NewRecipeEvents.OnAddIngredient:
+            case is RecipeDetailEvents.OnAddIngredient:
                 
-                currentRecipe.databaseId = saveRecipe.execute(recipe: (event as! NewRecipeEvents.OnAddIngredient).recipe)
+                currentRecipe.databaseId = saveRecipe.execute(recipe: (event as! RecipeDetailEvents.OnAddIngredient).recipe)
                 self.updateState(recipe: currentRecipe)
                 
           /* case is NewRecipeEvents.OnDeleteIngredient:
@@ -84,8 +84,8 @@ class NewRecipeViewModel: ObservableObject {
                         getIngredientsFromRecipe.execute(state.value.recipe.databaseId!!)
                     self.updateState(state.value.recipe.copy(ingredients = ingredients!!))
                 }*/
-            case is NewRecipeEvents.OnSaveRecipe:
-                currentRecipe.databaseId = saveRecipe.execute(recipe: (event as! NewRecipeEvents.OnSaveRecipe).recipe)
+            case is RecipeDetailEvents.OnSaveRecipe:
+                currentRecipe.databaseId = saveRecipe.execute(recipe: state.recipe)
                 self.updateState(recipe: currentRecipe)
 
             default: doNothing()
@@ -99,7 +99,7 @@ class NewRecipeViewModel: ObservableObject {
     private func updateState(
         recipe: Recipe? = nil
     ){
-        let currentState = (self.state.copy() as! NewRecipeState)
+        let currentState = (self.state.copy() as! RecipeDetailState)
         self.state = self.state.doCopy(
             changed: currentState.changed + 1,
             recipe:recipe ?? currentState.recipe
