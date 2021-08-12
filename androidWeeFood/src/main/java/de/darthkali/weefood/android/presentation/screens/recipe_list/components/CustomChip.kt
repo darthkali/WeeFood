@@ -11,10 +11,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun FoodCategoryChip(
-    category: String,
-    isSelected: Boolean = false,
-    onSelectedCategoryChanged: (String) -> Unit,
+fun CustomChip(
+    text: String,
+//    isSelected: Boolean = false,
+//    onSelectedCategoryChanged: (String) -> Unit,
 ) {
     Surface(
         modifier = Modifier.padding(start = 4.dp, end = 4.dp),
@@ -23,15 +23,15 @@ fun FoodCategoryChip(
         color = MaterialTheme.colors.primaryVariant
     ) {
         Row(modifier = Modifier
-            .toggleable(
-                value = isSelected,
-                onValueChange = {
-                    onSelectedCategoryChanged(category)
-                }
-            )
+//            .toggleable(
+//                value = isSelected,
+//                onValueChange = {
+//                    onSelectedCategoryChanged(text)
+//                }
+//            )
         ) {
             Text(
-                text = category,
+                text = text,
                 style = MaterialTheme.typography.body2,
                 color = MaterialTheme.colors.onBackground,
                 modifier = Modifier.padding(8.dp)

@@ -47,13 +47,17 @@ fun RecipeCard(
                     url = recipe.image ?: NO_IMAGE,
                     contentDescription = recipe.name ?: "not valid"
                 )
-                Text(
-                    text = recipe.name ?: "",    //if recipe.name == null, then set "" as text
-                    modifier = Modifier
-                        .fillMaxWidth(0.85f)
-                        .wrapContentWidth(Alignment.Start),
-                    style = MaterialTheme.typography.h2
-                )
+                Column {
+                    Text(
+                        text = recipe.name ?: "",    //if recipe.name == null, then set "" as text
+                        modifier = Modifier
+                            .fillMaxWidth(0.85f)
+                            .wrapContentWidth(Alignment.Start),
+                        style = MaterialTheme.typography.h2
+                    )
+
+                    CustomChip("${recipe.cooking_time} ${recipe.cooking_time_unit}")
+                }
             }
             Row(
                 modifier = Modifier
@@ -71,8 +75,9 @@ fun RecipeCard(
                 )
                 CommonButton(
                     text = "Hinzufügen",
-                    buttonStyle = ButtonStyle.ADD_BUTTON
-                ) {}
+                    buttonStyle = ButtonStyle.ADD_BUTTON,
+                    onClick = {}
+                )
             }
         }
     }
