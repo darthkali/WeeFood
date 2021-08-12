@@ -18,8 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import de.darthkali.weefood.android.presentation.components.CircleImage
-import de.darthkali.weefood.android.presentation.components.button.CommonButton
 import de.darthkali.weefood.android.presentation.components.button.ButtonStyle
+import de.darthkali.weefood.android.presentation.components.button.CommonButton
 import de.darthkali.weefood.android.presentation.theme.AppTheme
 import de.darthkali.weefood.domain.model.Ingredient
 import de.darthkali.weefood.mockFactory.IngredientMock
