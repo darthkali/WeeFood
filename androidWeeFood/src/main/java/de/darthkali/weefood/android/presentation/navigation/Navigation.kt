@@ -4,26 +4,25 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.platform.LocalContext
-import androidx.hilt.navigation.HiltViewModelFactory
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
 import de.darthkali.weefood.android.presentation.screens.day_list.DayListScreen
-import de.darthkali.weefood.android.presentation.screens.day_list.WeekListScreen
 import de.darthkali.weefood.android.presentation.screens.ingredient_list.IngredientListScreen
 import de.darthkali.weefood.android.presentation.screens.ingredient_list.IngredientListViewModel
-import de.darthkali.weefood.android.presentation.screens.new_recipe.NewRecipeScreen
-import de.darthkali.weefood.android.presentation.screens.recipe_detail.RecipeDetailScreen
+import de.darthkali.weefood.android.presentation.screens.recipe_detail.NewRecipeScreen
 import de.darthkali.weefood.android.presentation.screens.recipe_detail.RecipeDetailViewModel
 import de.darthkali.weefood.android.presentation.screens.recipe_list.RecipeListScreen
 import de.darthkali.weefood.android.presentation.screens.recipe_list.RecipeListViewModel
 import de.darthkali.weefood.android.presentation.screens.settings.SettingsScreen
 import de.darthkali.weefood.android.presentation.screens.shopping_list.ShoppingListScreen
+import de.darthkali.weefood.android.presentation.screens.week_list.WeekListScreen
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.koin.androidx.compose.getStateViewModel
+import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 
 /**
  * Navigation Class
@@ -37,7 +36,9 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalComposeUiApi
 @ExperimentalMaterialApi
 @Composable
-fun Navigation(){
+fun Navigation() {
+
+
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = NavigationItem.WeekList.route) {
 
@@ -47,7 +48,7 @@ fun Navigation(){
          */
         composable(
             route = NavigationItem.WeekList.route
-        ) { navBackStackEntry ->
+        ) {
             WeekListScreen(navController)
         }
 
@@ -62,51 +63,81 @@ fun Navigation(){
         }
 
 
-
         /**
          * Navigation -> RecipeList
          */
         composable(
-            route = NavigationItem.RecipeList.route
-        ) { navBackStackEntry ->
-            val factory = HiltViewModelFactory(LocalContext.current, navBackStackEntry)
-            val viewModel: RecipeListViewModel = viewModel("RecipeListViewModel", factory)
+            route = NavigationItem.RecipeList.route + "?query={query}",
+            arguments = listOf(navArgument("query") {
+                defaultValue = ""
+                type = NavType.StringType
+            })
+        ) { backStackEntry ->
+            val viewModel = getViewModel<RecipeListViewModel> {
+                parametersOf(backStackEntry.arguments?.getString("query"))
+            }
             RecipeListScreen(
-                state = viewModel.state.value,
+                viewModel = viewModel,
                 navController = navController,
                 onTriggerEvent = viewModel::onTriggerEvent,
-                onClickRecipeListItem = { recipeId ->
-                    navController.navigate("${NavigationItem.RecipeDetail.route}/$recipeId")
+                onClickOpenRecipe = { recipeId ->
+                    navController.navigate("${NavigationItem.RecipeDetail.route}?recipeId=$recipeId")
+                },
+                onClickAddNewRecipe = {
+                    navController.navigate("${NavigationItem.RecipeDetail.route}?editable=true")
                 }
             )
         }
-
 
         /**
          * Navigation -> RecipeDetail
          */
         composable(
-            route = NavigationItem.RecipeDetail.route + "/{recipeId}",
-            arguments = listOf(navArgument("recipeId") {
-                type = NavType.IntType
-            })
-        ) { navBackStackEntry ->
-            val factory = HiltViewModelFactory(LocalContext.current, navBackStackEntry)
-            val viewModel: RecipeDetailViewModel = viewModel("RecipeDetailViewModel", factory)
-            RecipeDetailScreen(
-                state = viewModel.state.value,
-                onTriggerEvent = viewModel::onTriggerEvent
+            route = NavigationItem.RecipeDetail.route + "?recipeId={recipeId}&editable={editable}",
+            arguments = listOf(
+                navArgument("recipeId") {
+                    nullable = true
+                    defaultValue = null
+                    type = NavType.StringType
+                },
+                navArgument("editable") {
+                    defaultValue = false
+                    type = NavType.BoolType
+                },
             )
-        }
-
-
-        /**
-         * Navigation -> NewRecipe
-         */
-        composable(
-            route = NavigationItem.NewRecipe.route
-        ) { navBackStackEntry ->
-            NewRecipeScreen(navController)
+        ) { backStackEntry ->
+            val viewModel =
+                getStateViewModel<RecipeDetailViewModel>(state = { backStackEntry.arguments!! })
+            NewRecipeScreen(
+                navController = navController,
+                onTriggerEvent = viewModel::onTriggerEvent,
+                viewModel = viewModel,
+                onClickSaveRecipeDetailFAB = { recipeId ->
+                    navController.navigate(
+                        "${NavigationItem.RecipeDetail.route}?recipeId=${recipeId}"
+                    )
+                },
+                onClickEditRecipeDetailFAB = { recipeId ->
+                    navController.navigate(
+                        "${NavigationItem.RecipeDetail.route}?recipeId=${recipeId}&editable=true"
+                    )
+                },
+                onClickBackInEditableRecipeDetailScreen = { recipeId ->
+                    navController.navigate(
+                        "${NavigationItem.RecipeDetail.route}?recipeId=${recipeId}"
+                    )
+                },
+                onClickBackInViewableRecipeDetailScreen = { recipeName ->
+                    navController.navigate(
+                        "${NavigationItem.RecipeList.route}?query=${recipeName}"
+                    )
+                },
+                onClickAddIngredient = { recipeId ->
+                    navController.navigate(
+                        "${NavigationItem.IngredientList.route}/${recipeId}"
+                    )
+                }
+            )
         }
 
 
@@ -114,14 +145,28 @@ fun Navigation(){
          * Navigation -> IngredientList
          */
         composable(
-            route = NavigationItem.IngredientList.route
-        ) { navBackStackEntry ->
-            val factory = HiltViewModelFactory(LocalContext.current, navBackStackEntry)
-            val viewModel: IngredientListViewModel = viewModel("RecipeListViewModel", factory)
+            route = NavigationItem.IngredientList.route + "/{recipeId}",
+            arguments = listOf(navArgument("recipeId") {
+                type = NavType.IntType
+            })
+        ) { backStackEntry ->
+            val viewModel = getViewModel<IngredientListViewModel> {
+                parametersOf(backStackEntry.arguments?.getInt("recipeId"))
+            }
             IngredientListScreen(
-                state = viewModel.state.value,
+                viewModel = viewModel,
                 navController = navController,
                 onTriggerEvent = viewModel::onTriggerEvent,
+                onClickBack = { recipeId ->
+                    navController.navigate(
+                        "${NavigationItem.RecipeDetail.route}?recipeId=${recipeId}&editable=true"
+                    )
+                },
+                onClickSaveIngredient = { recipeId ->
+                    navController.navigate(
+                        "${NavigationItem.RecipeDetail.route}?recipeId=${recipeId}&editable=true"
+                    )
+                }
             )
         }
 
@@ -131,14 +176,8 @@ fun Navigation(){
          */
         composable(
             route = NavigationItem.ShoppingList.route
-        ) { navBackStackEntry ->
-            val factory = HiltViewModelFactory(LocalContext.current, navBackStackEntry)
-            val viewModel: IngredientListViewModel = viewModel("RecipeListViewModel", factory)
-            IngredientListScreen(
-                state = viewModel.state.value,
-                navController = navController,
-                onTriggerEvent = viewModel::onTriggerEvent,
-            )
+        ) {
+            ShoppingListScreen(navController)
         }
 
 
@@ -147,9 +186,10 @@ fun Navigation(){
          */
         composable(
             route = NavigationItem.Settings.route
-        ) { navBackStackEntry ->
+        ) {
             SettingsScreen(navController)
         }
 
     }
 }
+

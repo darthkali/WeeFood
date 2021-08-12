@@ -1,14 +1,16 @@
 package de.darthkali.weefood.android.presentation.screens.ingredient_list
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import de.darthkali.weefood.android.presentation.navigation.BottomBar
 import de.darthkali.weefood.android.presentation.navigation.NavigationItem
@@ -17,7 +19,6 @@ import de.darthkali.weefood.android.presentation.screens.ingredient_list.compone
 import de.darthkali.weefood.android.presentation.screens.ingredient_list.components.SearchAppBar
 import de.darthkali.weefood.android.presentation.theme.AppTheme
 import de.darthkali.weefood.presentation.ingredient_list.IngredientListEvents
-import de.darthkali.weefood.presentation.ingredient_list.IngredientListState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
@@ -26,44 +27,55 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalFoundationApi
 @Composable
 fun IngredientListScreen(
-    state: IngredientListState,
+    viewModel: IngredientListViewModel,
     navController: NavController,
     onTriggerEvent: (IngredientListEvents) -> Unit,
+    onClickSaveIngredient: (Int?) -> Unit,
+    onClickBack: (Int?) -> Unit,
 ) {
     AppTheme(
-        displayProgressBar = state.isLoading,
+        displayProgressBar = viewModel.state.value.isLoading,
     ) {
         Scaffold(
             topBar = {
                 TopBar(
                     title = "Zutaten Suche",
-                    navigationIcon= Icons.Filled.ArrowBack,
-                    navigationIconClickAction = { navController.navigate(NavigationItem.WeekList.route) },
-                    )
+                    navigationIcon = Icons.Filled.ArrowBack,
+                    navigationIconClickAction = {
+                        onClickBack(viewModel.state.value.recipeId)
+                    },
+                )
             },
             bottomBar = { BottomBar(navController) }
-        ) {
-            Column() {
-                SearchAppBar(
-                    query = state.query,
-                    onQueryChanged = {
-                        onTriggerEvent(IngredientListEvents.OnUpdateQuery(it))
-                    },
-                    onExecuteSearch = {
-                        onTriggerEvent(IngredientListEvents.NewSearch)
-                    },
-                )
+        ) { innerPadding ->
+            Box(modifier = Modifier.padding(innerPadding)) {
 
-                IngredientList(
-                    loading = state.isLoading,
-                    ingredients = state.ingredients,
-                    page = state.page,
-                    onTriggerNextPage = {
-                        onTriggerEvent(IngredientListEvents.NextPage)
-                    },
-                )
+
+                Column {
+                    SearchAppBar(
+                        query = viewModel.state.value.query,
+                        onQueryChanged = {
+                            onTriggerEvent(IngredientListEvents.OnUpdateQuery(it))
+                        },
+                        onExecuteSearch = {
+                            onTriggerEvent(IngredientListEvents.NewSearch)
+                        },
+                    )
+
+                    IngredientList(
+                        loading = viewModel.state.value.isLoading,
+                        ingredients = viewModel.state.value.ingredients,
+                        page = viewModel.state.value.page,
+                        onTriggerNextPage = {
+                            onTriggerEvent(IngredientListEvents.NextPage)
+                        },
+                        onSaveIngredient = {
+                            onTriggerEvent(IngredientListEvents.SaveIngredient(it))
+                            onClickSaveIngredient(viewModel.state.value.recipeId)
+                        }
+                    )
+                }
             }
         }
     }
-
 }

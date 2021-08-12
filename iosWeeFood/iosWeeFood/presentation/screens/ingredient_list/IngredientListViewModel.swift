@@ -11,25 +11,13 @@ import shared
 
 class IngredientListViewModel: ObservableObject {
 
-    private let logger = Logger(className: "RecipeListViewModel")
-
-    // Dependencies
-    let searchIngredients: SearchIngredient
-    //let foodCategoryUtil: FoodCategoryUtil
+    private let searchIngredient = SearchIngredient()
+    private let logger = Logger(className: "IngredientListViewModel")
 
     // State
     @Published var state: IngredientListState = IngredientListState()
 
-    //@Published var showDialog: Bool = false
-
-    init(
-        searchIngredients: SearchIngredient
-        //foodCategoryUtil: FoodCategoryUtil
-    ){
-        self.searchIngredients = searchIngredients
-        //self.foodCategoryUtil = foodCategoryUtil
-        onTriggerEvent(stateEvent: IngredientListEvents.LoadIngredient())
-    }
+    init(){onTriggerEvent(stateEvent: IngredientListEvents.LoadIngredient())}
 
     func onTriggerEvent(stateEvent: IngredientListEvents){
         switch stateEvent {
@@ -41,10 +29,6 @@ class IngredientListViewModel: ObservableObject {
             nextPage()
         case is IngredientListEvents.OnUpdateQuery:
             onUpdateQuery(query: (stateEvent as! IngredientListEvents.OnUpdateQuery).query)
-        //case is RecipeListEvents.OnSelectCategory:
-          //  onUpdateSelectedCategory(foodCategory: (stateEvent as! RecipeListEvents.OnSelectCategory).category)
-        //case RecipeListEvents.OnRemoveHeadMessageFromQueue():
-          //  removeHeadFromQueue()
         default:
             doNothing()
         }
@@ -55,7 +39,7 @@ class IngredientListViewModel: ObservableObject {
     private func loadIngredients(){
         let currentState = (self.state.copy() as! IngredientListState)
         do{
-            try searchIngredients.execute(
+            try searchIngredient.execute(
                 query: currentState.query,
                 page: Int32(currentState.page)
             ).collectCommon(
@@ -71,9 +55,6 @@ class IngredientListViewModel: ObservableObject {
                     if(data != nil){
                         self.appendIngredients(ingredients: data as! [Ingredient])
                     }
-                   // if(message != nil){
-                     //   self.handleMessageByUIComponentType(message!.build())
-                    //}
                 }else{
                     self.logger.log(msg: "DataState is nil")
                 }
@@ -95,18 +76,12 @@ class IngredientListViewModel: ObservableObject {
 
     private func resetSearchState(){
         let currentState = (self.state.copy() as! IngredientListState)
-        //var foodCategory = currentState.selectedCategory
-       // if(foodCategory?.value != currentState.query){
-         //   foodCategory = nil
-        //}
         self.state = self.state.doCopy(
             isLoading: currentState.isLoading,
             page: 1, // reset
             query: currentState.query,
             ingredients: [], // reset
-            //selectedCategory: foodCategory, // Maybe reset (see logic above)
             bottomIngredient:  currentState.bottomIngredient
-            //queue: currentState.queue
         )
     }
 
@@ -152,7 +127,7 @@ class IngredientListViewModel: ObservableObject {
         // if !queryInProgress
         // else -> do nothing
         let currentState = (self.state.copy() as! IngredientListState)
-        if(ingredient.id == currentState.bottomIngredient?.id){
+        if(ingredient.internalId == currentState.bottomIngredient?.internalId){
             if(IngredientListState.Companion().RECIPE_PAGINATION_PAGE_SIZE * currentState.page <= currentState.ingredients.count){
                 if(!currentState.isLoading){
                     return true

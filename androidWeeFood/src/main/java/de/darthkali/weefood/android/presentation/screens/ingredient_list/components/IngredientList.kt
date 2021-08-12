@@ -1,6 +1,5 @@
 package de.darthkali.weefood.android.presentation.screens.ingredient_list.components
 
-
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.lazy.LazyColumn
@@ -15,7 +14,6 @@ import de.darthkali.weefood.datasource.network.IngredientServiceImpl.Companion.P
 import de.darthkali.weefood.domain.model.Ingredient
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-
 @ExperimentalMaterialApi
 @ExperimentalCoroutinesApi
 @Composable
@@ -24,25 +22,28 @@ fun IngredientList(
     ingredients: List<Ingredient> = listOf(),
     page: Int = 1,
     onTriggerNextPage: () -> Unit,
-){
-    Box(modifier = Modifier
-        .background(color = MaterialTheme.colors.background)
+    onSaveIngredient: (Ingredient) -> Unit
+) {
+    Box(
+        modifier = Modifier
+            .background(color = MaterialTheme.colors.background)
     ) {
         if (loading && ingredients.isEmpty()) {
-            LoadingIngredientListShimmer(imageHeight = 250.dp,)
-        }
-        else if(ingredients.isEmpty()){
+            LoadingIngredientListShimmer(imageHeight = 250.dp)
+        } else if (ingredients.isEmpty()) {
             NothingHere()
-        }
-        else {
-            LazyColumn{
+        } else {
+            LazyColumn {
                 itemsIndexed(
                     items = ingredients
                 ) { index, ingredient ->
                     if ((index + 1) >= (page * PAGINATION_PAGE_SIZE) && !loading) {
                         onTriggerNextPage()
                     }
-                    IngredientCard(ingredient = ingredient)
+                    IngredientCard(
+                        ingredientDb = ingredient,
+                        onSaveIngredient = { onSaveIngredient(it) }
+                    )
                 }
             }
         }

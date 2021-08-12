@@ -1,8 +1,21 @@
 package de.darthkali.weefood
 
 import android.app.Application
-import dagger.hilt.android.HiltAndroidApp
+import de.darthkali.weefood.android.di.appModule
+import de.darthkali.weefood.di.initKoin
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.component.KoinComponent
 
-@HiltAndroidApp
-class BaseApplication: Application()
+class BaseApplication : Application(), KoinComponent {
+    override fun onCreate() {
+        super.onCreate()
+
+        initKoin {
+            androidContext(this@BaseApplication)
+            modules(appModule)
+        }
+    }
+}
+
+
 

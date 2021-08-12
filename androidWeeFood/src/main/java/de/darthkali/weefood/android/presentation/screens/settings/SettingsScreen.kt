@@ -15,7 +15,6 @@ import de.darthkali.weefood.android.presentation.navigation.TopBar
 import de.darthkali.weefood.android.presentation.theme.AppTheme
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-
 @ExperimentalCoroutinesApi
 @ExperimentalMaterialApi
 @ExperimentalComposeUiApi
@@ -29,10 +28,10 @@ fun SettingsScreen(
             topBar = {
                 TopBar(
                     title = "Einstellungen",
-                    navigationIcon= Icons.Filled.ArrowBack,
-                    navigationIconClickAction = { navController.navigate(NavigationItem.WeekList.route) },
+                    navigationIcon = Icons.Filled.ArrowBack,
+                    navigationIconClickAction = { navController.navigate(NavigationItem.WeekList.route) }
                 )
-                     },
+            },
             bottomBar = { BottomBar(navController) }
         ) {
             Text(text = "SettingsScreen")

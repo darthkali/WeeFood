@@ -8,14 +8,13 @@ plugins {
     id(Plugins.sqlDelight)
 }
 
-version = "1.0"
-
 android {
     compileSdkVersion(Application.compileSdk)
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
         minSdkVersion(Application.minSdk)
         targetSdkVersion(Application.targetSdk)
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -30,6 +29,8 @@ android {
         create("testReleaseApi")
     }
 }
+
+version = "1.0"
 
 kotlin {
     android()
@@ -51,32 +52,81 @@ kotlin {
     }
 
     sourceSets {
+        all {
+            languageSettings.apply {
+                useExperimentalAnnotation("kotlin.RequiresOptIn")
+                useExperimentalAnnotation("kotlinx.coroutines.ExperimentalCoroutinesApi")
+            }
+        }
+
+
         val commonMain by getting {
-            dependencies{
+            dependencies {
                 implementation(Ktor.core)
                 implementation(Ktor.clientSerialization)
+                implementation(Kotlin.annotations)
                 implementation(Kotlinx.datetime)
+                implementation(Kotlinx.common)
+                implementation(Kotlinx.serialization)
                 implementation(SQLDelight.runtime)
+                implementation(Koin.core)
+                implementation(Koin.test)
+            }
+        }
+
+        val commonTest by getting {
+            dependencies {
+                implementation(Kotlin.commonTest)
+                implementation(Kotlin.annotations)
+                implementation(Koin.test)
             }
         }
         val androidMain by getting {
-            dependencies{
+            dependencies {
                 implementation(Ktor.android)
                 implementation(SQLDelight.androidDriver)
+                implementation(Kotlinx.android)
+                implementation(Koin.test)
+                implementation(Koin.testJunit4)
             }
         }
-        val iosMain by getting{
+
+        val androidTest by getting {
+            dependencies {
+                implementation(Kotlin.jvm)
+                implementation(Kotlin.junit)
+                implementation(Ktor.android)
+                implementation(SQLDelight.androidDriver)
+                implementation(AndroidXTest.core)
+                implementation(AndroidXTest.junit)
+                implementation(AndroidXTest.runner)
+                implementation(AndroidXTest.rules)
+                implementation(Kotlinx.test)
+                implementation(Robolectric.robolectric)
+                implementation(Koin.android)
+            }
+        }
+
+
+        val iosMain by getting {
             dependencies {
                 implementation(Ktor.ios)
                 implementation(SQLDelight.nativeDriver)
+                implementation(Koin.core)
+                implementation(Koin.test)
+                implementation(Kotlinx.common) {
+                    version {
+                        strictly(Kotlinx.coroutines)
+                    }
+                }
             }
         }
     }
 }
 
 sqldelight {
-    database("RecipeDatabase") {
-        packageName = "de.darthkali.weefood.datasource.cache"
+    database("WeeFoodDatabase") {
+        packageName = "de.darthkali.weefood.datasource.database"
         sourceFolders = listOf("sqldelight")
     }
 }

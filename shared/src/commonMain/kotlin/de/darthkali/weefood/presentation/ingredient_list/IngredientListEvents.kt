@@ -1,13 +1,11 @@
 package de.darthkali.weefood.presentation.ingredient_list
 
-sealed class IngredientListEvents{
+import de.darthkali.weefood.domain.model.Ingredient
 
-    object LoadIngredient: IngredientListEvents()
-
-    object NewSearch: IngredientListEvents()
-
-    object NextPage: IngredientListEvents()
-
-    data class OnUpdateQuery(val query: String): IngredientListEvents()
-
+sealed class IngredientListEvents {
+    object LoadIngredient : IngredientListEvents()
+    object NewSearch : IngredientListEvents()
+    object NextPage : IngredientListEvents()
+    data class SaveIngredient(val ingredient: Ingredient) : IngredientListEvents()
+    data class OnUpdateQuery(val query: String) : IngredientListEvents()
 }

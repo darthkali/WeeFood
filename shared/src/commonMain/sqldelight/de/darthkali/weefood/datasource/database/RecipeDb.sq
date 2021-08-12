@@ -1,0 +1,78 @@
+-- -----------------------------------------------------
+-- Table
+-- -----------------------------------------------------
+CREATE TABLE recipe_Entity (
+  id                INTEGER             NOT NULL PRIMARY KEY AUTOINCREMENT,
+  name              TEXT                NOT NULL,
+  image             TEXT,
+  cooking_time      INTEGER AS Integer  NOT NULL,
+  cooking_time_unit TEXT                NOT NULL,
+  description       TEXT
+);
+
+-- -----------------------------------------------------
+-- CRUD
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- CREATE
+-- -----------------------------------------------------
+insertRecipe:
+INSERT INTO recipe_Entity(id,name, image,cooking_time, cooking_time_unit, description)
+VALUES(?, ?, ?, ?, ?, ?);
+
+
+-- -----------------------------------------------------
+-- READ
+-- -----------------------------------------------------
+getAllRecipes:
+SELECT *
+FROM recipe_Entity
+LIMIT :pageSize
+OFFSET :offset;
+
+getRecipeById:
+SELECT * FROM recipe_Entity
+WHERE id = :id;
+
+
+searchRecipes:
+SELECT * FROM recipe_Entity
+WHERE name LIKE ('%' || :query || '%')
+-- OR ingredients LIKE ('%' || :query || '%')
+-- ORDER BY date_updated DESC -- Ordering can cause duplicates in the results because they all have identical timestamps
+LIMIT :pageSize
+OFFSET :offset;
+
+getLastInsertRowId:
+SELECT last_insert_rowid();
+
+-- -----------------------------------------------------
+-- UPDATE
+-- -----------------------------------------------------
+updateRecipe:
+UPDATE recipe_Entity
+SET name = ?, image = ?, cooking_time = ?, cooking_time_unit = ?, description = ?
+WHERE id = ?;
+
+-- -----------------------------------------------------
+-- DELETE
+-- -----------------------------------------------------
+
+deleteRecipeById:
+DELETE FROM recipe_Entity WHERE id = ?;
+
+deleteAllRecipes:
+DELETE FROM recipe_Entity;
+
+
+
+
+
+
+
+
+
+
+
+

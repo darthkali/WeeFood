@@ -1,22 +1,30 @@
 package de.darthkali.weefood.android.presentation.screens.recipe_list
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.FabPosition
+import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.FloatingActionButtonDefaults
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import de.darthkali.weefood.android.presentation.navigation.BottomBar
 import de.darthkali.weefood.android.presentation.navigation.TopBar
 import de.darthkali.weefood.android.presentation.screens.recipe_list.components.RecipeList
 import de.darthkali.weefood.android.presentation.screens.recipe_list.components.SearchAppBar
 import de.darthkali.weefood.android.presentation.theme.AppTheme
-import de.darthkali.weefood.presentation.ingredient_list.IngredientListEvents
-import de.darthkali.weefood.presentation.ingredient_list.IngredientListState
+import de.darthkali.weefood.presentation.recipe_list.RecipeListEvents
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-
 
 @ExperimentalCoroutinesApi
 @ExperimentalMaterialApi
@@ -24,42 +32,58 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalFoundationApi
 @Composable
 fun RecipeListScreen(
-    state: IngredientListState,
+    viewModel: RecipeListViewModel,
     navController: NavController,
-    onTriggerEvent: (IngredientListEvents) -> Unit,
-    onClickRecipeListItem: (Int) -> Unit,
+    onTriggerEvent: (RecipeListEvents) -> Unit,
+    onClickOpenRecipe: (Int) -> Unit,
+    onClickAddNewRecipe: () -> Unit
 ) {
     AppTheme(
-        displayProgressBar = state.isLoading,
+        displayProgressBar = viewModel.state.value.isLoading,
     ) {
         Scaffold(
             topBar = {
-                TopBar(title = "Einkaufsliste")
+                TopBar(title = "Rezeptliste")
             },
-            bottomBar = { BottomBar(navController) }
-        ) {
-            Column() {
-                SearchAppBar(
-                    query = state.query,
-                    onQueryChanged = {
-                        onTriggerEvent(IngredientListEvents.OnUpdateQuery(it))
-                    },
-                    onExecuteSearch = {
-                        onTriggerEvent(IngredientListEvents.NewSearch)
-                    },
-                )
+            bottomBar = { BottomBar(navController) },
 
-                RecipeList(
-                    loading = state.isLoading,
-                    ingredients = state.ingredients,
-                    page = state.page,
-                    onTriggerNextPage = {
-                        onTriggerEvent(IngredientListEvents.NextPage)
-                    },
-                    onClickRecipeListItem = onClickRecipeListItem
-                )
+            floatingActionButtonPosition = FabPosition.End,
+            floatingActionButton = {
+                FloatingActionButton(
+                    onClick = { onClickAddNewRecipe() },
+                    backgroundColor = MaterialTheme.colors.primary,
+                    elevation = FloatingActionButtonDefaults.elevation(6.dp)
+                ) {
+                    Icon(Icons.Filled.Add, "")
+                }
+            }
+
+
+        ) { innerPadding ->
+            Box(modifier = Modifier.padding(innerPadding)) {
+                Column {
+                    SearchAppBar(
+                        query = viewModel.state.value.query,
+                        onQueryChanged = {
+                            onTriggerEvent(RecipeListEvents.OnUpdateQuery(it))
+                        },
+                        onExecuteSearch = {
+                            onTriggerEvent(RecipeListEvents.NewSearch)
+                        },
+                    )
+
+                    RecipeList(
+                        loading = viewModel.state.value.isLoading,
+                        recipes = viewModel.state.value.recipes,
+                        page = viewModel.state.value.page,
+                        onTriggerNextPage = {
+                            onTriggerEvent(RecipeListEvents.NextPage)
+                        },
+                        onClickOpenRecipe = onClickOpenRecipe
+                    )
+                }
             }
         }
-    }
 
+    }
 }

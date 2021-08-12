@@ -1,13 +1,18 @@
 package de.darthkali.weefood.android.presentation.screens.ingredient_list.components
 
-
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
@@ -17,11 +22,9 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import de.darthkali.weefood.android.presentation.theme.AppTheme
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-
 
 @ExperimentalComposeUiApi
 @Composable
@@ -45,8 +48,11 @@ fun SearchAppBar(
                 TextField(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(8.dp)
-                    ,
+                        .padding(
+                            start = 8.dp,
+                            end = 8.dp,
+                            top = 8.dp
+                        ),
                     value = query,
                     onValueChange = { onQueryChanged(it) },
                     label = { Text(text = "Search") },

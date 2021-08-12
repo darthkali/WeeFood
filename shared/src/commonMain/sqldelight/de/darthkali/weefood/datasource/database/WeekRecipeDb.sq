@@ -1,0 +1,57 @@
+-- -----------------------------------------------------
+-- Table
+-- -----------------------------------------------------
+CREATE TABLE weekRecipe_Entity(
+  id        INTEGER             NOT NULL PRIMARY KEY AUTOINCREMENT,
+  weekday   INTEGER AS Integer  NOT NULL,
+  portion   INTEGER AS Integer  NOT NULL,
+  recipe_id INTEGER AS Integer  NOT NULL,
+
+  FOREIGN KEY (recipe_id)       REFERENCES recipe_Entity(id)
+);
+
+-- -----------------------------------------------------
+-- CRUD
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- CREATE
+-- -----------------------------------------------------
+insertWeekRecip:
+INSERT INTO weekRecipe_Entity(id,weekday, portion ,recipe_id)
+VALUES(?, ?, ?, ?);
+
+
+-- -----------------------------------------------------
+-- READ
+-- -----------------------------------------------------
+getAllWeekRecipes:
+SELECT *
+FROM weekRecipe_Entity;
+
+getAllWeekRecipesByWeekDay:
+SELECT *
+FROM weekRecipe_Entity
+WHERE weekday = :weekday;
+
+getLastInsertRowId:
+SELECT last_insert_rowid();
+
+
+-- -----------------------------------------------------
+-- UPDATE
+-- -----------------------------------------------------
+updateWeekRecipe:
+UPDATE weekRecipe_Entity
+SET weekday = ?, portion = ?, recipe_id = ?
+WHERE id = ?;
+
+-- -----------------------------------------------------
+-- DELETE
+-- -----------------------------------------------------
+
+deleteWeekRecipeById:
+DELETE FROM weekRecipe_Entity WHERE id = ?;
+
+deleteAllWeekRecipes:
+DELETE FROM weekRecipe_Entity;

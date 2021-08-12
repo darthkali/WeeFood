@@ -12,8 +12,8 @@ import shared
 
 struct BottomBar: View {
     
-    private let networkModule = NetworkModule()
-    private let cacheModule = CacheModule()
+    //private let searchIngredient = SearchIngredient()
+    //private let cacheModule = DatabaseModule()
     
     
     var body: some View {
@@ -21,7 +21,15 @@ struct BottomBar: View {
             
             // Meine Rezepte
             NavigationView{
+                VStack{
+                    NavigationLink(destination: NewRecipeScreen(recipeId: 0)) {
+                          Text("Neues Rezept anlegen")
+                       }
+                    
+                
+
                 RecipeListScreen().navigationBarTitle("Meine Rezepte")
+                }
             }
             .tabItem{
                 Image(systemName: "book.fill")
@@ -40,8 +48,7 @@ struct BottomBar: View {
             // Einkaufsliste
             NavigationView{
                 IngredientListScreen(
-                    networkModule: networkModule,
-                    cacheModule: cacheModule
+                    
                 ).navigationBarTitle("Zutatensuche")
             }
             .tabItem{

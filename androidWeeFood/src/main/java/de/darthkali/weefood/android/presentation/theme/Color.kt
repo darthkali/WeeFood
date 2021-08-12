@@ -14,7 +14,6 @@ val Black = Color(0xFF000000)             // DarkGreen
 val DarkGray = Color(0xFF1B1B1B)             // DarkGreen
 val LightGray = Color(0xFF5C5C5C)     // LightGreen
 
-
 val DarkColors = darkColors(
     primary = Black,
     primaryVariant = LightGray,
@@ -25,8 +24,8 @@ val DarkColors = darkColors(
     onSecondary = White,
     onBackground = White,
     onSurface = White,
+    )
 
-)
 val LightColors = lightColors(
     primary = DarkGreen,
     primaryVariant = LightGreen,
