@@ -46,7 +46,7 @@ fun IngredientListScreen(
                     },
                 )
             },
-            bottomBar = { BottomBar(navController) }
+//            bottomBar = { BottomBar(navController) }
         ) { innerPadding ->
             Box(modifier = Modifier.padding(innerPadding)) {
 
