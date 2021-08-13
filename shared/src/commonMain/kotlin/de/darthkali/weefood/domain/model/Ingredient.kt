@@ -6,8 +6,8 @@ data class Ingredient(
     val name: String? = "",
     val image: String? = "",
     val apiId: Int,
-    val quantity: Float,
-    val unit: String,
+    var quantity: Float,
+    var unit: String,
 ) {
 
     override fun toString(): String {

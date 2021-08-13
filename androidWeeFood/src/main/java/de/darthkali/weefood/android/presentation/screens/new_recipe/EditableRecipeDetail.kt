@@ -97,7 +97,8 @@ fun EditableRecipeDetail(
                             it
                         )
                     )
-                } //onDeleteIngredient(it)
+                }, //onDeleteIngredient(it),
+                onTriggerEvent = onTriggerEvent
             )
         }
 

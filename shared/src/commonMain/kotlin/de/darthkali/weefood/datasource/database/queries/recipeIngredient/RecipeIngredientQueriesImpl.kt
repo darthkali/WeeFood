@@ -37,7 +37,8 @@ class RecipeIngredientQueriesImpl : RecipeIngredientQueries, KoinComponent {
                 unit = recipeIngredientDb.unit,
                 recipe_id = recipeIngredientDb.recipe_id,
                 ingredient_id = recipeIngredientDb.ingredient_id,
-                id = recipeIngredientDb.id.toLong()
+                recipe_id_ = recipeIngredientDb.recipe_id,
+                ingredient_id_ = recipeIngredientDb.ingredient_id,
             )
             logger.log("Updated RecipeIngredient with RecipeId: ${recipeIngredientDb.recipe_id} into database")
             recipeIngredientDb.id

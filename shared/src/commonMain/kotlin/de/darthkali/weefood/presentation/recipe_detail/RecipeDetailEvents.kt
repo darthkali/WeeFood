@@ -10,6 +10,8 @@ sealed class RecipeDetailEvents {
     data class OnUpdateCookingTime(val cooking_time: Int) : RecipeDetailEvents()
     data class OnUpdateCookingTimeUnit(val cooking_time_unit: String) : RecipeDetailEvents()
     data class OnUpdateDescription(val description: String) : RecipeDetailEvents()
+    data class OnUpdateIngredientQuantity(val ingredientId: Int, val quantity: Float) : RecipeDetailEvents()
+    data class OnUpdateIngredientQuantityUnit(val ingredientId: Int, val quantityUnit: String) : RecipeDetailEvents()
     data class OnAddIngredient(val recipe: Recipe) :
         RecipeDetailEvents() //TODO: change to INgredient
 

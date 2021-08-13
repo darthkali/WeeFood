@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
@@ -23,12 +24,14 @@ import de.darthkali.weefood.android.presentation.components.button.ButtonStyle
 import de.darthkali.weefood.android.presentation.theme.AppTheme
 import de.darthkali.weefood.domain.model.Ingredient
 import de.darthkali.weefood.mockFactory.IngredientMock
+import de.darthkali.weefood.presentation.recipe_detail.RecipeDetailEvents
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalComposeUiApi
 @Composable
 fun IngredientCard(
     ingredient: Ingredient,
+    onTriggerEvent: (RecipeDetailEvents) -> Unit,
     onDeleteIngredient: (Ingredient) -> Unit
 ) {
 
@@ -51,14 +54,53 @@ fun IngredientCard(
                     url = ingredient.image,
                     contentDescription = ingredient.name
                 )
-                Text(
-                    text = ingredient.name
-                        ?: "",   //if ingredient.name == null, then set "" as text
-                    modifier = Modifier
-                        .fillMaxWidth(0.85f)
-                        .wrapContentWidth(Alignment.Start),
-                    style = typography.h2
-                )
+
+                Column {
+
+
+                    Text(
+                        text = ingredient.name
+                            ?: "",   //if ingredient.name == null, then set "" as text
+                        modifier = Modifier
+                            .fillMaxWidth(0.85f)
+                            .wrapContentWidth(Alignment.Start),
+                        style = typography.h2
+                    )
+
+                    Row() {
+                        IngredientUnitTextField(
+                            input = ingredient.quantity.toString(),
+                            onInputChanged = {
+                                onTriggerEvent(
+                                    RecipeDetailEvents.OnUpdateIngredientQuantity(
+                                        ingredient.internalId!!,
+                                        it.toFloat()
+                                    )
+                                )
+                            },
+                            label = "Einheit",
+                            modifier = Modifier
+                                .width(120.dp)
+                                .padding(8.dp),
+                        )
+                        IngredientUnitTextField(
+                            input = ingredient.unit,
+                            onInputChanged = {
+                                onTriggerEvent(
+                                    RecipeDetailEvents.OnUpdateIngredientQuantityUnit(
+                                        ingredient.internalId!!,
+                                        it
+                                    )
+                                )
+                            },
+                            label = "Einheit",
+                            modifier = Modifier
+                                .width(120.dp)
+                                .padding(8.dp),
+                        )
+                    }
+
+                }
             }
 
             Row(
@@ -83,13 +125,13 @@ fun IngredientCard(
 }
 
 
-@ExperimentalCoroutinesApi
-@ExperimentalMaterialApi
-@ExperimentalComposeUiApi
-@Preview(showBackground = true)
-@Composable
-fun UserProfileDetailsPreview() {
-    AppTheme() {
-        IngredientCard(ingredient = IngredientMock.ingredient, onDeleteIngredient = {})
-    }
-}
+//@ExperimentalCoroutinesApi
+//@ExperimentalMaterialApi
+//@ExperimentalComposeUiApi
+//@Preview(showBackground = true)
+//@Composable
+//fun UserProfileDetailsPreview() {
+//    AppTheme() {
+//        IngredientCard(ingredient = IngredientMock.ingredient, onDeleteIngredient = {})
+//    }
+//}
