@@ -45,7 +45,7 @@ SELECT last_insert_rowid();
 updateRecipeIngredient:
 UPDATE recipeIngredient_Entity
 SET quantity = ?, unit = ?, recipe_id = ?, ingredient_id = ?
-WHERE id = ?;
+WHERE recipe_id = ? AND ingredient_id = ?;
 
 -- -----------------------------------------------------
 -- DELETE

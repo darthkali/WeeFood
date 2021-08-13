@@ -25,7 +25,7 @@ struct NewRecipeScreen: View {
         
         //Button (Speichern)
         Button("Speichern"){
-            viewModel.onTriggerEvent(event: NewRecipeEvents.OnSaveRecipe(recipe: viewModel.state.recipe))
+            viewModel.onTriggerEvent(event: RecipeDetailEvents.OnSaveRecipe())
         }
         .padding()
         .foregroundColor(.white)
@@ -43,7 +43,7 @@ struct NewRecipeScreen: View {
                         text: $viewModel.state.recipe.name
                     )
                     .onChange(of: viewModel.state.recipe.name, perform: { value in
-                        viewModel.onTriggerEvent(event: NewRecipeEvents.OnUpdateName(name: value))
+                        viewModel.onTriggerEvent(event: RecipeDetailEvents.OnUpdateName(name: value))
                     })
 
                     // Text -> Zutaten pro Portion
@@ -87,7 +87,7 @@ struct NewRecipeScreen: View {
                             formatter: NumberFormatter()
                         )
                         .onChange(of: viewModel.state.recipe.cooking_time, perform: { value in
-                            viewModel.onTriggerEvent(event: NewRecipeEvents.OnUpdateCookingTime(cooking_time: value as! Int32))
+                            viewModel.onTriggerEvent(event: RecipeDetailEvents.OnUpdateCookingTime(cooking_time: value as! Int32))
                         })
                         
                         
@@ -98,7 +98,7 @@ struct NewRecipeScreen: View {
                             text: $viewModel.state.recipe.cooking_time_unit
                         )
                         .onChange(of: viewModel.state.recipe.cooking_time_unit, perform: { value in
-                            viewModel.onTriggerEvent(event: NewRecipeEvents.OnUpdateCookingTimeUnit(cooking_time_unit: value))
+                            viewModel.onTriggerEvent(event: RecipeDetailEvents.OnUpdateCookingTimeUnit(cooking_time_unit: value))
                         })
                     }
             
@@ -113,7 +113,7 @@ struct NewRecipeScreen: View {
                         text: $viewModel.state.recipe.recipeDescription ?? "dedasfsdf"
                     )
                     .onChange(of: viewModel.state.recipe.recipeDescription! , perform: { value in
-                        viewModel.onTriggerEvent(event: NewRecipeEvents.OnUpdateDescription(description: value))
+                        viewModel.onTriggerEvent(event: RecipeDetailEvents.OnUpdateDescription(description: value))
                     })
                     
                     

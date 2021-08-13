@@ -71,6 +71,24 @@ class RecipeDetailViewModel(
             is RecipeDetailEvents.OnUpdateDescription -> {
                 onUpdateRecipe(state.value.recipe.copy(recipeDescription = event.description))
             }
+            is RecipeDetailEvents.OnUpdateIngredientQuantity -> {
+                val resultRecipe = state.value.recipe
+                resultRecipe.ingredients.forEach {
+                    if(it.internalId == event.ingredientId){
+                        it.quantity = event.quantity
+                        onUpdateRecipe(resultRecipe)
+                    }
+                }
+            }
+            is RecipeDetailEvents.OnUpdateIngredientQuantityUnit -> {
+                val resultRecipe = state.value.recipe
+                resultRecipe.ingredients.forEach {
+                    if(it.internalId == event.ingredientId){
+                        it.unit = event.quantityUnit
+                        onUpdateRecipe(resultRecipe)
+                    }
+                }
+            }
             is RecipeDetailEvents.OnAddIngredient -> {
                 onUpdateRecipe(state.value.recipe.copy(databaseId = saveRecipe.execute(state.value.recipe)))
             }

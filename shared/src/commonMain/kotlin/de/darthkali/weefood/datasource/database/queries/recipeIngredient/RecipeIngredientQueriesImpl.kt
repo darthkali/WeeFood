@@ -37,7 +37,8 @@ class RecipeIngredientQueriesImpl : RecipeIngredientQueries, KoinComponent {
                 unit = recipeIngredientDb.unit,
                 recipe_id = recipeIngredientDb.recipe_id,
                 ingredient_id = recipeIngredientDb.ingredient_id,
-                id = recipeIngredientDb.id.toLong()
+                recipe_id_ = recipeIngredientDb.recipe_id,
+                ingredient_id_ = recipeIngredientDb.ingredient_id,
             )
             logger.log("Updated RecipeIngredient with RecipeId: ${recipeIngredientDb.recipe_id} into database")
             recipeIngredientDb.id
@@ -52,7 +53,7 @@ class RecipeIngredientQueriesImpl : RecipeIngredientQueries, KoinComponent {
             logger.log("Get RecipeIngredient from database by ID")
             weeFoodDatabaseQueries.getAllRecipeIngredientsByRecipeId(
                 recipe_id = recipeId
-            ).executeAsList().toRecipeIngredientList() //TODO WF-140: Mapper nutzen
+            ).executeAsList().toRecipeIngredientList()
         } catch (e: Exception) {
             logger.log(e.toString())
             listOf()
@@ -63,7 +64,7 @@ class RecipeIngredientQueriesImpl : RecipeIngredientQueries, KoinComponent {
         return try {
             logger.log("Get all RecipeIngredients from database")
             weeFoodDatabaseQueries.getAllRecipeIngredients()
-                .executeAsList().toRecipeIngredientList() //TODO WF-140: Mapper nutzen
+                .executeAsList().toRecipeIngredientList()
         } catch (e: Exception) {
             logger.log(e.toString())
             listOf()
@@ -126,7 +127,7 @@ class RecipeIngredientQueriesImpl : RecipeIngredientQueries, KoinComponent {
 -- -----------------------------------------------------
 */
 
-    fun RecipeIngredient_Entity.toRecipeIngredient(): RecipeIngredientDb { //TODO WF-140: Mapper nutzen
+    fun RecipeIngredient_Entity.toRecipeIngredient(): RecipeIngredientDb {
         return RecipeIngredientDb(
             id = id.toInt(),
             quantity = quantity,
@@ -136,7 +137,7 @@ class RecipeIngredientQueriesImpl : RecipeIngredientQueries, KoinComponent {
         )
     }
 
-    fun List<RecipeIngredient_Entity>.toRecipeIngredientList(): List<RecipeIngredientDb> { //TODO WF-140: Mapper nutzen
+    fun List<RecipeIngredient_Entity>.toRecipeIngredientList(): List<RecipeIngredientDb> {
         return map { it.toRecipeIngredient() }
     }
 

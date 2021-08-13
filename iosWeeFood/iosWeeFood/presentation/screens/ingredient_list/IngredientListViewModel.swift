@@ -47,9 +47,8 @@ class IngredientListViewModel: ObservableObject {
                 callback: { dataState in
                 if dataState != nil {
                     let data = dataState?.data
-                    //let message = dataState?.message
                     let loading = dataState?.isLoading ?? false
-
+                   
                     self.updateState(isLoading: loading)
 
                     if(data != nil){
@@ -108,13 +107,13 @@ class IngredientListViewModel: ObservableObject {
             isLoading: currentState.isLoading,
             page: currentState.page,
             query: currentState.query,
-            ingredients: currentIngredients, // update recipes
+            ingredients: currentIngredients, // update ingredient
             bottomIngredient:  currentState.bottomIngredient
         )
         currentState = (self.state.copy() as! IngredientListState)
         
         if(currentState.ingredients.count != 0){
-            self.onUpdateBottomIngredient(ingredient: currentState.ingredients[currentState.ingredients.count - 1 ])
+            self.onUpdateBottomIngredient(ingredient: currentState.ingredients[currentState.ingredients.count  - 1 ])
         }
         
     }

@@ -2,7 +2,9 @@ package de.darthkali.weefood.datasource.database.queries.ingredient
 
 import de.darthkali.weefood.datasource.database.Ingredient_Entity
 import de.darthkali.weefood.datasource.database.WeeFoodDatabaseWrapper
+import de.darthkali.weefood.datasource.database.mapper.ingredient.IngredientMapper
 import de.darthkali.weefood.datasource.database.model.IngredientDb
+import de.darthkali.weefood.datasource.network.mapper.IngredientListMapper
 import de.darthkali.weefood.util.Logger
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -11,6 +13,8 @@ class IngredientQueriesImpl : IngredientQueries, KoinComponent {
 
     private val weeFoodDatabase: WeeFoodDatabaseWrapper by inject()
     private val weeFoodDatabaseQueries = weeFoodDatabase.instance.ingredientDbQueries
+    private val mapper = IngredientMapper()
+    private val mapperList = IngredientListMapper()
 
     private val logger = Logger("IngredientQueriesImpl")
 
@@ -53,7 +57,7 @@ class IngredientQueriesImpl : IngredientQueries, KoinComponent {
             weeFoodDatabaseQueries.getAllIngredients(
                 pageSize = 100,  // TODO replace with parameter
                 offset = 0       // TODO replace with parameter
-            ).executeAsList().toIngredientDbList() //TODO WF-140: Mapper nutzen
+            ).executeAsList().toIngredientDbList()
 
         } catch (e: Exception) {
             logger.log(e.toString())
@@ -66,7 +70,7 @@ class IngredientQueriesImpl : IngredientQueries, KoinComponent {
             logger.log("Get Ingredient from database by ID")
             weeFoodDatabaseQueries.getIngredientById(
                 id = ingredientId.toLong()
-            ).executeAsOne().toIngredientDb() //TODO WF-140: Mapper nutzen
+            ).executeAsOne().toIngredientDb()
         } catch (e: Exception) {
             logger.log(e.toString())
             null
@@ -78,7 +82,7 @@ class IngredientQueriesImpl : IngredientQueries, KoinComponent {
             logger.log("Get Ingredient from database by ApiID")
             weeFoodDatabaseQueries.getIngredientByApiId(
                 apiId = apiId.toLong()
-            ).executeAsOne().toIngredientDb() //TODO WF-140: Mapper nutzen
+            ).executeAsOne().toIngredientDb()
         } catch (e: Exception) {
             logger.log(e.toString())
             null
@@ -131,7 +135,7 @@ class IngredientQueriesImpl : IngredientQueries, KoinComponent {
 -- -----------------------------------------------------
 */
 
-    fun Ingredient_Entity.toIngredientDb(): IngredientDb { //TODO WF-140: Mapper nutzen
+    fun Ingredient_Entity.toIngredientDb(): IngredientDb {
         return IngredientDb(
             name = name,
             image = image,
@@ -141,7 +145,7 @@ class IngredientQueriesImpl : IngredientQueries, KoinComponent {
     }
 
 
-    fun List<Ingredient_Entity>.toIngredientDbList(): List<IngredientDb> { //TODO WF-140: Mapper nutzen
+    fun List<Ingredient_Entity>.toIngredientDbList(): List<IngredientDb> {
         return map { it.toIngredientDb() }
     }
 

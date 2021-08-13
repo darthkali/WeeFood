@@ -4,6 +4,7 @@ import de.darthkali.weefood.datasource.database.mapper.recipe.RecipeMapper
 import de.darthkali.weefood.datasource.database.model.RecipeIngredientDb
 import de.darthkali.weefood.datasource.database.queries.recipe.RecipeQueries
 import de.darthkali.weefood.domain.model.Recipe
+import de.darthkali.weefood.interactors.ingredient.SaveIngredient
 import de.darthkali.weefood.interactors.recipe_ingredient.SaveRecipeIngredient
 import de.darthkali.weefood.util.Logger
 import org.koin.core.component.KoinComponent
