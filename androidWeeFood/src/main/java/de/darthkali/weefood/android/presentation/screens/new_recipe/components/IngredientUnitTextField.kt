@@ -22,13 +22,12 @@ import androidx.compose.ui.unit.dp
 fun IngredientUnitTextField(
     input: String = "",
     onInputChanged: (String) -> Unit,
-    label: String
+    label: String,
+    modifier: Modifier = Modifier,
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     TextField(
-        modifier = Modifier
-            .width(120.dp)
-            .padding(8.dp),
+        modifier = modifier,
         value = input,
         onValueChange = { onInputChanged(it) },
         label = { Text(text = label) },
@@ -38,7 +37,6 @@ fun IngredientUnitTextField(
         ),
         keyboardActions = KeyboardActions(
             onDone = {
-                //onExecuteSearch()
                 keyboardController?.hide()
             },
         ),
