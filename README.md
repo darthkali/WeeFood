@@ -1,7 +1,7 @@
 # WeeFood
 
 <p align="center">
- <img src="https://user-images.githubusercontent.com/46423967/124324799-dbd06b00-db83-11eb-872c-06442f1f39dc.png" height="400" />
+ <img src="https://user-images.githubusercontent.com/46423967/130109598-45d9d370-e34f-43d4-99e4-4af42acd9411.png" height="400" />
 </p>
 
 ## Basis
