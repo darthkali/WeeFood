@@ -10,7 +10,6 @@ import org.koin.core.component.inject
 class GetAllIngredients : KoinComponent {
 
     private val ingredientQueries: IngredientQueries by inject()
-    private val logger = Logger("GetAllIngredients")
     private val mapper = IngredientListMapper()
 
     fun execute(): List<Ingredient> {

@@ -1,6 +1,7 @@
 package de.darthkali.weefood.presentation.recipe_list
 
 import de.darthkali.weefood.domain.model.Recipe
+import de.darthkali.weefood.presentation.ViewState
 
 //TODO JavaDoc einfügen - bottomIngredient ist extra
 actual data class RecipeListState(

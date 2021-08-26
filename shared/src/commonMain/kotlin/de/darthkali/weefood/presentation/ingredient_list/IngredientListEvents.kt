@@ -1,8 +1,9 @@
 package de.darthkali.weefood.presentation.ingredient_list
 
 import de.darthkali.weefood.domain.model.Ingredient
+import de.darthkali.weefood.presentation.ViewEvent
 
-sealed class IngredientListEvents {
+sealed class IngredientListEvents : ViewEvent {
     object LoadIngredient : IngredientListEvents()
     object NewSearch : IngredientListEvents()
     object NextPage : IngredientListEvents()

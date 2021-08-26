@@ -2,6 +2,7 @@ package de.darthkali.weefood.presentation.recipe_detail
 
 import de.darthkali.weefood.datasource.database.model.IngredientDb
 import de.darthkali.weefood.domain.model.Recipe
+import de.darthkali.weefood.presentation.ViewState
 
 data class RecipeDetailState(
     var changed: Int = 0,
@@ -16,7 +17,7 @@ data class RecipeDetailState(
         portion = 0,
         ingredients = listOf(),
     )
-) {
+) : ViewState {
     // Need secondary constructor to initialize with no args in SwiftUI
     constructor() : this(
         recipe = Recipe(

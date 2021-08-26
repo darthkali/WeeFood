@@ -11,12 +11,14 @@ import de.darthkali.weefood.interactors.recipe_ingredient.DeleteRecipeIngredient
 import de.darthkali.weefood.interactors.recipe_ingredient.GetIngredientsFromRecipe
 import de.darthkali.weefood.presentation.recipe_detail.RecipeDetailEvents
 import de.darthkali.weefood.presentation.recipe_detail.RecipeDetailState
+import de.darthkali.weefood.presentation.recipe_list.RecipeListEvents
+import de.darthkali.weefood.presentation.recipe_list.RecipeListState
 import de.darthkali.weefood.util.Logger
 import org.koin.core.component.inject
 
 class RecipeDetailViewModel(
     savedStateHandle: SavedStateHandle,
-) : BaseViewModel() {
+) : BaseViewModel<RecipeDetailEvents, RecipeDetailState>() {
 
     private val logger = Logger("NewRecipeViewModel")
     private val saveRecipe: SaveRecipe by inject()
@@ -47,8 +49,24 @@ class RecipeDetailViewModel(
         }
     }
 
+    override fun setInitialState() =
+        RecipeDetailState(
+            changed = 0,
 
-    fun onTriggerEvent(event: RecipeDetailEvents) {
+            recipe = Recipe(
+                databaseId = 0,
+                name = " ",//TODO WF-137 :leerzeichen, damit er das element im ViewModel kopiert? Häääää
+                image = "",
+                cooking_time = 0,
+                cooking_time_unit = "",
+                recipeDescription = "",
+                portion = 0,
+                ingredients = listOf(),
+            )
+        )
+
+
+    override fun onTriggerEvent(event: RecipeDetailEvents) {
         when (event) {
             is RecipeDetailEvents.GetRecipe -> {
 
@@ -74,7 +92,7 @@ class RecipeDetailViewModel(
             is RecipeDetailEvents.OnUpdateIngredientQuantity -> {
                 val resultRecipe = state.value.recipe
                 resultRecipe.ingredients.forEach {
-                    if(it.internalId == event.ingredientId){
+                    if (it.internalId == event.ingredientId) {
                         it.quantity = event.quantity
                         onUpdateRecipe(resultRecipe)
                     }
@@ -83,7 +101,7 @@ class RecipeDetailViewModel(
             is RecipeDetailEvents.OnUpdateIngredientQuantityUnit -> {
                 val resultRecipe = state.value.recipe
                 resultRecipe.ingredients.forEach {
-                    if(it.internalId == event.ingredientId){
+                    if (it.internalId == event.ingredientId) {
                         it.unit = event.quantityUnit
                         onUpdateRecipe(resultRecipe)
                     }
@@ -115,5 +133,6 @@ class RecipeDetailViewModel(
     private fun onUpdateRecipe(recipe: Recipe) {
         state.value = state.value.copy(recipe = recipe, changed = state.value.changed + 1)
     }
+
 
 }

@@ -24,6 +24,7 @@ import de.darthkali.weefood.android.presentation.screens.recipe_list.components.
 import de.darthkali.weefood.android.presentation.screens.recipe_list.components.SearchAppBar
 import de.darthkali.weefood.android.presentation.theme.AppTheme
 import de.darthkali.weefood.presentation.recipe_list.RecipeListEvents
+import de.darthkali.weefood.presentation.recipe_list.RecipeListState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
@@ -32,14 +33,15 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalFoundationApi
 @Composable
 fun RecipeListScreen(
-    viewModel: RecipeListViewModel,
+    state: RecipeListState,
+//    viewModel: RecipeListViewModel,
     navController: NavController,
     onTriggerEvent: (RecipeListEvents) -> Unit,
     onClickOpenRecipe: (Int) -> Unit,
     onClickAddNewRecipe: () -> Unit
 ) {
     AppTheme(
-        displayProgressBar = viewModel.state.value.isLoading,
+        displayProgressBar = state.isLoading,
     ) {
         Scaffold(
             topBar = {
@@ -63,7 +65,7 @@ fun RecipeListScreen(
             Box(modifier = Modifier.padding(innerPadding)) {
                 Column {
                     SearchAppBar(
-                        query = viewModel.state.value.query,
+                        query = state.query,
                         onQueryChanged = {
                             onTriggerEvent(RecipeListEvents.OnUpdateQuery(it))
                         },
@@ -73,9 +75,9 @@ fun RecipeListScreen(
                     )
 
                     RecipeList(
-                        loading = viewModel.state.value.isLoading,
-                        recipes = viewModel.state.value.recipes,
-                        page = viewModel.state.value.page,
+                        loading = state.isLoading,
+                        recipes = state.recipes,
+                        page = state.page,
                         onTriggerNextPage = {
                             onTriggerEvent(RecipeListEvents.NextPage)
                         },

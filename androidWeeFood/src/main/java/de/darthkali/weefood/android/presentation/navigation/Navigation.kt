@@ -76,8 +76,10 @@ fun Navigation() {
             val viewModel = getViewModel<RecipeListViewModel> {
                 parametersOf(backStackEntry.arguments?.getString("query"))
             }
+            val state = viewModel.viewState.value
+
             RecipeListScreen(
-                viewModel = viewModel,
+                state = state,
                 navController = navController,
                 onTriggerEvent = viewModel::onTriggerEvent,
                 onClickOpenRecipe = { recipeId ->
@@ -129,7 +131,7 @@ fun Navigation() {
                 },
                 onClickBackInViewableRecipeDetailScreen = { recipeName ->
                     navController.navigate(
-                        "${NavigationItem.RecipeList.route}?query=${recipeName}"
+                        "${NavigationItem.RecipeList.route}" //?query=${recipeName}"
                     )
                 },
                 onClickAddIngredient = { recipeId ->

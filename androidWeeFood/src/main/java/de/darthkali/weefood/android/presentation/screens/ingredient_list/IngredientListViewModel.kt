@@ -9,12 +9,14 @@ import de.darthkali.weefood.interactors.ingredient.SaveIngredient
 import de.darthkali.weefood.interactors.ingredient.SearchIngredient
 import de.darthkali.weefood.presentation.ingredient_list.IngredientListEvents
 import de.darthkali.weefood.presentation.ingredient_list.IngredientListState
+import de.darthkali.weefood.presentation.recipe_list.RecipeListEvents
+import de.darthkali.weefood.presentation.recipe_list.RecipeListState
 import de.darthkali.weefood.util.Logger
 import org.koin.core.component.inject
 
 class IngredientListViewModel(
     recipeId: Int
-) : BaseViewModel() {
+) : BaseViewModel<IngredientListEvents, IngredientListState>() {
 
     private val searchIngredient: SearchIngredient by inject()
     private val saveIngredient: SaveIngredient by inject()
@@ -27,7 +29,17 @@ class IngredientListViewModel(
         loadIngredients()
     }
 
-    fun onTriggerEvent(event: IngredientListEvents) {
+    override fun setInitialState() =
+        IngredientListState(
+            isLoading = true,
+            page = 1,
+            query = "",
+            ingredients = listOf(),
+            recipeId = 0
+        )
+
+
+    override fun onTriggerEvent(event: IngredientListEvents) {
         when (event) {
             IngredientListEvents.LoadIngredient -> {
                 loadIngredients()
@@ -93,4 +105,6 @@ class IngredientListViewModel(
         curr.addAll(ingredients)
         state.value = state.value.copy(ingredients = curr)
     }
+
+
 }

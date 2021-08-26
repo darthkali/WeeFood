@@ -2,8 +2,9 @@ package de.darthkali.weefood.presentation.recipe_detail
 
 import de.darthkali.weefood.domain.model.Ingredient
 import de.darthkali.weefood.domain.model.Recipe
+import de.darthkali.weefood.presentation.ViewEvent
 
-sealed class RecipeDetailEvents {
+sealed class RecipeDetailEvents : ViewEvent {
     object OnSaveRecipe : RecipeDetailEvents()
     data class OnUpdateName(val name: String) : RecipeDetailEvents()
     data class OnUpdateImage(val image: String) : RecipeDetailEvents()
