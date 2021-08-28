@@ -39,7 +39,7 @@ android {
 dependencies {
     implementation(project(":shared"))
 
-    implementation(Accompanist.coil)
+    implementation(Coil.compose)
 
     implementation(AndroidX.appCompat)
     implementation(AndroidX.fragmentKtx)

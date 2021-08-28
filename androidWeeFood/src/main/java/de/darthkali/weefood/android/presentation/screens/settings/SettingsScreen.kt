@@ -86,9 +86,12 @@ fun RequestContentPermission() {
             Text(text = "Pick image")
         }
 
+
         Spacer(modifier = Modifier.height(12.dp))
 
+
         imageUri?.let {
+
             if (Build.VERSION.SDK_INT < 28) {
                 bitmap.value = MediaStore.Images
                     .Media.getBitmap(context.contentResolver,it)

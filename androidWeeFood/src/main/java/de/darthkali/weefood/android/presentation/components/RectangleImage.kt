@@ -11,8 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.coil.rememberCoilPainter
-import com.google.accompanist.imageloading.ImageLoadState
+import coil.compose.ImagePainter
+import coil.compose.rememberImagePainter
 import de.darthkali.weefood.datasource.network.IngredientServiceImpl.Companion.IMAGE_URL_MEDIUM
 
 const val RECIPE_IMAGE_HEIGHT = 260
@@ -22,7 +22,7 @@ fun RectangleImage(
     url: String,
     contentDescription: String,
 ) {
-    val painter = rememberCoilPainter("$IMAGE_URL_MEDIUM/$url")
+    val painter = rememberImagePainter("$IMAGE_URL_MEDIUM/$url")
     Card(
         modifier = Modifier
             .padding(16.dp)
@@ -38,8 +38,8 @@ fun RectangleImage(
             contentDescription = contentDescription,
             contentScale = ContentScale.Crop,
         )
-        when (painter.loadState) {
-            is ImageLoadState.Loading -> {
+        when (painter.state) {
+            is ImagePainter.State.Loading -> {
                 Card(
                     shape = CircleShape,
                     modifier = Modifier
@@ -50,7 +50,7 @@ fun RectangleImage(
                     //TODO: insert loading image
                 }
             }
-            is ImageLoadState.Error -> {
+            is ImagePainter.State.Error -> {
                 // If you wish to display some content if the request fails
             }
         }
