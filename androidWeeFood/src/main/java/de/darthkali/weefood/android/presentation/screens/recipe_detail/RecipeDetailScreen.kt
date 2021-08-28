@@ -106,6 +106,7 @@ fun NewRecipeScreen(
         ) { innerPadding ->
             Box(modifier = Modifier.padding(innerPadding)) {
 
+
                 if (viewModel.editable.value) {
                     EditableRecipeDetail(
                         recipe = viewModel.state.value.recipe,
