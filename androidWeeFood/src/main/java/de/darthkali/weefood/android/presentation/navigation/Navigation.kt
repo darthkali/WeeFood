@@ -123,9 +123,23 @@ fun Navigation() {
                     )
                 },
                 onClickBackInEditableRecipeDetailScreen = { recipeId ->
-                    navController.navigate(
-                        "${NavigationItem.RecipeDetail.route}?recipeId=${recipeId}"
-                    )
+                    try {
+                        if (recipeId != null && recipeId > 0) {
+                            navController.navigate(
+                                "${NavigationItem.RecipeDetail.route}?recipeId=${recipeId}"
+                            )
+                        } else {
+                            navController.navigate(
+                                "${NavigationItem.RecipeList.route}"
+                            )
+                        }
+                    } catch (e: Exception) {
+                        //log.error("Error")
+                    } finally {
+                        navController.navigate(
+                            "${NavigationItem.RecipeList.route}"
+                        )
+                    }
                 },
                 onClickBackInViewableRecipeDetailScreen = { recipeName ->
                     navController.navigate(

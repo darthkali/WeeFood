@@ -25,14 +25,12 @@ class RecipeDetailViewModel(
     private val getIngredientsFromRecipe: GetIngredientsFromRecipe by inject()
 
     private var _state = mutableStateOf(RecipeDetailState())
-        private set
 
     val state: MutableState<RecipeDetailState>
         get() = _state
 
 
     private var _editable = mutableStateOf(false)
-        private set
 
     val editable: MutableState<Boolean>
         get() = _editable
@@ -44,6 +42,8 @@ class RecipeDetailViewModel(
         }
         savedStateHandle.get<String>("recipeId")?.let { id ->
             onTriggerEvent(RecipeDetailEvents.GetRecipe(recipeId = id.toInt()))
+        } ?: kotlin.run {
+            onTriggerEvent((RecipeDetailEvents.OnSaveRecipe))
         }
     }
 

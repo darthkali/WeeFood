@@ -8,7 +8,7 @@ data class RecipeDetailState(
 
     var recipe: Recipe = Recipe(
         databaseId = 0,
-        name = " ",//TODO WF-137 :leerzeichen, damit er das element im ViewModel kopiert? Häääää
+        name = "",//TODO WF-137 :leerzeichen, damit er das element im ViewModel kopiert? Häääää
         image = "",
         cooking_time = 0,
         cooking_time_unit = "",
@@ -21,7 +21,7 @@ data class RecipeDetailState(
     constructor() : this(
         recipe = Recipe(
             databaseId = 0,
-            name = " ",
+            name = "",
             image = "",
             cooking_time = 0,
             cooking_time_unit = "",
