@@ -54,6 +54,8 @@ dependencies {
     implementation(Compose.constraintLayout)
     implementation(Compose.activity)
     implementation(Compose.navigation)
+    androidTestImplementation(Compose.test)
+    debugImplementation(Compose.testManifest)
 
     implementation(Google.material)
 
