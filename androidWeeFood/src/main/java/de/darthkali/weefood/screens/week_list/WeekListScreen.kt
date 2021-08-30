@@ -34,6 +34,7 @@ fun WeekListScreen(
             },
             bottomBar = { BottomBar(navController) }
         ) {
+
             Text(text = "WeekList")
         }
     }
