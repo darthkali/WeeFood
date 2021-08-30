@@ -14,6 +14,7 @@ android {
         targetSdkVersion(Application.targetSdk)
         versionCode = Application.versionCode
         versionName = Application.versionName
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         getByName("release") {
@@ -33,6 +34,9 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion = Compose.composeVersion
+    }
+    packagingOptions {
+        exclude("META-INF/*")
     }
 }
 
@@ -54,6 +58,8 @@ dependencies {
     implementation(Compose.constraintLayout)
     implementation(Compose.activity)
     implementation(Compose.navigation)
+    androidTestImplementation(Compose.test)
+    debugImplementation(Compose.testManifest)
 
     implementation(Google.material)
 
@@ -68,6 +74,11 @@ dependencies {
     implementation(Koin.core)
     implementation(Koin.android)
     implementation(Koin.compose)
+    implementation(Koin.test)
+    implementation(Koin.testJunit4)
 
     debugImplementation(SquareUp.leakCanary)
 }
+
+
+

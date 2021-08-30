@@ -1,5 +1,6 @@
 object Compose {
     const val composeVersion = "1.0.0"
+
     const val runtime = "androidx.compose.runtime:runtime:${composeVersion}"
     const val runtimeLiveData = "androidx.compose.runtime:runtime-livedata:${composeVersion}"
     const val ui = "androidx.compose.ui:ui:${composeVersion}"
@@ -17,4 +18,11 @@ object Compose {
 
     private const val composeNavigationVersion = "2.4.0-alpha04"
     const val navigation = "androidx.navigation:navigation-compose:${composeNavigationVersion}"
+
+
+    // Test rules and transitive dependencies:
+    const val test = "androidx.compose.ui:ui-test-junit4:$composeVersion"
+
+    // Needed for createComposeRule, but not createAndroidComposeRule:
+    const val testManifest = "androidx.compose.ui:ui-test-manifest:$composeVersion"
 }
