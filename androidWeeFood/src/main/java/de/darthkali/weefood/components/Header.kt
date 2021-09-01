@@ -18,19 +18,14 @@ fun Header(
     text: String,
     modifier: Modifier = Modifier,
 ) {
-
     Column(modifier = modifier) {
         Text(
             text = text,
             color = MaterialTheme.colors.onBackground,
             style = MaterialTheme.typography.h1
-
-
             )
         Divider(color = MaterialTheme.colors.primaryVariant, thickness = 1.dp)
     }
-
-
 }
 
 @ExperimentalCoroutinesApi

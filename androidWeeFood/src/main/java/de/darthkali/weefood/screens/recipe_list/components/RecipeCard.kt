@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import coil.annotation.ExperimentalCoilApi
 import de.darthkali.weefood.components.CircleImage
 import de.darthkali.weefood.components.button.ButtonStyle
 import de.darthkali.weefood.components.button.CommonButton
@@ -20,6 +21,7 @@ import de.darthkali.weefood.datasource.network.IngredientServiceImpl.Companion.N
 import de.darthkali.weefood.domain.model.Recipe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoilApi
 @ExperimentalCoroutinesApi
 @Composable
 fun RecipeCard(
@@ -43,7 +45,7 @@ fun RecipeCard(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 CircleImage(
                     url = recipe.image ?: NO_IMAGE,
-                    contentDescription = recipe.name ?: "not valid"
+                    contentDescription = recipe.name
                 )
                 Column {
                     Text(

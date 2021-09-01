@@ -14,12 +14,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import coil.annotation.ExperimentalCoilApi
 import de.darthkali.weefood.components.CircleImage
 import de.darthkali.weefood.components.button.ButtonStyle
 import de.darthkali.weefood.components.button.CommonButton
 import de.darthkali.weefood.domain.model.Ingredient
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoilApi
 @ExperimentalCoroutinesApi
 @Composable
 fun IngredientCard(

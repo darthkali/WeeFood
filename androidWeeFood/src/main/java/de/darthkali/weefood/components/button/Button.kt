@@ -26,7 +26,6 @@ fun CommonButton(
     buttonStyle: ButtonStyle = ButtonStyle.OPEN_BUTTON,
     onClick: () -> Unit
 ) {
-
     when (buttonStyle) {
         ButtonStyle.OPEN_BUTTON ->
             Button(

@@ -58,7 +58,7 @@ fun Navigation() {
          */
         composable(
             route = NavigationItem.DayList.route
-        ) { navBackStackEntry ->
+        ) { _ ->
             DayListScreen(navController)
         }
 
@@ -169,7 +169,6 @@ fun Navigation() {
             }
             IngredientListScreen(
                 viewModel = viewModel,
-                navController = navController,
                 onTriggerEvent = viewModel::onTriggerEvent,
                 onClickBack = { recipeId ->
                     navController.navigate(

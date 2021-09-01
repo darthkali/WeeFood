@@ -1,12 +1,11 @@
 package de.darthkali.weefood.interactors.ingredient
 
-import de.darthkali.weefood.datasource.database.mapper.recipe.RecipeListMapper
 import de.darthkali.weefood.datasource.network.IngredientService
 import de.darthkali.weefood.datasource.network.mapper.IngredientListMapper
 import de.darthkali.weefood.domain.model.Ingredient
-import de.darthkali.weefood.domain.util.CommonFlow
+import de.darthkali.weefood.util.CommonFlow
 import de.darthkali.weefood.domain.util.DataState
-import de.darthkali.weefood.domain.util.asCommonFlow
+import de.darthkali.weefood.util.asCommonFlow
 import de.darthkali.weefood.util.Logger
 import kotlinx.coroutines.flow.flow
 import org.koin.core.component.KoinComponent

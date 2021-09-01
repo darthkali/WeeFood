@@ -1,4 +1,4 @@
-package de.darthkali.weefood.domain.util
+package de.darthkali.weefood.util
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

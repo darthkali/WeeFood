@@ -26,7 +26,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @Composable
 fun IngredientListScreen(
     viewModel: IngredientListViewModel,
-    navController: NavController,
     onTriggerEvent: (IngredientListEvents) -> Unit,
     onClickSaveIngredient: (Int?) -> Unit,
     onClickBack: (Int?) -> Unit,
