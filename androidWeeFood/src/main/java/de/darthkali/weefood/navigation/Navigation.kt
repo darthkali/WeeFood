@@ -58,7 +58,7 @@ fun Navigation() {
          */
         composable(
             route = NavigationItem.DayList.route
-        ) { _ ->
+        ) {
             DayListScreen(navController)
         }
 
@@ -130,14 +130,14 @@ fun Navigation() {
                             )
                         } else {
                             navController.navigate(
-                                "${NavigationItem.RecipeList.route}"
+                                NavigationItem.RecipeList.route
                             )
                         }
                     } catch (e: Exception) {
                         //log.error("Error")
                     } finally {
                         navController.navigate(
-                            "${NavigationItem.RecipeList.route}"
+                            NavigationItem.RecipeList.route
                         )
                     }
                 },
