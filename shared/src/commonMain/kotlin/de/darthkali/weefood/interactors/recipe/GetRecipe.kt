@@ -20,7 +20,7 @@ class GetRecipe : KoinComponent {
      * check if we have a valid recipeId?
      *
      * is the response not null, then create a Recipe and return it
-     * else return null and place a log message
+     * else place a log message and return null
      *
      * @return Recipe
      */
