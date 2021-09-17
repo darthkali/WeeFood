@@ -1,8 +1,8 @@
-package de.darthkali.weefood.datasource.database.queries.ingredient
+package de.darthkali.weefood.datasource.database.repository.ingredient
 
 import de.darthkali.weefood.datasource.database.model.IngredientDb
 
-interface IngredientQueries {
+interface IngredientRepository {
     fun insertIngredient(ingredientDb: IngredientDb): Int?
     fun updateIngredientByApiId(ingredientDb: IngredientDb): Int?
     fun getAllIngredients(): List<IngredientDb>

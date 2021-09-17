@@ -1,4 +1,4 @@
-package de.darthkali.weefood.datasource.database.queries.ingredient
+package de.darthkali.weefood.datasource.database.repository.ingredient
 
 import de.darthkali.weefood.datasource.database.Ingredient_Entity
 import de.darthkali.weefood.datasource.database.WeeFoodDatabaseWrapper
@@ -9,7 +9,7 @@ import de.darthkali.weefood.util.Logger
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class IngredientQueriesImpl : IngredientQueries, KoinComponent {
+class IngredientRepositoryImpl : IngredientRepository, KoinComponent {
 
     private val weeFoodDatabase: WeeFoodDatabaseWrapper by inject()
     private val weeFoodDatabaseQueries = weeFoodDatabase.instance.ingredientDbQueries

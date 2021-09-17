@@ -1,4 +1,4 @@
-package de.darthkali.weefood.datasource.database.queries.recipe
+package de.darthkali.weefood.datasource.database.repository.recipe
 
 import de.darthkali.weefood.BaseTest
 import de.darthkali.weefood.mockFactory.RecipeMock
@@ -12,23 +12,23 @@ import org.koin.core.component.inject
 
 class RecipeDbQueriesImplTest : BaseTest() {
 
-    private val recipeQueries: RecipeQueries by inject()
+    private val recipeRepository: RecipeRepository by inject()
 
     @BeforeTest
     fun setup() = runTest {
         writeHead("setup")
-        recipeQueries.deleteAllRecipes()
+        recipeRepository.deleteAllRecipes()
         val recipes = RecipeMock.recipeListDb
 
         for (recipe in recipes) {
-            recipeQueries.insertRecipe(recipe)
+            recipeRepository.insertRecipe(recipe)
         }
     }
 
     @Test
     fun get_all_recipes_success() = runTest {
         writeHead("get_all_recipes_success")
-        val recipes = recipeQueries.getAllRecipes()
+        val recipes = recipeRepository.getAllRecipes()
         recipes.forEachIndexed { index, recipe ->
             println(recipe.toString())
             assertEquals(
@@ -42,10 +42,10 @@ class RecipeDbQueriesImplTest : BaseTest() {
     fun get_recipe_by_id_success() = runTest {
         writeHead("get_recipe_by_id_success")
 
-        val recipes = recipeQueries.getAllRecipes()
+        val recipes = recipeRepository.getAllRecipes()
 
         for (recipeItem in recipes) {
-            val recipe = recipeQueries.getRecipeById(recipeItem.id)
+            val recipe = recipeRepository.getRecipeById(recipeItem.id)
             println(recipe.toString())
             assertEquals(
                 expected = recipeItem.id,
@@ -58,14 +58,14 @@ class RecipeDbQueriesImplTest : BaseTest() {
     fun search_recipes_success() = runTest {
         writeHead("search_recipes_success")
 
-        recipeQueries.deleteAllRecipes()
+        recipeRepository.deleteAllRecipes()
         val recipes = RecipeMock.recipeListForSearchByName
 
         for (recipe in recipes) {
-            recipeQueries.insertRecipe(recipe)
+            recipeRepository.insertRecipe(recipe)
         }
 
-        for (recipe in recipeQueries.searchRecipes(RecipeMock.searchName, 1)) {
+        for (recipe in recipeRepository.searchRecipes(RecipeMock.searchName, 1)) {
             println(recipe.toString())
             assertEquals(
                 expected = "true",
@@ -77,11 +77,11 @@ class RecipeDbQueriesImplTest : BaseTest() {
     @Test
     fun delete_all_recipes_success() = runTest {
         writeHead("delete_all_recipes_success")
-        assertTrue(recipeQueries.getAllRecipes().isNotEmpty())
-        recipeQueries.deleteAllRecipes()
+        assertTrue(recipeRepository.getAllRecipes().isNotEmpty())
+        recipeRepository.deleteAllRecipes()
 
         assertTrue(
-            recipeQueries.getAllRecipes().isEmpty(),
+            recipeRepository.getAllRecipes().isEmpty(),
             "Delete All did not work"
         )
     }
@@ -90,19 +90,19 @@ class RecipeDbQueriesImplTest : BaseTest() {
     fun delete_recipe_by_id_success() = runTest {
         writeHead("delete_recipe_by_id_success")
 
-        recipeQueries.getAllRecipes().forEachIndexed { index, recipe ->
+        recipeRepository.getAllRecipes().forEachIndexed { index, recipe ->
 
             val recipeId = recipe.id
             println("Delete recipe with ID: $recipeId")
-            recipeQueries.deleteRecipeById(recipeId)
+            recipeRepository.deleteRecipeById(recipeId)
 
             assertEquals(
-                expected = recipeQueries.getAllRecipes().size,
+                expected = recipeRepository.getAllRecipes().size,
                 actual = RecipeMock.recipeListDb.size - (index + 1),
             )
 
             assertNull(
-                recipeQueries.getRecipeById(recipeId)
+                recipeRepository.getRecipeById(recipeId)
             )
         }
     }
@@ -111,18 +111,18 @@ class RecipeDbQueriesImplTest : BaseTest() {
     fun insert_recipe_success() = runTest {
         writeHead("insert_recipe_success")
 
-        for (recipe in recipeQueries.getAllRecipes()) {
+        for (recipe in recipeRepository.getAllRecipes()) {
             println(recipe.toString())
         }
 
-        recipeQueries.insertRecipe(RecipeMock.recipeDb)
+        recipeRepository.insertRecipe(RecipeMock.recipeDb)
 
-        for (recipe in recipeQueries.getAllRecipes()) {
+        for (recipe in recipeRepository.getAllRecipes()) {
             println(recipe.toString())
         }
 
         assertEquals(
-            expected = recipeQueries.getAllRecipes().last(),
+            expected = recipeRepository.getAllRecipes().last(),
             actual = RecipeMock.recipeDb,
         )
     }
@@ -131,18 +131,18 @@ class RecipeDbQueriesImplTest : BaseTest() {
     fun update_recipe_success() = runTest {
         writeHead("update_recipe_success")
 
-        for (recipe in recipeQueries.getAllRecipes()) {
+        for (recipe in recipeRepository.getAllRecipes()) {
             println(recipe.toString())
         }
 
-        recipeQueries.updateRecipe(RecipeMock.recipeDbUpdate)
+        recipeRepository.updateRecipe(RecipeMock.recipeDbUpdate)
 
-        for (recipe in recipeQueries.getAllRecipes()) {
+        for (recipe in recipeRepository.getAllRecipes()) {
             println(recipe.toString())
         }
 
         assertEquals(
-            expected = recipeQueries.getAllRecipes()[RecipeMock.recipeDbUpdateIndex],
+            expected = recipeRepository.getAllRecipes()[RecipeMock.recipeDbUpdateIndex],
             actual = RecipeMock.recipeDbUpdate,
         )
     }

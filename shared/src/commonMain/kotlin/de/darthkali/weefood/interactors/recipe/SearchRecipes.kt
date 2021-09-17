@@ -1,7 +1,7 @@
 package de.darthkali.weefood.interactors.recipe
 
 import de.darthkali.weefood.datasource.database.mapper.recipe.RecipeListMapper
-import de.darthkali.weefood.datasource.database.queries.recipe.RecipeQueries
+import de.darthkali.weefood.datasource.database.repository.recipe.RecipeRepository
 import de.darthkali.weefood.domain.model.Recipe
 import de.darthkali.weefood.util.CommonFlow
 import de.darthkali.weefood.domain.util.DataState
@@ -13,7 +13,7 @@ import org.koin.core.component.inject
 
 class SearchRecipes : KoinComponent {
 
-    private val recipeQueries: RecipeQueries by inject()
+    private val recipeRepository: RecipeRepository by inject()
     private val mapper = RecipeListMapper()
     private val logger = Logger("SearchRecipe")
 
@@ -34,7 +34,7 @@ class SearchRecipes : KoinComponent {
         try {
             emit(DataState.loading())
 
-            val recipeList = mapper.mapTo(recipeQueries.searchRecipes(
+            val recipeList = mapper.mapTo(recipeRepository.searchRecipes(
                 name = query,
                 page = page,
             ))

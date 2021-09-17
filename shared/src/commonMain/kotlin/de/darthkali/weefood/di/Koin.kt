@@ -1,14 +1,14 @@
 package de.darthkali.weefood.di
 
 import de.darthkali.weefood.datasource.database.WeeFoodDatabase
-import de.darthkali.weefood.datasource.database.queries.ingredient.IngredientQueries
-import de.darthkali.weefood.datasource.database.queries.ingredient.IngredientQueriesImpl
-import de.darthkali.weefood.datasource.database.queries.recipe.RecipeQueries
-import de.darthkali.weefood.datasource.database.queries.recipe.RecipeQueriesImpl
-import de.darthkali.weefood.datasource.database.queries.recipeIngredient.RecipeIngredientQueries
-import de.darthkali.weefood.datasource.database.queries.recipeIngredient.RecipeIngredientQueriesImpl
-import de.darthkali.weefood.datasource.database.queries.weekRecipe.WeekRecipeQueries
-import de.darthkali.weefood.datasource.database.queries.weekRecipe.WeekRecipeQueriesImpl
+import de.darthkali.weefood.datasource.database.repository.ingredient.IngredientRepository
+import de.darthkali.weefood.datasource.database.repository.ingredient.IngredientRepositoryImpl
+import de.darthkali.weefood.datasource.database.repository.recipe.RecipeRepository
+import de.darthkali.weefood.datasource.database.repository.recipe.RecipeRepositoryImpl
+import de.darthkali.weefood.datasource.database.repository.recipeIngredient.RecipeIngredientRepository
+import de.darthkali.weefood.datasource.database.repository.recipeIngredient.RecipeIngredientRepositoryImpl
+import de.darthkali.weefood.datasource.database.repository.weekRecipe.WeekRecipeRepository
+import de.darthkali.weefood.datasource.database.repository.weekRecipe.WeekRecipeRepositoryImpl
 import de.darthkali.weefood.datasource.network.IngredientService
 import de.darthkali.weefood.datasource.network.IngredientServiceImpl
 import de.darthkali.weefood.datasource.network.KtorClientFactory
@@ -49,10 +49,10 @@ val network = module {
 
 val database = module {
     single { WeeFoodDatabase(get()) }
-    single<IngredientQueries> { IngredientQueriesImpl() }
-    single<RecipeQueries> { RecipeQueriesImpl() }
-    single<RecipeIngredientQueries> { RecipeIngredientQueriesImpl() }
-    single<WeekRecipeQueries> { WeekRecipeQueriesImpl() }
+    single<IngredientRepository> { IngredientRepositoryImpl() }
+    single<RecipeRepository> { RecipeRepositoryImpl() }
+    single<RecipeIngredientRepository> { RecipeIngredientRepositoryImpl() }
+    single<WeekRecipeRepository> { WeekRecipeRepositoryImpl() }
 }
 
 val interactor = module {

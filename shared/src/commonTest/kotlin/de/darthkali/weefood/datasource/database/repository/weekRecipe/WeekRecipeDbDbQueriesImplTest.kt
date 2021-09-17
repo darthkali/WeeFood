@@ -1,4 +1,4 @@
-package de.darthkali.weefood.datasource.database.queries.weekRecipe
+package de.darthkali.weefood.datasource.database.repository.weekRecipe
 
 import de.darthkali.weefood.BaseTest
 import de.darthkali.weefood.mockFactory.WeekRecipeMock
@@ -11,23 +11,23 @@ import org.koin.core.component.inject
 
 class WeekRecipeDbDbQueriesImplTest : BaseTest() {
 
-    private val weekRecipeQueries: WeekRecipeQueries by inject()
+    private val weekRecipeRepository: WeekRecipeRepository by inject()
 
     @BeforeTest
     fun setup() = runTest {
         writeHead("setup")
-        weekRecipeQueries.deleteAllWeekRecipe()
+        weekRecipeRepository.deleteAllWeekRecipe()
         val weekRecipes = WeekRecipeMock.weekRecipeDbList
 
         for (weekRecipe in weekRecipes) {
-            weekRecipeQueries.insertWeekRecipe(weekRecipe)
+            weekRecipeRepository.insertWeekRecipe(weekRecipe)
         }
     }
 
     @Test
     fun get_all_week_recipes_success() = runTest {
         writeHead("get_all_week_recipes_success")
-        val weekRecipes = weekRecipeQueries.getAllWeekRecipes()
+        val weekRecipes = weekRecipeRepository.getAllWeekRecipes()
         weekRecipes.forEachIndexed { index, weekRecipe ->
             println(weekRecipe.toString())
 
@@ -43,7 +43,7 @@ class WeekRecipeDbDbQueriesImplTest : BaseTest() {
         writeHead("get_all_week_recipe_by_weekday")
 
         val weekRecipes =
-            weekRecipeQueries.getAllWeekRecipesByWeekDay(WeekRecipeMock.weekDayForSearch)
+            weekRecipeRepository.getAllWeekRecipesByWeekDay(WeekRecipeMock.weekDayForSearch)
 
         for (weekRecipe in weekRecipes) {
             println(weekRecipe.toString())
@@ -57,11 +57,11 @@ class WeekRecipeDbDbQueriesImplTest : BaseTest() {
     @Test
     fun delete_all_week_recipes_success() = runTest {
         writeHead("delete_all_week_recipes_success")
-        assertTrue(weekRecipeQueries.getAllWeekRecipes().isNotEmpty())
-        weekRecipeQueries.deleteAllWeekRecipe()
+        assertTrue(weekRecipeRepository.getAllWeekRecipes().isNotEmpty())
+        weekRecipeRepository.deleteAllWeekRecipe()
 
         assertTrue(
-            weekRecipeQueries.getAllWeekRecipes().isEmpty(),
+            weekRecipeRepository.getAllWeekRecipes().isEmpty(),
             "Delete All did not work"
         )
     }
@@ -70,20 +70,20 @@ class WeekRecipeDbDbQueriesImplTest : BaseTest() {
     fun delete_week_recipe_by_id_success() = runTest {
         writeHead("delete_week_recipe_by_id_success")
 
-        weekRecipeQueries.getAllWeekRecipes().forEachIndexed { index, weekRecipe ->
+        weekRecipeRepository.getAllWeekRecipes().forEachIndexed { index, weekRecipe ->
 
             val weekRecipeId = weekRecipe.id
             println("Delete Ingredient with ID: $weekRecipeId")
-            weekRecipeQueries.deleteWeekRecipeById(weekRecipeId)
+            weekRecipeRepository.deleteWeekRecipeById(weekRecipeId)
 
             assertEquals(
-                expected = weekRecipeQueries.getAllWeekRecipes().size,
+                expected = weekRecipeRepository.getAllWeekRecipes().size,
                 actual = WeekRecipeMock.weekRecipeDbList.size - (index + 1),
             )
         }
         assertEquals(
             expected = 0,
-            actual = weekRecipeQueries.getAllWeekRecipes().size,
+            actual = weekRecipeRepository.getAllWeekRecipes().size,
         )
     }
 
@@ -91,18 +91,18 @@ class WeekRecipeDbDbQueriesImplTest : BaseTest() {
     fun insert_week_recipe_success() = runTest {
         writeHead("insert_week_recipe_success")
 
-        for (weekRecipe in weekRecipeQueries.getAllWeekRecipes()) {
+        for (weekRecipe in weekRecipeRepository.getAllWeekRecipes()) {
             println(weekRecipe.toString())
         }
 
-        weekRecipeQueries.insertWeekRecipe(WeekRecipeMock.weekRecipeDb)
+        weekRecipeRepository.insertWeekRecipe(WeekRecipeMock.weekRecipeDb)
 
-        for (weekRecipe in weekRecipeQueries.getAllWeekRecipes()) {
+        for (weekRecipe in weekRecipeRepository.getAllWeekRecipes()) {
             println(weekRecipe.toString())
         }
 
         assertEquals(
-            expected = weekRecipeQueries.getAllWeekRecipes().last(),
+            expected = weekRecipeRepository.getAllWeekRecipes().last(),
             actual = WeekRecipeMock.weekRecipeDb,
         )
     }

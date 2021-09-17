@@ -1,6 +1,6 @@
 package de.darthkali.weefood.interactors.recipe
 
-import de.darthkali.weefood.datasource.database.queries.recipe.RecipeQueries
+import de.darthkali.weefood.datasource.database.repository.recipe.RecipeRepository
 import de.darthkali.weefood.domain.model.Recipe
 import de.darthkali.weefood.interactors.recipe_ingredient.GetIngredientsFromRecipe
 import de.darthkali.weefood.util.Logger
@@ -9,7 +9,7 @@ import org.koin.core.component.inject
 
 class GetRecipe : KoinComponent {
 
-    private val recipeQueries: RecipeQueries by inject()
+    private val recipeRepository: RecipeRepository by inject()
     private val getIngredientsFromRecipe: GetIngredientsFromRecipe by inject()
     private val logger = Logger("SaveRecipe")
 
@@ -27,7 +27,7 @@ class GetRecipe : KoinComponent {
     fun execute(recipeId: Int): Recipe? {
         return try {
             if (recipeId > 0) {
-                recipeQueries.getRecipeById(recipeId)?.let {
+                recipeRepository.getRecipeById(recipeId)?.let {
                     return Recipe(
                         databaseId = it.id,
                         name = it.name,

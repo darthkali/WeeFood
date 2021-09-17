@@ -65,10 +65,11 @@ fun IngredientCard(
 
             ) {
                 CommonButton(text = "Schliessen", buttonStyle = ButtonStyle.CLOSE_BUTTON) {}
-                CommonButton(text = "Hinzufügen", buttonStyle = ButtonStyle.ADD_BUTTON) {
-                    onSaveIngredient(
-                        ingredientDb
-                    )
+                CommonButton(
+                    text = "Hinzufügen",
+                    buttonStyle = ButtonStyle.ADD_BUTTON,
+                ) {
+                    onSaveIngredient(ingredientDb)
                 }
             }
         }
