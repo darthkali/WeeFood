@@ -10,7 +10,7 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 import org.koin.core.component.inject
 
-class RecipeDbQueriesImplTest : BaseTest() {
+class RecipeRepositoryImplTest : BaseTest() {
 
     private val recipeRepository: RecipeRepository by inject()
 

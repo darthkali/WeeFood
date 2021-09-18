@@ -32,5 +32,16 @@
 - Swift UI
 
 **Install Pod Files**
+
+
+install gradle via terminal
+run: `brew install gradle`
+
+run gradle and gradle wrapper in the main directory of the app
+run: `gradle; gradle wrapper`
+
 go into the iosWeeFood Folder and open the Terminal
-run: `pod install`
+run: `pod deintegrate; pod install`
+
+
+

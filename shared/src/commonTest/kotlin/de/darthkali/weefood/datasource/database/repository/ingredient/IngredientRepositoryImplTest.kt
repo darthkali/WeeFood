@@ -10,7 +10,7 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 import org.koin.core.component.inject
 
-class IngredientDbQueriesImplTest : BaseTest() {
+class IngredientRepositoryImplTest : BaseTest() {
 
     private val ingredientRepository: IngredientRepository by inject()
 
@@ -37,6 +37,7 @@ class IngredientDbQueriesImplTest : BaseTest() {
             )
         }
     }
+
 
     @Test
     fun get_ingredient_by_id_success() = runTest {

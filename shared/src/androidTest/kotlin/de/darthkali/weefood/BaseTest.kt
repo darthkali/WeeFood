@@ -18,9 +18,6 @@ import org.koin.test.KoinTestRule
 //TODO JavaDoc einfügen
 @RunWith(AndroidJUnit4::class)
 actual abstract class BaseTest : KoinTest {
-    @get:Rule
-    var coroutineTestRule = CoroutineTestRule()
-
     //TODO JavaDoc einfügen
     @get:Rule
     val koinTestRule = KoinTestRule.create {
@@ -34,7 +31,6 @@ actual abstract class BaseTest : KoinTest {
         )
     }
 
-
     //TODO JavaDoc einfügen
     actual fun <T> runTest(
         block: suspend CoroutineScope.() -> T
@@ -42,3 +38,6 @@ actual abstract class BaseTest : KoinTest {
         runBlocking { block() }
     }
 }
+
+
+
