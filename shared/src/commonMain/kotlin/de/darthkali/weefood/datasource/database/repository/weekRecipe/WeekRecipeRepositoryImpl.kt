@@ -14,7 +14,7 @@ class WeekRecipeRepositoryImpl : WeekRecipeRepository, KoinComponent {
 
     private val weeFoodDatabase: WeeFoodDatabaseWrapper by inject()
     private val weeFoodDatabaseQueries = weeFoodDatabase.instance.weekRecipeDbQueries
-    private val logger = Logger("WeekRecipeQueriesImpl")
+    private val logger = Logger("WeekRecipeRepositoryImpl")
 
     override fun insertWeekRecipe(weekRecipeDb: WeekRecipeDb): Boolean {
         return try {

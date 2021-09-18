@@ -65,7 +65,6 @@ val interactor = module {
     single { SearchRecipes() }
     single { DeleteRecipeIngredient() }
     single { GetIngredientsFromRecipe() }
-
 }
 
 

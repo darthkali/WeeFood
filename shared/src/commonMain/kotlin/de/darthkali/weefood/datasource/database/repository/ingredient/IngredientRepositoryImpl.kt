@@ -13,11 +13,7 @@ class IngredientRepositoryImpl : IngredientRepository, KoinComponent {
 
     private val weeFoodDatabase: WeeFoodDatabaseWrapper by inject()
     private val weeFoodDatabaseQueries = weeFoodDatabase.instance.ingredientDbQueries
-    private val mapper = IngredientMapper()
-    private val mapperList = IngredientListMapper()
-
-    private val logger = Logger("IngredientQueriesImpl")
-
+    private val logger = Logger("IngredientRepositoryImpl")
 
     override fun insertIngredient(ingredientDb: IngredientDb): Int? {
         return try {

@@ -10,3 +10,4 @@ interface IngredientService {
         page: Int,
     ): List<IngredientDto>
 }
+

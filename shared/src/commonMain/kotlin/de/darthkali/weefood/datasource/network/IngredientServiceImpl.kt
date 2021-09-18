@@ -17,11 +17,19 @@ class IngredientServiceImpl : IngredientService, KoinComponent {
 
     override suspend fun searchIngredient(query: String, page: Int): List<IngredientDto> {
 
-        val offset: Int = (page - 1) * PAGINATION_PAGE_SIZE
+        val offset: Int = if (page > 0) ((page - 1) * PAGINATION_PAGE_SIZE) else 0
 
         return httpClient.get<IngredientSearchResponse> {
-                url("$BASE_URL/food/ingredients/search?apiKey=$API_KEY&query=$query&metaInformation=true&offset=$offset&number=$PAGINATION_PAGE_SIZE")
-            }.results
+            url(
+                BASE_URL +
+                        "/food/ingredients/search?" +
+                        "apiKey=$API_KEY&" +
+                        "query=$query&" +
+                        "metaInformation=true&" +
+                        "offset=$offset&" +
+                        "number=$PAGINATION_PAGE_SIZE"
+            )
+        }.results
 
     }
 
