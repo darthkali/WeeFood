@@ -135,10 +135,6 @@ fun Navigation() {
                         }
                     } catch (e: Exception) {
                         //log.error("Error")
-                    } finally {
-                        navController.navigate(
-                            NavigationItem.RecipeList.route
-                        )
                     }
                 },
                 onClickBackInViewableRecipeDetailScreen = { recipeName ->

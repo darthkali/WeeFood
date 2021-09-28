@@ -24,7 +24,7 @@ val DarkColors = darkColors(
     onSecondary = White,
     onBackground = White,
     onSurface = White,
-    )
+)
 
 val LightColors = lightColors(
     primary = DarkGreen,

@@ -23,7 +23,7 @@ fun Header(
             text = text,
             color = MaterialTheme.colors.onBackground,
             style = MaterialTheme.typography.h1
-            )
+        )
         Divider(color = MaterialTheme.colors.primaryVariant, thickness = 1.dp)
     }
 }

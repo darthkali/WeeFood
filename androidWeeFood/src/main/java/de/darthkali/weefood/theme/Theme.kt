@@ -19,7 +19,6 @@ fun AppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit,
 ) {
-
     MaterialTheme(
         colors = if (darkTheme) DarkColors else LightColors,
         typography = MontserratTypography,

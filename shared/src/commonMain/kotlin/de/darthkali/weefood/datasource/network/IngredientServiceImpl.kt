@@ -10,10 +10,8 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 class IngredientServiceImpl : IngredientService, KoinComponent {
-
     private val ktorClientFactory: KtorClientFactory by inject()
     private val httpClient = ktorClientFactory.build()
-
 
     override suspend fun searchIngredient(query: String, page: Int): List<IngredientDto> {
 
