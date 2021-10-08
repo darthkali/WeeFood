@@ -11,7 +11,6 @@ actual data class RecipeListState(
     val recipes: List<Recipe> = listOf(),
 ) {
     // Need secondary constructor to initialize with no args in SwiftUI
-
     constructor() : this(
         isLoading = false,
         page = 1,

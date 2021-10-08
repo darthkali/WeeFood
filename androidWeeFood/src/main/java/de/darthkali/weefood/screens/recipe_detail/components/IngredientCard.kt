@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.material.Text
@@ -15,13 +16,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import de.darthkali.weefood.components.CircleImage
 import de.darthkali.weefood.components.button.CommonButton
 import de.darthkali.weefood.components.button.ButtonStyle
 import de.darthkali.weefood.domain.model.Ingredient
+import de.darthkali.weefood.mockFactory.IngredientMock
 import de.darthkali.weefood.presentation.recipe_detail.RecipeDetailEvents
+import de.darthkali.weefood.theme.AppTheme
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoilApi
 @ExperimentalComposeUiApi
@@ -31,7 +36,6 @@ fun IngredientCard(
     onTriggerEvent: (RecipeDetailEvents) -> Unit,
     onDeleteIngredient: (Ingredient) -> Unit
 ) {
-
     Card(
         shape = MaterialTheme.shapes.small,
         modifier = Modifier
@@ -53,14 +57,12 @@ fun IngredientCard(
                 )
 
                 Column {
-
-
                     Text(
-                        text = ingredient.name
-                            ?: "",   //if ingredient.name == null, then set "" as text
+                        text = ingredient.name ?: "",
                         modifier = Modifier
                             .fillMaxWidth(0.85f)
-                            .wrapContentWidth(Alignment.Start),
+                            .wrapContentWidth(Alignment.Start)
+                            .padding(top = 16.dp),
                         style = typography.h2
                     )
 
@@ -75,7 +77,7 @@ fun IngredientCard(
                                     )
                                 )
                             },
-                            label = "Einheit",
+                            label = "Menge",
                             modifier = Modifier
                                 .width(120.dp)
                                 .padding(8.dp),
@@ -103,7 +105,7 @@ fun IngredientCard(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(end = 8.dp, bottom = 8.dp),
+                    .padding(end = 8.dp, top = 8.dp, bottom = 8.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.End
 
@@ -122,13 +124,43 @@ fun IngredientCard(
 }
 
 
-//@ExperimentalCoroutinesApi
-//@ExperimentalMaterialApi
-//@ExperimentalComposeUiApi
-//@Preview(showBackground = true)
-//@Composable
-//fun UserProfileDetailsPreview() {
-//    AppTheme() {
-//        IngredientCard(ingredient = IngredientMock.ingredient, onDeleteIngredient = {})
-//    }
-//}
+@ExperimentalCoilApi
+@ExperimentalCoroutinesApi
+@ExperimentalMaterialApi
+@ExperimentalComposeUiApi
+@Preview(showBackground = true)
+@Composable
+fun UserProfileDetailsPreview() {
+
+    val ingredientLong = Ingredient(
+        name = "Ganz langer name, der ggf auch mal umbricht",
+        image = "",
+        apiId = 0,
+        quantity = 5F,
+        unit = "Gramm"
+    )
+
+    val ingredientShort = Ingredient(
+        name = "Ganz kurzer",
+        image = "",
+        apiId = 0,
+        quantity = 50F,
+        unit = "ml"
+    )
+
+    AppTheme() {
+        Column() {
+            IngredientCard(
+                ingredient = ingredientLong,
+                onDeleteIngredient = {},
+                onTriggerEvent = {}
+            )
+            IngredientCard(
+                ingredient = ingredientShort,
+                onDeleteIngredient = {},
+                onTriggerEvent = {}
+            )
+        }
+
+    }
+}

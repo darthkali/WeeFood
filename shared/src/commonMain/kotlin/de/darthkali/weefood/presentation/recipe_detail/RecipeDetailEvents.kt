@@ -16,5 +16,6 @@ sealed class RecipeDetailEvents {
         RecipeDetailEvents() //TODO: change to INgredient
 
     data class OnDeleteIngredient(val ingredient: Ingredient) : RecipeDetailEvents()
+    data class OnDeleteRecipe(val recipe: Recipe) : RecipeDetailEvents()
     data class GetRecipe(val recipeId: Int) : RecipeDetailEvents()
 }

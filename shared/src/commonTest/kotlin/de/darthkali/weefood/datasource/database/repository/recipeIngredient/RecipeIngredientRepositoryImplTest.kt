@@ -126,4 +126,26 @@ class RecipeIngredientRepositoryImplTest : BaseTest() {
             actual = RecipeIngredientMock.recipeIngredientDbUpdate,
         )
     }
+
+    @Test
+    fun delete_recipe_ingredient_by_recipeId_success() = runTest {
+        writeHead("delete_recipe_ingredient_by_recipeId_success")
+
+        for (recipeIngredient in recipeIngredientRepository.getAllRecipeIngredients()) {
+            println(recipeIngredient.toString())
+        }
+
+        recipeIngredientRepository.deleteAllRecipeIngredientsByRecipeId(RecipeIngredientMock.deleteRecipeIngredientByRecipeId)
+
+        for (recipeIngredient in recipeIngredientRepository.getAllRecipeIngredients()) {
+            println(recipeIngredient.toString())
+        }
+
+        assertEquals(
+            expected = listOf(),
+            actual = recipeIngredientRepository.getAllRecipeIngredientByRecipeId(
+                RecipeIngredientMock.deleteRecipeIngredientByRecipeId
+            )
+        )
+    }
 }

@@ -14,4 +14,5 @@ interface RecipeIngredientRepository {
     ): Boolean
 
     fun deleteAllRecipeIngredients(): Boolean
+    fun deleteAllRecipeIngredientsByRecipeId(recipeId: Int): Boolean
 }

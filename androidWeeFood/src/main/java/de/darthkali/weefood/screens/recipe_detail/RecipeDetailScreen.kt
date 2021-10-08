@@ -72,12 +72,15 @@ fun NewRecipeScreen(
                     EditableRecipeDetailScreenTopBar(
                         recipe = viewModel.state.value.recipe,
                         navController = navController,
-                        onClickBackInEditableRecipeDetailScreen = onClickBackInEditableRecipeDetailScreen
+                        onClickBackInEditableRecipeDetailScreen = onClickBackInEditableRecipeDetailScreen,
+                        onTriggerEvent = onTriggerEvent,
+                        scope = scope,
+                        scaffoldState = scaffoldState
                     )
                 } else {
                     ViewableRecipeDetailScreenTopBar(
                         recipe = viewModel.state.value.recipe,
-                        onClickBackInViewableRecipeDetailScreen = onClickBackInViewableRecipeDetailScreen
+                        onClickBackInViewableRecipeDetailScreen = onClickBackInViewableRecipeDetailScreen,
                     )
                 }
             },
@@ -109,6 +112,8 @@ fun NewRecipeScreen(
                         recipe = viewModel.state.value.recipe,
                         onTriggerEvent = onTriggerEvent,
                         onClickAddIngredient = onClickAddIngredient,
+                        scope = scope,
+                        scaffoldState = scaffoldState
                     )
                 } else {
                     ViewableRecipeDetail(
@@ -122,37 +127,6 @@ fun NewRecipeScreen(
     }
 }
 
-@Composable
-fun SaveRecipeDetailFABALT(
-    recipe: Recipe,
-    onTriggerEvent: (RecipeDetailEvents) -> Unit,
-    onClickSaveRecipeDetailFAB: (Int?) -> Unit,
-) {
-
-    val snackbarVisibleState = remember { mutableStateOf(false) }
-    FloatingActionButton(
-
-        onClick = {
-
-            if (recipe.name != "") {
-                onTriggerEvent(RecipeDetailEvents.OnSaveRecipe)
-                onClickSaveRecipeDetailFAB(recipe.databaseId)
-                snackbarVisibleState.value = false
-            } else {
-                snackbarVisibleState.value = true
-            }
-        },
-        backgroundColor = MaterialTheme.colors.primary,
-        elevation = FloatingActionButtonDefaults.elevation(6.dp)
-    ) {
-        Icon(Icons.Filled.Check, "")
-    }
-    if (snackbarVisibleState.value) {
-        Snackbar(
-            modifier = Modifier.padding(8.dp)
-        ) { Text(text = "This is a snackbar!") }
-    }
-}
 
 @Composable
 fun SaveRecipeDetailFAB(
@@ -205,20 +179,38 @@ fun EditRecipeDetailFAB(
 fun EditableRecipeDetailScreenTopBar(
     recipe: Recipe,
     navController: NavController,
+    onTriggerEvent: (RecipeDetailEvents) -> Unit,
     onClickBackInEditableRecipeDetailScreen: (Int?) -> Unit,
+    scope: CoroutineScope,
+    scaffoldState: ScaffoldState
 ) {
 
     TopBar(
-        title = "Neues Rezept",
+        title =
+        if (recipe.name == "") {
+            "Neues Rezept"
+        } else {
+            recipe.name
+        },
+
         navigationIcon = Icons.Filled.ArrowBack,
         navigationIconClickAction = {
-
             recipe.databaseId?.let {
-                onClickBackInEditableRecipeDetailScreen(recipe.databaseId)
-            } ?: run {
-                navController.navigate(
-                    NavigationItem.Settings.route // TODO: Wenn wir ein neues REzept erstellen und es noch keine ID hat
-                )
+                if (recipe.isRecipeEmpty()) {
+                    onTriggerEvent(RecipeDetailEvents.OnDeleteRecipe(recipe))
+                    navController.navigate(
+                        NavigationItem.RecipeList.route
+                    )
+                } else {
+                    if (recipe.name != "") {
+                        onTriggerEvent(RecipeDetailEvents.OnSaveRecipe)
+                        onClickBackInEditableRecipeDetailScreen(recipe.databaseId)
+                    } else {
+                        scope.launch {
+                            scaffoldState.snackbarHostState.showSnackbar("Bitte einen Rezeptnamen eingeben!")
+                        }
+                    }
+                }
             }
         }
     )

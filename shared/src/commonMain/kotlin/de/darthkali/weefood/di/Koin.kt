@@ -15,6 +15,7 @@ import de.darthkali.weefood.datasource.network.KtorClientFactory
 import de.darthkali.weefood.interactors.ingredient.GetAllIngredients
 import de.darthkali.weefood.interactors.ingredient.SaveIngredient
 import de.darthkali.weefood.interactors.ingredient.SearchIngredient
+import de.darthkali.weefood.interactors.recipe.DeleteRecipe
 import de.darthkali.weefood.interactors.recipe.GetRecipe
 import de.darthkali.weefood.interactors.recipe.SaveRecipe
 import de.darthkali.weefood.interactors.recipe_ingredient.SaveRecipeIngredient
@@ -64,6 +65,7 @@ val interactor = module {
     single { GetRecipe() }
     single { SearchRecipes() }
     single { DeleteRecipeIngredient() }
+    single { DeleteRecipe() }
     single { GetIngredientsFromRecipe() }
 }
 

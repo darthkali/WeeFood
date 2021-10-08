@@ -18,6 +18,7 @@ object RecipeIngredientMock {
         RecipeIngredientDb(quantity = 50F, unit = "gramm", recipe_id = 4, ingredient_id = 8)
     )
 
+    const val deleteRecipeIngredientByRecipeId = 4
     const val recipeIngredientDbUpdateIndex = 2
     val recipeIngredientDbUpdate = RecipeIngredientDb(
         id = recipeIngredientDbUpdateIndex + 1,

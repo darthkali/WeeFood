@@ -71,4 +71,16 @@ data class Recipe(
     override fun hashCode(): Int {
         return super.hashCode()
     }
+
+    fun isRecipeEmpty():Boolean{
+        return(
+        name == "" &&
+        image == "" &&
+        cooking_time == 0 &&
+        cooking_time_unit == "" &&
+        recipeDescription == "" &&
+        portion == 0 &&
+        ingredients.isEmpty()
+        )
+    }
 }

@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -23,7 +24,9 @@ import de.darthkali.weefood.screens.recipe_detail.components.IngredientCard
 import de.darthkali.weefood.screens.recipe_detail.components.IngredientUnitTextField
 import de.darthkali.weefood.domain.model.Recipe
 import de.darthkali.weefood.presentation.recipe_detail.RecipeDetailEvents
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 @ExperimentalMaterialApi
@@ -34,6 +37,8 @@ fun EditableRecipeDetail(
     recipe: Recipe,
     onTriggerEvent: (RecipeDetailEvents) -> Unit,
     onClickAddIngredient: (Int?) -> Unit,
+    scope: CoroutineScope,
+    scaffoldState: ScaffoldState
 ) {
     LazyColumn() {
         item {
@@ -65,12 +70,23 @@ fun EditableRecipeDetail(
                     buttonStyle = ButtonStyle.ADD_BUTTON,
 
                     ) {
+
                     onTriggerEvent(RecipeDetailEvents.OnSaveRecipe)
-                    recipe.databaseId?.let {
-                        if (it != 0) {
-                            onClickAddIngredient(it)
+
+                    if (recipe.name != "") {
+                        recipe.databaseId?.let {
+                            if (it != 0) {
+                                onClickAddIngredient(it)
+                            }
+                        }
+
+                    } else {
+                        scope.launch {
+                            scaffoldState.snackbarHostState.showSnackbar("Bitte einen Rezeptnamen eingeben!")
                         }
                     }
+
+
                 }
             }
         }

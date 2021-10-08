@@ -112,6 +112,27 @@ class RecipeIngredientRepositoryImpl : RecipeIngredientRepository, KoinComponent
         }
     }
 
+
+
+    override fun deleteAllRecipeIngredientsByRecipeId( recipeDbId: Int): Boolean {
+        return try {
+            logger.log("Delete all RecipeIngredients by RecipeId from database")
+            weeFoodDatabaseQueries.getAllRecipeIngredients().executeAsList().forEach {
+                if(it.recipe_id == recipeDbId){
+                    weeFoodDatabaseQueries.deleteRecipeIngredientById(it.id)
+                }
+            }
+            true
+        } catch (e: Exception) {
+            logger.log(e.toString())
+            false
+        }
+    }
+
+
+
+
+
     /*
 -- -----------------------------------------------------
 -- recipeIngredient_Entity

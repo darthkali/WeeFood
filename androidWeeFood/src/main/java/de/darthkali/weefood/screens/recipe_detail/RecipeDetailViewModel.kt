@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import de.darthkali.weefood.screens.BaseViewModel
 import de.darthkali.weefood.domain.model.Recipe
+import de.darthkali.weefood.interactors.recipe.DeleteRecipe
 import de.darthkali.weefood.interactors.recipe.GetRecipe
 import de.darthkali.weefood.interactors.recipe.SaveRecipe
 import de.darthkali.weefood.interactors.recipe_ingredient.DeleteRecipeIngredient
@@ -22,6 +23,7 @@ class RecipeDetailViewModel(
     private val saveRecipe: SaveRecipe by inject()
     private val getRecipe: GetRecipe by inject()
     private val deleteRecipeIngredient: DeleteRecipeIngredient by inject()
+    private val deleteRecipe: DeleteRecipe by inject()
     private val getIngredientsFromRecipe: GetIngredientsFromRecipe by inject()
 
     private var _state = mutableStateOf(RecipeDetailState())
@@ -42,9 +44,10 @@ class RecipeDetailViewModel(
         }
         savedStateHandle.get<String>("recipeId")?.let { id ->
             onTriggerEvent(RecipeDetailEvents.GetRecipe(recipeId = id.toInt()))
-        } ?: kotlin.run {
-            onTriggerEvent((RecipeDetailEvents.OnSaveRecipe))
         }
+            ?: kotlin.run {
+                onTriggerEvent((RecipeDetailEvents.OnSaveRecipe))
+            }
     }
 
 
@@ -74,7 +77,7 @@ class RecipeDetailViewModel(
             is RecipeDetailEvents.OnUpdateIngredientQuantity -> {
                 val resultRecipe = state.value.recipe
                 resultRecipe.ingredients.forEach {
-                    if(it.internalId == event.ingredientId){
+                    if (it.internalId == event.ingredientId) {
                         it.quantity = event.quantity
                         onUpdateRecipe(resultRecipe)
                     }
@@ -83,7 +86,7 @@ class RecipeDetailViewModel(
             is RecipeDetailEvents.OnUpdateIngredientQuantityUnit -> {
                 val resultRecipe = state.value.recipe
                 resultRecipe.ingredients.forEach {
-                    if(it.internalId == event.ingredientId){
+                    if (it.internalId == event.ingredientId) {
                         it.unit = event.quantityUnit
                         onUpdateRecipe(resultRecipe)
                     }
@@ -102,6 +105,9 @@ class RecipeDetailViewModel(
                         getIngredientsFromRecipe.execute(state.value.recipe.databaseId!!)
                     onUpdateRecipe(state.value.recipe.copy(ingredients = ingredients!!))
                 }
+            }
+            is RecipeDetailEvents.OnDeleteRecipe -> {
+                deleteRecipe.execute(recipeId = state.value.recipe.databaseId!!)
             }
             is RecipeDetailEvents.OnSaveRecipe -> {
                 onUpdateRecipe(state.value.recipe.copy(databaseId = saveRecipe.execute(state.value.recipe)))

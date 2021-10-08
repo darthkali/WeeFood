@@ -39,7 +39,7 @@ class GetRecipe : KoinComponent {
                     )
                 }
             }
-            logger.log("Rezept mit der RecipeId $recipeId konnte nicht gefunden werden")
+            logger.log("ezept mitR der RecipeId $recipeId konnte nicht gefunden werden")
             null
         } catch (e: Exception) {
             logger.log(e.toString())
