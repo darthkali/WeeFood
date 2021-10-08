@@ -33,20 +33,20 @@ To run the iOS app you need to foloww these Steps:
 
  At first: Some Solutions must run twice. And sometimes you need to rebuild the app in Android Studio again.
 
- #No Gradle Permission
+ ### No Gradle Permission
  1. open the Terminal in root directory from the app
  2. run: `chmod +x gradlew` to give full permission
 
- #shared or other modules are missing
+ ### shared or other modules are missing
  1. open the Terminal in `iosWeeFood` directory from the app
  2. run: `pod deintegrate; pod install` to clean the pod  and reinstall it
 
- #SQL-Delight problems
+ ### SQL-Delight problems
  1. go in xcode to the root project
  2. Build Settings -> Linking -> Other Linker Flag
  3. Set a new variable `-lsqlite3`
 
- #no command line tool set
+ ### no command line tool set
  1. go in xcode to settings -> locations
  2. set a xcode version in the command line tool sections
 
