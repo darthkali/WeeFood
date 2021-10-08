@@ -12,6 +12,7 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -24,7 +25,11 @@ fun TopBar(
 ) {
     TopAppBar(
         navigationIcon = setIcon(navigationIcon, navigationIconClickAction = navigationIconClickAction),
-        title = { Text(title) },
+        title = { Text(
+            text = title,
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis
+        ) },
         actions = {
             actionIconIconClickAction?.let { it ->
                 IconButton(onClick = it) {
@@ -35,10 +40,10 @@ fun TopBar(
         },
         backgroundColor = MaterialTheme.colors.primary,
 
+
     )
 }
 
-//@Composable
 fun setIcon(
     icon: ImageVector? = null,
     navigationIconClickAction: (() -> Unit)? = null,
