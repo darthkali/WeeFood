@@ -29,13 +29,21 @@ To run the iOS app you need to foloww these Steps:
  2. After that you need Xcode. In the App Folder is a `iosWeeFood` Folder. From there you can open the workspace-file in xcode.
  3. run the App with the Start Button on top
 
+## Issues when building the iOS app
  In Case you never run a app in XCode there might be some issues. For some of them i have found a solution.
-
  At first: Some Solutions must run twice. And sometimes you need to rebuild the app in Android Studio again.
 
  ### No Gradle Permission
  1. open the Terminal in root directory from the app
  2. run: `chmod +x gradlew` to give full permission
+
+ ### gradlew wrapper is missing
+ 1. open the Terminal in root directory from the app
+ 2. run: `gradle; gradle wrapper`
+
+if gradle is missing:
+install gradle via terminal
+run: `brew install gradle`
 
  ### shared or other modules are missing
  1. open the Terminal in `iosWeeFood` directory from the app
@@ -53,25 +61,12 @@ To run the iOS app you need to foloww these Steps:
 
 
 
-
+## Specs
 - Android Studio Arctic Fox 2020.3.1
 - Xcode 12.5.1
 - Koin
 - Jetpack Compose
 - Kotlin Multiplatform Mobile
 - Swift UI
-
-**Install Pod Files**
-
-
-install gradle via terminal
-run: `brew install gradle`
-
-run gradle and gradle wrapper in the main directory of the app
-run: `gradle; gradle wrapper`
-
-go into the iosWeeFood Folder and open the Terminal
-run: `pod deintegrate; pod install`
-
 
 
