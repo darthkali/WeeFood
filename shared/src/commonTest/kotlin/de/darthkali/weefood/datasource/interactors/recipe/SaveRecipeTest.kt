@@ -1,9 +1,11 @@
 package de.darthkali.weefood.datasource.interactors.recipe
 
 import de.darthkali.weefood.BaseTest
+import de.darthkali.weefood.datasource.database.model.RecipeDb
 import de.darthkali.weefood.datasource.database.repository.ingredient.IngredientRepository
 import de.darthkali.weefood.datasource.database.repository.recipe.RecipeRepository
 import de.darthkali.weefood.datasource.database.repository.recipeIngredient.RecipeIngredientRepository
+import de.darthkali.weefood.domain.model.Recipe
 import de.darthkali.weefood.interactors.recipe.GetRecipe
 import de.darthkali.weefood.interactors.recipe.SaveRecipe
 import de.darthkali.weefood.mockFactory.IngredientMock
@@ -85,15 +87,63 @@ class SaveRecipeTest : BaseTest() {
             println(recipe.toString())
         }
 
-        saveRecipe.execute(RecipeMock.recipeUpdate)
+        val oldRecipe = recipeRepository.getAllRecipes()[2]
+
+        val newRecipe = Recipe(
+            databaseId = oldRecipe.id,
+            name = "${oldRecipe.name}_new",
+            image = "${oldRecipe.image}_new",
+            cooking_time = oldRecipe.cooking_time + 1,
+            cooking_time_unit = "${oldRecipe.cooking_time_unit}_new",
+            recipeDescription = "${oldRecipe.description}_new",
+            portion = 0,
+            ingredients = listOf()
+        )
+
+        saveRecipe.execute(newRecipe)
 
         for (recipeIngredient in recipeIngredientRepository.getAllRecipeIngredients()) {
             println(recipeIngredient.toString())
         }
 
         assertEquals(
-            expected = RecipeMock.recipeUpdate,
-            actual = getRecipe.execute(RecipeMock.recipeUpdate.databaseId!!),
+            expected = newRecipe,
+            actual = getRecipe.execute(oldRecipe.id),
         )
+
+
+
+
+
+
+
+       /* for (recipe in recipeRepository.getAllRecipes()) {
+            println(recipe.toString())
+        }
+
+        val oldRecipe = recipeRepository.getAllRecipes()[2]
+
+        val newRecipe = RecipeDb(
+            id = oldRecipe.id,
+            name = "${oldRecipe.name}_new",
+            image = "${oldRecipe.image}_new",
+            cooking_time = oldRecipe.cooking_time + 1,
+            cooking_time_unit = "${oldRecipe.cooking_time_unit}_new",
+            description = "${oldRecipe.description}_new",
+        )
+
+        recipeRepository.updateRecipe(newRecipe)
+
+        for (recipe in recipeRepository.getAllRecipes()) {
+            println(recipe.toString())
+        }
+
+        assertEquals(
+            expected = newRecipe,
+            actual = recipeRepository.getRecipeById(oldRecipe.id),
+        )
+ */
     }
+
+
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4DECC79AA8C4152FACC13795 /* Pods_iosWeeFood.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8FE4361C1B11633CAE7ACA8 /* Pods_iosWeeFood.framework */; };
 		C250EB7826B70FEB006CCFFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C250EB7726B70FEB006CCFFF /* AppDelegate.swift */; };
 		C250EB7A26B70FEB006CCFFF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C250EB7926B70FEB006CCFFF /* SceneDelegate.swift */; };
 		C250EB7C26B70FEB006CCFFF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C250EB7B26B70FEB006CCFFF /* ContentView.swift */; };
@@ -35,13 +36,12 @@
 		C2EAD0CB26C28B2900B8E196 /* RecipeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2EAD0CA26C28B2900B8E196 /* RecipeCard.swift */; };
 		C2EAD0CD26C2941D00B8E196 /* RecipeSearchAppBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2EAD0CC26C2941D00B8E196 /* RecipeSearchAppBar.swift */; };
 		C2EAD0CF26C2976D00B8E196 /* NewRecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2EAD0CE26C2976D00B8E196 /* NewRecipeViewModel.swift */; };
-		DC11696447617AC51BC98292 /* Pods_iosWeeFood.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49DEC3F88295B56E06151CCA /* Pods_iosWeeFood.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3738670C1D5727FA5B1DD994 /* Pods-iosWeeFood.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosWeeFood.release.xcconfig"; path = "Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood.release.xcconfig"; sourceTree = "<group>"; };
-		48D8990E54FE35654F57F2CB /* Pods-iosWeeFood.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosWeeFood.debug.xcconfig"; path = "Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood.debug.xcconfig"; sourceTree = "<group>"; };
-		49DEC3F88295B56E06151CCA /* Pods_iosWeeFood.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosWeeFood.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BA835DA9395841A954CDA32 /* Pods-iosWeeFood.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosWeeFood.debug.xcconfig"; path = "Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood.debug.xcconfig"; sourceTree = "<group>"; };
+		A8FE4361C1B11633CAE7ACA8 /* Pods_iosWeeFood.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosWeeFood.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE000AE77CC3117CC4F1B873 /* Pods-iosWeeFood.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosWeeFood.release.xcconfig"; path = "Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood.release.xcconfig"; sourceTree = "<group>"; };
 		C250EB7426B70FEB006CCFFF /* iosWeeFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosWeeFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C250EB7726B70FEB006CCFFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C250EB7926B70FEB006CCFFF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,21 +79,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC11696447617AC51BC98292 /* Pods_iosWeeFood.framework in Frameworks */,
+				4DECC79AA8C4152FACC13795 /* Pods_iosWeeFood.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0C847275D749076B71795BD8 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				49DEC3F88295B56E06151CCA /* Pods_iosWeeFood.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		C250EB6B26B70FEB006CCFFF = {
 			isa = PBXGroup;
 			children = (
@@ -101,7 +93,7 @@
 				C288DAE726B7121C00871FAB /* Podfile */,
 				C4EA807C2DB2B0114B659278 /* Pods */,
 				C250EB7526B70FEB006CCFFF /* Products */,
-				0C847275D749076B71795BD8 /* Frameworks */,
+				E66F7B43198B6B6514EA1A54 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -287,10 +279,18 @@
 		C4EA807C2DB2B0114B659278 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				48D8990E54FE35654F57F2CB /* Pods-iosWeeFood.debug.xcconfig */,
-				3738670C1D5727FA5B1DD994 /* Pods-iosWeeFood.release.xcconfig */,
+				1BA835DA9395841A954CDA32 /* Pods-iosWeeFood.debug.xcconfig */,
+				BE000AE77CC3117CC4F1B873 /* Pods-iosWeeFood.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		E66F7B43198B6B6514EA1A54 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A8FE4361C1B11633CAE7ACA8 /* Pods_iosWeeFood.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -300,11 +300,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C250EB8826B70FEF006CCFFF /* Build configuration list for PBXNativeTarget "iosWeeFood" */;
 			buildPhases = (
-				E49FD8D949A1FE1F41FCDDF8 /* [CP] Check Pods Manifest.lock */,
+				125E7AC404D7A9FE7BFF9B4A /* [CP] Check Pods Manifest.lock */,
 				C250EB7026B70FEB006CCFFF /* Sources */,
 				C250EB7126B70FEB006CCFFF /* Frameworks */,
 				C250EB7226B70FEB006CCFFF /* Resources */,
-				04F44BD44D1D0BDD1F618BAD /* [CP] Embed Pods Frameworks */,
+				1392D82848910BF46E93AD57 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -362,24 +362,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		04F44BD44D1D0BDD1F618BAD /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E49FD8D949A1FE1F41FCDDF8 /* [CP] Check Pods Manifest.lock */ = {
+		125E7AC404D7A9FE7BFF9B4A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -399,6 +382,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1392D82848910BF46E93AD57 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iosWeeFood/Pods-iosWeeFood-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -567,7 +567,7 @@
 		};
 		C250EB8926B70FEF006CCFFF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 48D8990E54FE35654F57F2CB /* Pods-iosWeeFood.debug.xcconfig */;
+			baseConfigurationReference = 1BA835DA9395841A954CDA32 /* Pods-iosWeeFood.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -607,7 +607,7 @@
 		};
 		C250EB8A26B70FEF006CCFFF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3738670C1D5727FA5B1DD994 /* Pods-iosWeeFood.release.xcconfig */;
+			baseConfigurationReference = BE000AE77CC3117CC4F1B873 /* Pods-iosWeeFood.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

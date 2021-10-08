@@ -1,6 +1,9 @@
 package de.darthkali.weefood.datasource.database.repository.recipe
 
 import de.darthkali.weefood.BaseTest
+import de.darthkali.weefood.datasource.database.model.RecipeDb
+import de.darthkali.weefood.domain.model.Ingredient
+import de.darthkali.weefood.domain.model.Recipe
 import de.darthkali.weefood.mockFactory.RecipeMock
 import de.darthkali.weefood.writeHead
 import kotlin.test.BeforeTest
@@ -135,18 +138,28 @@ class RecipeRepositoryImplTest : BaseTest() {
             println(recipe.toString())
         }
 
-        recipeRepository.updateRecipe(RecipeMock.recipeDbUpdate)
+        val oldRecipe = recipeRepository.getAllRecipes()[2]
+
+        val newRecipe = RecipeDb(
+            id = oldRecipe.id,
+            name = "${oldRecipe.name}_new",
+            image = "${oldRecipe.image}_new",
+            cooking_time = oldRecipe.cooking_time + 1,
+            cooking_time_unit = "${oldRecipe.cooking_time_unit}_new",
+            description = "${oldRecipe.description}_new",
+        )
+
+        recipeRepository.updateRecipe(newRecipe)
 
         for (recipe in recipeRepository.getAllRecipes()) {
             println(recipe.toString())
         }
 
         assertEquals(
-            expected = recipeRepository.getAllRecipes()[RecipeMock.recipeDbUpdateIndex],
-            actual = RecipeMock.recipeDbUpdate,
+            expected = newRecipe,
+            actual = recipeRepository.getRecipeById(oldRecipe.id),
         )
     }
-
 
 
 }
