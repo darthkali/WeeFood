@@ -23,7 +23,7 @@
 ## Tests
 All test are shared between iOS and Android. In the `.run` directory are 2 configurations. These configurations run all Test (separate for iOS and Android) at once.
 
-##Run iOS App
+## Run iOS App
 To run the iOS app you need to foloww these Steps:
  1. rebuild the app in Android Studio [Taskbar in AS -> Build -> Rebuild Project]
  2. After that you need Xcode. In the App Folder is a `iosWeeFood` Folder. From there you can open the workspace-file in xcode.
