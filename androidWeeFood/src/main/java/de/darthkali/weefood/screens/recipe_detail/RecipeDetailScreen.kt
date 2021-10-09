@@ -32,6 +32,7 @@ import de.darthkali.weefood.navigation.TopBar
 import de.darthkali.weefood.theme.AppTheme
 import de.darthkali.weefood.domain.model.Recipe
 import de.darthkali.weefood.presentation.recipe_detail.RecipeDetailEvents
+import de.darthkali.weefood.presentation.recipe_detail.RecipeDetailState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
@@ -43,7 +44,8 @@ import kotlinx.coroutines.launch
 @ExperimentalFoundationApi
 @Composable
 fun NewRecipeScreen(
-    viewModel: RecipeDetailViewModel,
+    recipeDetailState: RecipeDetailState,
+    editable: Boolean,
     navController: NavController,
     onTriggerEvent: (RecipeDetailEvents) -> Unit,
     onClickAddIngredient: (Int?) -> Unit,
@@ -68,9 +70,9 @@ fun NewRecipeScreen(
                 }
             },
             topBar = {
-                if (viewModel.editable.value) {
+                if (editable) {
                     EditableRecipeDetailScreenTopBar(
-                        recipe = viewModel.state.value.recipe,
+                        recipe = recipeDetailState.recipe,
                         navController = navController,
                         onClickBackInEditableRecipeDetailScreen = onClickBackInEditableRecipeDetailScreen,
                         onTriggerEvent = onTriggerEvent,
@@ -79,16 +81,16 @@ fun NewRecipeScreen(
                     )
                 } else {
                     ViewableRecipeDetailScreenTopBar(
-                        recipe = viewModel.state.value.recipe,
+                        recipe = recipeDetailState.recipe,
                         onClickBackInViewableRecipeDetailScreen = onClickBackInViewableRecipeDetailScreen,
                     )
                 }
             },
             floatingActionButtonPosition = FabPosition.End,
             floatingActionButton = {
-                if (viewModel.editable.value) {
+                if (editable) {
                     SaveRecipeDetailFAB(
-                        recipe = viewModel.state.value.recipe,
+                        recipe = recipeDetailState.recipe,
                         onClickSaveRecipeDetailFAB = onClickSaveRecipeDetailFAB,
                         onTriggerEvent = onTriggerEvent,
                         scope = scope,
@@ -97,7 +99,7 @@ fun NewRecipeScreen(
 
                 } else {
                     EditRecipeDetailFAB(
-                        recipe = viewModel.state.value.recipe,
+                        recipe = recipeDetailState.recipe,
                         onTriggerEvent = onTriggerEvent,
                         onClickEditRecipeDetailFAB = onClickEditRecipeDetailFAB
                     )
@@ -107,9 +109,9 @@ fun NewRecipeScreen(
         ) { innerPadding ->
             Box(modifier = Modifier.padding(innerPadding)) {
 
-                if (viewModel.editable.value) {
+                if (editable) {
                     EditableRecipeDetail(
-                        recipe = viewModel.state.value.recipe,
+                        recipe = recipeDetailState.recipe,
                         onTriggerEvent = onTriggerEvent,
                         onClickAddIngredient = onClickAddIngredient,
                         scope = scope,
@@ -117,7 +119,7 @@ fun NewRecipeScreen(
                     )
                 } else {
                     ViewableRecipeDetail(
-                        recipe = viewModel.state.value.recipe,
+                        recipe = recipeDetailState.recipe,
                     )
                 }
 

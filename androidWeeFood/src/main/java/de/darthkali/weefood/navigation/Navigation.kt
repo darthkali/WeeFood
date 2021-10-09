@@ -77,7 +77,7 @@ fun Navigation() {
                 parametersOf(backStackEntry.arguments?.getString("query"))
             }
             RecipeListScreen(
-                viewModel = viewModel,
+                recipeListState = viewModel.state.value,
                 navController = navController,
                 onTriggerEvent = viewModel::onTriggerEvent,
                 onClickOpenRecipe = { recipeId ->
@@ -108,10 +108,12 @@ fun Navigation() {
         ) { backStackEntry ->
             val viewModel =
                 getStateViewModel<RecipeDetailViewModel>(state = { backStackEntry.arguments!! })
+
             NewRecipeScreen(
                 navController = navController,
                 onTriggerEvent = viewModel::onTriggerEvent,
-                viewModel = viewModel,
+                recipeDetailState = viewModel.state.value,
+                editable = viewModel.editable.value,
                 onClickSaveRecipeDetailFAB = { recipeId ->
                     navController.navigate(
                         "${NavigationItem.RecipeDetail.route}?recipeId=${recipeId}"
@@ -163,8 +165,9 @@ fun Navigation() {
             val viewModel = getViewModel<IngredientListViewModel> {
                 parametersOf(backStackEntry.arguments?.getInt("recipeId"))
             }
+
             IngredientListScreen(
-                viewModel = viewModel,
+                ingredientListState = viewModel.state.value,
                 onTriggerEvent = viewModel::onTriggerEvent,
                 onClickBack = { recipeId ->
                     navController.navigate(
