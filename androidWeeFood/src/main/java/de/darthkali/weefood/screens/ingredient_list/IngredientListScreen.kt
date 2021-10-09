@@ -17,6 +17,7 @@ import de.darthkali.weefood.screens.ingredient_list.components.IngredientList
 import de.darthkali.weefood.screens.ingredient_list.components.SearchAppBar
 import de.darthkali.weefood.theme.AppTheme
 import de.darthkali.weefood.presentation.ingredient_list.IngredientListEvents
+import de.darthkali.weefood.presentation.ingredient_list.IngredientListState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
@@ -25,13 +26,13 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalFoundationApi
 @Composable
 fun IngredientListScreen(
-    viewModel: IngredientListViewModel,
+    ingredientListState: IngredientListState,
     onTriggerEvent: (IngredientListEvents) -> Unit,
     onClickSaveIngredient: (Int?) -> Unit,
     onClickBack: (Int?) -> Unit,
 ) {
     AppTheme(
-        displayProgressBar = viewModel.state.value.isLoading,
+        displayProgressBar = ingredientListState.isLoading,
     ) {
         Scaffold(
             topBar = {
@@ -39,7 +40,7 @@ fun IngredientListScreen(
                     title = "Zutaten Suche",
                     navigationIcon = Icons.Filled.ArrowBack,
                     navigationIconClickAction = {
-                        onClickBack(viewModel.state.value.recipeId)
+                        onClickBack(ingredientListState.recipeId)
                     },
                 )
             },
@@ -50,7 +51,7 @@ fun IngredientListScreen(
 
                 Column {
                     SearchAppBar(
-                        query = viewModel.state.value.query,
+                        query = ingredientListState.query,
                         onQueryChanged = {
                             onTriggerEvent(IngredientListEvents.OnUpdateQuery(it))
                         },
@@ -60,15 +61,15 @@ fun IngredientListScreen(
                     )
 
                     IngredientList(
-                        loading = viewModel.state.value.isLoading,
-                        ingredients = viewModel.state.value.ingredients,
-                        page = viewModel.state.value.page,
+                        loading = ingredientListState.isLoading,
+                        ingredients = ingredientListState.ingredients,
+                        page = ingredientListState.page,
                         onTriggerNextPage = {
                             onTriggerEvent(IngredientListEvents.NextPage)
                         },
                         onSaveIngredient = {
                             onTriggerEvent(IngredientListEvents.SaveIngredient(it))
-                            onClickSaveIngredient(viewModel.state.value.recipeId)
+                            onClickSaveIngredient(ingredientListState.recipeId)
                         }
                     )
                 }

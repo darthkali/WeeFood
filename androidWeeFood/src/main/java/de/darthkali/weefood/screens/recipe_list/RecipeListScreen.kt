@@ -24,6 +24,7 @@ import de.darthkali.weefood.screens.recipe_list.components.RecipeList
 import de.darthkali.weefood.screens.recipe_list.components.SearchAppBar
 import de.darthkali.weefood.theme.AppTheme
 import de.darthkali.weefood.presentation.recipe_list.RecipeListEvents
+import de.darthkali.weefood.presentation.recipe_list.RecipeListState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
@@ -32,14 +33,14 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalFoundationApi
 @Composable
 fun RecipeListScreen(
-    viewModel: RecipeListViewModel,
+    recipeListState: RecipeListState,
     navController: NavController,
     onTriggerEvent: (RecipeListEvents) -> Unit,
     onClickOpenRecipe: (Int) -> Unit,
     onClickAddNewRecipe: () -> Unit
 ) {
     AppTheme(
-        displayProgressBar = viewModel.state.value.isLoading,
+        displayProgressBar = recipeListState.isLoading,
     ) {
         Scaffold(
             topBar = {
@@ -63,7 +64,7 @@ fun RecipeListScreen(
             Box(modifier = Modifier.padding(innerPadding)) {
                 Column {
                     SearchAppBar(
-                        query = viewModel.state.value.query,
+                        query = recipeListState.query,
                         onQueryChanged = {
                             onTriggerEvent(RecipeListEvents.OnUpdateQuery(it))
                         },
@@ -73,9 +74,9 @@ fun RecipeListScreen(
                     )
 
                     RecipeList(
-                        loading = viewModel.state.value.isLoading,
-                        recipes = viewModel.state.value.recipes,
-                        page = viewModel.state.value.page,
+                        loading = recipeListState.isLoading,
+                        recipes = recipeListState.recipes,
+                        page = recipeListState.page,
                         onTriggerNextPage = {
                             onTriggerEvent(RecipeListEvents.NextPage)
                         },
