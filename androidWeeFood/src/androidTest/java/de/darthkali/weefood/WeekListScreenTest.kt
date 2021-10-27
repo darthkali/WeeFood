@@ -4,12 +4,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.test.assertCountEquals
-import androidx.compose.ui.test.hasAnyChild
-import androidx.compose.ui.test.hasTestTag
-import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
-import androidx.compose.ui.test.onChild
-import androidx.compose.ui.test.onChildren
 import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
@@ -18,7 +13,6 @@ import androidx.compose.ui.test.printToLog
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -29,7 +23,7 @@ import org.junit.runner.RunWith
 @ExperimentalStdlibApi
 
 @RunWith(AndroidJUnit4::class)
-class WeekListScreenTest:BaseUiTest() {
+class WeekListScreenTest : BaseUiTest() {
 
     @Before
     fun setUp() {
@@ -66,6 +60,5 @@ class WeekListScreenTest:BaseUiTest() {
             .assertCountEquals(2)
             .onFirst()
             .assertExists()
-
     }
 }

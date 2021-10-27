@@ -5,7 +5,7 @@ import de.darthkali.weefood.domain.util.enums.Weekday
 
 object WeekRecipeMock {
 
-    val weekDayForSearch = Weekday.MONDAY //Weekday.MONDAY
+    val weekDayForSearch = Weekday.MONDAY // Weekday.MONDAY
 
     val weekRecipeDb = WeekRecipeDb(weekday = Weekday.MONDAY, portion = 1, recipe_id = 1)
 

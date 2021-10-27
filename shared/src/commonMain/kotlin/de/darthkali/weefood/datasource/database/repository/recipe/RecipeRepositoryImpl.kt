@@ -53,8 +53,8 @@ class RecipeRepositoryImpl : RecipeRepository, KoinComponent {
         return try {
             logger.log("Get All Recipes from database")
             weeFoodDatabaseQueries.getAllRecipes(
-                pageSize = 100,  // TODO replace with parameter
-                offset = 0       // TODO replace with parameter
+                pageSize = 100, // TODO replace with parameter
+                offset = 0 // TODO replace with parameter
             ).executeAsList().toRecipeList()
         } catch (e: Exception) {
             logger.log(e.toString())
@@ -90,7 +90,7 @@ class RecipeRepositoryImpl : RecipeRepository, KoinComponent {
             weeFoodDatabaseQueries.searchRecipes(
                 query = name,
                 pageSize = 30.toLong(),
-                offset = ((page - 1) * 30).toLong(),    //TODO: Replace 30 with Pagination Size
+                offset = ((page - 1) * 30).toLong(), // TODO: Replace 30 with Pagination Size
             ).executeAsList().toRecipeList()
         } catch (e: Exception) {
             logger.log(e.toString())
@@ -120,7 +120,6 @@ class RecipeRepositoryImpl : RecipeRepository, KoinComponent {
         }
     }
 
-
     /*
 -- -----------------------------------------------------
 -- recipe_Entity
@@ -148,6 +147,4 @@ class RecipeRepositoryImpl : RecipeRepository, KoinComponent {
     fun List<Recipe_Entity>.toRecipeList(): List<RecipeDb> {
         return map { it.toRecipe() }
     }
-
-
 }

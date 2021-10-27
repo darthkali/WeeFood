@@ -13,7 +13,7 @@ sealed class RecipeDetailEvents {
     data class OnUpdateIngredientQuantity(val ingredientId: Int, val quantity: Float) : RecipeDetailEvents()
     data class OnUpdateIngredientQuantityUnit(val ingredientId: Int, val quantityUnit: String) : RecipeDetailEvents()
     data class OnAddIngredient(val recipe: Recipe) :
-        RecipeDetailEvents() //TODO: change to INgredient
+        RecipeDetailEvents() // TODO: change to INgredient
 
     data class OnDeleteIngredient(val ingredient: Ingredient) : RecipeDetailEvents()
     data class OnDeleteRecipe(val recipe: Recipe) : RecipeDetailEvents()

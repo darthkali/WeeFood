@@ -19,7 +19,6 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.test.KoinTest
 import org.koin.test.KoinTestRule
 
-
 @ExperimentalCoroutinesApi
 @ExperimentalStdlibApi
 @ExperimentalFoundationApi
@@ -49,4 +48,3 @@ open class BaseUiTest : KoinTest {
         }
     }
 }
-

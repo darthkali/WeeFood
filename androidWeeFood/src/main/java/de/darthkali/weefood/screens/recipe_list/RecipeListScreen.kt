@@ -20,11 +20,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import de.darthkali.weefood.navigation.BottomBar
 import de.darthkali.weefood.navigation.TopBar
+import de.darthkali.weefood.presentation.recipe_list.RecipeListEvents
+import de.darthkali.weefood.presentation.recipe_list.RecipeListState
 import de.darthkali.weefood.screens.recipe_list.components.RecipeList
 import de.darthkali.weefood.screens.recipe_list.components.SearchAppBar
 import de.darthkali.weefood.theme.AppTheme
-import de.darthkali.weefood.presentation.recipe_list.RecipeListEvents
-import de.darthkali.weefood.presentation.recipe_list.RecipeListState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
@@ -59,7 +59,6 @@ fun RecipeListScreen(
                 }
             }
 
-
         ) { innerPadding ->
             Box(modifier = Modifier.padding(innerPadding)) {
                 Column {
@@ -85,6 +84,5 @@ fun RecipeListScreen(
                 }
             }
         }
-
     }
 }

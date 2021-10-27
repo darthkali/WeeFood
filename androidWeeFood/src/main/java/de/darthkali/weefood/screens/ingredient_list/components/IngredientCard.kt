@@ -49,7 +49,7 @@ fun IngredientCard(
                 )
                 Text(
                     text = ingredientDb.name
-                        ?: "",   //if ingredient.name == null, then set "" as text
+                        ?: "", // if ingredient.name == null, then set "" as text
                     modifier = Modifier
                         .fillMaxWidth(0.85f)
                         .wrapContentWidth(Alignment.Start),
@@ -76,22 +76,21 @@ fun IngredientCard(
     }
 }
 
-
-//@ExperimentalCoroutinesApi
-//@ExperimentalMaterialApi
-//@ExperimentalComposeUiApi
-//@Preview(showBackground = true)
-//@Composable
-//fun UserProfileDetailsPreview() {
+// @ExperimentalCoroutinesApi
+// @ExperimentalMaterialApi
+// @ExperimentalComposeUiApi
+// @Preview(showBackground = true)
+// @Composable
+// fun UserProfileDetailsPreview() {
 //    val apple = Ingredient(
 //        id = 1,
 //        name = "Apfel",
 //        image = "apple.img",
-////        aisle = "meat",
-////        possibleUnits = listOf(),
+// //        aisle = "meat",
+// //        possibleUnits = listOf(),
 //    )
 //    AppTheme() {
 //        IngredientCard(ingredient = apple)
 //    }
 //
-//}
+// }

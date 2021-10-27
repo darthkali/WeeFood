@@ -3,10 +3,10 @@ package de.darthkali.weefood.interactors.ingredient
 import de.darthkali.weefood.datasource.network.IngredientService
 import de.darthkali.weefood.datasource.network.mapper.IngredientListMapper
 import de.darthkali.weefood.domain.model.Ingredient
-import de.darthkali.weefood.util.CommonFlow
 import de.darthkali.weefood.domain.util.DataState
-import de.darthkali.weefood.util.asCommonFlow
+import de.darthkali.weefood.util.CommonFlow
 import de.darthkali.weefood.util.Logger
+import de.darthkali.weefood.util.asCommonFlow
 import kotlinx.coroutines.flow.flow
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -34,14 +34,15 @@ class SearchIngredient : KoinComponent {
         try {
             emit(DataState.loading())
 
-            val ingredientList = mapper.mapTo(ingredientService.searchIngredient(
-                query = query,
-                page = page,
-            ))
+            val ingredientList = mapper.mapTo(
+                ingredientService.searchIngredient(
+                    query = query,
+                    page = page,
+                )
+            )
             emit(DataState.data(data = ingredientList))
         } catch (e: Exception) {
             logger.log(e.toString())
         }
     }.asCommonFlow()
-
 }

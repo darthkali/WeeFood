@@ -37,9 +37,5 @@ fun DefaultPreview() {
     AppTheme {
 
         Header(text = "Zutaten")
-
-
     }
-
 }
-

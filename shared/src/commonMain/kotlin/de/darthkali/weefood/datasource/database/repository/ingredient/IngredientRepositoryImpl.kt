@@ -2,9 +2,7 @@ package de.darthkali.weefood.datasource.database.repository.ingredient
 
 import de.darthkali.weefood.datasource.database.Ingredient_Entity
 import de.darthkali.weefood.datasource.database.WeeFoodDatabaseWrapper
-import de.darthkali.weefood.datasource.database.mapper.ingredient.IngredientMapper
 import de.darthkali.weefood.datasource.database.model.IngredientDb
-import de.darthkali.weefood.datasource.network.mapper.IngredientListMapper
 import de.darthkali.weefood.util.Logger
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -51,10 +49,9 @@ class IngredientRepositoryImpl : IngredientRepository, KoinComponent {
         return try {
             logger.log("Get All Ingredients from database")
             weeFoodDatabaseQueries.getAllIngredients(
-                pageSize = 100,  // TODO replace with parameter
-                offset = 0       // TODO replace with parameter
+                pageSize = 100, // TODO replace with parameter
+                offset = 0 // TODO replace with parameter
             ).executeAsList().toIngredientDbList()
-
         } catch (e: Exception) {
             logger.log(e.toString())
             listOf()
@@ -117,7 +114,6 @@ class IngredientRepositoryImpl : IngredientRepository, KoinComponent {
         }
     }
 
-
     /*
 -- -----------------------------------------------------
 -- ingredient_Entity
@@ -140,9 +136,7 @@ class IngredientRepositoryImpl : IngredientRepository, KoinComponent {
         )
     }
 
-
     fun List<Ingredient_Entity>.toIngredientDbList(): List<IngredientDb> {
         return map { it.toIngredientDb() }
     }
-
 }

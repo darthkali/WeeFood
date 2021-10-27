@@ -75,7 +75,6 @@ fun SearchAppBar(
     }
 }
 
-
 @ExperimentalCoroutinesApi
 @ExperimentalMaterialApi
 @ExperimentalComposeUiApi
@@ -88,5 +87,4 @@ fun SearchAppBarPreview() {
             onExecuteSearch = { /*TODO*/ },
         )
     }
-
 }

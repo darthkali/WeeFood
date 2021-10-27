@@ -38,12 +38,14 @@ data class RecipeDb(
      * @return a boolean true / false
      */
     override fun equals(other: Any?): Boolean {
-        return ((other is RecipeDb)
-                && other.name == this.name
-                && other.image == this.image)
-                && other.cooking_time == this.cooking_time
-                && other.cooking_time_unit == this.cooking_time_unit
-                && other.description == this.description
+        return (
+            (other is RecipeDb) &&
+                other.name == this.name &&
+                other.image == this.image
+            ) &&
+            other.cooking_time == this.cooking_time &&
+            other.cooking_time_unit == this.cooking_time_unit &&
+            other.description == this.description
     }
 
     /**

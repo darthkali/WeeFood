@@ -21,11 +21,7 @@ import de.darthkali.weefood.components.CircleImage
 import de.darthkali.weefood.components.button.ButtonStyle
 import de.darthkali.weefood.components.button.CommonButton
 import de.darthkali.weefood.datasource.network.IngredientServiceImpl.Companion.NO_IMAGE
-import de.darthkali.weefood.domain.model.Ingredient
 import de.darthkali.weefood.domain.model.Recipe
-import de.darthkali.weefood.mockFactory.IngredientMock
-import de.darthkali.weefood.mockFactory.RecipeMock
-import de.darthkali.weefood.screens.recipe_detail.components.IngredientCard
 import de.darthkali.weefood.theme.AppTheme
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -33,7 +29,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalCoroutinesApi
 @Composable
 fun RecipeCard(
-    recipe: Recipe, //TODO: change to Recipe
+    recipe: Recipe, // TODO: change to Recipe
     onClick: () -> Unit,
 ) {
     Card(
@@ -143,8 +139,5 @@ fun UserProfileDetailsPreview() {
             RecipeCard(recipe = recipeShort, onClick = {})
             RecipeCard(recipe = recipeWithoutCookingTime, onClick = {})
         }
-
     }
 }
-
-

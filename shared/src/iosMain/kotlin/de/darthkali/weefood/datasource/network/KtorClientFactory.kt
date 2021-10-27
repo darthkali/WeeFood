@@ -5,7 +5,7 @@ import io.ktor.client.engine.ios.Ios
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 
-//TODO JavaDoc einfügen
+// TODO JavaDoc einfügen
 actual class KtorClientFactory {
     actual fun build(): HttpClient {
         return HttpClient(Ios) {
@@ -21,4 +21,3 @@ actual class KtorClientFactory {
         }
     }
 }
-

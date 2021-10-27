@@ -12,7 +12,6 @@ import de.darthkali.weefood.navigation.TopBar
 import de.darthkali.weefood.theme.AppTheme
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-
 @ExperimentalCoroutinesApi
 @ExperimentalMaterialApi
 @ExperimentalComposeUiApi
@@ -29,5 +28,4 @@ fun DayListScreen(
             Text(text = "DayListScreen")
         }
     }
-
 }

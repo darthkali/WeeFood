@@ -55,5 +55,4 @@ fun ShimmerRecipeCardItem(
             )
         }
     }
-
 }

@@ -13,7 +13,6 @@ class GetRecipe : KoinComponent {
     private val getIngredientsFromRecipe: GetIngredientsFromRecipe by inject()
     private val logger = Logger("SaveRecipe")
 
-
     /**
      * @param recipeId: Int
      *

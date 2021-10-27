@@ -30,8 +30,7 @@ fun RectangleImage(
             .padding(16.dp)
             .size(64.dp),
         elevation = 4.dp
-    )
-    {
+    ) {
         Image(
             modifier = Modifier
                 .fillMaxWidth()
@@ -49,7 +48,7 @@ fun RectangleImage(
                     elevation = 4.dp,
                 ) {
                     // empty for white background
-                    //TODO: insert loading image
+                    // TODO: insert loading image
                 }
             }
             is ImagePainter.State.Error -> {

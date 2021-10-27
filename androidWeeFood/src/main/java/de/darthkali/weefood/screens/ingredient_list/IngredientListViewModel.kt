@@ -3,12 +3,12 @@ package de.darthkali.weefood.screens.ingredient_list
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
-import de.darthkali.weefood.screens.BaseViewModel
 import de.darthkali.weefood.domain.model.Ingredient
 import de.darthkali.weefood.interactors.ingredient.SaveIngredient
 import de.darthkali.weefood.interactors.ingredient.SearchIngredient
 import de.darthkali.weefood.presentation.ingredient_list.IngredientListEvents
 import de.darthkali.weefood.presentation.ingredient_list.IngredientListState
+import de.darthkali.weefood.screens.BaseViewModel
 import de.darthkali.weefood.util.Logger
 import org.koin.core.component.inject
 
@@ -55,7 +55,6 @@ class IngredientListViewModel(
             logger.log("Ingredients ID was: $it")
         }
     }
-
 
     /**
      * Get the next page of recipes

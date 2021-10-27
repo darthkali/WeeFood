@@ -12,7 +12,7 @@ class IngredientMapper : BaseMapper<Ingredient, IngredientDb> {
             name = db.name,
             image = db.image,
             quantity = 0F, // TODO: korrekter Wert?
-            unit = "",// TODO: korrekter Wert?
+            unit = "", // TODO: korrekter Wert?
         )
     }
 

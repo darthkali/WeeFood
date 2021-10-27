@@ -20,10 +20,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import de.darthkali.weefood.components.CircleImage
-import de.darthkali.weefood.components.button.CommonButton
 import de.darthkali.weefood.components.button.ButtonStyle
+import de.darthkali.weefood.components.button.CommonButton
 import de.darthkali.weefood.domain.model.Ingredient
-import de.darthkali.weefood.mockFactory.IngredientMock
 import de.darthkali.weefood.presentation.recipe_detail.RecipeDetailEvents
 import de.darthkali.weefood.theme.AppTheme
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -98,7 +97,6 @@ fun IngredientCard(
                                 .padding(8.dp),
                         )
                     }
-
                 }
             }
 
@@ -122,7 +120,6 @@ fun IngredientCard(
         }
     }
 }
-
 
 @ExperimentalCoilApi
 @ExperimentalCoroutinesApi
@@ -161,6 +158,5 @@ fun UserProfileDetailsPreview() {
                 onTriggerEvent = {}
             )
         }
-
     }
 }

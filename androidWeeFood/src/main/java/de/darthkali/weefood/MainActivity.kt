@@ -6,9 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.ui.ExperimentalComposeUiApi
-import de.darthkali.weefood.navigation.Navigation
 import de.darthkali.weefood.di.appModule
 import de.darthkali.weefood.di.initKoin
+import de.darthkali.weefood.navigation.Navigation
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.android.ext.koin.androidContext
 

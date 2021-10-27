@@ -34,11 +34,12 @@ data class IngredientDb(
      * @return a boolean true / false
      */
     override fun equals(other: Any?): Boolean {
-        return ((other is IngredientDb)
-                && other.name == this.name
-                && other.image == this.image)
+        return (
+            (other is IngredientDb) &&
+                other.name == this.name &&
+                other.image == this.image
+            )
     }
-
 
     /**
      * to check that 2 Ingredients are exact the same
@@ -49,6 +50,4 @@ data class IngredientDb(
     override fun hashCode(): Int {
         return super.hashCode()
     }
-
 }
-

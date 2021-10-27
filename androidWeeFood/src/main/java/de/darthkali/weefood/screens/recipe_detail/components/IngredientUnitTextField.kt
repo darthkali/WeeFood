@@ -40,5 +40,4 @@ fun IngredientUnitTextField(
         textStyle = TextStyle(color = MaterialTheme.colors.primary),
         colors = TextFieldDefaults.textFieldColors(backgroundColor = MaterialTheme.colors.surface),
     )
-
 }

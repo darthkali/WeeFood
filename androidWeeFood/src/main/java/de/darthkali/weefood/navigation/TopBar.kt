@@ -3,7 +3,6 @@ package de.darthkali.weefood.navigation
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -25,11 +24,13 @@ fun TopBar(
 ) {
     TopAppBar(
         navigationIcon = setIcon(navigationIcon, navigationIconClickAction = navigationIconClickAction),
-        title = { Text(
-            text = title,
-            maxLines = 2,
-            overflow = TextOverflow.Ellipsis
-        ) },
+        title = {
+            Text(
+                text = title,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis
+            )
+        },
         actions = {
             actionIconIconClickAction?.let { it ->
                 IconButton(onClick = it) {
@@ -39,7 +40,6 @@ fun TopBar(
             }
         },
         backgroundColor = MaterialTheme.colors.primary,
-
 
     )
 }

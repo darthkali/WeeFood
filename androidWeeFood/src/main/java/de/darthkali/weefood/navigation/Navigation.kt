@@ -38,10 +38,8 @@ import org.koin.core.parameter.parametersOf
 @Composable
 fun Navigation() {
 
-
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = NavigationItem.WeekList.route) {
-
 
         /**
          * Navigation -> WeekList
@@ -52,7 +50,6 @@ fun Navigation() {
             WeekListScreen(navController)
         }
 
-
         /**
          * Navigation -> DayList
          */
@@ -62,16 +59,17 @@ fun Navigation() {
             DayListScreen(navController)
         }
 
-
         /**
          * Navigation -> RecipeList
          */
         composable(
             route = NavigationItem.RecipeList.route + "?query={query}",
-            arguments = listOf(navArgument("query") {
-                defaultValue = ""
-                type = NavType.StringType
-            })
+            arguments = listOf(
+                navArgument("query") {
+                    defaultValue = ""
+                    type = NavType.StringType
+                }
+            )
         ) { backStackEntry ->
             val viewModel = getViewModel<RecipeListViewModel> {
                 parametersOf(backStackEntry.arguments?.getString("query"))
@@ -116,19 +114,19 @@ fun Navigation() {
                 editable = viewModel.editable.value,
                 onClickSaveRecipeDetailFAB = { recipeId ->
                     navController.navigate(
-                        "${NavigationItem.RecipeDetail.route}?recipeId=${recipeId}"
+                        "${NavigationItem.RecipeDetail.route}?recipeId=$recipeId"
                     )
                 },
                 onClickEditRecipeDetailFAB = { recipeId ->
                     navController.navigate(
-                        "${NavigationItem.RecipeDetail.route}?recipeId=${recipeId}&editable=true"
+                        "${NavigationItem.RecipeDetail.route}?recipeId=$recipeId&editable=true"
                     )
                 },
                 onClickBackInEditableRecipeDetailScreen = { recipeId ->
                     try {
                         if (recipeId != null && recipeId > 0) {
                             navController.navigate(
-                                "${NavigationItem.RecipeDetail.route}?recipeId=${recipeId}"
+                                "${NavigationItem.RecipeDetail.route}?recipeId=$recipeId"
                             )
                         } else {
                             navController.navigate(
@@ -136,31 +134,32 @@ fun Navigation() {
                             )
                         }
                     } catch (e: Exception) {
-                        //log.error("Error")
+                        // log.error("Error")
                     }
                 },
                 onClickBackInViewableRecipeDetailScreen = { recipeName ->
                     navController.navigate(
-                        "${NavigationItem.RecipeList.route}?query=${recipeName}"
+                        "${NavigationItem.RecipeList.route}?query=$recipeName"
                     )
                 },
                 onClickAddIngredient = { recipeId ->
                     navController.navigate(
-                        "${NavigationItem.IngredientList.route}/${recipeId}"
+                        "${NavigationItem.IngredientList.route}/$recipeId"
                     )
                 }
             )
         }
-
 
         /**
          * Navigation -> IngredientList
          */
         composable(
             route = NavigationItem.IngredientList.route + "/{recipeId}",
-            arguments = listOf(navArgument("recipeId") {
-                type = NavType.IntType
-            })
+            arguments = listOf(
+                navArgument("recipeId") {
+                    type = NavType.IntType
+                }
+            )
         ) { backStackEntry ->
             val viewModel = getViewModel<IngredientListViewModel> {
                 parametersOf(backStackEntry.arguments?.getInt("recipeId"))
@@ -171,17 +170,16 @@ fun Navigation() {
                 onTriggerEvent = viewModel::onTriggerEvent,
                 onClickBack = { recipeId ->
                     navController.navigate(
-                        "${NavigationItem.RecipeDetail.route}?recipeId=${recipeId}&editable=true"
+                        "${NavigationItem.RecipeDetail.route}?recipeId=$recipeId&editable=true"
                     )
                 },
                 onClickSaveIngredient = { recipeId ->
                     navController.navigate(
-                        "${NavigationItem.RecipeDetail.route}?recipeId=${recipeId}&editable=true"
+                        "${NavigationItem.RecipeDetail.route}?recipeId=$recipeId&editable=true"
                     )
                 }
             )
         }
-
 
         /**
          * Navigation -> ShoppingList
@@ -192,7 +190,6 @@ fun Navigation() {
             ShoppingListScreen(navController)
         }
 
-
         /**
          * Navigation -> Settings
          */
@@ -201,7 +198,5 @@ fun Navigation() {
         ) {
             SettingsScreen(navController)
         }
-
     }
 }
-

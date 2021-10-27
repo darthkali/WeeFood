@@ -19,12 +19,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import de.darthkali.weefood.components.Header
-import de.darthkali.weefood.screens.recipe_list.components.CustomChip
 import de.darthkali.weefood.domain.model.Recipe
-import de.darthkali.weefood.screens.recipe_list.components.RecipeCard
+import de.darthkali.weefood.screens.recipe_list.components.CustomChip
 import de.darthkali.weefood.theme.AppTheme
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-
 
 @ExperimentalCoroutinesApi
 @ExperimentalMaterialApi
@@ -49,7 +47,6 @@ fun ViewableRecipeDetail(
                 text = "Zutaten pro Portion",
                 modifier = Modifier.padding(start = 8.dp, end = 8.dp)
             )
-
 
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -120,10 +117,10 @@ fun UserProfileDetailsPreview() {
         cooking_time = 5,
         cooking_time_unit = "h",
         recipeDescription = "Hackfleisch in einem großen Topf anbraten. Zwiebel und Knoblauch klein hacken und dazugeben. Karotten schälen, in kleine Scheiben schneiden und zum Hackfleisch geben. Alles 5 Minuten unter gelegentlichem Rühren weiter braten. Tomatenmark hinzugeben und gut vermischen. Dann mit der Brühe ablöschen, aufkochen und bei geringer Hitze 40 Minuten zugedeckt köcheln lassen.\n" +
-                "\n" +
-                "Die Paprika in kleine Sticks schneiden und ca. 10 Minuten vor Ende der Kochzeit hinzufügen. Zum Schluss noch mit Salz und Pfeffer abschmecken.\n" +
-                "\n" +
-                "Anrichten und auf jeden Teller einen Klecks Crème fraîche geben.",
+            "\n" +
+            "Die Paprika in kleine Sticks schneiden und ca. 10 Minuten vor Ende der Kochzeit hinzufügen. Zum Schluss noch mit Salz und Pfeffer abschmecken.\n" +
+            "\n" +
+            "Anrichten und auf jeden Teller einen Klecks Crème fraîche geben.",
         portion = 0,
         ingredients = listOf(),
     )

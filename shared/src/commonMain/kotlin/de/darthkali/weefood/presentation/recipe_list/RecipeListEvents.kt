@@ -6,4 +6,3 @@ sealed class RecipeListEvents {
     object NextPage : RecipeListEvents()
     data class OnUpdateQuery(val query: String) : RecipeListEvents()
 }
-

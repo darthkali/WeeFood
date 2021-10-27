@@ -45,19 +45,19 @@ data class Recipe(
      */
     override fun equals(other: Any?): Boolean {
 
-
         // if we will only get a recipe without a portion, we will set the portion equal to the other portions
         if (this.portion == 0 && (other is Recipe)) {
             this.portion = other.portion
         }
 
-
-        return ((other is Recipe)
-                && other.name == this.name
-                && other.image == this.image)
-                && other.cooking_time == this.cooking_time
-                && other.cooking_time_unit == this.cooking_time_unit
-                && other.recipeDescription == this.recipeDescription
+        return (
+            (other is Recipe) &&
+                other.name == this.name &&
+                other.image == this.image
+            ) &&
+            other.cooking_time == this.cooking_time &&
+            other.cooking_time_unit == this.cooking_time_unit &&
+            other.recipeDescription == this.recipeDescription
 //                && other.portion == this.portion
 //                && other.ingredients.hashCode() == this.ingredients.hashCode()
     }
@@ -72,15 +72,15 @@ data class Recipe(
         return super.hashCode()
     }
 
-    fun isRecipeEmpty():Boolean{
+    fun isRecipeEmpty(): Boolean {
         return(
-        name == "" &&
-        image == "" &&
-        cooking_time == 0 &&
-        cooking_time_unit == "" &&
-        recipeDescription == "" &&
-        portion == 0 &&
-        ingredients.isEmpty()
-        )
+            name == "" &&
+                image == "" &&
+                cooking_time == 0 &&
+                cooking_time_unit == "" &&
+                recipeDescription == "" &&
+                portion == 0 &&
+                ingredients.isEmpty()
+            )
     }
 }

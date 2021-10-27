@@ -3,11 +3,11 @@ package de.darthkali.weefood.datasource.database.repository.recipeIngredient
 import de.darthkali.weefood.BaseTest
 import de.darthkali.weefood.mockFactory.RecipeIngredientMock
 import de.darthkali.weefood.writeHead
+import org.koin.core.component.inject
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
-import org.koin.core.component.inject
 
 class RecipeIngredientRepositoryImplTest : BaseTest() {
 
@@ -42,9 +42,11 @@ class RecipeIngredientRepositoryImplTest : BaseTest() {
         writeHead("get_all_recipe_ingredient_by_recipe_id_success")
 
         RecipeIngredientMock.recipeIngredientDbList.forEachIndexed { index, recipeMock ->
-            for (recipeIngredient in recipeIngredientRepository.getAllRecipeIngredientByRecipeId(
-                recipeMock.recipe_id
-            )) {
+            for (
+                recipeIngredient in recipeIngredientRepository.getAllRecipeIngredientByRecipeId(
+                    recipeMock.recipe_id
+                )
+            ) {
                 println(recipeIngredient.toString())
                 assertEquals(
                     RecipeIngredientMock.recipeIngredientDbList[index].recipe_id,

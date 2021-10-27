@@ -35,11 +35,13 @@ data class RecipeIngredientDb(
      * @return a boolean true / false
      */
     override fun equals(other: Any?): Boolean {
-        return ((other is RecipeIngredientDb)
-                && other.quantity == this.quantity
-                && other.unit == this.unit)
-                && other.recipe_id == this.recipe_id
-                && other.ingredient_id == this.ingredient_id
+        return (
+            (other is RecipeIngredientDb) &&
+                other.quantity == this.quantity &&
+                other.unit == this.unit
+            ) &&
+            other.recipe_id == this.recipe_id &&
+            other.ingredient_id == this.ingredient_id
     }
 
     /**

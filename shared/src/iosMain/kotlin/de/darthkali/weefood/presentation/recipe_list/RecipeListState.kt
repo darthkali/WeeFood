@@ -2,7 +2,7 @@ package de.darthkali.weefood.presentation.recipe_list
 
 import de.darthkali.weefood.domain.model.Recipe
 
-//TODO JavaDoc einfügen - bottomIngredient ist extra
+// TODO JavaDoc einfügen - bottomIngredient ist extra
 actual data class RecipeListState(
     val isLoading: Boolean = false,
     val page: Int = 1,

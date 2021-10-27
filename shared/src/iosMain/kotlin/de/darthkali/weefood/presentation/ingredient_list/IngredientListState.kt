@@ -1,10 +1,8 @@
 package de.darthkali.weefood.presentation.ingredient_list
 
-
-import de.darthkali.weefood.datasource.database.model.IngredientDb
 import de.darthkali.weefood.domain.model.Ingredient
 
-//TODO JavaDoc einfügen - bottomIngredient ist extra
+// TODO JavaDoc einfügen - bottomIngredient ist extra
 actual data class IngredientListState(
     val isLoading: Boolean = false,
     val page: Int = 1,

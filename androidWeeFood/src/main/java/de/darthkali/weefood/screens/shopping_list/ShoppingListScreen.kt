@@ -28,5 +28,4 @@ fun ShoppingListScreen(
             Text(text = "ShoppingListScreen")
         }
     }
-
 }

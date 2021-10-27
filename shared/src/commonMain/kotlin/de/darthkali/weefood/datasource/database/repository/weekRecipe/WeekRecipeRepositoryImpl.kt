@@ -1,8 +1,8 @@
 package de.darthkali.weefood.datasource.database.repository.weekRecipe
 
 import de.darthkali.weefood.datasource.database.RecipeIngredient_Entity
-import de.darthkali.weefood.datasource.database.WeekRecipe_Entity
 import de.darthkali.weefood.datasource.database.WeeFoodDatabaseWrapper
+import de.darthkali.weefood.datasource.database.WeekRecipe_Entity
 import de.darthkali.weefood.datasource.database.model.RecipeIngredientDb
 import de.darthkali.weefood.datasource.database.model.WeekRecipeDb
 import de.darthkali.weefood.domain.util.enums.Weekday
@@ -47,7 +47,7 @@ class WeekRecipeRepositoryImpl : WeekRecipeRepository, KoinComponent {
         return try {
             logger.log("Get All WeekRecipe from database by WeekDay")
             weeFoodDatabaseQueries.getAllWeekRecipesByWeekDay(
-                weekday = weekday.value, //.ordinal // TODO: SQL Delight bietet eine möglichkeit enums zu nutzen. Das muss hier eingebaut werden
+                weekday = weekday.value, // .ordinal // TODO: SQL Delight bietet eine möglichkeit enums zu nutzen. Das muss hier eingebaut werden
             ).executeAsList().toWeekRecipeList()
         } catch (e: Exception) {
             logger.log(e.toString())
@@ -76,7 +76,6 @@ class WeekRecipeRepositoryImpl : WeekRecipeRepository, KoinComponent {
             false
         }
     }
-
 
 /*
 -- -----------------------------------------------------
@@ -107,7 +106,6 @@ class WeekRecipeRepositoryImpl : WeekRecipeRepository, KoinComponent {
         return map { it.toRecipeIngredient() }
     }
 
-
 /*
 -- -----------------------------------------------------
 -- weekRecipe_Entity
@@ -133,5 +131,4 @@ class WeekRecipeRepositoryImpl : WeekRecipeRepository, KoinComponent {
     fun List<WeekRecipe_Entity>.toWeekRecipeList(): List<WeekRecipeDb> {
         return map { it.toWeekRecipe() }
     }
-
 }

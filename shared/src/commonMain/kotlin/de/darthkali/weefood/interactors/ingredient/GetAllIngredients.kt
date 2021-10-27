@@ -15,4 +15,3 @@ class GetAllIngredients : KoinComponent {
         return mapper.mapTo(ingredientRepository.getAllIngredients())
     }
 }
-

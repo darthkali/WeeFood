@@ -1,6 +1,5 @@
 package de.darthkali.weefood.domain.model
 
-
 data class Ingredient(
     var internalId: Int? = null,
     val name: String? = "",
@@ -40,14 +39,14 @@ data class Ingredient(
      * @return a boolean true / false
      */
     override fun equals(other: Any?): Boolean {
-        return ((other is Ingredient)
-                && other.internalId == this.internalId
-                && other.name == this.name
-                && other.image == this.image
-                && other.apiId == this.apiId
-                )
+        return (
+            (other is Ingredient) &&
+                other.internalId == this.internalId &&
+                other.name == this.name &&
+                other.image == this.image &&
+                other.apiId == this.apiId
+            )
     }
-
 
     /**
      * to check that 2 Ingredients are exact the same
@@ -59,4 +58,3 @@ data class Ingredient(
         return super.hashCode()
     }
 }
-

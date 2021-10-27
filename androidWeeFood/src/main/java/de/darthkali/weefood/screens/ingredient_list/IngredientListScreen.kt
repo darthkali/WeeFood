@@ -11,13 +11,12 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
 import de.darthkali.weefood.navigation.TopBar
+import de.darthkali.weefood.presentation.ingredient_list.IngredientListEvents
+import de.darthkali.weefood.presentation.ingredient_list.IngredientListState
 import de.darthkali.weefood.screens.ingredient_list.components.IngredientList
 import de.darthkali.weefood.screens.ingredient_list.components.SearchAppBar
 import de.darthkali.weefood.theme.AppTheme
-import de.darthkali.weefood.presentation.ingredient_list.IngredientListEvents
-import de.darthkali.weefood.presentation.ingredient_list.IngredientListState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
@@ -47,7 +46,6 @@ fun IngredientListScreen(
 //            bottomBar = { BottomBar(navController) }
         ) { innerPadding ->
             Box(modifier = Modifier.padding(innerPadding)) {
-
 
                 Column {
                     SearchAppBar(

@@ -9,10 +9,10 @@ import de.darthkali.weefood.mockFactory.IngredientMock
 import de.darthkali.weefood.mockFactory.RecipeIngredientMock
 import de.darthkali.weefood.mockFactory.RecipeMock
 import de.darthkali.weefood.writeHead
+import org.koin.core.component.inject
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.koin.core.component.inject
 
 class GetIngredientsFromRecipeTest : BaseTest() {
 
@@ -32,7 +32,6 @@ class GetIngredientsFromRecipeTest : BaseTest() {
         val recipes = RecipeMock.recipeListDb
         val recipeIngredients = RecipeIngredientMock.recipeIngredientDbList
 
-
         for (ingredient in ingredients) {
             ingredientRepository.insertIngredient(ingredient)
         }
@@ -45,7 +44,6 @@ class GetIngredientsFromRecipeTest : BaseTest() {
             recipeIngredientRepository.insertRecipeIngredient(recipeIngredient)
         }
     }
-
 
     /**
      * should save a new recipeIngredient to the database
@@ -73,15 +71,12 @@ class GetIngredientsFromRecipeTest : BaseTest() {
         ingredients?.forEachIndexed { index, ingredient ->
             println(ingredient.toString())
             println("expected ${RecipeIngredientMock.recipeIngredientDbList[index]}")
-            println("actual ${ingredient}")
-
+            println("actual $ingredient")
 
             assertEquals(
                 expected = RecipeIngredientMock.recipeIngredientDbList[index].ingredient_id,
                 actual = ingredient.internalId,
             )
         }
-
     }
-
 }

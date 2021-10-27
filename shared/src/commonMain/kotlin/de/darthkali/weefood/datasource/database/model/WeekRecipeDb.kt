@@ -34,10 +34,12 @@ data class WeekRecipeDb(
      * @return a boolean true / false
      */
     override fun equals(other: Any?): Boolean {
-        return ((other is WeekRecipeDb)
-                && other.weekday == this.weekday
-                && other.portion == this.portion)
-                && other.recipe_id == this.recipe_id
+        return (
+            (other is WeekRecipeDb) &&
+                other.weekday == this.weekday &&
+                other.portion == this.portion
+            ) &&
+            other.recipe_id == this.recipe_id
     }
 
     /**

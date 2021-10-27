@@ -3,7 +3,6 @@ package de.darthkali.weefood.screens.recipe_detail
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
-import de.darthkali.weefood.screens.BaseViewModel
 import de.darthkali.weefood.domain.model.Recipe
 import de.darthkali.weefood.interactors.recipe.DeleteRecipe
 import de.darthkali.weefood.interactors.recipe.GetRecipe
@@ -12,6 +11,7 @@ import de.darthkali.weefood.interactors.recipe_ingredient.DeleteRecipeIngredient
 import de.darthkali.weefood.interactors.recipe_ingredient.GetIngredientsFromRecipe
 import de.darthkali.weefood.presentation.recipe_detail.RecipeDetailEvents
 import de.darthkali.weefood.presentation.recipe_detail.RecipeDetailState
+import de.darthkali.weefood.screens.BaseViewModel
 import de.darthkali.weefood.util.Logger
 import org.koin.core.component.inject
 
@@ -31,12 +31,10 @@ class RecipeDetailViewModel(
     val state: MutableState<RecipeDetailState>
         get() = _state
 
-
     private var _editable = mutableStateOf(false)
 
     val editable: MutableState<Boolean>
         get() = _editable
-
 
     init {
         savedStateHandle.get<Boolean>("editable")?.let {
@@ -50,14 +48,12 @@ class RecipeDetailViewModel(
             }
     }
 
-
     fun onTriggerEvent(event: RecipeDetailEvents) {
         when (event) {
             is RecipeDetailEvents.GetRecipe -> {
 
                 val recipe: Recipe = getRecipe.execute(recipeId = event.recipeId)!!
                 state.value = state.value.copy(recipe = recipe)
-
             }
             is RecipeDetailEvents.OnUpdateName -> {
                 onUpdateRecipe(state.value.recipe.copy(name = event.name))
@@ -121,5 +117,4 @@ class RecipeDetailViewModel(
     private fun onUpdateRecipe(recipe: Recipe) {
         state.value = state.value.copy(recipe = recipe, changed = state.value.changed + 1)
     }
-
 }

@@ -13,30 +13,26 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.Snackbar
 import androidx.compose.material.SnackbarHost
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import de.darthkali.weefood.domain.model.Recipe
 import de.darthkali.weefood.navigation.NavigationItem
 import de.darthkali.weefood.navigation.TopBar
-import de.darthkali.weefood.theme.AppTheme
-import de.darthkali.weefood.domain.model.Recipe
 import de.darthkali.weefood.presentation.recipe_detail.RecipeDetailEvents
 import de.darthkali.weefood.presentation.recipe_detail.RecipeDetailState
+import de.darthkali.weefood.theme.AppTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
-
 
 @ExperimentalCoroutinesApi
 @ExperimentalMaterialApi
@@ -96,7 +92,6 @@ fun NewRecipeScreen(
                         scope = scope,
                         scaffoldState = scaffoldState
                     )
-
                 } else {
                     EditRecipeDetailFAB(
                         recipe = recipeDetailState.recipe,
@@ -122,13 +117,10 @@ fun NewRecipeScreen(
                         recipe = recipeDetailState.recipe,
                     )
                 }
-
-
             }
         }
     }
 }
-
 
 @Composable
 fun SaveRecipeDetailFAB(
@@ -143,7 +135,6 @@ fun SaveRecipeDetailFAB(
             if (recipe.name != "") {
                 onTriggerEvent(RecipeDetailEvents.OnSaveRecipe)
                 onClickSaveRecipeDetailFAB(recipe.databaseId)
-
             } else {
                 scope.launch {
                     scaffoldState.snackbarHostState.showSnackbar("Bitte einen Rezeptnamen eingeben!")
@@ -156,7 +147,6 @@ fun SaveRecipeDetailFAB(
         Icon(Icons.Filled.Check, "")
     }
 }
-
 
 @Composable
 fun EditRecipeDetailFAB(
@@ -175,7 +165,6 @@ fun EditRecipeDetailFAB(
         Icon(Icons.Filled.Create, "")
     }
 }
-
 
 @Composable
 fun EditableRecipeDetailScreenTopBar(
@@ -231,6 +220,3 @@ fun ViewableRecipeDetailScreenTopBar(
         }
     )
 }
-
-
-

@@ -1,9 +1,7 @@
 package de.darthkali.weefood.datasource.network
 
-import de.darthkali.weefood.datasource.network.mapper.IngredientListMapper
 import de.darthkali.weefood.datasource.network.model.IngredientDto
 import de.darthkali.weefood.datasource.network.model.IngredientSearchResponse
-import de.darthkali.weefood.domain.model.Ingredient
 import io.ktor.client.request.get
 import io.ktor.client.request.url
 import org.koin.core.component.KoinComponent
@@ -20,15 +18,14 @@ class IngredientServiceImpl : IngredientService, KoinComponent {
         return httpClient.get<IngredientSearchResponse> {
             url(
                 BASE_URL +
-                        "/food/ingredients/search?" +
-                        "apiKey=$API_KEY&" +
-                        "query=$query&" +
-                        "metaInformation=true&" +
-                        "offset=$offset&" +
-                        "number=$PAGINATION_PAGE_SIZE"
+                    "/food/ingredients/search?" +
+                    "apiKey=$API_KEY&" +
+                    "query=$query&" +
+                    "metaInformation=true&" +
+                    "offset=$offset&" +
+                    "number=$PAGINATION_PAGE_SIZE"
             )
         }.results
-
     }
 
     companion object {
@@ -41,9 +38,3 @@ class IngredientServiceImpl : IngredientService, KoinComponent {
         const val NO_IMAGE = "no.jpg"
     }
 }
-
-
-
-
-
-

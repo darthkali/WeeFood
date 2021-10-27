@@ -7,7 +7,7 @@ sealed class NavigationItem(
     var icon: Int? = null,
     var title: String = ""
 ) {
-    //for Bottom Nav
+    // for Bottom Nav
     object WeekList : NavigationItem("weekList", R.drawable.ic_home, "Wochenplan")
     object RecipeList : NavigationItem("recipeList", R.drawable.ic_menu_book, "Rezepte")
     object ShoppingList : NavigationItem("shoppingList", R.drawable.ic_shopping_cart, "Einkaufsliste")
@@ -18,4 +18,3 @@ sealed class NavigationItem(
     object RecipeDetail : NavigationItem("recipeDetail")
     object IngredientList : NavigationItem("ingredientList")
 }
-

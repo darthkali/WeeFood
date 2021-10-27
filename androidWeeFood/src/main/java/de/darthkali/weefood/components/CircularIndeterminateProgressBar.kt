@@ -24,8 +24,7 @@ fun CircularIndeterminateProgressBar(isDisplayed: Boolean, verticalBias: Float) 
             val (progressBar) = createRefs()
             val topBias = createGuidelineFromTop(verticalBias)
             CircularProgressIndicator(
-                modifier = Modifier.constrainAs(progressBar)
-                {
+                modifier = Modifier.constrainAs(progressBar) {
                     top.linkTo(topBias)
                     end.linkTo(parent.end)
                     start.linkTo(parent.start)

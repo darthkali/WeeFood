@@ -20,10 +20,10 @@ import androidx.compose.ui.unit.dp
 import de.darthkali.weefood.components.Header
 import de.darthkali.weefood.components.button.ButtonStyle
 import de.darthkali.weefood.components.button.CommonButton
-import de.darthkali.weefood.screens.recipe_detail.components.IngredientCard
-import de.darthkali.weefood.screens.recipe_detail.components.IngredientUnitTextField
 import de.darthkali.weefood.domain.model.Recipe
 import de.darthkali.weefood.presentation.recipe_detail.RecipeDetailEvents
+import de.darthkali.weefood.screens.recipe_detail.components.IngredientCard
+import de.darthkali.weefood.screens.recipe_detail.components.IngredientUnitTextField
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
@@ -69,7 +69,7 @@ fun EditableRecipeDetail(
                     text = "Zutat hinzufügen",
                     buttonStyle = ButtonStyle.ADD_BUTTON,
 
-                    ) {
+                ) {
 
                     onTriggerEvent(RecipeDetailEvents.OnSaveRecipe)
 
@@ -79,14 +79,11 @@ fun EditableRecipeDetail(
                                 onClickAddIngredient(it)
                             }
                         }
-
                     } else {
                         scope.launch {
                             scaffoldState.snackbarHostState.showSnackbar("Bitte einen Rezeptnamen eingeben!")
                         }
                     }
-
-
                 }
             }
         }
@@ -102,12 +99,10 @@ fun EditableRecipeDetail(
                             it
                         )
                     )
-                }, //onDeleteIngredient(it),
+                }, // onDeleteIngredient(it),
                 onTriggerEvent = onTriggerEvent
             )
         }
-
-
 
         item {
             Header(
@@ -125,7 +120,7 @@ fun EditableRecipeDetail(
                     input = recipe.cooking_time.toString(),
                     onInputChanged = {
                         var result = 0
-                        if(it != ""){
+                        if (it != "") {
                             result = it.toInt()
                         }
 
@@ -174,4 +169,3 @@ fun EditableRecipeDetail(
         }
     }
 }
-

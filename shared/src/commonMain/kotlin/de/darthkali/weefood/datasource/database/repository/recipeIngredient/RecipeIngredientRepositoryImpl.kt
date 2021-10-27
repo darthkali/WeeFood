@@ -82,7 +82,6 @@ class RecipeIngredientRepositoryImpl : RecipeIngredientRepository, KoinComponent
         }
     }
 
-
     override fun deleteRecipeIngredientByRecipeIdAndIngredientId(
         recipeDbId: Int,
         ingredientDbId: Int
@@ -100,7 +99,6 @@ class RecipeIngredientRepositoryImpl : RecipeIngredientRepository, KoinComponent
         }
     }
 
-
     override fun deleteAllRecipeIngredients(): Boolean {
         return try {
             logger.log("Delete all RecipeIngredients from database")
@@ -112,13 +110,11 @@ class RecipeIngredientRepositoryImpl : RecipeIngredientRepository, KoinComponent
         }
     }
 
-
-
-    override fun deleteAllRecipeIngredientsByRecipeId( recipeDbId: Int): Boolean {
+    override fun deleteAllRecipeIngredientsByRecipeId(recipeDbId: Int): Boolean {
         return try {
             logger.log("Delete all RecipeIngredients by RecipeId from database")
             weeFoodDatabaseQueries.getAllRecipeIngredients().executeAsList().forEach {
-                if(it.recipe_id == recipeDbId){
+                if (it.recipe_id == recipeDbId) {
                     weeFoodDatabaseQueries.deleteRecipeIngredientById(it.id)
                 }
             }
@@ -128,10 +124,6 @@ class RecipeIngredientRepositoryImpl : RecipeIngredientRepository, KoinComponent
             false
         }
     }
-
-
-
-
 
     /*
 -- -----------------------------------------------------
@@ -161,5 +153,4 @@ class RecipeIngredientRepositoryImpl : RecipeIngredientRepository, KoinComponent
     fun List<RecipeIngredient_Entity>.toRecipeIngredientList(): List<RecipeIngredientDb> {
         return map { it.toRecipeIngredient() }
     }
-
 }

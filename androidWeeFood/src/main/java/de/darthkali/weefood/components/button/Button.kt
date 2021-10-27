@@ -16,8 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import de.darthkali.weefood.theme.AppTheme
-import java.util.Locale
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import java.util.Locale
 
 @Composable
 fun CommonButton(
@@ -76,7 +76,6 @@ fun ButtonText(
     )
 }
 
-
 @Composable
 fun MyFloatingActionButton(
     onClick: () -> Unit,
@@ -89,7 +88,6 @@ fun MyFloatingActionButton(
         Icon(Icons.Filled.Check, "")
     }
 }
-
 
 @ExperimentalCoroutinesApi
 @ExperimentalMaterialApi
@@ -104,5 +102,4 @@ fun DefaultPreview() {
         CommonButton(text = "Close ", buttonStyle = ButtonStyle.CLOSE_BUTTON) {}
         MyFloatingActionButton({})
     }
-
 }

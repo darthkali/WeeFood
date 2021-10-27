@@ -3,11 +3,11 @@ package de.darthkali.weefood.datasource.database.repository.weekRecipe
 import de.darthkali.weefood.BaseTest
 import de.darthkali.weefood.mockFactory.WeekRecipeMock
 import de.darthkali.weefood.writeHead
+import org.koin.core.component.inject
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
-import org.koin.core.component.inject
 
 class WeekRecipeRepositoryImplTest : BaseTest() {
 

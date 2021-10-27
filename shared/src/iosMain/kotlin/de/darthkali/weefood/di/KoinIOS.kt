@@ -5,11 +5,10 @@ import de.darthkali.weefood.datasource.database.WeeFoodDatabase
 import de.darthkali.weefood.datasource.database.WeeFoodDatabaseWrapper
 import org.koin.dsl.module
 
-//TODO JavaDoc einfügen
+// TODO JavaDoc einfügen
 actual fun platformModule() = module {
     single {
         val driver = NativeSqliteDriver(WeeFoodDatabase.Schema, "weeFoodDatabase.db")
         WeeFoodDatabaseWrapper(WeeFoodDatabase(driver))
     }
 }
-

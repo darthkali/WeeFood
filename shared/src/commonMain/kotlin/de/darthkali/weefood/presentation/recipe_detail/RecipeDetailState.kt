@@ -1,6 +1,5 @@
 package de.darthkali.weefood.presentation.recipe_detail
 
-import de.darthkali.weefood.datasource.database.model.IngredientDb
 import de.darthkali.weefood.domain.model.Recipe
 
 data class RecipeDetailState(

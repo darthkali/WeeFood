@@ -18,10 +18,10 @@ import de.darthkali.weefood.interactors.ingredient.SearchIngredient
 import de.darthkali.weefood.interactors.recipe.DeleteRecipe
 import de.darthkali.weefood.interactors.recipe.GetRecipe
 import de.darthkali.weefood.interactors.recipe.SaveRecipe
-import de.darthkali.weefood.interactors.recipe_ingredient.SaveRecipeIngredient
 import de.darthkali.weefood.interactors.recipe.SearchRecipes
 import de.darthkali.weefood.interactors.recipe_ingredient.DeleteRecipeIngredient
 import de.darthkali.weefood.interactors.recipe_ingredient.GetIngredientsFromRecipe
+import de.darthkali.weefood.interactors.recipe_ingredient.SaveRecipeIngredient
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
 import org.koin.dsl.KoinAppDeclaration
@@ -68,7 +68,3 @@ val interactor = module {
     single { DeleteRecipe() }
     single { GetIngredientsFromRecipe() }
 }
-
-
-
-

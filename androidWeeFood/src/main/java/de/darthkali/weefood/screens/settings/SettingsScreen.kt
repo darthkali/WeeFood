@@ -37,5 +37,4 @@ fun SettingsScreen(
             Text(text = "SettingsScreen")
         }
     }
-
 }

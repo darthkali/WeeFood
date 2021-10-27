@@ -3,12 +3,12 @@ package de.darthkali.weefood.datasource.database.repository.ingredient
 import de.darthkali.weefood.BaseTest
 import de.darthkali.weefood.mockFactory.IngredientMock
 import de.darthkali.weefood.writeHead
+import org.koin.core.component.inject
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
-import org.koin.core.component.inject
 
 class IngredientRepositoryImplTest : BaseTest() {
 
@@ -37,7 +37,6 @@ class IngredientRepositoryImplTest : BaseTest() {
             )
         }
     }
-
 
     @Test
     fun get_ingredient_by_id_success() = runTest {

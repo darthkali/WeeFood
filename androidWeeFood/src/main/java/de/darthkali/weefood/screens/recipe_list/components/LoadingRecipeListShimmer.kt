@@ -73,6 +73,4 @@ fun LoadingRecipeListShimmer(
             }
         }
     }
-
-
 }

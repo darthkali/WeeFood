@@ -16,7 +16,6 @@ class SaveRecipe : KoinComponent {
     private val logger = Logger("SaveRecipe")
     private val mapper = RecipeMapper()
 
-
     /**
      * @param recipe: Recipe
      *
@@ -52,5 +51,3 @@ class SaveRecipe : KoinComponent {
         }
     }
 }
-
-

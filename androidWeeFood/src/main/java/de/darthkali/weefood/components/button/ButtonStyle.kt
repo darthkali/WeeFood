@@ -6,4 +6,3 @@ enum class ButtonStyle {
     CLOSE_BUTTON,
     DELETE_BUTTON,
 }
-

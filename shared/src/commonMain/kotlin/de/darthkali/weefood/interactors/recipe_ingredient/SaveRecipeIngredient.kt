@@ -1,6 +1,5 @@
 package de.darthkali.weefood.interactors.recipe_ingredient
 
-
 import de.darthkali.weefood.datasource.database.model.RecipeIngredientDb
 import de.darthkali.weefood.datasource.database.repository.recipeIngredient.RecipeIngredientRepository
 import de.darthkali.weefood.util.Logger
@@ -11,7 +10,6 @@ class SaveRecipeIngredient : KoinComponent {
 
     private val recipeIngredientRepository: RecipeIngredientRepository by inject()
     private val logger = Logger("SaveRecipeIngredient")
-
 
     /**
      * @param recipeIngredient: RecipeIngredientDb
@@ -40,4 +38,3 @@ class SaveRecipeIngredient : KoinComponent {
         }
     }
 }
-
