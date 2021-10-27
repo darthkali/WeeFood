@@ -3,6 +3,7 @@ package de.darthkali.weefood.datasource.database.repository.recipe
 import de.darthkali.weefood.datasource.database.Recipe_Entity
 import de.darthkali.weefood.datasource.database.WeeFoodDatabaseWrapper
 import de.darthkali.weefood.datasource.database.model.RecipeDb
+import de.darthkali.weefood.presentation.ingredient_list.RECIPE_PAGINATION_PAGE_SIZE
 import de.darthkali.weefood.util.Logger
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -90,7 +91,7 @@ class RecipeRepositoryImpl : RecipeRepository, KoinComponent {
             weeFoodDatabaseQueries.searchRecipes(
                 query = name,
                 pageSize = 30.toLong(),
-                offset = ((page - 1) * 30).toLong(), // TODO: Replace 30 with Pagination Size
+                offset = ((page - 1) * RECIPE_PAGINATION_PAGE_SIZE).toLong(),
             ).executeAsList().toRecipeList()
         } catch (e: Exception) {
             logger.log(e.toString())

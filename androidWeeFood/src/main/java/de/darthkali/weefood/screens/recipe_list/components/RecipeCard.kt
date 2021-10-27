@@ -29,7 +29,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalCoroutinesApi
 @Composable
 fun RecipeCard(
-    recipe: Recipe, // TODO: change to Recipe
+    recipe: Recipe,
     onClick: () -> Unit,
 ) {
     Card(

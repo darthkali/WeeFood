@@ -15,10 +15,9 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.test.KoinTest
 import org.koin.test.KoinTestRule
 
-// TODO JavaDoc einfügen
 @RunWith(AndroidJUnit4::class)
 actual abstract class BaseTest : KoinTest {
-    // TODO JavaDoc einfügen
+
     @get:Rule
     val koinTestRule = KoinTestRule.create {
         androidContext(ApplicationProvider.getApplicationContext())
@@ -31,7 +30,6 @@ actual abstract class BaseTest : KoinTest {
         )
     }
 
-    // TODO JavaDoc einfügen
     actual fun <T> runTest(
         block: suspend CoroutineScope.() -> T
     ) {

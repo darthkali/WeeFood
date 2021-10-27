@@ -83,8 +83,8 @@ fun SearchAppBarPreview() {
     AppTheme() {
         SearchAppBar(
             query = "",
-            onQueryChanged = { /*TODO*/ },
-            onExecuteSearch = { /*TODO*/ },
+            onQueryChanged = {  },
+            onExecuteSearch = {  },
         )
     }
 }

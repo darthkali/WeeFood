@@ -11,8 +11,8 @@ class IngredientMapper : BaseMapper<Ingredient, IngredientDb> {
             apiId = db.apiId,
             name = db.name,
             image = db.image,
-            quantity = 0F, // TODO: korrekter Wert?
-            unit = "", // TODO: korrekter Wert?
+            quantity = 0F,
+            unit = "",
         )
     }
 
