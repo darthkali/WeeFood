@@ -12,7 +12,8 @@ import shared
 class RecipeListViewModel: ObservableObject {
 
 
-    private let logger = Logger(cprivate let searchRecipe = SearchRecipes()lassName: "RecipeListViewModel")
+    private let searchRecipe = SearchRecipes()
+    private let logger = Logger(className: "RecipeListViewModel")
 
     // State
     @Published var state: RecipeListState = RecipeListState()
