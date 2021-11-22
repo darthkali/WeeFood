@@ -37,11 +37,8 @@ fun SearchAppBar(
         color = MaterialTheme.colors.background,
         elevation = 8.dp,
     ) {
-        Column {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-            ) {
+
+
                 TextField(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -67,7 +64,7 @@ fun SearchAppBar(
                     textStyle = TextStyle(color = MaterialTheme.colors.primary),
                     colors = TextFieldDefaults.textFieldColors(backgroundColor = MaterialTheme.colors.surface),
                 )
-            }
-        }
+
+
     }
 }
