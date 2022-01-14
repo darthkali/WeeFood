@@ -29,7 +29,7 @@ class IngredientServiceImpl : IngredientService, KoinComponent {
     }
 
     companion object {
-        const val API_KEY = "a18522db266047e4b92632a17b82bd6f"
+        const val API_KEY = "00000000000000000000000000000000" // place your own api key // TODO:  Replace with ENV
         const val BASE_URL = "https://api.spoonacular.com"
         const val PAGINATION_PAGE_SIZE = 30
         const val IMAGE_URL_SMALL = "https://spoonacular.com/cdn/ingredients_100x100"
